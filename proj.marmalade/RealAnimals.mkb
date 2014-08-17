@@ -1,0 +1,149 @@
+#!/usr/bin/env mkb
+
+options
+{
+    module_path="../../TheGameH2O/modules/oxy/oxygine-oxygine-framework/oxygine/marmalade"
+    module_path="../../TheGameH2O/modules/oxy/oxygine-oxygine-framework/oxygine/marmalade/oxygine-oxygine-sound-84ba4558b2fd"
+	s3e-data-dir="../data"
+    enable-exceptions=1
+}
+
+includepath source
+
+files
+{
+    [source]
+    (../source)
+    Main.cpp
+    Main.h
+    entry_point.cpp
+	SharedResources.cpp
+	SharedResources.h
+
+    [source/model]
+    SpriteModel.cpp
+    SpriteModel.h
+
+	[source/elements/base]
+	AnimalSlot.cpp
+	AnimalSlot.h
+	CounterBoxElement.cpp
+	CounterBoxElement.h
+
+	[source/elements/games]
+	MemoryCard.cpp
+	MemoryCard.h
+
+    [source/gui/base]
+    RotatingContainer.cpp
+    RotatingContainer.h
+	ShaderSprite.cpp
+    ShaderSprite.h
+    ShaderButton.cpp
+    ShaderButton.h
+    DraggableSprite.cpp
+    DraggableSprite.h
+    EditableSprite.cpp
+    EditableSprite.h
+
+    [source/gui/common]
+    TweenButton.h
+    TweenButton.cpp
+    Slider.cpp
+    Slider.h
+    ShaderTweenButton.cpp
+    ShaderTweenButton.h
+	ProgressBarBox9.cpp
+	ProgressBarBox9.h
+
+	[source/gui/games]
+	MemoryField.cpp
+	MemoryField.h
+
+    [source/gui/particle]
+    Particle.cpp
+    Particle.h
+    ParticleEmitter.cpp
+    ParticleEmitter.h
+
+    [source/frame/base]
+	CustomFrame.cpp
+    CustomFrame.h
+
+	[source/frame/memory]
+	MemoryFrame.cpp
+	MemoryFrame.h
+
+	[source/frame/utils]
+    BuyItemPopup.cpp
+    BuyItemPopup.h
+    SlideFrame.cpp
+    SlideFrame.h
+	WallPostMessagePopup.cpp
+	WallPostMessagePopup.h
+
+    [source/frame/levels]
+    PresentAnimalsFrame.cpp
+    PresentAnimalsFrame.h
+
+    [source/frame/main]
+    LandingPageFrame.cpp
+    LandingPageFrame.h
+    LevelChooserFrame.cpp
+    LevelChooserFrame.h
+
+    [source/frame/editor]
+    ChooseSpriteFrame.cpp
+    ChooseSpriteFrame.h
+    MaskFrame.cpp
+    MaskFrame.h
+
+    [source/worldLoader]
+    World.cpp
+    World.h
+    SpriteSpawner.cpp
+    SpriteSpawner.h
+    SpriteContainer.cpp
+    SpriteContainer.h
+
+    [source/utils]
+    FlashUtils.h
+    FlashUtils.cpp
+    Settings.cpp
+    Settings.h
+	FlurryAnalytics.cpp
+	FlurryAnalytics.h
+	FlurryAds.cpp
+	FlurryAds.h
+	GooglePlayInAppPurchaseManager.cpp
+	GooglePlayInAppPurchaseManager.h
+	FileSaver.cpp
+	FileSaver.h
+
+	[source/managers]
+	FacebookManager.cpp
+	FacebookManager.h
+}
+
+subprojects
+{
+	s3eFacebook
+    iwgl
+    oxygine-framework
+	oxygine-sound
+	s3eFlurry
+	s3eFlurryAppSpot
+	s3eAndroidGooglePlayBilling
+}
+
+assets
+{
+	(data)
+}
+
+deployment
+{
+	["Default"]
+	android-manifest='AndroidManifest.xml'
+	android-extra-strings='(app_id,FACEBOOK_APP_ID)'
+}

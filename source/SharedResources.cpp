@@ -1,0 +1,152 @@
+#include "SharedResources.h"
+
+Resources gameResources;
+Resources animalsResources;
+
+const string FARM[12] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl", "mouse"};
+
+const string WINTER[6] = {"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal"};
+
+const string UNDERWATER[5] = {"dolphin", "octopus", "fish_1", "whale", "shark"};
+
+const string STEPPE[7] = {"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion"};
+
+const string ASIA[8] = {"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot", "elephant"};
+
+const string AUSTRALIA[8] = {"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
+
+const string ALL_ANIMALS[46] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl", "mouse",
+								"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal",
+								"dolphin", "octopus", "fish_1", "whale", "shark",
+								"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion",
+								"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot", "elephant",
+								"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
+
+
+
+spTextActor createTextfield(const string &txt, bool isHtml, int scale2size, bool multiline) {
+	spTextActor text = new TextActor();
+	text->setAnchor(0.5f, 0.5f);
+	text->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(),  Color(255, 255, 255, 255), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+	if (isHtml) {
+		text->setHtmlText(txt);
+	}
+	else {
+		text->setText(txt);
+	}
+	return text;
+}
+
+spTweenButton createButton(const string &name, const string &txt) {
+	spTweenButton button = new TweenButton();
+	button->setName(name);
+	bool shouldAddText = true;
+	bool shouldAddSprite = false;
+	const char *spriteName = "";
+
+	int r = rand() % 5;
+	const char *str = "button_darkblue";
+	switch(r) {
+		case 1:
+			str = "button_purple";
+			break;
+		case 2:
+			str = "button_blue";
+			break;
+		case 3:
+			str = "button_green";
+			break;
+		case 4:
+			str = "button_yellow";
+			break;
+	}
+
+	if (name == "facebook") {
+		shouldAddText = false;
+		str = "button_facebook";
+	}
+	else if (name == "rate") {
+		shouldAddSprite = true;
+		spriteName = "star";
+	}
+
+	button->setResAnim(gameResources.getResAnim(str));
+	button->setAnchor(Vector2(0.5,0.5));
+	button->setInputChildrenEnabled(false);
+	button->setBaseScale(getRoot()->getWidth() * 0.15f / button->getHeight());
+
+	if (shouldAddText) {
+		spTextActor text = new TextActor();
+
+		text->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(),  Color(255, 255, 255, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+		text->setText(txt);
+
+		text->setSize(button->getSize());
+		button->addChild(text);
+	}
+
+	return button;
+}
+
+spShaderTweenButton createShaderButton(const string &name, const string &txt) {
+	spShaderTweenButton button = new ShaderTweenButton();
+	button->setName(name);
+	bool shouldAddText = true;
+	bool shouldAddSprite = false;
+	const char *spriteName = "";
+
+	int r = rand() % 5;
+	const char *str = "button_darkblue";
+	switch(r) {
+		case 1:
+			str = "button_purple";
+			break;
+		case 2:
+			str = "button_blue";
+			break;
+		case 3:
+			str = "button_green";
+			break;
+		case 4:
+			str = "button_yellow";
+			break;
+	}
+
+	if (name == "facebook") {
+		shouldAddText = false;
+		str = "button_facebook";
+	}
+	else if (name == "rate") {
+		shouldAddSprite = true;
+		spriteName = "star";
+	}
+
+	button->setResAnim(gameResources.getResAnim(str));
+	button->setAnchor(Vector2(0.5,0.5));
+	button->setInputChildrenEnabled(false);
+	button->setBaseScale(getRoot()->getHeight() * 0.1f / button->getHeight());
+
+	if (shouldAddText) {
+		spTextActor text = new TextActor();
+
+		text->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(),  Color(255, 255, 255, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+		text->setText(txt);
+
+		text->setSize(button->getSize());
+		button->addChild(text);
+	}
+
+	return button;
+}
+
+TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle::HorizontalAlign hAlign, TextStyle::VerticalAlign vAling) {
+	TextStyle style;
+	style.font = fontType;
+	style.color = color;
+	style.hAlign = hAlign;
+	style.vAlign = vAling;
+	style.fontSize2Scale = 0;
+	style.multiline = multiline;
+
+	return style;
+}
