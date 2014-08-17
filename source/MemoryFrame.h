@@ -2,9 +2,7 @@
 #define _MEMORYFRAME_
 
 #include "CustomFrame.h"
-#include "SpriteSpawner.h"
 #include "FlashUtils.h"
-#include "LandingPageFrame.h"
 #include "MemoryField.h"
 #include "CounterBoxElement.h"
 
@@ -29,11 +27,12 @@ protected:
 	void setData();
 
 	void stopPreviousAndPlayNewSound(string soundName);
-	int getLevelToLoad();
+	Point getSize();
 
 private:
 	spCounterBoxElement _counterBox;
 	spMemoryField _field;
+	Point _size;
 
 	int _currentLevelCardsScored;
 	int _maxCards;

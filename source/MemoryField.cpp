@@ -34,6 +34,10 @@ void MemoryField::fillField(bool isFirstTime) {
 	for (int i = 0; i < _numberOfFields.x; i++) {
 		for (int j = _numberOfFields.y - 1; j >= 0; j--) {
 			if (isFirstTime) {
+
+		string log = buffer[bufferIndex] + " - " + FlashUtils::CMath::intToString(i) + "x" + FlashUtils::CMath::intToString(j);
+		oxygine::log::messageln(log.c_str());
+
 				spMemoryCard newCard = new MemoryCard(buffer[bufferIndex]);
 				newCard->setPosition(getCellPosition(i, j));
 				newCard->index = Point(i,j);
@@ -56,16 +60,19 @@ void MemoryField::fillField(bool isFirstTime) {
 
 void MemoryField::generateRandomCardsArrayByType(string *buffer) {
 	int maxLength = sizeof(ALL_ANIMALS)/sizeof(ALL_ANIMALS[0]);
-	int random = int(ceill(FlashUtils::CMath::Rand(0, maxLength)));
+	int random = FlashUtils::CMath::Rand(0, maxLength - 1);
 	
 	for (int i = 0; i < _numberOfFields.x * _numberOfFields.y; i++) {
 		string copiedName(ALL_ANIMALS[random]);
+
+		string log = "At: " + FlashUtils::CMath::intToString(random) + " - " + copiedName + " - " + FlashUtils::CMath::intToString(i);
+		oxygine::log::messageln(log.c_str());
 
 		buffer[i] = copiedName;
 		i += 1;
 		buffer[i] = copiedName;
 
-		if (random < maxLength) {
+		if (random < maxLength - 1) {
 			random++;
 		}
 		else {

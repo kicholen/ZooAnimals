@@ -73,7 +73,9 @@ files
 	[source/frame/memory]
 	MemoryFrame.cpp
 	MemoryFrame.h
-
+	ChooseMemoryDifficultyFrame.cpp
+	ChooseMemoryDifficultyFrame.h
+	
 	[source/frame/utils]
     BuyItemPopup.cpp
     BuyItemPopup.h

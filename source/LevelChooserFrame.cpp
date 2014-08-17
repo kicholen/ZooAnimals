@@ -5,7 +5,7 @@
 #include "GooglePlayInAppPurchaseManager.h"
 #include "Settings.h"
 #include "ShaderSprite.h"
-#include "MemoryFrame.h"
+#include "ChooseMemoryDifficultyFrame.h"
 
 LevelChooserFrame::LevelChooserFrame() {
 	init("LevelChooserFrame.xml", true);
@@ -29,8 +29,8 @@ Action LevelChooserFrame::loop() {
 			transitionShowFrameAsDialog(buyItemPopup);
 		}
 		else if (levelChecker != string::npos && availableChecker != string::npos) {
-			spMemoryFrame memoryFrame = new MemoryFrame("sratat");
-			transitionShowFrame(memoryFrame);
+			spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
+			transitionShowFrame(chooserFrame);
 			//Settings::instance.getValue("level_enter").set_value(Settings::instance.getValue("level_enter").as_int() + 1);
 			//spPresentAnimalsFrame presentAnimalsFrame = new PresentAnimalsFrame(action.id.c_str());
 			//transitionShowFrame(presentAnimalsFrame);
