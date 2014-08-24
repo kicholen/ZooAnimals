@@ -2,6 +2,7 @@
 
 Resources gameResources;
 Resources animalsResources;
+Resources editResources;
 
 const string FARM[12] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl", "mouse"};
 

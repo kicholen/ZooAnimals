@@ -12,7 +12,6 @@ void main_init();
 void main_destroy();
 void main_update();
 
-extern Resources editResources;
 extern SoundPlayer sPlayer;
 
 DECLARE_SMART(LandingPageFrame, spLandingPageFrame);

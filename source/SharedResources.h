@@ -8,6 +8,7 @@ using namespace oxygine;
 
 extern Resources gameResources;
 extern Resources animalsResources;
+extern Resources editResources;
 
 extern const string FARM[12];
 extern const string WINTER[6];

@@ -29,10 +29,24 @@ files
 	AnimalSlot.h
 	CounterBoxElement.cpp
 	CounterBoxElement.h
+	MatchTwoSlot.cpp
+	MatchTwoSlot.h
+	MatchTwoDraggable.cpp
+	MatchTwoDraggable.h
 
 	[source/elements/games]
 	MemoryCard.cpp
 	MemoryCard.h
+	AnimalDropField.cpp
+	AnimalDropField.h
+	DraggableAnimal.cpp
+	DraggableAnimal.h
+	ConnectDotElement.cpp
+	ConnectDotElement.h
+	ConnectDotsField.cpp
+	ConnectDotsField.h
+	MatchTwoField.cpp
+	MatchTwoField.h
 
     [source/gui/base]
     RotatingContainer.cpp
@@ -76,6 +90,18 @@ files
 	ChooseMemoryDifficultyFrame.cpp
 	ChooseMemoryDifficultyFrame.h
 	
+	[source/frame/connectdots]
+	ConnectDotsFrame.cpp
+	ConnectDotsFrame.h
+
+	[source/frame/matchtwo]
+	MatchTwoFrame.cpp
+	MatchTwoFrame.h
+
+	[source/frame/counter]
+	AnimalCounterFrame.cpp
+	AnimalCounterFrame.h
+
 	[source/frame/utils]
     BuyItemPopup.cpp
     BuyItemPopup.h

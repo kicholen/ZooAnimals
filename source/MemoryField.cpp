@@ -6,21 +6,13 @@
 MemoryField::MemoryField(Point numberOfFields) {
 	animated_count = 0;
 	droped_count = 0;
-	_backSwap = false;
 	_numberOfFields = numberOfFields;
 	EventCallback cb = CLOSURE(this, &MemoryField::cardClick);
 	addEventListener(TouchEvent::TOUCH_DOWN, cb);
 	_state = mfWaiting;
 
 	setSize(MEMORY_SIZE_X * _numberOfFields.x, MEMORY_SIZE_Y * _numberOfFields.y);
-	/*
-	spColorRectSprite background = new ColorRectSprite();
-	background->setColor(Color(0, 25, 120));
-	background->setSize(getSize());
-	background->setAnchor(0.0f, 0.0f);
-	background->setPosition(0.0f, 0.0f);
-	background->attachTo(this);
-	*/
+
 	fillField(true);
 	animateField();
 }
@@ -34,10 +26,6 @@ void MemoryField::fillField(bool isFirstTime) {
 	for (int i = 0; i < _numberOfFields.x; i++) {
 		for (int j = _numberOfFields.y - 1; j >= 0; j--) {
 			if (isFirstTime) {
-
-		string log = buffer[bufferIndex] + " - " + FlashUtils::CMath::intToString(i) + "x" + FlashUtils::CMath::intToString(j);
-		oxygine::log::messageln(log.c_str());
-
 				spMemoryCard newCard = new MemoryCard(buffer[bufferIndex]);
 				newCard->setPosition(getCellPosition(i, j));
 				newCard->index = Point(i,j);
@@ -64,10 +52,6 @@ void MemoryField::generateRandomCardsArrayByType(string *buffer) {
 	
 	for (int i = 0; i < _numberOfFields.x * _numberOfFields.y; i++) {
 		string copiedName(ALL_ANIMALS[random]);
-
-		string log = "At: " + FlashUtils::CMath::intToString(random) + " - " + copiedName + " - " + FlashUtils::CMath::intToString(i);
-		oxygine::log::messageln(log.c_str());
-
 		buffer[i] = copiedName;
 		i += 1;
 		buffer[i] = copiedName;

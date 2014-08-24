@@ -45,7 +45,6 @@ private:
 	Point _secondCardIndex;
 	int droped_count;
 	int animated_count;
-	bool _backSwap;
 
 	void generateRandomCardsArrayByType(string *buffer);
 	int rotateCard(Point ind, bool show);

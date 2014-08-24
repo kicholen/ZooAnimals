@@ -46,9 +46,7 @@ void AnimalSlot::createBackground() {
 	cardBackground->setResAnim(gameResources.getResAnim("memory_card_box9_a"));
 	cardBackground->setScale(getWidth() / cardBackground->getWidth(), getHeight() / cardBackground->getHeight());
 	cardBackground->setPosition(getWidth() / 2, getHeight() / 2);
-	cardBackground->setVerticalMode(Box9Sprite::TILING_FULL);
-	cardBackground->setHorizontalMode(Box9Sprite::TILING_FULL);
-	cardBackground->setGuides(18, 144, 18, 144);
+	cardBackground->setGuides(36, 144, 36, 144);//(18, 144, 18, 144);
 	cardBackground->attachTo(this);
 	cardBackground->setPriority(-1);
 }

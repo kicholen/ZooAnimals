@@ -13,6 +13,8 @@ class DraggableSprite : public Sprite
 public:
 	DraggableSprite();
 
+	void setDragBounds(Vector2 position, Vector2 size);
+	void setDragEnabled(bool shouldEnable);
 private:
 	Draggable drag;
 };

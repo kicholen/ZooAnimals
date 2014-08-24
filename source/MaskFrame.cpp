@@ -43,6 +43,9 @@ Action MaskFrame::loop() {
 			chooseSpriteFrame->addEventListener(ChooseSpriteFrame::SpawnSpriteEvent::SPAWN_SPRITE, CLOSURE(this, &MaskFrame::onSpawnSprite));
 			transitionShowFrameAsDialog(chooseSpriteFrame);
 		}
+		else if (action.id == "ADD_POINT") {
+			addDraggableSprite("quad_40", Vector2(0.5f, 0.5f), 0.5f, 0.5f,_view->getWidth() / 2, _view->getHeight() / 2, 0, false);
+		}
 		else if (action.id == "SAVE") {
 			spActor child = _spritesHolder->getFirstChild();
 			string firstMessage[] = {"", "", "", "", "", "", "", ""};
@@ -131,10 +134,18 @@ void MaskFrame::setData() {
 	tween->setDoneCallback(CLOSURE(this, &MaskFrame::switchBackground));
 	sliderButton->addTween(tween);
 
-	int buttonXOffset = 100;
-	spTweenButton button = addButton("CLEAR", "CLEAR", Vector2(_view->getWidth() - buttonXOffset, 50));
-	addButton("ADD", "ADD", Vector2(_view->getWidth() - buttonXOffset, 50 + (button->getDerivedHeight() + 5)* 2));
-	button = addButton("SAVE", "SAVE", Vector2(_view->getWidth() - buttonXOffset,  _content->getHeight() * 80 / 100 - button->getDerivedHeight()));
+	spTweenButton button = addButton("CLEAR", "CLEAR", Vector2(_view->getWidth(), 50));
+	button->setBaseScale(button->getScale().x / 2);
+	//button->setScale(button->getScale() / 2);
+	button->setX(_view->getWidth() - button->getDerivedWidth() / 2);
+	button = addButton("ADD", "ADD", Vector2(_view->getWidth() - button->getDerivedWidth() / 2, 50 + (button->getDerivedHeight() + 5)* 2));
+	button->setBaseScale(button->getScale().x / 2);
+
+	button = addButton("SAVE", "SAVE", Vector2(_view->getWidth() - button->getDerivedWidth() / 2,  _content->getHeight() * 80 / 100 - button->getDerivedHeight()));
+	button->setBaseScale(button->getScale().x / 2);
+
+	button = addButton("ADD_POINT", "ADD_POINT", Vector2(_view->getWidth() - button->getDerivedWidth() / 2, 50 + (button->getDerivedHeight() + 5)* 3));
+	button->setBaseScale(button->getScale().x / 2);
 
 	_currentTextfield = createTextfield("FILE_PATH", false, 0, false);
 	_currentTextfield->setFontSize2Scale(40 * _view->getWidth() / 640);

@@ -7,6 +7,10 @@
 #include "ShaderSprite.h"
 #include "ChooseMemoryDifficultyFrame.h"
 
+#include "MatchTwoFrame.h"
+
+#include "ConnectDotsFrame.h"
+
 LevelChooserFrame::LevelChooserFrame() {
 	init("LevelChooserFrame.xml", true);
 	_counter = 0;
@@ -29,8 +33,15 @@ Action LevelChooserFrame::loop() {
 			transitionShowFrameAsDialog(buyItemPopup);
 		}
 		else if (levelChecker != string::npos && availableChecker != string::npos) {
-			spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
-			transitionShowFrame(chooserFrame);
+			//spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
+			//transitionShowFrame(chooserFrame);
+
+		//	spConnectDotsFrame connectFrame = new ConnectDotsFrame();
+		//	transitionShowFrame(connectFrame);
+
+			spMatchTwoFrame matchTwo = new MatchTwoFrame();
+			transitionShowFrame(matchTwo);
+
 			//Settings::instance.getValue("level_enter").set_value(Settings::instance.getValue("level_enter").as_int() + 1);
 			//spPresentAnimalsFrame presentAnimalsFrame = new PresentAnimalsFrame(action.id.c_str());
 			//transitionShowFrame(presentAnimalsFrame);

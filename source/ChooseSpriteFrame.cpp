@@ -1,5 +1,5 @@
 #include "ChooseSpriteFrame.h"
-
+#include "SharedResources.h"
 
 ChooseSpriteFrame::ChooseSpriteFrame() {
 	init("ChooseSpriteFrame.xml", false);
