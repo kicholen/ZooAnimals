@@ -23,3 +23,5 @@ spTweenButton createButton(const string &name, const string &txt);
 spShaderTweenButton createShaderButton(const string &name, const string &txt);
 
 TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle::HorizontalAlign hAlign, TextStyle::VerticalAlign vAling);
+
+void setSpriteScaleBySize(spSprite sprite, Vector2 size);

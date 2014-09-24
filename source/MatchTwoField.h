@@ -25,10 +25,10 @@ public:
 		MatchTwoFieldEvent(EV ev):Event(ev) {}
 	};
 
-	MatchTwoField(Vector2 size, uint numberOfMatches);
+	MatchTwoField(Vector2 size, uint numberOfMatches, uint pairsFromContent);
 	~MatchTwoField();
 
-	void restart(uint numberOfMatches);
+	void restart(uint numberOfMatches, uint pairsFromContent);
 private:
 	void spriteTouchDown(Event *event);
 	void spriteTouchUp(Event *event);
@@ -39,14 +39,14 @@ private:
 	void onProperSlotFound(Vector2 animateTo);
 	void onSlotFoundAnimationCompleted(Event *event);
 
-	void fillField();
+	void fillField(uint pairsFromContent);
 	void createSpotTakenVector(uint numberOfMatches);
 	uint getRandomFreeSpot();
 	Vector2 getSlotPosition(int i);
 	Vector2 getSlotSize();
 	void hidePreviousMatchesIfNecessary();
 
-	void createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale);
+	void createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale, string spriteName);
 private:
 	MatchTwoFieldState _state;
 	uint _numberOfMatches;

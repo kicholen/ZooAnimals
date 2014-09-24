@@ -20,6 +20,10 @@ MatchTwoSlot::MatchTwoSlot() {
 	_state = mtsWaiting;
 }
 
+void MatchTwoSlot::setSprite(string spriteName) {
+	_pairSprite->setResAnim(animalsResources.getResAnim(spriteName));
+}
+
 Vector2 MatchTwoSlot::getBasketPosition() {
 	return local2global(_basket->getPosition());
 }

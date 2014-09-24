@@ -1,31 +1,30 @@
-#include "MatchTwoFrame.h"
-#include "Content.h"
+#include "FindShadowFrame.h"
 
-MatchTwoFrame::MatchTwoFrame() {
+FindShadowFrame::FindShadowFrame() {
 	init("LandingPageFrame.xml", true);
 	selectTransitions();
 }
 
-void MatchTwoFrame::selectTransitions() {
+void FindShadowFrame::selectTransitions() {
 	spTransition transition = new TransitionFade;
 	setTransitionIn(transition);
 	setTransitionOut(transition);
 }
 
-void MatchTwoFrame::_postHiding(Event *) {
+void FindShadowFrame::_postHiding(Event *) {
 	//FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
 	_view->removeChildren();
 	_resources.unload();
 }
 
-void MatchTwoFrame::_preShowing(Event *) {
+void FindShadowFrame::_preShowing(Event *) {
 	//FlurryAnalytics::instance.onLevelEnterEvent(_whichLevel.c_str());
 	selectTransitions();
 	_resources.load();
 	setData();
 }
 
-Action MatchTwoFrame::loop() {
+Action FindShadowFrame::loop() {
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "back" || action.id == "_btn_back_") {
@@ -42,12 +41,12 @@ Action MatchTwoFrame::loop() {
 	return _lastAction;
 }
 
-void MatchTwoFrame::onFinished(Event *event) {
-	int random = int(FlashUtils::CMath::Rand(0, Content::instance.getGameLevelsCount("match_two")));
-	_field->restart(3, random);
+void FindShadowFrame::onFinished(Event *event) {
+	int random = int(FlashUtils::CMath::Rand(2, 4));
+	_field->restart(random, "dog");
 }
 
-void MatchTwoFrame::setData() {
+void FindShadowFrame::setData() {
 	spColorRectSprite background = new ColorRectSprite();
 	background->setColor(Color(88, 144, 217));
 	background->setSize(_view->getSize());
@@ -55,10 +54,9 @@ void MatchTwoFrame::setData() {
 	background->setPosition(0.0f, 0.0f);
 	background->attachTo(_view);
 
-	int random = int(FlashUtils::CMath::Rand(0, Content::instance.getGameLevelsCount("match_two")));
-	_field = new MatchTwoField(Vector2(_view->getWidth() * 0.8f, _view->getHeight()), 3, random);
+	_field = new FindShadowField(Vector2(_view->getWidth() * 0.8f, _view->getHeight()), 3, "cat");
 	_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _field->getDerivedHeight() / 2);
-	_field->addEventListener(MatchTwoField::MatchTwoFieldEvent::FINISHED, CLOSURE(this, &MatchTwoFrame::onFinished));
+	_field->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onFinished));
 	_view->addChild(_field);
 
 	//_counterBox = new CounterBoxElement(Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.15f), 120);

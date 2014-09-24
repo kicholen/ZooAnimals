@@ -104,13 +104,13 @@ void MemoryFrame::setData() {
 
 Point MemoryFrame::getSize() {
 	if (_whichLevel == "easy") {
-		return Point(2, 3);
+		return Point(3, 2);
 	}
 	else if (_whichLevel == "normal") {
-		return Point(3, 4);
+		return Point(4, 3);
 	}
 	else if (_whichLevel == "hard") {
-		return Point(4, 6);
+		return Point(6, 4);
 	}
 	else {
 		string error = "Not excepted parametr: " + _whichLevel;

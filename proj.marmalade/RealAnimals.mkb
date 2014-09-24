@@ -19,6 +19,8 @@ files
     entry_point.cpp
 	SharedResources.cpp
 	SharedResources.h
+	Content.cpp
+	Content.h
 
     [source/model]
     SpriteModel.cpp
@@ -47,6 +49,14 @@ files
 	ConnectDotsField.h
 	MatchTwoField.cpp
 	MatchTwoField.h
+	FindShadowField.cpp
+	FindShadowField.h
+
+	[source/elements/farm]
+	AnimalFarmField.cpp
+	AnimalFarmField.h
+	AnimalInFarmElement.cpp
+	AnimalInFarmElement.h
 
     [source/gui/base]
     RotatingContainer.cpp
@@ -59,6 +69,8 @@ files
     DraggableSprite.h
     EditableSprite.cpp
     EditableSprite.h
+	RotatingContainer2d.cpp
+	RotatingContainer2d.h
 
     [source/gui/common]
     TweenButton.h
@@ -98,6 +110,10 @@ files
 	MatchTwoFrame.cpp
 	MatchTwoFrame.h
 
+	[source/frame/findshadow]
+	FindShadowFrame.cpp
+	FindShadowFrame.h
+
 	[source/frame/counter]
 	AnimalCounterFrame.cpp
 	AnimalCounterFrame.h
@@ -119,7 +135,9 @@ files
     LandingPageFrame.h
     LevelChooserFrame.cpp
     LevelChooserFrame.h
-
+	ZooFrame.cpp
+	ZooFrame.h
+	
     [source/frame/editor]
     ChooseSpriteFrame.cpp
     ChooseSpriteFrame.h

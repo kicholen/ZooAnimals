@@ -113,6 +113,14 @@ namespace FlashUtils
 		return __min(__max(num, lbnd), hbnd);
 	}
 
+	float CMath::DegToRad(float degree) {
+		return degree * MATH_PI / 180;
+	}
+
+	float CMath::RadToDeg(float rad) {
+		return rad * 180 / MATH_PI;
+	}
+
 	bool CMath::SweptCircleIntersect(SweptCircleIntersect_data &data, const Vector2 &p1, const Vector2 &v1, float r1, const Vector2 &p2, const Vector2 &v2, float r2) {
 		//Set up some radius related information:
 		float tr = r1 + r2;
@@ -244,5 +252,13 @@ namespace FlashUtils
 				size *= 2;
 		}
 		return str;
+	}
+
+	float CMath::calculateDistance(Vector2 from, Vector2 to) {
+		return sqrt((to.x - from.x) * (to.x - from.x) + (to.y - from.y) * (to.y - from.y));
+	}
+
+	float CMath::calculateAngle(Vector2 to, Vector2 from) {
+		return atan2(from.y - to.y, from.x - to.x);
 	}
 }

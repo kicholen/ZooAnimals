@@ -14,6 +14,7 @@
 #include "oxygine-framework.h"
 #include "SharedResources.h"
 
+#include "Content.h"
 #include "Settings.h"
 #include "FlurryAnalytics.h"
 #include "FlurryAds.h"
@@ -51,6 +52,7 @@ void main_init() {
 
 	blocking::setYieldCallback(mainloop);
 
+	Content::instance.init("1");
 	// opcje, dŸwiêku, odblokowane funkcjonalnoœci
 	Settings::instance.init("1");
 	Settings::instance.getValue("sounds").set_value(60);

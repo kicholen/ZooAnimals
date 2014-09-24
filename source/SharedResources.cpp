@@ -74,7 +74,7 @@ spTweenButton createButton(const string &name, const string &txt) {
 	button->setResAnim(gameResources.getResAnim(str));
 	button->setAnchor(Vector2(0.5,0.5));
 	button->setInputChildrenEnabled(false);
-	button->setBaseScale(getRoot()->getWidth() * 0.15f / button->getHeight());
+	button->setBaseScale(getRoot()->getHeight() * 0.075f / button->getHeight());
 
 	if (shouldAddText) {
 		spTextActor text = new TextActor();
@@ -150,4 +150,15 @@ TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle
 	style.multiline = multiline;
 
 	return style;
+}
+
+void setSpriteScaleBySize(spSprite sprite, Vector2 size) {
+	float animalScale = 1.0f;
+	if (sprite->getWidth() > sprite->getHeight()) {
+		animalScale = size.x / sprite->getWidth();
+	}
+	else {
+		animalScale = size.y / sprite->getHeight();
+	}
+	sprite->setScale(animalScale);
 }

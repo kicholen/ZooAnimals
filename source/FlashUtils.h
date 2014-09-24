@@ -111,6 +111,9 @@ namespace FlashUtils
 
 		static float Clamp(float num, float lbnd, float hbnd);
 
+		static float DegToRad(float degree);
+
+		static float RadToDeg(float rad);
 
 		struct SweptCircleIntersect_data {
 			float nu;
@@ -127,6 +130,9 @@ namespace FlashUtils
 		static string intToString(int x);
 		static double stringToDouble(const char *input);
 		static string stringFormat(const string fmt, ...);
+
+		static float calculateDistance(Vector2 from, Vector2 to);
+		static float calculateAngle(Vector2 to, Vector2 from);
 	};
 }
 

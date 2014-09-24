@@ -1,18 +1,20 @@
 #include "MatchTwoField.h"
 #include "SharedResources.h"
+#include "pugixml/pugixml.hpp"
+#include "Content.h"
 
-MatchTwoField::MatchTwoField(Vector2 size, uint numberOfMatches) : _numberOfMatches(0) {
+MatchTwoField::MatchTwoField(Vector2 size, uint numberOfMatches, uint pairsFromContent) : _numberOfMatches(0) {
 	setSize(size);
 	addEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &MatchTwoField::touchUp));
 
-	restart(numberOfMatches);
+	restart(numberOfMatches, pairsFromContent);
 }
 
 MatchTwoField::~MatchTwoField() {
 	_isSpotTaken._vector.resize(0);
 }
 
-void MatchTwoField::restart(uint numberOfMatches) {
+void MatchTwoField::restart(uint numberOfMatches, uint pairsFromContent) {
 	createSpotTakenVector(numberOfMatches);
 	_animatedCount = 0;
 	_state = mtAnimating;
@@ -20,11 +22,12 @@ void MatchTwoField::restart(uint numberOfMatches) {
 	_numberOfMatches = numberOfMatches;
 	hidePreviousMatchesIfNecessary();
 	_numberOfMatchesFound = 0;
-	fillField();
+	fillField(pairsFromContent);
 }
 
-void MatchTwoField::fillField() {
+void MatchTwoField::fillField(uint pairsFromContent) {
 	int bufferIndex = 1;
+	pugi::xml_node levelNode = Content::instance.getMatchTwoLevelNode(pairsFromContent).first_child();
 
 	for(uint i = 0; i < _numberOfMatches; i++) {
 		string name = FlashUtils::CMath::intToString(bufferIndex);
@@ -37,6 +40,10 @@ void MatchTwoField::fillField() {
 			addChild(slot);
 		}
 		_animatedCount++;
+		pugi::xml_attribute firstAttribute = levelNode.first_attribute();
+		slot->setSprite(firstAttribute.as_string());
+		levelNode = levelNode.next_sibling();
+		firstAttribute = levelNode.first_attribute();
 		slot->setVisible(true);
 		slot->setPosition(getSlotPosition(bufferIndex));
 		Vector2 slotScale = Vector2(getSlotSize().x / MATCH_SLOT_SIZE_X, getSlotSize().y / MATCH_SLOT_SIZE_Y);
@@ -45,8 +52,10 @@ void MatchTwoField::fillField() {
 		spTween tween = slot->addTween(Sprite::TweenX(getSlotPosition(bufferIndex).x), 250, 1, false, 75 * bufferIndex, Tween::ease_inOutBack);
 		tween->setDoneCallback(CLOSURE(this, &MatchTwoField::animationEndCallback));
 		
-		createDraggableSprite(slot, name, slotScale);
+		createDraggableSprite(slot, name, slotScale, firstAttribute.as_string());
 		bufferIndex++;
+
+		levelNode = levelNode.next_sibling();
 	}
 }
 
@@ -76,7 +85,7 @@ Vector2 MatchTwoField::getSlotSize() {
 	}
 }
 
-void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale) {
+void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale, string spriteName) {
 	spMatchTwoDraggable draggableSprite = getChildT<MatchTwoDraggable>(name, oxygine::ep_ignore_error);
 	
 	if (draggableSprite == NULL) {
@@ -91,7 +100,7 @@ void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vect
 	draggableSprite->setVisible(true);
 	draggableSprite->setPriority(1);
 	draggableSprite->setInputEnabled(true);
-	draggableSprite->setResAnim(animalsResources.getResAnim("cat"));
+	draggableSprite->setResAnim(animalsResources.getResAnim(spriteName));
 	Vector2 basePosition = Vector2(getWidth() * 0.2f, getSlotPosition(getRandomFreeSpot()).y);
 	draggableSprite->setBasePosition(basePosition);
 	draggableSprite->setX(basePosition.x);
@@ -180,7 +189,7 @@ void MatchTwoField::hidePreviousMatchesIfNecessary() {
 void MatchTwoField::createSpotTakenVector(uint numberOfMatches) {
 	_isSpotTaken._vector.resize(0);
 	_isSpotTaken._vector.reserve(numberOfMatches);
-	for (int i = 0; i < numberOfMatches; i++) {
+	for (uint i = 0; i < numberOfMatches; i++) {
 		_isSpotTaken._vector.push_back(false);
 	}
 }
