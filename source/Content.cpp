@@ -101,3 +101,53 @@ int Content::getGameLevelsCount(const string &gameName) {
 
 	return counter;
 }
+
+pugi::xml_node Content::getAnimalJumpParametersNode(const string &name) {
+	pugi::xml_node data = _contentDocument.child("data");
+	OX_ASSERT(data);
+	pugi::xml_node zoo = data.child("zoo");
+	OX_ASSERT(zoo);
+	pugi::xml_node animal = zoo.child(name.c_str());
+	OX_ASSERT(animal);
+	pugi::xml_node parameter = animal.first_child();
+	const pugi::char_t* pugiName = "jump_parameters";
+
+	while (!parameter.empty()) {
+		if (strcmp(pugiName, parameter.name()) == 0) { //parameter.name() == "jump_parameters") {
+			return parameter;
+		}
+
+		parameter = parameter.next_sibling();
+	}
+
+	return pugi::xml_node();
+}
+
+pugi::xml_node Content::getAnimalFarmParametersNode(const string &name) {
+	pugi::xml_node data = _contentDocument.child("data");
+	OX_ASSERT(data);
+	pugi::xml_node zoo = data.child("zoo");
+	OX_ASSERT(zoo);
+	pugi::xml_node animal = zoo.child(name.c_str());
+	OX_ASSERT(animal);
+	pugi::xml_node parameter = animal.first_child();
+	const pugi::char_t* pugiName = "farm";
+
+	while (!parameter.empty()) {
+		if (strcmp(pugiName, parameter.name()) == 0) {
+			return parameter;
+		}
+
+		parameter = parameter.next_sibling();
+	}
+
+	return pugi::xml_node();
+}
+
+pugi::xml_node Content::getAnimalFarmSortParametersNode(const string &name) {
+	return getAnimalFarmParametersNode(name).child("sort");
+}
+
+pugi::xml_node Content::getAnimalFarmNoSortParametersNode(const string &name) {
+	return getAnimalFarmParametersNode(name).child("no_sort");
+}

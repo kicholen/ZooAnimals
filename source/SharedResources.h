@@ -9,6 +9,7 @@ using namespace oxygine;
 extern Resources gameResources;
 extern Resources animalsResources;
 extern Resources editResources;
+extern Resources tilesResources;
 
 extern const string FARM[12];
 extern const string WINTER[6];
@@ -25,3 +26,5 @@ spShaderTweenButton createShaderButton(const string &name, const string &txt);
 TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle::HorizontalAlign hAlign, TextStyle::VerticalAlign vAling);
 
 void setSpriteScaleBySize(spSprite sprite, Vector2 size);
+
+bool isOnScreen(spActor actor);

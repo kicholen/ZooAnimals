@@ -98,10 +98,10 @@ void LevelChooserFrame::_preShowing(Event *) {
 void LevelChooserFrame::setData() {
 	addButton("back", "BACK", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.9f ));
 	spTweenButton button = addButton("memory", "memory", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f ));
-	addButton("connect_dots", "connect_dots", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + button->getDerivedHeight() + 50));
-	addButton("zoo_frame", "zoo_frame", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + (button->getDerivedHeight() + 50) * 2));
-	addButton("find_shadow", "find_shadow", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + (button->getDerivedHeight() + 50) * 3));
-	addButton("match_two", "match_two", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + (button->getDerivedHeight() + 50) * 4));
+	addButton("connect_dots", "connect_dots", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + button->getDerivedHeight() + 10));
+	addButton("zoo_frame", "zoo_frame", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + (button->getDerivedHeight() + 10) * 2));
+	addButton("find_shadow", "find_shadow", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + (button->getDerivedHeight() + 10) * 3));
+	addButton("match_two", "match_two", Vector2(_view->getWidth() / 2,  _content->getHeight() * 0.2f + (button->getDerivedHeight() + 10) * 4));
 
 	/*spTextActor text = createTextfield("In which place do you want to play?", true, 0, true);
 	text->setFontSize2Scale(40 * _view->getWidth() / 640);

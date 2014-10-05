@@ -99,6 +99,7 @@ void main_init() {
 	animalsResources.loadXML("xmls/AnimalsResources.xml");
 
 	editResources.loadXML("edit_res.xml");
+	tilesResources.loadXML("tiles_res.xml");
 	// for edit app
 	Point *ad = new Point(getRoot()->getWidth(), getRoot()->getHeight());
 	SpriteSpawner::Initialize(*ad);

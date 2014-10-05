@@ -5,6 +5,9 @@
 #include "FlashUtils.h"
 #include "AnimalInFarmElement.h"
 #include "SharedResources.h"
+#include "TileField.h"
+
+#define SORT_Z_DELAY 500
 
 using namespace FlashUtils;
 using namespace oxygine;
@@ -25,7 +28,10 @@ public:
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
-	spAnimalInFarmElement createAnimal(string animalNumber, string spriteName);
+	spTileField createTileField(string animalName);
+	void createCustomElements(spTileField tileField);
+	Array<int> getAnimalParameters(string animalName);
+	spAnimalInFarmElement createAnimal(string animalNumber, string spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal = false);
 	void createAddAnimalButton(string buttonName, Vector2 position);
 	void tryToAnimateAnimals(Vector2 position);
 	bool canAnimalsAnimate();
@@ -34,11 +40,13 @@ private:
 	void onTouchOver(Event *event);
 
 	Array<spAnimalInFarmElement> _animalsArray;
+	Array<spSprite> _zSortElements;
 	AnimalFarmState _state;
 	float _animateDuration;
-	float _lastAnimalsAnimateTime;
+	float _lastZSortTime;
 	int _count;
 	string _species;
+	bool _canAnimalsUpdate;
 };
 
 

@@ -42,7 +42,8 @@ Action ConnectDotsFrame::loop() {
 }
 
 void ConnectDotsFrame::onFinished(Event *event) {
-	_field->reset(1);
+	_previousAnimal = _previousAnimal < 33 ? _previousAnimal + 1 : 0;
+	_field->reset(_previousAnimal);
 }
 
 void ConnectDotsFrame::setData() {
@@ -52,14 +53,15 @@ void ConnectDotsFrame::setData() {
 	background->setAnchor(0.0f, 0.0f);
 	background->setPosition(0.0f, 0.0f);
 	background->attachTo(_view);
+	_previousAnimal = 0;
 
-	_field = new ConnectDotsField(2);
+	_field = new ConnectDotsField(_previousAnimal);
 	//float scale = getRoot()->getHeight() * 0.8f / _field->getHeight();
-
+	
 	// 320 x 480
-	// todo: it's bad
-	float m_height = 150;
-	float m_width = 100;
+	// todo: remove this magical hack - it's bad
+	float m_height = 100;
+	float m_width = 150;
 	bool foundOne = false;
 
 	while (!foundOne) {
@@ -74,7 +76,7 @@ void ConnectDotsFrame::setData() {
 	_field->setScaleX(m_width / _field->getWidth());
 	_field->setScaleY(m_height / _field->getHeight());
 
-	_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y * 0.6f - _field->getDerivedHeight() / 2);
+	_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y * 0.5f - _field->getDerivedHeight() / 2);
 	_field->addEventListener(ConnectDotsField::ConnectDotsFieldEvent::FINISHED, CLOSURE(this, &ConnectDotsFrame::onFinished));
 	_view->addChild(_field);
 

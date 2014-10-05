@@ -65,8 +65,9 @@ void ZooFrame::setData() {
 	spColorRectSprite rectangleContainer = new ColorRectSprite();
 	rectangleContainer->setSize(_rotatingContainer->getWidth(), _rotatingContainer->getHeight());
 	rectangleContainer->setColor(Color(0, 0, 0, 0));
-	Vector2 fieldSize = Vector2(_view->getWidth() * 0.8f, _view->getHeight() * 0.8f);
-	string animalsInside[] = {"goat", "polarbear", "elephant", "octopus", "peacock", "kangaroo"};
+	Point tilesCounter = Point(_view->getWidth() * 0.8f / 32.0f, _view->getHeight() * 0.8f / 32.0f);
+	Vector2 fieldSize = Vector2(tilesCounter.x * 32, tilesCounter.y * 32);
+	string animalsInside[] = {"tiger", "koala", "goat", "girafee", "octopus", "penguin"};
 	int sizeOfArray = sizeof(animalsInside) / sizeof( animalsInside[0]);
 	float positionX = 0.0f;
 	float offset = 15.0f;

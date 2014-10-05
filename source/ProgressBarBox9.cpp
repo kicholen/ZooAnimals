@@ -31,7 +31,8 @@ void ProgressBarBox9::createBackground() {
 	timerBackground->setAnchor(Vector2(0.0f, 0.0f));
 	timerBackground->setPosition(0.0f, 0.0f);
 	timerBackground->setSize(getSize());
-	timerBackground->setGuides(33, 93, 33, 93);
+	//timerBackground->setGuides(33, 93, 33, 93);
+	timerBackground->setGuides(7, 9, 6, 8);
 	timerBackground->attachTo(this);
 	timerBackground->setPriority(1);
 }
@@ -42,7 +43,8 @@ void ProgressBarBox9::createForeground() {
 	timerForeground->setAnchor(Vector2(0.0f, 0.0f));
 	timerForeground->setPosition(0.0f, 0.0f);
 	timerForeground->setSize(getSize());
-	timerForeground->setGuides(33, 93, 33, 93);
+	//timerForeground->setGuides(33, 93, 33, 93);
+	timerForeground->setGuides(7, 9, 6, 8);
 	timerForeground->attachTo(_masked);
 	timerForeground->setColor(Color(144, 217, 88));
 }

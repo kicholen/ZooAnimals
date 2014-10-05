@@ -3,13 +3,7 @@
 
 #include "oxygine-framework.h"
 
-#define ANIMAL_IN_FARM_SIZE_X 20
-#define ANIMAL_IN_FARM_SIZE_Y 20
-#define JUMP_HEIGHT 20
-#define JUMP_RANGE 30
-#define JUMP_TIME 2000
-#define JUMP_DELAY_MIN 500
-#define JUMP_DELAY_MAX 1000
+#define ANIMAL_PERCENT_SIZE 5
 
 using namespace oxygine;
 
@@ -20,14 +14,14 @@ typedef enum {aifCreating, aifWaiting, aifJumping} AnimalInFarmElementState;
 class AnimalInFarmElement : public Actor
 {
 public:
-	AnimalInFarmElement(string spriteName, Vector2 size);
+	AnimalInFarmElement(string spriteName, Vector2 size, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal);
 	~AnimalInFarmElement();
 
 	void setAnimalSprite(string spriteName);
 	void animateJump(Vector2 position, bool isRandom = false);
 	float getShadowY();
 protected:
-	virtual void doUpdate(const UpdateState &us);
+	void doUpdate(const UpdateState &us);
 private:
 	void createAnimalSprite();
 	void createShadowSprite();
@@ -53,6 +47,16 @@ private:
 	spSprite _animalSprite;
 	spSprite _debugJumpLine;
 	spSprite _shadowSprite;
+
+private:
+	float _jumpHeight;
+	float _jumpRange;
+	float _jumpTime;
+	Vector2 _jumpDelay;
+	bool _isWaterAnimal;
+
+public:
+	bool _canUpdate;
 };
 
 #endif

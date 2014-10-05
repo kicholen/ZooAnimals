@@ -3,6 +3,7 @@
 Resources gameResources;
 Resources animalsResources;
 Resources editResources;
+Resources tilesResources;
 
 const string FARM[12] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl", "mouse"};
 
@@ -162,3 +163,16 @@ void setSpriteScaleBySize(spSprite sprite, Vector2 size) {
 	}
 	sprite->setScale(animalScale);
 }
+
+bool isOnScreen(spActor actor) {
+	Vector2 startPosition = convert_local2root(actor, Vector2(0, 0));
+	RectF intersection = RectF(startPosition, actor->getSize());
+
+	intersection.clip(RectF(Vector2(0.0f, 0.0f), getRoot()->getSize()));
+	if (!intersection.isEmpty()) {
+		return true;
+	}
+
+	return false;
+}
+

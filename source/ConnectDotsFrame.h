@@ -24,7 +24,7 @@ protected:
 	void setData();
 private:
 	spConnectDotsField _field;
-
+	int _previousAnimal;
 	//spSoundInstance _previousSoundInstance; 
 };
 

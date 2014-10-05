@@ -35,6 +35,8 @@ files
 	MatchTwoSlot.h
 	MatchTwoDraggable.cpp
 	MatchTwoDraggable.h
+	TileField.cpp
+	TileField.h
 
 	[source/elements/games]
 	MemoryCard.cpp

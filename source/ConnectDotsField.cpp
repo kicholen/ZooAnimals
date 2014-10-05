@@ -46,6 +46,7 @@ void ConnectDotsField::fillField(int levelNumber) {
 				dot->addEventListener(TouchEvent::OVER, CLOSURE(this, &ConnectDotsField::onDotOver));
 				addChild(dot);
 			}
+			dot->setVisible(true);
 			dot->setScale(0.0f);
 			_animatedCount++;
 			Vector2 baseDotScale = Vector2(g[0] * getWidth() / dot->getWidth(), g[1] * getHeight() / dot->getHeight());
@@ -240,7 +241,11 @@ void ConnectDotsField::animateOnComplete() {
 			actor->addTween(TweenAlpha(0), 300)->setDoneCallback(CLOSURE(this, &ConnectDotsField::onLineDissapear));
 		}
 
-		actor = actor->getNextSibling();
+		actor = actor->getNextSibling(); 
+	}
+	for (int i = 1; i <= _numberOfDots; i++) {
+		spConnectDotElement dot = getChildT<ConnectDotElement>(FlashUtils::CMath::intToString(i));
+		dot->setVisible(false);
 	}
 
 	spMaskedSprite object = getChildT<MaskedSprite>("object_masked");
