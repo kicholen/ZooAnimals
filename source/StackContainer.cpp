@@ -2,6 +2,17 @@
 #include "SharedResources.h"
 
 StackContainer::StackContainer(Vector2 size, StackContainerAlign alignType) {
+	setData(size, alignType);
+}
+
+/*
+* Made for overriding.
+*/
+StackContainer::StackContainer() {
+
+}
+
+void StackContainer::setData(Vector2 size, StackContainerAlign alignType) {
 	setSize(size);
 	_childrenCount = 0;
 	_alignType = alignType;

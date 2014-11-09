@@ -61,6 +61,8 @@ files
 	AnimalInFarmElement.h
 	FarmControlPanel.cpp
 	FarmControlPanel.h
+	FarmBasePanel.cpp
+	FarmBasePanel.h
 
     [source/gui/base]
     RotatingContainer.cpp

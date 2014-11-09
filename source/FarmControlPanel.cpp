@@ -6,7 +6,6 @@ FarmControlPanel::FarmControlPanel(Vector2 size, Vector2 protrudeSize) {
 	setAnchor(0.5f, 0.5f);
 	setSize(Vector2(size.x, size.y));
 	setPosition(-getWidth() / 2, getRoot()->getDerivedHeight() / 2);
-	_score = 2225; // inject this
 	_state = fcpHidden;
 	_protrudeSize = protrudeSize;
 
@@ -19,12 +18,8 @@ FarmControlPanel::FarmControlPanel(Vector2 size, Vector2 protrudeSize) {
 	addChild(bg);
 
 	addChild(createBackground());
-	_elementsContainer = createStackContainer();
-	_elementsContainer->attachTo(this);
-	_scoreTextField = createScoreTextField();
-	_elementsContainer->addChild(createButton("play", "back_button"));
-	_elementsContainer->addChild(createButton("shop", "back_button"));
-	_elementsContainer->addChild(_scoreTextField);
+	_farmBasePanel = createFarmBasePanel();
+	_farmBasePanel->attachTo(this);
 }
 
 void FarmControlPanel::handleClick(Event *event) {
@@ -33,11 +28,16 @@ void FarmControlPanel::handleClick(Event *event) {
 	if (name == "back" || name == "_btn_back_") {
 
 	}
-	else if (name == "play") {
-		showGamesView();
-	}
-	else if (name == "shop") {
-		showShopView();
+	else if (name == "farm_base_panel") {
+		FarmBasePanel::FarmBasePanelEvent *fbpe = safeCast<FarmBasePanel::FarmBasePanelEvent*>(event);
+		const string eventName = fbpe->_name;
+
+		if (eventName == "play") {
+			showGamesView();
+		}
+		else if (eventName == "shop") {
+			showShopView();
+		}
 	}
 	else {
 		FarmControlPanelEvent gameEvent(FarmControlPanelEvent::PLAY_GAMES, name);
@@ -55,7 +55,6 @@ void FarmControlPanel::show() {
 	tween->setName("show_part");
 	tween->setDoneCallback(CLOSURE(this, &FarmControlPanel::onTweenEnded));
 }
-
 
 void FarmControlPanel::hide() {
 	if (_state != fcpPartShown) {
@@ -141,22 +140,14 @@ spBox9Sprite FarmControlPanel::createBackground() {
 	return background;
 }
 
-spStackContainer FarmControlPanel::createStackContainer() {
-	spStackContainer elementsContainer = new StackContainer(Vector2(_protrudeSize.x, _protrudeSize.y));
-	elementsContainer->setAnchor(0.0f, 0.0f);
-	elementsContainer->setPosition(Vector2(getWidth() - _protrudeSize.x, 0.0f));
+spFarmBasePanel FarmControlPanel::createFarmBasePanel() {
+	spFarmBasePanel farmBasePanel = new FarmBasePanel(Vector2(_protrudeSize.x, _protrudeSize.y));
+	farmBasePanel->setAnchor(0.0f, 0.0f);
+	farmBasePanel->setPosition(Vector2(getWidth() - _protrudeSize.x, 0.0f));
+	farmBasePanel->setName("farm_base_panel");
+	farmBasePanel->addEventListener(FarmBasePanel::FarmBasePanelEvent::CLICK_EVENT, CLOSURE(this, &FarmControlPanel::handleClick));
 
-	return elementsContainer;
-}
-
-spTextActor FarmControlPanel::createScoreTextField() {
-	spTextActor scoreTextField = createTextfield(FlashUtils::CMath::intToString(_score), true, 0, false);
-	scoreTextField->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_RIGHT, TextStyle::VALIGN_MIDDLE));
-	scoreTextField->setFontSize2Scale(20.0f * getRoot()->getWidth() / 480.0f);
-	scoreTextField->setSize(_protrudeSize.x * 0.4f, _protrudeSize.y * 0.2f);
-	scoreTextField->setPriority(3);
-
-	return scoreTextField;
+	return farmBasePanel;
 }
 
 spButton FarmControlPanel::createButton(const string& actionName, const string& buttonResAnim) {
@@ -185,6 +176,15 @@ void FarmControlPanel::createElementContainerIfNeeded() {
 		dupaArray.push(createButton("match", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("match", "back_button"));
 
 		_gameContainer = new AnimatableElementContainer(Vector2(getWidth() - _protrudeSize.x, getHeight()));
 		_gameContainer->addChildren(dupaArray);
@@ -196,19 +196,5 @@ void FarmControlPanel::createElementContainerIfNeeded() {
 }
 
 void FarmControlPanel::updateScore(int score) {
-	removeTweensByName("score_tween");
-	addTween(FarmControlPanel::TweenScore(score), 200)->setName("score_tween");
-}
-
-void FarmControlPanel::setScore(int score) {
-	if (_score == score) {
-		return;
-	}
-
-	_score = score;
-	_scoreTextField->setText(FlashUtils::CMath::intToString(_score));
-}
-
-int FarmControlPanel::getScore() const {
-	return _score;
+	_farmBasePanel->updateScore(score);
 }

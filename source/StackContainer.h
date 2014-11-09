@@ -12,6 +12,9 @@ class StackContainer : public Actor
 {
 public:
 	StackContainer(Vector2 size, StackContainerAlign alignType = scVertical);
+	StackContainer();
+
+	void setData(Vector2 size, StackContainerAlign alignType);
 
 	void addChild(spActor actor);
 	void addChild(Actor *actor);
