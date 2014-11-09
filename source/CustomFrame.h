@@ -11,9 +11,6 @@
 
 using namespace oxygine;
 
-extern Resources gameResources;
-
-
 class CustomFrame : public Frame
 {
 public:

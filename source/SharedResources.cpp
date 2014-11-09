@@ -164,6 +164,23 @@ void setSpriteScaleBySize(spSprite sprite, Vector2 size) {
 	sprite->setScale(animalScale);
 }
 
+void setActorScaleBySize(spActor actor, Vector2 size) {
+	float animalScale = 1.0f;
+	if (actor->getWidth() > actor->getHeight()) {
+		animalScale = size.x / actor->getWidth();
+		if (animalScale * actor->getHeight() > size.y) {
+			animalScale = size.y / actor->getHeight();
+		}
+	}
+	else {
+		animalScale = size.y / actor->getHeight();
+		if (animalScale * actor->getWidth() > size.x) {
+			animalScale = size.x / actor->getWidth();
+		}
+	}
+	actor->setScale(animalScale);
+}
+
 bool isOnScreen(spActor actor) {
 	Vector2 startPosition = convert_local2root(actor, Vector2(0, 0));
 	RectF intersection = RectF(startPosition, actor->getSize());

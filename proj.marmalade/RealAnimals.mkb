@@ -59,6 +59,8 @@ files
 	AnimalFarmField.h
 	AnimalInFarmElement.cpp
 	AnimalInFarmElement.h
+	FarmControlPanel.cpp
+	FarmControlPanel.h
 
     [source/gui/base]
     RotatingContainer.cpp
@@ -73,6 +75,10 @@ files
     EditableSprite.h
 	RotatingContainer2d.cpp
 	RotatingContainer2d.h
+	StackContainer.cpp
+	StackContainer.h
+	AnimatableElementContainer.cpp
+	AnimatableElementContainer.h
 
     [source/gui/common]
     TweenButton.h

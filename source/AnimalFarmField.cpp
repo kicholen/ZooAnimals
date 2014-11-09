@@ -41,18 +41,19 @@ void AnimalFarmField::setData(string animalName, uint animalsCount) {
 	parameters._vector.resize(0);
 
 	createAddAnimalButton("add_animal", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.1f));
-	spTileField tileField = createTileField(animalName);
+	spTileField tileField = createTileField();
 	createCustomElements(tileField);
 
 	_animateDuration = 5.0f * 1000;
 	_state = afWaiting;
 }
 
-spTileField AnimalFarmField::createTileField(string animalName) {
+spTileField AnimalFarmField::createTileField() {
 	float ratio = (getSize().x / 32.0f) / (getSize().y / 32.0f);
-	spTileField tileField = new TileField(Point(ratio * 8, 8));
-	tileField->setData(animalName);
+	spTileField tileField = new TileField(Point(ratio * 6, 6));
+	tileField->setData(_species);
 	tileField->setScale(getHeight() / tileField->getHeight());
+	tileField->setName("tajle");
 	//tileField->setSize(getSize());
 	tileField->setAnchor(0.0f, 0.0f);
 	tileField->setPosition(0.0f, 0.0f);

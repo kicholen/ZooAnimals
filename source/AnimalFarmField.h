@@ -25,10 +25,11 @@ public:
 	void setData(string animalName, uint animalsCount);
 	void addAnimal(Event *event);
 	//void addAnimals();
+	spTileField createTileField();
+
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
-	spTileField createTileField(string animalName);
 	void createCustomElements(spTileField tileField);
 	Array<int> getAnimalParameters(string animalName);
 	spAnimalInFarmElement createAnimal(string animalNumber, string spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal = false);
