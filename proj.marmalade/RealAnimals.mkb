@@ -2,8 +2,8 @@
 
 options
 {
-    module_path="../../TheGameH2O/modules/oxy/oxygine-oxygine-framework/oxygine/marmalade"
-    module_path="../../TheGameH2O/modules/oxy/oxygine-oxygine-framework/oxygine/marmalade/oxygine-oxygine-sound-84ba4558b2fd"
+    module_path="../../../../../Development/oxygine-framework/oxygine/marmalade"
+	module_path="../../../../../Development/oxygine-sound"
 	s3e-data-dir="../data"
     enable-exceptions=1
 }
@@ -25,6 +25,10 @@ files
     [source/model]
     SpriteModel.cpp
     SpriteModel.h
+
+	[source/elements/shop]
+	ShopContainer.cpp
+	ShopContainer.h
 
 	[source/elements/base]
 	AnimalSlot.cpp

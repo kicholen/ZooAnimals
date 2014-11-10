@@ -12,7 +12,7 @@ class Particle : public Sprite
 {
 public:
 	static spActor TheParticleSprite;
-	static Array<spParticle> TheParticleArray;
+	static VectorArray<spParticle> TheParticleArray;
 
 	static void initialize(const string &particleName);
 	static void cleanup();

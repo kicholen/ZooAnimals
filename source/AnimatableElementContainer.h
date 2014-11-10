@@ -26,15 +26,15 @@ public:
 	void hideContainerElements(bool shouldAnimate = false);
 
 	void removeChildren();
-	void addChildren(Array<spActor> children);
+	void addChildren(VectorArray<spActor> children);
 private:
 	void updateChildren();
 	Point getProperArrayDimensions();
 	void addAnimationTween(spActor actor, bool show);
 	void setAlphaToActor(spActor actor, bool show);
 
-	Array<spStackContainer> _stackContainersArray;
-	Array<spActor> _childrenArray;
+	VectorArray<spStackContainer> _stackContainersArray;
+	VectorArray<spActor> _childrenArray;
 
 	Point _properArrayDimensions;
 	bool _needsUpdateArrayDimensions;

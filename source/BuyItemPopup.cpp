@@ -56,7 +56,7 @@ void BuyItemPopup::setData() {
 	popupBackground->attachTo(_view);
 
 	spTextActor infoMessage = createTextfield("Would you like to unlock all levels and remove ads?", true, 0, true);
-	infoMessage->setFontSize2Scale(20 * _view->getWidth() / 640);
+	infoMessage->setFontSize2Scale(20 * (int)_view->getWidth() / 640);
 	infoMessage->setSize(popupBackground->getHeight() * 0.9f, popupBackground->getHeight() * 0.7f);
 	infoMessage->setPosition(_view->getWidth() / 2, _view->getHeight() * 0.4f);
 	_view->addChild(infoMessage);

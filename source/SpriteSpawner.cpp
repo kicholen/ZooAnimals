@@ -5,7 +5,7 @@
 
 using namespace FlashUtils;
 
-Array<World*> *SpriteSpawner::levelArray = 0;
+VectorArray<World*> *SpriteSpawner::levelArray = 0;
 
 void SpriteSpawner::AddLevel(double delay, WorldData *ldata) {
 	//return;
@@ -26,7 +26,7 @@ void SpriteSpawner::AddLevel(double delay, WorldData *ldata) {
 
 void SpriteSpawner::readLevel(pugi::xml_node& child, float stageWidth, float stageHeight) {
 	float delayAmount = 0.0f;
-	Array<WaveData*> waves;
+	VectorArray<WaveData*> waves;
 	WaveData* wavePtrs[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	pugi::xml_node levelContents = child.first_child();
@@ -37,7 +37,7 @@ void SpriteSpawner::readLevel(pugi::xml_node& child, float stageWidth, float sta
 		if (!strcmp(name, "delay" )) {
 			pugi::xml_node delayChild = levelContents.first_child();
 			while(!delayChild.empty()) {
-				delayAmount = atof(delayChild.value());
+				delayAmount = (float)atof(delayChild.value());
 				delayChild = delayChild.first_child();
 			}
 		}
@@ -59,7 +59,7 @@ void SpriteSpawner::readLevel(pugi::xml_node& child, float stageWidth, float sta
 }
 WaveData* SpriteSpawner::ReadWave(pugi::xml_node& child, float stageWidth, float stageHeight) {
 	float durationAmount = 0.0f;
-	Array<SpriteModel*>* groups = new Array<SpriteModel*>();
+	VectorArray<SpriteModel*>* groups = new VectorArray<SpriteModel*>();
 
 	pugi::xml_node waveContents = child.first_child();
 	while(!waveContents.empty()) {
@@ -69,13 +69,13 @@ WaveData* SpriteSpawner::ReadWave(pugi::xml_node& child, float stageWidth, float
 			pugi::xml_node durationChild = waveContents.first_child();
 			while(!durationChild.empty())
 			{
-				durationAmount = atof(durationChild.value());
+				durationAmount = (float)atof(durationChild.value());
 				durationChild = durationChild.first_child();
 			}
 		}
 		else if(!strcmp(name, "g" )) {
 			//this "group" needs to be added to the array
-			Array<SpriteModel*>* readGroups = ReadGroup(waveContents, stageWidth, stageHeight);
+			VectorArray<SpriteModel*>* readGroups = ReadGroup(waveContents, stageWidth, stageHeight);
 			int NumberOfGroupsRead = readGroups->length();
 			for(int i = 0; i < NumberOfGroupsRead; ++i) {
 				groups->push((*readGroups)[i]);
@@ -98,8 +98,8 @@ unsigned int getFinalColor(int red, int green, int blue) {
 	return r | g | b;
 }
 
-Array<SpriteModel*>* SpriteSpawner::ReadGroup(pugi::xml_node& child, float stageWidth, float stageHeight) {
-	Array<SpriteModel*>* groupArray = new Array<SpriteModel*>();
+VectorArray<SpriteModel*>* SpriteSpawner::ReadGroup(pugi::xml_node& child, float stageWidth, float stageHeight) {
+	VectorArray<SpriteModel*>* groupArray = new VectorArray<SpriteModel*>();
 
 	float scaleX = 0.0f;
 	float scaleY = 0.0f;
@@ -118,28 +118,28 @@ Array<SpriteModel*>* SpriteSpawner::ReadGroup(pugi::xml_node& child, float stage
 		if (!strcmp(name, "sX" )) {
 			pugi::xml_node subChild = groupContents.first_child();
 			while(!subChild.empty()) {
-				scaleX = atof(subChild.value());
+				scaleX = (float)atof(subChild.value());
 				subChild = subChild.first_child();
 			}
 		}
 		else if (!strcmp(name, "sY" )) {
 			pugi::xml_node subChild = groupContents.first_child();
 			while(!subChild.empty()) {
-				scaleY = atof(subChild.value());
+				scaleY = (float)atof(subChild.value());
 				subChild = subChild.first_child();
 			}
 		}
 		else if (!strcmp(name, "x" ) || !strcmp(name, "x1")) {
 			pugi::xml_node subChild = groupContents.first_child();
 			while(!subChild.empty()) {
-				positionX = atof(subChild.value());
+				positionX = (float)atof(subChild.value());
 				subChild = subChild.first_child();
 			}
 		}
 		else if(!strcmp(name, "y" ) || !strcmp(name, "y1")) {
 			pugi::xml_node subChild = groupContents.first_child();
 			while(!subChild.empty()) {
-				positionY = atof(subChild.value());
+				positionY = (float)atof(subChild.value());
 				subChild = subChild.first_child();
 			}
 		}
@@ -232,10 +232,10 @@ void SpriteSpawner::readLevelsXml(const string &filePath, float stageWidth, floa
 
 #define RGB CMath::RGBToHex
 void SpriteSpawner::Initialize(const Point &size) {
-	levelArray = new Array<World*>();
+	levelArray = new VectorArray<World*>();
 
-	double halfx = getRoot()->getWidth() / 2;
-	double halfy = getRoot()->getHeight() / 2;
+	float halfx = getRoot()->getWidth() / 2.0f;
+	float halfy = getRoot()->getHeight() / 2.0f;
 
 //#if READ_XML
 	readLevelsXml("xmls/WorldData.xml", halfx * 2, halfy * 2);
@@ -250,6 +250,6 @@ void SpriteSpawner::Initialize(const Point &size) {
 //#endif
 }
 
-Array<Group*>* SpriteSpawner::getLevelData(int levelNumber = 0) {
+VectorArray<Group*>* SpriteSpawner::getLevelData(int levelNumber = 0) {
 	return (*levelArray)[levelNumber]->getLevelData();//World::levelNumber
 }

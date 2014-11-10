@@ -45,7 +45,7 @@ public:
 			groups.push(g13);
 	}
 
-	WaveData *concat(Array<SpriteModel*> *groups1, Array<SpriteModel*> *groups2 = NULL, Array<SpriteModel*> *groups3 = NULL, Array<SpriteModel*> *groups4 = NULL, Array<SpriteModel*> *groups5 = NULL)
+	WaveData *concat(VectorArray<SpriteModel*> *groups1, VectorArray<SpriteModel*> *groups2 = NULL, VectorArray<SpriteModel*> *groups3 = NULL, VectorArray<SpriteModel*> *groups4 = NULL, VectorArray<SpriteModel*> *groups5 = NULL)
 	{
 		if (groups1)
 			add(groups1);
@@ -77,7 +77,7 @@ public:
 		return this;
 	}
 
-	WaveData *add(Array<SpriteModel*> *g)
+	WaveData *add(VectorArray<SpriteModel*> *g)
 	{
 		for (int i = 0; i < g->length(); ++i)
 		{
@@ -94,14 +94,14 @@ public:
 	}
 
 	double d;
-	Array<SpriteModel *> groups;
+	VectorArray<SpriteModel *> groups;
 
 };
 
 class WorldData
 {
 public:
-	Array<WaveData*> waves;
+	VectorArray<WaveData*> waves;
 
 	WorldData(WaveData *wave, WaveData *wave2 = NULL, WaveData *wave3 = NULL, WaveData *wave4 = NULL, WaveData *wave5 = NULL, WaveData *wave6 = NULL, WaveData *wave7 = NULL, WaveData *wave8 = NULL, WaveData *wave9 = NULL)
 	{
@@ -129,7 +129,7 @@ public:
 class SpriteSpawner
 {
 public:
-	static Array<World*> *levelArray;
+	static VectorArray<World*> *levelArray;
 	/*
 		flash.Array levelArray = new Array(
 			[waveLength, [groupx, groupy, spawnWidth, spawnHeight, number, color, col_rand, rel_pos, xvel, yvel], [ANOTHER GROUP DEFINITION]]
@@ -138,9 +138,9 @@ public:
 	static void AddLevel(double delay, WorldData *levelArray);
 
 protected:
-	static Array<SpriteModel*> *ReturnTransport(double xpos, double ypos, double rad, unsigned int speed);
+	static VectorArray<SpriteModel*> *ReturnTransport(double xpos, double ypos, double rad, unsigned int speed);
 
-	static Array<SpriteModel*> *ReturnWall(double x1, double y1, double x2, double y2, int enum_, int rnum, unsigned int col);
+	static VectorArray<SpriteModel*> *ReturnWall(double x1, double y1, double x2, double y2, int enum_, int rnum, unsigned int col);
 
 public:
 
@@ -148,7 +148,7 @@ public:
 
 	static void Think(double dt);
 
-	static Array<Group*>* getLevelData(int levelNumber);
+	static VectorArray<Group*>* getLevelData(int levelNumber);
 
 	static void Start();
 
@@ -156,7 +156,7 @@ private:
 	static void readLevelsXml(const string &filePath, float stageWidth, float stageHeight );
 	static void readLevel(pugi::xml_node& child, float stageWidth, float stageHeight);
 	static WaveData* ReadWave(pugi::xml_node& child, float stageWidth, float stageHeight);
-	static Array<SpriteModel*>* ReadGroup(pugi::xml_node& child, float stageWidth, float stageHeight);
+	static VectorArray<SpriteModel*>* ReadGroup(pugi::xml_node& child, float stageWidth, float stageHeight);
 	static unsigned int ReadColor(pugi::xml_node& child);
 };
 

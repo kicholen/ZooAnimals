@@ -7,7 +7,7 @@ TileField::TileField(Point numberOfFields) {
 	//addEventListener(TouchEvent::TOUCH_DOWN, cb);
 	//_state = mfWaiting;
 
-	setSize(TILE_SIZE_X * _numberOfFields.x, TILE_SIZE_Y * _numberOfFields.y);
+	setSize(float(TILE_SIZE_X * _numberOfFields.x), float(TILE_SIZE_Y * _numberOfFields.y));
 }
 
 
@@ -49,10 +49,10 @@ spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Po
 	return sprite;
 }
 
-Array<int> TileField::getFarmParameters(string animalName) {
+VectorArray<int> TileField::getFarmParameters(string animalName) {
 	pugi::xml_node animalParameters = Content::instance.getAnimalFarmParametersNode(animalName);
 	pugi::xml_attribute attribute = animalParameters.first_attribute();
-	Array<int> attributesArray;
+	VectorArray<int> attributesArray;
 	attributesArray._vector.resize(0);
 	attributesArray._vector.reserve(5);
 
@@ -65,9 +65,9 @@ Array<int> TileField::getFarmParameters(string animalName) {
 }
 
 Point TileField::getCellIndex(Vector2 position) {
-	return Point(position.x / TILE_SIZE_X, position.y / TILE_SIZE_Y);
+	return Point((int)position.x / TILE_SIZE_X, (int)position.y / TILE_SIZE_Y);
 }
 
 Vector2	TileField::getCellPosition(int i, int j) {
-	return Vector2(i * TILE_SIZE_X, j * TILE_SIZE_Y);
+	return Vector2(float(i * TILE_SIZE_X), float(j * TILE_SIZE_Y));
 }

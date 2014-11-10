@@ -11,7 +11,7 @@ MemoryField::MemoryField(Point numberOfFields) {
 	addEventListener(TouchEvent::TOUCH_DOWN, cb);
 	_state = mfWaiting;
 
-	setSize(MEMORY_SIZE_X * _numberOfFields.x, MEMORY_SIZE_Y * _numberOfFields.y);
+	setSize(float(MEMORY_SIZE_X * _numberOfFields.x), float(MEMORY_SIZE_Y * _numberOfFields.y));
 
 	fillField(true);
 	animateField();
@@ -48,7 +48,7 @@ void MemoryField::fillField(bool isFirstTime) {
 
 void MemoryField::generateRandomCardsArrayByType(string *buffer) {
 	int maxLength = sizeof(ALL_ANIMALS)/sizeof(ALL_ANIMALS[0]);
-	int random = FlashUtils::CMath::Rand(0, maxLength - 1);
+	int random = FlashUtils::CMath::random(0, maxLength - 1);
 	
 	for (int i = 0; i < _numberOfFields.x * _numberOfFields.y; i++) {
 		string copiedName(ALL_ANIMALS[random]);
@@ -163,11 +163,11 @@ bool MemoryField::areSelectedCardsPair(spMemoryCard first, spMemoryCard second) 
 }
 
 Point MemoryField::getCellIndex(Vector2 position) {
-	return Point(position.x / MEMORY_SIZE_X, position.y / MEMORY_SIZE_Y);
+	return Point(int(position.x / (float)MEMORY_SIZE_X), int(position.y / (float)MEMORY_SIZE_Y));
 }
 
 Vector2	MemoryField::getCellPosition(int i, int j) {
-	return Vector2(i * MEMORY_SIZE_X + MEMORY_SIZE_X / 2, j * MEMORY_SIZE_Y + MEMORY_SIZE_Y / 2);
+	return Vector2(float(i * MEMORY_SIZE_X + MEMORY_SIZE_X / 2), float(j * MEMORY_SIZE_Y + MEMORY_SIZE_Y / 2));
 }
 
 void MemoryField::dispatchCardsScored() {

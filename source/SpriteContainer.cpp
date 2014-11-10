@@ -2,7 +2,7 @@
 
 
 SpriteContainer::SpriteContainer() {
-	groupArray = new Array<Group*>();
+	groupArray = new VectorArray<Group*>();
 }
 
 void SpriteContainer::reset() {	
@@ -21,6 +21,6 @@ void SpriteContainer::addGroup(SpriteModel &gd) {
 	groupArray->push(g);
 }
 
-Array<Group*>* SpriteContainer::getGroupData() {
+VectorArray<Group*>* SpriteContainer::getGroupData() {
 	return groupArray;
 }

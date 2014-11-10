@@ -28,7 +28,7 @@ void ConnectDotsField::reset(int level) {
 void ConnectDotsField::fillField(int levelNumber) {
 	int bufferIndex = 1;
 
-	Array<Group*> *groupArray = new Array<Group*>();
+	VectorArray<Group*> *groupArray = new VectorArray<Group*>();
 
 	groupArray = SpriteSpawner::getLevelData(levelNumber);
 
@@ -49,11 +49,11 @@ void ConnectDotsField::fillField(int levelNumber) {
 			dot->setVisible(true);
 			dot->setScale(0.0f);
 			_animatedCount++;
-			Vector2 baseDotScale = Vector2(g[0] * getWidth() / dot->getWidth(), g[1] * getHeight() / dot->getHeight());
+			Vector2 baseDotScale = Vector2((float)g[0] * getWidth() / dot->getWidth(), (float)g[1] * getHeight() / dot->getHeight());
 			dot->setBaseScale(baseDotScale);
 			spTween tween = dot->addTween(Sprite::TweenScale(baseDotScale), 250, 1, false, 75 * bufferIndex, Tween::ease_inOutBack);
 			tween->setDoneCallback(CLOSURE(this, &ConnectDotsField::onDotAnimationCompleted));
-			dot->setPosition(g[2] * getWidth(), g[3] * getHeight());
+			dot->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
 			bufferIndex++;
 		}
 		else {
@@ -199,8 +199,8 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 		addChild(mask);
 	}
 	mask->setResAnim(animalsResources.getResAnim(g.spriteName));
-	mask->setScale(g[0] * getWidth() / mask->getWidth(), g[1] * getHeight() / mask->getHeight());
-	mask->setPosition(g[2] * getWidth(), g[3] * getHeight());
+	mask->setScale((float)g[0] * getWidth() / mask->getWidth(), (float)g[1] * getHeight() / mask->getHeight());
+	mask->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
 
 	spMaskedSprite masked = getChildT<MaskedSprite>("object_masked", oxygine::ep_ignore_error);
 	if (masked == NULL) {
@@ -221,8 +221,8 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 	}
 	object->setVal(Vector4(0.5f, 0.5f, 0.5f, 1.0f));
 	object->setResAnim(animalsResources.getResAnim(g.spriteName));
-	object->setScale(g[0] * getWidth() / object->getWidth(), g[1] * getHeight() / object->getHeight());
-	object->setPosition(g[2] * getWidth(), g[3] * getHeight());
+	object->setScale((float)g[0] * getWidth() / object->getWidth(), (float)g[1] * getHeight() / object->getHeight());
+	object->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
 }
 
 void ConnectDotsField::onComplete() {

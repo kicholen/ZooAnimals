@@ -44,7 +44,7 @@ void ConnectDotElement::setDotSprite() {
 void ConnectDotElement::createText(string number) {
 	spTextActor numberTextField = createTextfield(number, true, 0, false);
 	numberTextField->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
-	numberTextField->setFontSize2Scale(2 * getRoot()->getWidth() / 320);
+	numberTextField->setFontSize2Scale(2 * (int)getRoot()->getWidth() / 320);
 	numberTextField->setSize(getWidth() * 0.8f, getHeight() * 0.8f);
 	numberTextField->setPosition(getWidth() / 2, getHeight() / 2);
 	numberTextField->setPriority(3);

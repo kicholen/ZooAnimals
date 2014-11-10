@@ -10,7 +10,7 @@ ParticleEmitter::ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 x
 	_colors._vector.resize(0);
 	_colors._vector.reserve(1);
 	_colors.push(1);
-	_friction = 0.002;
+	_friction = 0.002f;
 	_radius = Vector2(1.0f, 2.0f);
 
 	_frameTime = 0.0f;

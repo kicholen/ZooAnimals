@@ -31,7 +31,7 @@ protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
 	void createCustomElements(spTileField tileField);
-	Array<int> getAnimalParameters(string animalName);
+	VectorArray<int> getAnimalParameters(string animalName);
 	spAnimalInFarmElement createAnimal(string animalNumber, string spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal = false);
 	void createAddAnimalButton(string buttonName, Vector2 position);
 	void tryToAnimateAnimals(Vector2 position);
@@ -40,8 +40,8 @@ private:
 
 	void onTouchOver(Event *event);
 
-	Array<spAnimalInFarmElement> _animalsArray;
-	Array<spSprite> _zSortElements;
+	VectorArray<spAnimalInFarmElement> _animalsArray;
+	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;
 	float _animateDuration;
 	float _lastZSortTime;

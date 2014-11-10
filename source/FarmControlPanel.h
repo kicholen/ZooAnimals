@@ -44,11 +44,13 @@ private:
 	void showGamesView();
 	void showShopView();
 	void hideFullView();
+	void switchFarmBasePanel();
 
 	spBox9Sprite createBackground();
 	spFarmBasePanel createFarmBasePanel();
 	spButton createButton(const string& actionName, const string& buttonResAnim);
 	void createElementContainerIfNeeded();
+	spButton createCloseButtonIfNeeded();
 
 	spAnimatableElementContainer _gameContainer;
 	spFarmBasePanel _farmBasePanel;

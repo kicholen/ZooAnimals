@@ -6,14 +6,14 @@ int World::levelNumber = 0;
 double World::lastStart = 0;
 
 World::World() {
-	waveArray = new Array<SpriteContainer*>();
+	waveArray = new VectorArray<SpriteContainer*>();
 }
 
 void World::addWave(SpriteContainer *wave) {
 	waveArray->push(wave);
 }
 
-Array<Group*>* World::getLevelData() {
+VectorArray<Group*>* World::getLevelData() {
 	int i = 0;
 	return (*waveArray)[i]->getGroupData();
 }

@@ -5,7 +5,7 @@
 using namespace std;
 
 spActor Particle::TheParticleSprite;
-Array<spParticle> Particle::TheParticleArray;
+VectorArray<spParticle> Particle::TheParticleArray;
 
 ResAnim *particleResAnim = 0;
 
@@ -47,7 +47,7 @@ void Particle::removeParticles() {
 }
 
 Particle::Particle(float new_x, float new_y, float new_vx, float new_vy, float new_angle, unsigned int ncol) {
-	friction = 0.01;
+	friction = 0.01f;
 	lifetime = 10;
 	dead = false;
 	
@@ -65,7 +65,7 @@ Particle::Particle(float new_x, float new_y, float new_vx, float new_vy, float n
 	setAnimFrame(particleResAnim);
 	setAnchor(Vector2(0.5f, 0.5f));
 
-	birthday = getTimeMS() / 1000;
+	birthday = float(getTimeMS() / 1000);
 	setAnchor(Vector2(0.5f, 0.5f));
 	setInputEnabled(false);
 }
@@ -97,7 +97,7 @@ void Particle::draw() {
 		setColor(c);
 	}
 	float ageRatio = (1 - age() / lifetime) * 255;
-	setAlpha(ageRatio);
+	setAlpha(unsigned char(ageRatio));
 }
 
 void Particle::doVelocity(float dt, unsigned int numThreads) {

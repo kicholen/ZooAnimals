@@ -198,7 +198,7 @@ uint MatchTwoField::getRandomFreeSpot() {
 	bool untilFound = true;
 	int freeSpot;
 	int preformanceCounter = 0;
-	int randomCounter = int(CMath::Rand(2, _numberOfMatches * 3));
+	int randomCounter = CMath::random(2, _numberOfMatches * 3);
 
 	while (untilFound) {
 		for (int i = 0; i < _isSpotTaken.length(); i++) {

@@ -31,7 +31,7 @@ namespace FlashUtils
 	}
 
 	Vector2 CMath::RotatePoint(Vector2 p, float ang) {
-		float xang = ang * M_PI/180;
+		float xang = ang * (float)M_PI / 180.0f;
 
 		float s = sinf(xang);
 		float c = cosf(xang);

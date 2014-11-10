@@ -13,11 +13,11 @@ public:
 	World();
 
 	//Vars:
-	Array<SpriteContainer*> *waveArray;
+	VectorArray<SpriteContainer*> *waveArray;
 	double waveDelay;
 
 	//Funcs:
-	Array<Group*>* getLevelData();
+	VectorArray<Group*>* getLevelData();
 
 	void addWave(SpriteContainer *wave);
 

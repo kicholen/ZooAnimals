@@ -23,10 +23,10 @@ public:
 	SpriteContainer();
 
 	//Vars:
-	Array<Group*> *groupArray;
+	VectorArray<Group*> *groupArray;
 
 	//Funcs:
-	Array<Group*>* getGroupData();
+	VectorArray<Group*>* getGroupData();
 
 	void reset();
 

@@ -25,7 +25,7 @@ protected:
 	void setData();
 private:
 //	spAnimalFarmField _field;
-	Array<spAnimalFarmField> _farmArray;
+	VectorArray<spAnimalFarmField> _farmArray;
 
 	spRotatingContainer _rotatingContainer;
 	bool _shouldRemoveTiles;

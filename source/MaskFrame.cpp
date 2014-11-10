@@ -148,7 +148,7 @@ void MaskFrame::setData() {
 	button->setBaseScale(button->getScale().x / 2);
 
 	_currentTextfield = createTextfield("FILE_PATH", false, 0, false);
-	_currentTextfield->setFontSize2Scale(40 * _view->getWidth() / 640);
+	_currentTextfield->setFontSize2Scale(40 * (int)_view->getWidth() / 640);
 	_currentTextfield->setSize(button->getDerivedWidth(), button->getDerivedHeight());
 	_currentTextfield->setPosition(button->getX(), button->getY() - button->getDerivedHeight() * 3 / 2);
 	_currentTextfield->setColor(Color(35, 145, 245));

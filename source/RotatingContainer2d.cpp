@@ -47,7 +47,7 @@ void RotatingContainer2d::invalidateAll() {
 
 	Vector2 center = _wheel->getSize() / 2;
 
-	float angleOffset = 360 / numChildren;
+	float angleOffset = 360.0f / (float)numChildren;
 
 	float childDistanceFromCenter = center.x * _centerSubChildrenAt;
 

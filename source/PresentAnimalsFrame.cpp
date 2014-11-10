@@ -70,7 +70,7 @@ void PresentAnimalsFrame::setData() {
 	sliderButton->setName("slideFrame");
 	sliderButton->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &PresentAnimalsFrame::onShowSliderFrame));
 	
-	Array<Group*> *groupArray = new Array<Group*>();
+	VectorArray<Group*> *groupArray = new VectorArray<Group*>();
 
 	int levelToLoad = getLevelToLoad();
 

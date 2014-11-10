@@ -36,7 +36,7 @@ private:
 
 	Vector2 _radius;
 	float _friction;
-	Array<unsigned int> _colors;
+	VectorArray<unsigned int> _colors;
 
 	float _frameTime;
 };

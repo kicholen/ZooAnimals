@@ -75,7 +75,7 @@ void WallPostMessagePopup::setData() {
 			else {
 				_infoMessage = createTextfield("Would you like to unlock additional level? \n Just post a message on your Facebook wall about Animals Zoo.", true, 0, true);
 			}
-			_infoMessage->setFontSize2Scale(20 * _view->getWidth() / 640);
+			_infoMessage->setFontSize2Scale(20 * (int)_view->getWidth() / 640);
 			_infoMessage->setSize(popupBackground->getHeight() * 0.9f, popupBackground->getHeight() * 0.7f);
 			_infoMessage->setPosition(_view->getWidth() / 2, _view->getHeight() * 0.4f);
 		}
@@ -107,7 +107,7 @@ void WallPostMessagePopup::setData() {
 	else {
 		if (!_infoMessage) {
 			_infoMessage = createTextfield("We are really sorry but posting message on your Facebook wall is unavailable.", true, 0, true);
-			_infoMessage->setFontSize2Scale(20 * _view->getWidth() / 640);
+			_infoMessage->setFontSize2Scale(20 * (int)_view->getWidth() / 640);
 			_infoMessage->setSize(popupBackground->getHeight() * 0.9f, popupBackground->getHeight() * 0.7f);
 			_infoMessage->setPosition(_view->getWidth() / 2, _view->getHeight() * 0.4f);
 		}

@@ -57,7 +57,7 @@ private:
 	Vector2 _baseDraggingScale;
 	spMatchTwoDraggable _dragging;
 
-	Array<bool> _isSpotTaken;
+	VectorArray<bool> _isSpotTaken;
 };
 
 #endif

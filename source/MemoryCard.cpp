@@ -49,7 +49,7 @@ spTween MemoryCard::playAnimation(bool show) {
 }
 
 spTween MemoryCard::dropTo(Vector2 pos) {
-	int time = fabs(getPosition().y - pos.y) * 2;
+	int time = (int)fabs(getPosition().y - pos.y) * 2;
 	spTween tween = addTween(Sprite::TweenPosition(pos),time);
 	_state = mcDropped;
 	return tween;
@@ -90,7 +90,7 @@ void MemoryCard::createMask() {
 	_mask->setInputEnabled(false);
 	_mask->setVisible(false);
 	//_mask->setColor(Color(100, 20, 20));  DEBUG
-	_mask->setRotation(45 * DEG_TO_RAD);
+	_mask->setRotation(45.0f * (float)DEG_TO_RAD);
 	_mask->setResAnim(gameResources.getResAnim("memory_card_box9"));
 	_mask->setScale(getHeight() / _mask->getWidth() * 1.5f, getHeight() / _mask->getHeight() * 1.5f);
 	_mask->setPosition(_mask->getDerivedSize() * 3 / 2);

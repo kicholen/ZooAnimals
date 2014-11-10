@@ -24,7 +24,7 @@ AnimalInFarmElement::AnimalInFarmElement(string spriteName, Vector2 size, float 
 	_isWaterAnimal = isWaterAnimal;
 
 	_calculateNewPointCounter = 0;
-	_randomPointOnEdge = Vector2(CMath::random(0.0f, getWidth()), CMath::random(0.0f, getHeight()));
+	_randomPointOnEdge = Vector2((float)CMath::random(0, int(getWidth())), (float)CMath::random(0, int(getHeight())));
 	_shouldCalculateNewPoint = true;
 	_nextJumpDelay = 0.0f;
 	setInputEnabled(false);
@@ -66,7 +66,7 @@ void AnimalInFarmElement::setAnimalSprite(string id) {
 	_animalSprite->setResAnim(animalsResources.getResAnim(id));
 	setAlpha(255);
 	_animalSprite->setAnchor(0.5f, 0.5f);
-	_animalSprite->setPosition(CMath::random(0, getWidth()), CMath::random(0, getHeight()));
+	_animalSprite->setPosition((float)CMath::random(0, int(getWidth())), (float)CMath::random(0, int(getHeight())));
 	
 	setSpriteScaleBySize(_animalSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x));
 }
@@ -98,19 +98,19 @@ Vector2 AnimalInFarmElement::getRandomPointOnRectangleEdge() {
 		int random = CMath::random(0, 5);
 		switch (random) {
 		case 0:
-			_randomPointOnEdge = Vector2(0.0f, CMath::random(0.0f, getHeight()));
+			_randomPointOnEdge = Vector2(0.0f, (float)CMath::random(0, (int)getHeight()));
 			break;
 		case 1:
-			_randomPointOnEdge = Vector2(getWidth(), CMath::random(0.0f, getHeight()));
+			_randomPointOnEdge = Vector2(getWidth(), (float)CMath::random(0, (int)getHeight()));
 			break;
 		case 2:
-			_randomPointOnEdge = Vector2(CMath::random(0.0f, getWidth()), 0.0f);
+			_randomPointOnEdge = Vector2((float)CMath::random(0, (int)getWidth()), 0.0f);
 			break;
 		case 3:
-			_randomPointOnEdge = Vector2(CMath::random(0.0f, getWidth()), getHeight());
+			_randomPointOnEdge = Vector2((float)CMath::random(0, (int)getWidth()), getHeight());
 			break;
 		default:
-			_randomPointOnEdge = Vector2(CMath::random(0.0f, getWidth()), CMath::random(0.0f, getHeight()));
+			_randomPointOnEdge = Vector2((float)CMath::random(0, (int)getWidth()), (float)CMath::random(0, (int)getHeight()));
 			break;
 		}
 	}
@@ -194,17 +194,17 @@ void AnimalInFarmElement::jumpToPosition(Vector2 position) {
 	// shadow tween position
 	_state = aifJumping;
 	spTweenQueue queueTween = new TweenQueue();
-	queueTween->add(TweenPosition(_animalSprite->getPosition() + (position - _animalSprite->getPosition()) / 2 - Vector2(0.0f, _jumpHeight)), _jumpTime / 2);	
-	queueTween->add(TweenPosition(Vector2(position.x, position.y - _animalSprite->getDerivedHeight() / 2)), _jumpTime / 2);
+	queueTween->add(TweenPosition(_animalSprite->getPosition() + (position - _animalSprite->getPosition()) / 2 - Vector2(0.0f, _jumpHeight)), (int)_jumpTime / 2);	
+	queueTween->add(TweenPosition(Vector2(position.x, position.y - _animalSprite->getDerivedHeight() / 2)), (int)_jumpTime / 2);
 	
 	spTweenQueue queueTweenShadow = new TweenQueue();
-	queueTweenShadow->add(TweenPosition(_shadowSprite->getPosition() + (position - _shadowSprite->getPosition()) / 2), _jumpTime / 2);	
-	queueTweenShadow->add(TweenPosition((position)), _jumpTime / 2);
+	queueTweenShadow->add(TweenPosition(_shadowSprite->getPosition() + (position - _shadowSprite->getPosition()) / 2), (int)_jumpTime / 2);	
+	queueTweenShadow->add(TweenPosition((position)), (int)_jumpTime / 2);
 
 	_shadowSprite->addTween(queueTweenShadow);
 	_animalSprite->addTween(queueTween)->setDoneCallback(CLOSURE(this, &AnimalInFarmElement::onJumpEnded));
 	if (_isWaterAnimal) {
-		_animalSprite->addTween(Sprite::TweenColor(Color()), _jumpTime, 1, true);
+		_animalSprite->addTween(Sprite::TweenColor(Color()), (int)_jumpTime, 1, true);
 	}
 }
 
@@ -218,7 +218,7 @@ void AnimalInFarmElement::animateDisappear() {
 
 void AnimalInFarmElement::onJumpEnded(Event *event) {
 	_state = aifWaiting;
-	_nextJumpDelay = CMath::random(_jumpDelay.x, _jumpDelay.y);
+	_nextJumpDelay = CMath::Rand(_jumpDelay.x, _jumpDelay.y);
 }
 
 void AnimalInFarmElement::doUpdate(const UpdateState &us) {

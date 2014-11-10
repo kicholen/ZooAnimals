@@ -41,7 +41,7 @@ void AnimatableElementContainer::hideContainerElements(bool shouldAnimate) {
 	}
 }
 
-void AnimatableElementContainer::addChildren(Array<spActor> children) {
+void AnimatableElementContainer::addChildren(VectorArray<spActor> children) {
 	for (int i = children.length() - 1; i >= 0; i--) {
 		_childrenArray.push(children[i]);
 	}
@@ -72,7 +72,7 @@ void AnimatableElementContainer::updateChildren() {
 
 	for (int i = 0; i <= yDimension - 1; i++) {
 		int childCounterPerStack = 0;
-		spStackContainer stackContainer = new StackContainer(Vector2(getWidth(), getHeight() / yDimension - _offsetPercent / 100.0f * getHeight()), StackContainerAlign::scHorizontal);
+		spStackContainer stackContainer = new StackContainer(Vector2(getWidth(), getHeight() / yDimension - _offsetPercent / 100.0f * getHeight()), 1);
 		stackContainer->setAnchor(0.0f, 0.0f);
 		stackContainer->setPosition(Vector2(0.0f, getHeight() / yDimension * i + getHeight() * _offsetPercent / 100.0f / 2));// * (i + 1)));
 		
@@ -91,8 +91,8 @@ Point AnimatableElementContainer::getProperArrayDimensions() {
 	if (_needsUpdateArrayDimensions) {
 		int countSquared = (int)floorf(scalar::sqrt(_childrenArray.length()));
 
-		int xDimension = ceil((double)_childrenArray.length() / (double)countSquared);
-		int yDimension = ceil(double(_childrenArray.length()) / double(xDimension));
+		int xDimension = (int)ceil((double)_childrenArray.length() / (double)countSquared);
+		int yDimension = (int)ceil(double(_childrenArray.length()) / double(xDimension));
 
 		if (getDerivedWidth() > getDerivedHeight()) {
 			_properArrayDimensions = Point(xDimension, yDimension);

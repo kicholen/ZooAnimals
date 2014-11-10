@@ -43,7 +43,7 @@ Action MatchTwoFrame::loop() {
 }
 
 void MatchTwoFrame::onFinished(Event *event) {
-	int random = int(FlashUtils::CMath::Rand(0, Content::instance.getGameLevelsCount("match_two")));
+	int random = FlashUtils::CMath::random(0, Content::instance.getGameLevelsCount("match_two"));
 	_field->restart(3, random);
 }
 
@@ -55,7 +55,7 @@ void MatchTwoFrame::setData() {
 	background->setPosition(0.0f, 0.0f);
 	background->attachTo(_view);
 
-	int random = int(FlashUtils::CMath::Rand(0, Content::instance.getGameLevelsCount("match_two")));
+	int random = FlashUtils::CMath::random(0, Content::instance.getGameLevelsCount("match_two"));
 	_field = new MatchTwoField(Vector2(_view->getWidth() * 0.8f, _view->getHeight()), 3, random);
 	_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _field->getDerivedHeight() / 2);
 	_field->addEventListener(MatchTwoField::MatchTwoFieldEvent::FINISHED, CLOSURE(this, &MatchTwoFrame::onFinished));

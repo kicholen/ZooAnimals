@@ -1,7 +1,7 @@
 #include "StackContainer.h"
 #include "SharedResources.h"
 
-StackContainer::StackContainer(Vector2 size, StackContainerAlign alignType) {
+StackContainer::StackContainer(Vector2 size, int alignType) {
 	setData(size, alignType);
 }
 
@@ -12,10 +12,10 @@ StackContainer::StackContainer() {
 
 }
 
-void StackContainer::setData(Vector2 size, StackContainerAlign alignType) {
+void StackContainer::setData(Vector2 size, int alignType) {
 	setSize(size);
 	_childrenCount = 0;
-	_alignType = alignType;
+	_alignType = alignType == 0 ? scVertical : scHorizontal;
 	_needsUpdateChildSize = false;
 }
 

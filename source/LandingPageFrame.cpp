@@ -2,6 +2,7 @@
 #include "SoundInstance.h"
 #include "s3eOSExec.h"
 #include "GooglePlayInAppPurchaseManager.h"
+#include "SwipeTrailElement.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -58,12 +59,19 @@ void LandingPageFrame::setData() {
 	addButton("rate", "RATE", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() + 10));
 	
 	spTextActor text = createTextfield("Loveable animals cannot wait to play with you! :)", true, 0, true);
-	text->setFontSize2Scale(40 * _view->getWidth() / 640);
+	text->setFontSize2Scale(40 * (int)_view->getWidth() / 640);
 	text->setSize(_view->getWidth() * 0.65f, _view->getHeight() * 0.4f);
 	text->setPosition(_view->getWidth() / 2, _view->getHeight() * 0.2f);
 	text->setColor(Color(35, 145, 245));
 	text->attachTo(_view);
 	addButton("edit", "edit", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 3 + 30));
+
+
+
+	spSwipeTrailElement swipe = new SwipeTrailElement(20);
+	swipe->setSize(_view->getSize());
+	swipe->setPriority(1000);
+	swipe->attachTo(_view);
 }
 
 void LandingPageFrame::playLoopedMusic() {

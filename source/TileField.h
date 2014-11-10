@@ -22,7 +22,7 @@ public:
 	void setData(string animalName);
 	spSprite createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string spriteName, short priority = -1);
 private:
-	Array<int> getFarmParameters(string animalName);
+	VectorArray<int> getFarmParameters(string animalName);
 	Point getCellIndex(Vector2 position);
 	Vector2	getCellPosition(int i, int j);
 	

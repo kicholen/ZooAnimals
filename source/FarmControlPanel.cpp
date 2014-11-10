@@ -9,13 +9,13 @@ FarmControlPanel::FarmControlPanel(Vector2 size, Vector2 protrudeSize) {
 	_state = fcpHidden;
 	_protrudeSize = protrudeSize;
 
-	spColorRectSprite bg = new ColorRectSprite();
+	/*spColorRectSprite bg = new ColorRectSprite();
 	bg->setColor(Color(222, 100, 100));
 	bg->setSize(getSize());
 	bg->setAnchor(0.0f, 0.0f);
 	bg->setPosition(0.0f, 0.0f);
 	bg->setPriority(-1000);
-	addChild(bg);
+	addChild(bg);*/
 
 	addChild(createBackground());
 	_farmBasePanel = createFarmBasePanel();
@@ -38,6 +38,9 @@ void FarmControlPanel::handleClick(Event *event) {
 		else if (eventName == "shop") {
 			showShopView();
 		}
+	}
+	else if (name == "hide_shop_game_view") {
+		hideFullView();
 	}
 	else {
 		FarmControlPanelEvent gameEvent(FarmControlPanelEvent::PLAY_GAMES, name);
@@ -103,6 +106,8 @@ void FarmControlPanel::showGamesView() {
 	tween = addTween(TweenDummy(), TWEEN_DURATION / 2, 1, false, 0, Tween::ease_outBack);
 	tween->setName("show_game_elements");
 	tween->setDoneCallback(CLOSURE(this, &FarmControlPanel::onTweenEnded));
+
+	switchFarmBasePanel();
 }
 
 void FarmControlPanel::showShopView() {
@@ -115,6 +120,16 @@ void FarmControlPanel::showShopView() {
 
 	tween->setName("shop_view");
 	tween->setDoneCallback(CLOSURE(this, &FarmControlPanel::onTweenEnded));
+
+	switchFarmBasePanel();
+}
+
+void FarmControlPanel::switchFarmBasePanel() {
+	unsigned char panelAlpha = _farmBasePanel->getAlpha() == 0 ? 255 : 0;
+	unsigned char closeButtonAlpha = panelAlpha == 0 ? 255 : 0;
+
+	_farmBasePanel->addTween(TweenAlpha(panelAlpha), TWEEN_DURATION);
+	createCloseButtonIfNeeded()->addTween(TweenAlpha(closeButtonAlpha), TWEEN_DURATION);
 }
 
 void FarmControlPanel::hideFullView() {
@@ -125,6 +140,12 @@ void FarmControlPanel::hideFullView() {
 
 		tween->setName("show_part");
 		tween->setDoneCallback(CLOSURE(this, &FarmControlPanel::onTweenEnded));
+
+		switchFarmBasePanel();
+
+		if (_gameContainer) {
+			_gameContainer->hideContainerElements();
+		}
 	}
 }
 
@@ -160,9 +181,22 @@ spButton FarmControlPanel::createButton(const string& actionName, const string& 
 	return button;
 }
 
+spButton FarmControlPanel::createCloseButtonIfNeeded() {
+	spButton closeButton = getChildT<Button>("hide_shop_game_view", ep_ignore_error);
+	if (closeButton == NULL) {
+		closeButton = createButton("hide_shop_game_view", "back_button");
+		closeButton->attachTo(this);
+		closeButton->setAnchor(0.5f, 0.5f);
+		setActorScaleBySize(closeButton, _protrudeSize);
+		closeButton->setPosition(getWidth() - _protrudeSize.x + closeButton->getDerivedWidth() / 2, closeButton->getDerivedHeight() / 2);
+	}
+
+	return closeButton;
+}
+
 void FarmControlPanel::createElementContainerIfNeeded() {
 	if (_gameContainer == NULL) {
-		Array<spActor> dupaArray;
+		VectorArray<spActor> dupaArray;
 		dupaArray._vector.resize(0);
 
 		//Memory, connects dots, find shadow, match two

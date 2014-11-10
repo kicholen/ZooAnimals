@@ -101,7 +101,7 @@ void main_init() {
 	editResources.loadXML("edit_res.xml");
 	tilesResources.loadXML("tiles_res.xml");
 	// for edit app
-	Point *ad = new Point(getRoot()->getWidth(), getRoot()->getHeight());
+	Point *ad = new Point((int)getRoot()->getWidth(), (int)getRoot()->getHeight());
 	SpriteSpawner::Initialize(*ad);
 
 	spTransition tr = new TransitionSimple();

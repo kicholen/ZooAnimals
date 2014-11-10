@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "RootActor.h"
 #include <sstream>
+#include <deque>
 
 using namespace oxygine;
 
@@ -47,11 +48,17 @@ namespace FlashUtils
 	};
 	
 	template <class T>
-	class Array
+	class VectorArray
 	{
 	public:
 		void push(T v) {
 			_vector.push_back(v);
+		}
+
+		void addAll(VectorArray<T> array) {
+			for(int i = array.length() - 1; i >= 0; i--) {
+				push(array[i]);
+			}
 		}
 
 		int length() {
@@ -62,6 +69,14 @@ namespace FlashUtils
 			return _vector[i];
 		}
 
+		void clear() {
+			_vector.resize(0);
+		}
+
+		void ensureCapacity(int reserveCapacity) {
+			_vector.reserve(reserveCapacity);
+		}
+
 		void splice(int start, bool swap = false) {
 			if (swap) {
 				_vector[start] = _vector[_vector.size() - 1];
@@ -70,9 +85,61 @@ namespace FlashUtils
 			else {
 				_vector.erase(_vector.begin() + start);
 			}
+
 		}
 		
 		std::vector<T> _vector;
+	};
+
+	template <class T>
+	class DequeArray
+	{
+	public:
+		virtual void push(T v) {
+			_deque.push_back(v);
+		}
+
+		void addAll(DequeArray<T> array) {
+			for(int i = array.length() - 1; i >= 0; i--) {
+				push(array[i]);
+			}
+		}
+
+		int length() {
+			return _deque.size();
+		}
+
+		T operator [](int i) {
+			return _deque[i];
+		}
+
+		void clear() {
+			_deque.resize(0);
+		}
+		
+		std::deque<T> _deque;
+	};
+
+	template <class T>
+	class CapacityDeque : public DequeArray<T>
+	{
+	public:
+		virtual void push(T v) {
+			if (length() == capacity()) {
+				_deque.pop_back();
+			}
+			_deque.push_front(v);
+		}
+
+		void setCapacity(int capacity) {
+			_capacity = capacity;
+		}
+
+		int capacity() {
+			return _capacity;
+		}
+		
+		int _capacity;
 	};
 
 	class CMath

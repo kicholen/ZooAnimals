@@ -115,5 +115,7 @@ Point MemoryFrame::getSize() {
 	else {
 		string error = "Not excepted parametr: " + _whichLevel;
 		oxygine::log::error(error.c_str());
+
+		return Point(0, 0);
 	}
 }
