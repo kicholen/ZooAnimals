@@ -38,7 +38,7 @@ void ConnectDotsField::fillField(int levelNumber) {
 			string name = FlashUtils::CMath::intToString(bufferIndex);
 
 			spConnectDotElement dot = getChildT<ConnectDotElement>(name, oxygine::ep_ignore_error);
-			if (dot == NULL) {
+			if (!dot) {
 				dot = new ConnectDotElement(name);
 				dot->setAnchor(0.5f, 0.5f);
 				dot->setName(name);
@@ -189,7 +189,7 @@ void ConnectDotsField::dispatchFinishedEvent(Event *event) {
 
 void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 	spSprite mask = getChildT<Sprite>("object_mask", oxygine::ep_ignore_error);
-	if (mask == NULL) {
+	if (!mask) {
 		mask = new Sprite();
 		mask->setName("object_mask");
 		mask->setAnchor(0.5f, 0.5f);
@@ -203,7 +203,7 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 	mask->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
 
 	spMaskedSprite masked = getChildT<MaskedSprite>("object_masked", oxygine::ep_ignore_error);
-	if (masked == NULL) {
+	if (!masked) {
 		masked = new MaskedSprite();
 		masked->setName("object_masked");
 		addChild(masked);
@@ -211,7 +211,7 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 	}
 
 	spShaderSprite object = masked->getChildT<ShaderSprite>("object", oxygine::ep_ignore_error);
-	if (object == NULL) {
+	if (!object) {
 		object = new ShaderSprite();
 		object->setName("object");
 		object->setAnchor(0.5f, 0.5f);

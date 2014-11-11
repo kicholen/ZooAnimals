@@ -72,7 +72,7 @@ void FindShadowField::dispatchShadowFoundEvent(Event *event) {
 spSprite FindShadowField::createSprite(string name, string spriteName, bool isShadowSprite) {
 	spSprite sprite = getChildT<Sprite>(name, oxygine::ep_ignore_error);
 	
-	if (sprite == NULL) {
+	if (!sprite) {
 		sprite = new Sprite();
 		sprite->setAnchor(0.5f, 0.5f);
 		sprite->setVisible(true);

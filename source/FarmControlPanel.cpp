@@ -183,7 +183,7 @@ spButton FarmControlPanel::createButton(const string& actionName, const string& 
 
 spButton FarmControlPanel::createCloseButtonIfNeeded() {
 	spButton closeButton = getChildT<Button>("hide_shop_game_view", ep_ignore_error);
-	if (closeButton == NULL) {
+	if (!closeButton) {
 		closeButton = createButton("hide_shop_game_view", "back_button");
 		closeButton->attachTo(this);
 		closeButton->setAnchor(0.5f, 0.5f);
@@ -195,7 +195,7 @@ spButton FarmControlPanel::createCloseButtonIfNeeded() {
 }
 
 void FarmControlPanel::createElementContainerIfNeeded() {
-	if (_gameContainer == NULL) {
+	if (!_gameContainer) {
 		VectorArray<spActor> dupaArray;
 		dupaArray._vector.resize(0);
 

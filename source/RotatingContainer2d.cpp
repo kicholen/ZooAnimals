@@ -17,7 +17,7 @@ RotatingContainer2d::~RotatingContainer2d() {
 
 void RotatingContainer2d::clear() {
 	_wheel->removeChildren();
-	if (_mainChild != NULL) {
+	if (_mainChild) {
 		_mainChild->detach();
 	}
 }

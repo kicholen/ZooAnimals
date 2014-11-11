@@ -70,7 +70,7 @@ void LandingPageFrame::setData() {
 
 	spSwipeTrailElement swipe = new SwipeTrailElement(20);
 	swipe->setSize(_view->getSize());
-	swipe->setPriority(1000);
+	swipe->setPriority(-1000);
 	swipe->attachTo(_view);
 }
 

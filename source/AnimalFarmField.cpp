@@ -105,7 +105,7 @@ void AnimalFarmField::addAnimal(Event *event) {
 
 spAnimalInFarmElement AnimalFarmField::createAnimal(string animalNumber, string spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal) {
 	spAnimalInFarmElement animalElement = getChildT<AnimalInFarmElement>(animalNumber, oxygine::ep_ignore_error);
-	if (animalElement == NULL) {
+	if (!animalElement) {
 		animalElement = new AnimalInFarmElement(spriteName, getSize(), jumpRange, jumpHeight, jumpTime, delayRandom, isWaterAnimal);
 		addChild(animalElement);
 	}

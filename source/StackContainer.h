@@ -6,7 +6,7 @@
 using namespace oxygine;
 
 DECLARE_SMART(StackContainer, spStackContainer);
-typedef enum StackContainerAlign {scVertical = 0, scHorizontal = 1} ;
+enum StackContainerAlign {scVertical = 0, scHorizontal = 1} ;
 
 class StackContainer : public Actor
 {

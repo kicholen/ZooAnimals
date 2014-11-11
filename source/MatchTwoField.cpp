@@ -32,7 +32,7 @@ void MatchTwoField::fillField(uint pairsFromContent) {
 	for(uint i = 0; i < _numberOfMatches; i++) {
 		string name = FlashUtils::CMath::intToString(bufferIndex);
 		spMatchTwoSlot slot = getChildT<MatchTwoSlot>(name + "_basket", oxygine::ep_ignore_error);
-		if (slot == NULL) {
+		if (!slot) {
 			slot = new MatchTwoSlot();
 			slot->setAnchor(0.5f, 0.5f);
 			slot->setName(name + "_basket");
@@ -88,7 +88,7 @@ Vector2 MatchTwoField::getSlotSize() {
 void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale, string spriteName) {
 	spMatchTwoDraggable draggableSprite = getChildT<MatchTwoDraggable>(name, oxygine::ep_ignore_error);
 	
-	if (draggableSprite == NULL) {
+	if (!draggableSprite) {
 		draggableSprite = new MatchTwoDraggable();
 		draggableSprite->setAnchor(Vector2(0.5f, 0.5f));
 		draggableSprite->setName(name);

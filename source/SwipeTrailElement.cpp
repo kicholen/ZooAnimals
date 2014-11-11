@@ -3,11 +3,14 @@
 #include "RenderState.h"
 #include "core/gl/VideoDriverGLES20.h"
 #include "core/gl/ShaderProgramGL.h"
+#include "SharedResources.h"
 
 SwipeTrailElement::SwipeTrailElement(int maxInputPoints) {
 	_initialDistance = 10;
 	_minDistance = 20;
 	_pressed = false;
+	_thickness = 30.0f;
+	_endcap = 8.5f;
 	_touchPoints.setCapacity(maxInputPoints);
 	_pointsSimplifier = new ResolverRadialChaikin();
 	resolve();
@@ -22,7 +25,7 @@ SwipeTrailElement::SwipeTrailElement(int maxInputPoints) {
 									vec4 position = vec4(a_position, 0.0, 1.0);\
 									gl_Position = projection * position;\
 									}\
-									";
+				";
 
 	const char* fragmentShaderData = "\
 									  uniform mediump vec4 color;\
@@ -30,7 +33,6 @@ SwipeTrailElement::SwipeTrailElement(int maxInputPoints) {
 									  gl_FragColor = color; \
 									  } \
 									  ";
-
 	_program = new ShaderProgramGL();
 
 
@@ -39,6 +41,15 @@ SwipeTrailElement::SwipeTrailElement(int maxInputPoints) {
 
 	int pr = ShaderProgramGL::createProgram(vs, fs, (VertexDeclarationGL*)IVideoDriver::instance->getVertexDeclaration(VERTEX_POSITION));
 	_program->init(pr);
+	/*
+	spColorRectSprite bg = new ColorRectSprite();
+	bg->setColor(Color(222, 100, 100));
+	bg->setSize(getSize());
+	bg->setAnchor(0.0f, 0.0f);
+	bg->setPosition(0.0f, 0.0f);
+	bg->setPriority(-1000);
+	addChild(bg);*/
+	//setResAnim(animalsResources.getResAnim("tiger"));
 }
 
 
@@ -70,24 +81,35 @@ void SwipeTrailElement::doRender(const RenderState &rs) {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//Sprite::doRender(rs);
 	drawAllLines();
 
 	rs.renderer->resetSettings();
 }
 
 void SwipeTrailElement::drawAllLines() {
-	if (_triangles.length() >= 2) {
+	if (_triangles.length() <= 0) {
+		return;
+	}
+
+	int counter = 0;
+	for (int i = 0; i < _triangles.length(); i++) {
+		if (counter == _batchSize) {
+			drawPrimitives(true, false, _batchSize, true);
+			counter = 0;
+		}
+		mVertices[counter].x = _triangles[i].x;
+		mVertices[counter].y = _triangles[i].y;
+		counter++;
+	}
+	drawPrimitives(true, false, _batchSize, true);
+	
+	/*if (_triangles.length() >= 2) {
 		for (int i = 0; i < _triangles.length() - 2; i++) {
-			drawSegment(_triangles[i], _triangles[i + 1], true);
+			drawSegment(_triangles[i], _triangles[i + 1], false, false);
 		}
 	}
-	
-	if (_simplifiedPoints.length() >= 2) {
-		for (int i = 0; i < _simplifiedPoints.length() - 2; i++) {
-			drawSegment(_simplifiedPoints[i], _simplifiedPoints[i + 1], false);
-		}
-	}
-	
+	*/
 	/*if (_touchPoints.length() >= 2) {
 		for (int i = 0; i < _touchPoints.length() - 2; i++) {
 			drawSegment(_touchPoints[i], _touchPoints[i + 1], true);
@@ -96,12 +118,12 @@ void SwipeTrailElement::drawAllLines() {
 }
 
 /// Draw a line segment.
-void SwipeTrailElement::drawSegment(const Vector2& p1, const Vector2& p2, bool otherColor) {
+void SwipeTrailElement::drawSegment(const Vector2& p1, const Vector2& p2, bool otherColor, bool isTriangle) {
 	mVertices[0].x = p1.x;
 	mVertices[0].y = p1.y;
 	mVertices[1].x = p2.x;
 	mVertices[1].y = p2.y;
-	drawPrimitives(false, true, 2, otherColor);
+	drawPrimitives(isTriangle ? true : false, isTriangle ? false : true, 2, otherColor);
 }
 
 void SwipeTrailElement::drawPrimitives(bool drawTriangles, bool drawLines, int count, bool otherColor) {
@@ -110,7 +132,7 @@ void SwipeTrailElement::drawPrimitives(bool drawTriangles, bool drawLines, int c
 
 	if (drawTriangles)
 	{
-		Vector4 c = otherColor ? Vector4(0.9f, 0.2f, 0.2f, 0.5f) : Vector4(0.5f, 0.5f, 0.5f, 0.5f);
+		Vector4 c = otherColor ? Vector4(0.9f, 0.2f, 0.2f, 1.0f) : Vector4(0.5f, 0.5f, 0.5f, 1.0f);
 		IVideoDriver::instance->setUniform("color", &c, 1);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, count);
 	}
@@ -197,7 +219,7 @@ int SwipeTrailElement::generate(DequeArray<Vector2>& input, int mult) {
 		_triangles.push(Vector2(p.x + _perp.x, p.y + _perp.y));
 	}
 	_texCoord.push(Vector2(0.0f, 0.0f));
-		
+
 	for (int i = 1; i < input.length() - 1; i++) {
 		Vector2 p = input[i];
 		Vector2 p2 = input[i + 1];
@@ -221,14 +243,14 @@ int SwipeTrailElement::generate(DequeArray<Vector2>& input, int mult) {
 		//add the tip of perpendicular
 		_triangles.push(Vector2(p.x + _perp.x, p.y + _perp.y));
 		//0.0 -> end, transparent
-		_triangles.push(Vector2(0.0f, 0.0f));
+		_texCoord.push(Vector2(0.0f, 0.0f));
 			
 		//add the center point
 		_triangles.push(Vector2(p.x, p.y));
 		//1.0 -> center, opaque
 		_texCoord.push(Vector2(1.0f, 0.0f));
 	}
-		
+
 	//final point
 	if (_endcap <= 0) {
 		_triangles.push(input[input.length() - 1]);
@@ -246,4 +268,3 @@ int SwipeTrailElement::generate(DequeArray<Vector2>& input, int mult) {
 
 	return _triangles.length() - c;
 }
-	

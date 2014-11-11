@@ -40,7 +40,7 @@ private:
 	// Drawing stuff
 	void drawAllLines();
 	void drawPrimitives(bool drawTriangles, bool drawLines, int count, bool otherColor);
-	void drawSegment(const Vector2& p1, const Vector2& p2, bool otherColor);
+	void drawSegment(const Vector2& p1, const Vector2& p2, bool otherColor, bool isTriangle);
 
 	// Storage for touch points.
 	CapacityDeque<Vector2> _touchPoints;
@@ -51,7 +51,7 @@ private:
 	int _initialDistance;
 	int _minDistance;
 
-	static const int MAX_VERTICES = 64;
+	static const int MAX_VERTICES = 256;
 	Vector2 mVertices[MAX_VERTICES];
 	ShaderProgramGL *_program;
 	bool _pressed;

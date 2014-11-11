@@ -13,7 +13,7 @@ void SpriteContainer::reset() {
 
 void SpriteContainer::addGroup(SpriteModel &gd) {
 	Group *g = new Group;
-	double d[15] = { gd.scaleX, gd.scaleY, gd.positionX, gd.positionY, gd.zPriority };//todo
+	double d[15] = { gd.scaleX, gd.scaleY, gd.positionX, gd.positionY, (double)gd.zPriority };//todo
 
 	memcpy(g->v, d, sizeof(d));
 	g->spriteName = gd.spriteName;

@@ -97,7 +97,7 @@ void Particle::draw() {
 		setColor(c);
 	}
 	float ageRatio = (1 - age() / lifetime) * 255;
-	setAlpha(unsigned char(ageRatio));
+	setAlpha(ageRatio);
 }
 
 void Particle::doVelocity(float dt, unsigned int numThreads) {

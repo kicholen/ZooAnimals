@@ -116,7 +116,7 @@ namespace FlashUtils
 		void clear() {
 			_deque.resize(0);
 		}
-		
+	protected:
 		std::deque<T> _deque;
 	};
 
@@ -125,10 +125,10 @@ namespace FlashUtils
 	{
 	public:
 		virtual void push(T v) {
-			if (length() == capacity()) {
-				_deque.pop_back();
+			if (this->length() == capacity()) {
+				this->_deque.pop_back();
 			}
-			_deque.push_front(v);
+			this->_deque.push_front(v);
 		}
 
 		void setCapacity(int capacity) {
