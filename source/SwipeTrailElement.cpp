@@ -46,6 +46,10 @@ void SwipeTrailElement::onTouchEvent(Event *event) {
 			_pressed = false;
 			_lastPoint = Vector2();
 			removeEventListener(TouchEvent::MOVE, CLOSURE(this, &SwipeTrailElement::onTouchEvent));
+
+			for (int i = 0; i < _simplifiedPoints.length(); i++) {
+				oxygine::log::message(FlashUtils::CMath::stringFormat("<<<<<<< %f, %f \n", _simplifiedPoints[i].x, _simplifiedPoints[i].y).c_str());
+			}
 		}
 		break;
 
