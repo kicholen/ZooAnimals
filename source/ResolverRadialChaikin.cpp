@@ -24,8 +24,6 @@ void ResolverRadialChaikin::resolve(DequeArray<Vector2>& input, DequeArray<Vecto
 		simplify(input, _simplifyTolerance * _simplifyTolerance, _tempArray);
 		input.clear();
 		input.addAll(_tempArray);
-		//input.addAll(_tempArray);// = _tempArray;
-		input = _tempArray;
 	}
 
 	// perform smooth operations
@@ -42,11 +40,8 @@ void ResolverRadialChaikin::resolve(DequeArray<Vector2>& input, DequeArray<Vecto
 			smooth(input, output);
 			_tempArray.clear();
 			_tempArray.addAll(output);
-			DequeArray<Vector2> old = output;
 			input.clear();
 			input.addAll(_tempArray);
-			//input = _tempArray;
-			output = old;
 		} while (--iters > 0);
 	}
 }

@@ -42,6 +42,10 @@ files
 	TileField.cpp
 	TileField.h
 
+	[source/elements/swipe]
+	SwipeTrailElement.cpp
+	SwipeTrailElement.h
+
 	[source/elements/games]
 	MemoryCard.cpp
 	MemoryCard.h
@@ -183,6 +187,16 @@ files
 	[source/managers]
 	FacebookManager.cpp
 	FacebookManager.h
+
+	[source/touch/swipe]
+	ResolverRadialChaikin.cpp
+	ResolverRadialChaikin.h
+	SwipePointsGenerator.cpp
+	SwipePointsGenerator.h
+
+	[source/opengl]
+	GLShaderTriangleStrip.cpp
+	GLShaderTriangleStrip.h
 }
 
 subprojects
