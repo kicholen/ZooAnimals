@@ -252,8 +252,7 @@ void ConnectDotsField::animateOnComplete() {
 	object->getChild("object")->addTween(ShaderSprite::TweenVal(Vector4(1, 1, 1, 0)), 500);
 	addTween(TweenDummy(), 1000)->setDoneCallback(CLOSURE(this, &ConnectDotsField::dispatchFinishedEvent));
 
-	Particle::initialize("sparkle");
-	spParticleEmitter particleEmitter = new ParticleEmitter(Vector2(getWidth() / 2, getWidth() / 2), Vector2(getHeight() / 2, getHeight() / 2), Vector2(-0.5, 0.5), Vector2(-0.5, 0.5), Vector2(1, 3), Vector2(9, 20));
+	spParticleEmitter particleEmitter = new ParticleEmitter(Vector2(getWidth() / 2, getWidth() / 2), Vector2(getHeight() / 2, getHeight() / 2), Vector2(-0.5, 0.5), Vector2(-0.5, 0.5), Vector2(1, 3), Vector2(9, 20), "sparkle");
 	particleEmitter->setRadius(Vector2(getHeight() / 600, getHeight() / 550));
 	particleEmitter->pushColor(0x90d958, true);
 	particleEmitter->pushColor(0xd95890);

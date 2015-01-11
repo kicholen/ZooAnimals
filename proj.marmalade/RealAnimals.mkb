@@ -109,6 +109,8 @@ files
     Particle.h
     ParticleEmitter.cpp
     ParticleEmitter.h
+	ParticlesContainer.cpp
+	ParticlesContainer.h
 
     [source/frame/base]
 	CustomFrame.cpp

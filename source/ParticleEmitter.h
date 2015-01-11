@@ -2,7 +2,7 @@
 #define _PARTICLEEMITTER_
 
 #include "Actor.h"
-#include "Particle.h"
+#include "ParticlesContainer.h"
 #include "FlashUtils.h"
 
 using namespace FlashUtils;
@@ -13,7 +13,7 @@ DECLARE_SMART(ParticleEmitter, spParticleEmitter);
 class ParticleEmitter : public Actor
 {
 public:
-	ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 xVelocity, Vector2 yVelocity, Vector2 lifeTime, Vector2 particlesPerSecond);
+	ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 xVelocity, Vector2 yVelocity, Vector2 lifeTime, Vector2 particlesPerSecond, const string &resAnim);
 	~ParticleEmitter();
 	
 	void setFriction(float friction);
@@ -21,6 +21,8 @@ public:
 	void setLifetime(Vector2 lifetime);
 	void setRotation(Vector2 rotation);
 	void pushColor(unsigned int color, bool shouldClear = false);
+	void pushResAnim(const string &resAnim, bool shouldClear = false);
+
 protected:
 	//virtual void doUpdate(const UpdateState &us);
 	virtual void doUpdate(const UpdateState &us);
@@ -37,8 +39,11 @@ private:
 	Vector2 _radius;
 	float _friction;
 	VectorArray<unsigned int> _colors;
+	VectorArray<string> _resAnims;
 
 	float _frameTime;
+
+	spParticlesContainer _container;
 };
 
 #endif

@@ -15,8 +15,8 @@ namespace oxygine
 class GLShaderTriangleStrip : public Actor
 {
 public:
-	GLShaderTriangleStrip(void);
-	~GLShaderTriangleStrip(void);
+	GLShaderTriangleStrip();
+	~GLShaderTriangleStrip();
 
 protected:
 	void doRender(const RenderState &rs);

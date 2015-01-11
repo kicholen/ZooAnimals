@@ -4,9 +4,7 @@
 #include "core/gl/VideoDriverGLES20.h"
 #include "core/gl/ShaderProgramGL.h"
 
-GLShaderTriangleStrip::GLShaderTriangleStrip()
-{
-
+GLShaderTriangleStrip::GLShaderTriangleStrip() {
 	const char* vertexShaderData = "\
 									uniform mediump mat4 projection;\
 									attribute vec2 a_position;\
@@ -48,10 +46,8 @@ GLShaderTriangleStrip::GLShaderTriangleStrip()
 }
 
 
-GLShaderTriangleStrip::~GLShaderTriangleStrip()
-{
+GLShaderTriangleStrip::~GLShaderTriangleStrip() {
 	delete _program;
-	delete[] _swipeVertices;
 }
 
 

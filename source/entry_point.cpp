@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#include "core/Renderer.h"
-#include "RootActor.h"
+#include "core/oxygine.h"
+#include "Stage.h"
 #include "DebugActor.h"
 
 #include "Main.h"
@@ -9,9 +9,6 @@
 #include "Settings.h"
 
 using namespace oxygine;
-
-Renderer renderer;
-Rect viewport;
 
 #ifndef IS_DEBUG
 #   define IS_DEBUG 1
@@ -39,13 +36,14 @@ public:
 int mainloop() {
 	main_update();
 
-	getRoot()->update();
+	getStage()->update();
+	
+	if (core::beginRendering())
+	{		
+		Color clearColor(32, 32, 32, 255);
+		Rect viewport(Point(0, 0), core::getDisplaySize());
+		getStage()->render(clearColor, viewport);
 
-	Color clear(10, 10, 10, 255);
-
-	if (renderer.begin(0, viewport, &clear)) {
-		getRoot()->render(renderer);
-		renderer.end();
 		core::swapDisplayBuffers();
 	}
 
@@ -55,43 +53,30 @@ int mainloop() {
 }
 
 void run() {
+	ObjectBase::__startTracingLeaks();
+
 	core::init_desc desc;
-	main_preinit();
-#if OXYGINE_SDL
+#if OXYGINE_SDL || OXYGINE_EMSCRIPTEN
 	desc.w = 640;
 	desc.h = 960;
 #endif
 
+	main_preinit();
 	core::init(&desc);
 	
-	RootActor::instance = new MainRootActor();
+	Stage::instance = new Stage(true);
 	Point size = core::getDisplaySize();
-	getRoot()->init(size, size);
+	getStage()->setSize(size);
 
 	if (IS_DEBUG) {
-		DebugActor::initialize();
-
-		getRoot()->addChild(new DebugActor());
+		DebugActor::show();
 	}
-
-	Matrix view = makeViewMatrix(size.x, size.y);
-
-	viewport = Rect(0, 0, size.x, size.y);
-
-	Matrix proj;
-	Matrix::orthoLH(proj, (float)size.x, (float)size.y, 0, 1);
-
-	//Renderer is class helper for rendering primitives and batching them
-	//Renderer is lightweight class you could create it many of times
-	renderer.setDriver(IVideoDriver::instance);
-
-	//initialization view and projection matrix
-	//where Left Top corner is (0, 0), and right bottom is (width, height)
-	renderer.initCoordinateSystem(size.x, size.y);
 
 	main_init();
 
-	bool done = false;
+	#ifdef EMSCRIPTEN
+		return;
+	#endif
 
     while (1) {
 		int done = mainloop();
@@ -112,8 +97,6 @@ void run() {
 	//check example.cpp
 	main_destroy();
 
-	renderer.cleanup();
-
 	/**releases all internal components and RootActor*/
 	core::release();
 
@@ -121,9 +104,8 @@ void run() {
 	//we deleted everything and could be sure that there aren't any memory leaks
 	ObjectBase::dumpCreatedObjects();
 	//end
+	ObjectBase::__stopTracingLeaks();
 }
-
-
 
 #ifdef __S3E__
 int main(int argc, char* argv[])
@@ -156,11 +138,15 @@ extern "C"
 #endif
 #endif
 
-#ifdef __FLASHPLAYER__
+#ifdef EMSCRIPTEN
+#include <emscripten.h>
+
+void one(){ mainloop(); }
+
 int main(int argc, char* argv[])
 {
-	printf("test\n");
 	run();
+	emscripten_set_main_loop(one, 0, 0);
 	return 0;
 }
 #endif

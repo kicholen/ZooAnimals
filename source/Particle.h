@@ -11,20 +11,19 @@ DECLARE_SMART(Particle, spParticle);
 class Particle : public Sprite
 {
 public:
-	static spActor TheParticleSprite;
-	static VectorArray<spParticle> TheParticleArray;
 
-	static void initialize(const string &particleName);
-	static void cleanup();
+	class ParticleEvent : public Event {
+	public:
+		enum EV {
+			DIE_EVENT = makefourcc('P', 'D', 'E', 'E')
+		};
 
-	static unsigned int think_threads;
-	static unsigned int think_cur;
+		uint particleNumber;
 
-	static void thinkParticles(float dt);
-
-	static void removeParticles();
-
-	Particle(float new_x, float new_y, float new_vx, float new_vy, float angle, unsigned int ncol);
+		ParticleEvent(uint number):Event(DIE_EVENT), particleNumber(number) {}
+	};
+	
+	Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 
 	//Vars:
 	float last_x;
@@ -35,27 +34,29 @@ public:
 	Vector2 vel;
 	float friction;
 	float lifetime;
-	private:
+
+private:
 	float birthday;
-public:
+	uint _number;
 	bool dead;
+
+public:
 
 	bool blur;
 	bool deathPaint;
 
-	//Funcs:
-	void think(float dt, unsigned int numThreads);
+	void think(float dt);
 
 	void draw();
 
-	//Internal Stuff:
 private:
-	void doVelocity(float dt, unsigned int numThreads);
+	void doVelocity(float dt);
 
 public:
 	float age();
 
 	void die();
+	void revive(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 };
 
 #endif
