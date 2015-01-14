@@ -23,7 +23,7 @@ public:
 		ParticleEvent(uint number):Event(DIE_EVENT), particleNumber(number) {}
 	};
 	
-	Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
+	Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, uint number);
 
 	//Vars:
 	float last_x;
@@ -36,26 +36,24 @@ public:
 	float lifetime;
 
 private:
-	float birthday;
+	float _birthday;
 	uint _number;
-	bool dead;
+	bool _dead;
+	bool _shouldDieOnTouch;
 
 public:
-
-	bool blur;
-	bool deathPaint;
+	void setDieOnTouch(bool shouldDie);
 
 	void think(float dt);
 
 	void draw();
-
 private:
 	void doVelocity(float dt);
 
 public:
 	float age();
 
-	void die();
+	void die(Event *ev = NULL);
 	void revive(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 };
 

@@ -61,6 +61,8 @@ files
 	MatchTwoField.h
 	FindShadowField.cpp
 	FindShadowField.h
+	PopObjectsField.cpp
+	PopObjectsField.h
 
 	[source/elements/farm]
 	AnimalFarmField.cpp
@@ -137,6 +139,10 @@ files
 	[source/frame/counter]
 	AnimalCounterFrame.cpp
 	AnimalCounterFrame.h
+
+	[source/frame/popobjects]
+	PopObjectsFrame.cpp
+	PopObjectsFrame.h
 
 	[source/frame/utils]
     BuyItemPopup.cpp

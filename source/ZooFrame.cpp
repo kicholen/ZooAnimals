@@ -5,6 +5,7 @@
 #include "MatchTwoFrame.h"
 #include "ConnectDotsFrame.h"
 #include "FindShadowFrame.h"
+#include "PopObjectsFrame.h"
 
 ZooFrame::ZooFrame() {
 	init("LandingPageFrame.xml", true);
@@ -71,6 +72,10 @@ Action ZooFrame::loop() {
 		else if (action.id == "match") {
 			spMatchTwoFrame matchTwo = new MatchTwoFrame();
 			transitionShowFrame(matchTwo);
+		}
+		else if (action.id == "pop") {
+			spPopObjectsFrame pop = new PopObjectsFrame();
+			transitionShowFrame(pop);
 		}
 	}
 

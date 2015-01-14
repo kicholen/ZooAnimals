@@ -17,13 +17,14 @@ public:
 	void thinkParticles(float dt);
 	void removeParticles();
 	
-	void addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const string &resAnim, float lifetime, float friction, float radius);
+	spParticle addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const string &resAnim, float lifetime, float friction, float radius, bool shouldKillOnTouch);
 
 private:
 	spParticle createParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 
 	spParticle getParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 	spParticle getParticleFromPool(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
+	void addEventListenersToParticle(spParticle particle);
 
 	void onParticleEvent(Event *event);
 	void onParticleDie(Event *event);

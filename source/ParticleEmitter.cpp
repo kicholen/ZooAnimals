@@ -44,7 +44,11 @@ void ParticleEmitter::spawnParticle() {
 	unsigned int whichColor = _colors.length() > 1 ? CMath::random(0, _colors.length()) : 0;
 	unsigned int whichAnim = _resAnims.length() > 1 ? CMath::random(0, _resAnims.length()) : 0;
 
-	_container->addParticle(Vector2(CMath::Rand(_xPosition.x, _xPosition.y), CMath::Rand(_yPosition.x, _yPosition.y)), Vector2(CMath::Rand(_xVelocity.x, _xVelocity.y), CMath::Rand(_yVelocity.x, _yVelocity.y)), CMath::Rand(_rotation.x, _rotation.y), _colors[whichColor], _resAnims[whichAnim], CMath::Rand(_lifeTime.x, _lifeTime.y), _friction, CMath::Rand(_radius.x, _radius.y));
+	spParticle particle = _container->addParticle(Vector2(CMath::Rand(_xPosition.x, _xPosition.y), CMath::Rand(_yPosition.x, _yPosition.y)), Vector2(CMath::Rand(_xVelocity.x, _xVelocity.y), CMath::Rand(_yVelocity.x, _yVelocity.y)), CMath::Rand(_rotation.x, _rotation.y), _colors[whichColor], _resAnims[whichAnim], CMath::Rand(_lifeTime.x, _lifeTime.y), _friction, CMath::Rand(_radius.x, _radius.y), getIsParticleDestroyedOnTouch());
+	
+	if (getIsEventDispatchedOnParticleDead()) {
+		particle->addEventListener(Particle::ParticleEvent::DIE_EVENT, CLOSURE(this, &ParticleEmitter::onParticleDie));
+	}
 }
 
 void ParticleEmitter::setFriction(float friction) {
@@ -75,4 +79,8 @@ void ParticleEmitter::pushResAnim(const string &resAnim, bool shouldClear) {
 
 void ParticleEmitter::setRotation(Vector2 rotation) {
 	_rotation = rotation;
+}
+
+void ParticleEmitter::onParticleDie(Event *ev) {
+	dispatchEvent(ev);
 }

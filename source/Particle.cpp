@@ -1,7 +1,8 @@
 #include "Particle.h"
 
-Particle::Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol) {
+Particle::Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, uint number) {
 	revive(position, velocity, angle, ncol);
+	_number = number;
 
 	setAnchor(Vector2(0.5f, 0.5f));
 	setInputEnabled(false);
@@ -9,17 +10,11 @@ Particle::Particle(Vector2 position, Vector2 velocity, float angle, unsigned int
 }
 
 void Particle::think(float dt) {
-	if (dead) {
+	if (_dead) {
 		return;
 	}
 	draw();
 	doVelocity(dt);
-
-	/*
-	if(playerGravity) {
-		doPlayerGravity(dt);
-	}
-	*/
 
 	if((lifetime > 0) && (age() >= lifetime)) {
 		die();
@@ -50,15 +45,16 @@ void Particle::doVelocity(float dt) {
 }
 
 float Particle::age() {
-	return float(((getTimeMS()/1000.0) - birthday));
+	return float(((getTimeMS()/1000.0) - _birthday));
 }
 
-void Particle::die() {
-	if(!dead) {
+void Particle::die(Event *ev) {
+	if(!_dead) {
 		detach();
 
-		dead = true;
-		
+		_dead = true;
+
+		removeEventListener(TouchEvent::OVER, CLOSURE(this, &Particle::die));
 		ParticleEvent particleEvent(_number);
 		dispatchEvent(&particleEvent);
 	}
@@ -67,7 +63,7 @@ void Particle::die() {
 void Particle::revive(Vector2 position, Vector2 velocity, float angle, unsigned int ncol) {
 	friction = 0.01f;
 	lifetime = 10;
-	dead = false;
+	_dead = false;
 	
 	setPosition(position);
 	setRotation(angle);
@@ -75,5 +71,19 @@ void Particle::revive(Vector2 position, Vector2 velocity, float angle, unsigned 
 	col = ncol;
 	vel = velocity;
 
-	birthday = float(getTimeMS() / 1000);
+	_birthday = float(getTimeMS() / 1000);
+}
+
+void Particle::setDieOnTouch(bool shouldDie) {
+	if (_shouldDieOnTouch) {
+		removeEventListener(TouchEvent::OVER, CLOSURE(this, &Particle::die));
+	}
+	_shouldDieOnTouch = shouldDie;
+	if (_shouldDieOnTouch) {
+		addEventListener(TouchEvent::OVER, CLOSURE(this, &Particle::die));
+		setInputEnabled(true);
+	}
+	else {
+		setInputEnabled(false);
+	}
 }

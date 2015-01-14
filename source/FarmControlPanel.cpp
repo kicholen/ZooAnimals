@@ -203,7 +203,7 @@ void FarmControlPanel::createElementContainerIfNeeded() {
 		dupaArray.push(createButton("memory", "back_button")); 
 		dupaArray.push(createButton("dots", "back_button"));
 		dupaArray.push(createButton("shadow", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("pop", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));

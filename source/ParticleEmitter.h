@@ -23,10 +23,25 @@ public:
 	void pushColor(unsigned int color, bool shouldClear = false);
 	void pushResAnim(const string &resAnim, bool shouldClear = false);
 
+	void setDestroyParticleOnTouch(bool shouldDestroy) {_flags &= ~flag_destroyOnTouch; if (shouldDestroy) _flags |= flag_destroyOnTouch;}
+	void setDispatchEventOnParticleDead(bool shouldDispatch) {_flags &= ~flag_dispatchOnDead; if (shouldDispatch) _flags |= flag_dispatchOnDead;}
+
 protected:
-	//virtual void doUpdate(const UpdateState &us);
+	bool getIsParticleDestroyedOnTouch() {return (_flags & flag_destroyOnTouch) != 0;}
+	bool getIsEventDispatchedOnParticleDead() {return (_flags & flag_dispatchOnDead) != 0;}
+
 	virtual void doUpdate(const UpdateState &us);
 	void spawnParticle();
+	void onParticleDie(Event *ev);
+
+private:
+	mutable unsigned short _flags;
+
+	enum particle_flags
+	{
+		flag_destroyOnTouch	= 1,
+		flag_dispatchOnDead	= 1 << 1
+	};
 private:
 	Vector2 _xPosition;
 	Vector2 _yPosition;

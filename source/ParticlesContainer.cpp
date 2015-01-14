@@ -3,7 +3,8 @@
 ParticlesContainer::ParticlesContainer() {
 	_particlesArray._vector.resize(0);
 	_particlesArray._vector.reserve(100);
-	_particlesInPool._vector.resize(10);
+	_particlesInPool._vector.resize(0);
+	_particlesInPool._vector.reserve(10);
 }
 
 ParticlesContainer::~ParticlesContainer() {
@@ -25,15 +26,18 @@ void ParticlesContainer::thinkParticles(float dt) {
 	}
 }
 
-void ParticlesContainer::addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const string &resAnim, float lifetime, float friction, float radius) {
+spParticle ParticlesContainer::addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const string &resAnim, float lifetime, float friction, float radius, bool shouldKillOnTouch) {
 	spParticle particle = getParticle(position, velocity, angle, ncol);
 	particle->lifetime = lifetime;
 	particle->r = radius;
 	particle->friction = friction;
 	particle->setResAnim(gameResources.getResAnim(resAnim));
+	particle->setDieOnTouch(shouldKillOnTouch);
 
 	addChild(particle);
 	_particlesArray.push(particle);
+
+	return particle;
 }
 
 spParticle ParticlesContainer::getParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol) {
@@ -46,18 +50,24 @@ spParticle ParticlesContainer::getParticle(Vector2 position, Vector2 velocity, f
 }
 
 spParticle ParticlesContainer::getParticleFromPool(Vector2 position, Vector2 velocity, float angle, unsigned int ncol) {
-	spParticle particle = _particlesArray[_particlesInPool._vector[_particlesInPool.length() - 1]];
+	spParticle particle = _particlesArray[_particlesInPool._vector.back()];
+	particle->removeAllEventListeners();
 	_particlesInPool._vector.pop_back();
 	particle->revive(position, velocity, angle, ncol);
+	addEventListenersToParticle(particle);
 
 	return particle;
 }
 
 spParticle ParticlesContainer::createParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol) {
-	spParticle particle = new Particle(position, velocity, angle, ncol);
-	particle->addEventListener(Particle::ParticleEvent::DIE_EVENT, CLOSURE(this, &ParticlesContainer::onParticleDie));
+	spParticle particle = new Particle(position, velocity, angle, ncol, (uint)_particlesArray.length());
+	addEventListenersToParticle(particle);
 
 	return particle;
+}
+
+void ParticlesContainer::addEventListenersToParticle(spParticle particle) {
+	particle->addEventListener(Particle::ParticleEvent::DIE_EVENT, CLOSURE(this, &ParticlesContainer::onParticleDie));
 }
 
 void ParticlesContainer::onParticleDie(Event *ev) {
