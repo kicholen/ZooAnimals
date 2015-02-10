@@ -52,14 +52,22 @@ void PopObjectsFrame::setData() {
 	background->setAnchor(0.0f, 0.0f);
 	background->setPosition(0.0f, 0.0f);
 	background->attachTo(_view);
-
-	spParticleEmitter emitter = new ParticleEmitter(Vector2(_view->getWidth() / 2, _view->getWidth() / 2), Vector2(_view->getHeight() / 2, _view->getHeight() / 2), Vector2(-0.5, 0.5), Vector2(-0.5, 0.5), Vector2(1000, 1000), Vector2(2, 2), "sparkle"); 
-	emitter->setDestroyParticleOnTouch(true);
-	_view->addChild(emitter);
-	//_popField = new PopObjectsField(Vector2(_view->getWidth() * 0.8f, _view->getHeight()), 3);
-	//_popField->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _field->getDerivedHeight() / 2);
-	//_popField->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &PopObjectsFrame::onFinished));
-	//_view->addChild(_popField);
+	addSwipeTrail();
+	addPopField();
 
 	addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
+}
+
+void PopObjectsFrame::addPopField() {
+	_popField = new PopObjectsField();
+	_popField->setPosition(getRoot()->getSize().x / 2 - _popField->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _popField->getDerivedHeight() / 2);
+	//_popField->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &PopObjectsFrame::onFinished));
+	_view->addChild(_popField);
+}
+
+void PopObjectsFrame::addSwipeTrail() {
+	_swipeTrailElement = new SwipeTrailElement(20);
+	_swipeTrailElement->setSize(_view->getSize());
+	//_swipeTrailElement->setPriority(100);
+	_swipeTrailElement->attachTo(_view);
 }

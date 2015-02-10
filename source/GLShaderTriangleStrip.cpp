@@ -89,7 +89,7 @@ void GLShaderTriangleStrip::drawTriangleStrip(int count, Vector2 *vertices) {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (GLfloat*) vertices);
 
-	float time = 0.0f;
+	float time = getTimeMS() / 1000;
 	Vector4 resolution = Vector4(getRoot()->getWidth(), getRoot()->getHeight(), 0.0f, 0.0f);
 	IVideoDriver::instance->setUniform("resolution", &resolution, 1);
 	IVideoDriver::instance->setUniform("time", time);
@@ -97,3 +97,17 @@ void GLShaderTriangleStrip::drawTriangleStrip(int count, Vector2 *vertices) {
 
 	glDisableVertexAttribArray(0);
 }
+
+/*void GLShaderTraingleStrip::drawPoints() {
+	double scale_factor = 500/1.2;
+	typedef GLfloat point[2];
+	point vertices[6] = {
+		{+0.000000,+1.000000},
+		{+0.866025,+0.500000},
+		{+0.866025,-0.500000},
+		{+0.000000,-1.000000},
+		{-0.866025,-0.500000},
+		{-0.866025,+0.500000}
+	};
+}
+*/

@@ -20,13 +20,13 @@ namespace oxygine
 
 		if (_wasBaseScaleSet) {
 			if (s == 2) {
-				this->removeTweens();
+				//this->removeTweens();
 				_tween = createTween(Actor::TweenScale(_baseScale * 0.85f), _duration, 1, false);
 				_tween->setEase(_ease);
 				this->addTween(_tween);
 			}
 			else if (s == 0) {
-				this->removeTweens();
+				//this->removeTweens();
 				_tween = createTween(Actor::TweenScale(_baseScale), _duration, 1, false);
 				_tween->setEase(_ease);
 				this->addTween(_tween);
@@ -35,9 +35,24 @@ namespace oxygine
 		Sprite::setAnimFrame(_resAnim->getFrame(0, _row));
 	}
 
+	void TweenButton::doUpdate(const UpdateState &us) {
+		if (!_wasBaseScaleSet) {
+			setBasicScale(getScale().x);
+		}
+	}
+
 	void TweenButton::setBaseScale(float scale) {
+		setScale(scale);
+		setBasicScale(scale);
+	}
+
+	void TweenButton::setScale(float scale) {
+		Actor::setScale(Vector2(scale, scale));
+		setBasicScale(scale);
+	}
+
+	void TweenButton::setBasicScale(float scale) {
 		_baseScale = scale;
-		setScale(_baseScale);
 		_wasBaseScaleSet = true;
 	}
 }

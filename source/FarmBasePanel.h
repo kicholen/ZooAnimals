@@ -34,7 +34,7 @@ public:
 	void updateScore(int score);
 private:
 	spTextActor createScoreTextField();
-	spButton createButton(const string& actionName, const string& buttonResAnim);
+	spTweenButton createTweenButton(const string& actionName, const string& buttonResAnim);
 	void handleClick(Event *event);
 
 	void setScore(int score);

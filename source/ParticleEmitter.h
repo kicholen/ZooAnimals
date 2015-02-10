@@ -24,11 +24,11 @@ public:
 	void pushResAnim(const string &resAnim, bool shouldClear = false);
 
 	void setDestroyParticleOnTouch(bool shouldDestroy) {_flags &= ~flag_destroyOnTouch; if (shouldDestroy) _flags |= flag_destroyOnTouch;}
-	void setDispatchEventOnParticleDead(bool shouldDispatch) {_flags &= ~flag_dispatchOnDead; if (shouldDispatch) _flags |= flag_dispatchOnDead;}
+	void setDispatchEventOnParticleDeadByTouch(bool shouldDispatch) {_flags &= ~flag_dispatchOnDeadByTouch; if (shouldDispatch) _flags |= flag_dispatchOnDeadByTouch;}
 
 protected:
 	bool getIsParticleDestroyedOnTouch() {return (_flags & flag_destroyOnTouch) != 0;}
-	bool getIsEventDispatchedOnParticleDead() {return (_flags & flag_dispatchOnDead) != 0;}
+	bool getIsEventDispatchedOnParticleDeadByTouch() {return (_flags & flag_dispatchOnDeadByTouch) != 0;}
 
 	virtual void doUpdate(const UpdateState &us);
 	void spawnParticle();
@@ -40,7 +40,7 @@ private:
 	enum particle_flags
 	{
 		flag_destroyOnTouch	= 1,
-		flag_dispatchOnDead	= 1 << 1
+		flag_dispatchOnDeadByTouch	= 1 << 1
 	};
 private:
 	Vector2 _xPosition;

@@ -194,7 +194,7 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 		mask->setName("object_mask");
 		mask->setAnchor(0.5f, 0.5f);
 		mask->setAlpha(1);
-		mask->setInputEnabled(false);
+		mask->setTouchEnabled(false);
 		mask->setVisible(false);
 		addChild(mask);
 	}

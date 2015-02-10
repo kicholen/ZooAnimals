@@ -135,17 +135,17 @@ void MaskFrame::setData() {
 	sliderButton->addTween(tween);
 
 	spTweenButton button = addButton("CLEAR", "CLEAR", Vector2(_view->getWidth(), 50));
-	button->setBaseScale(button->getScale().x / 2);
+	button->setScale(button->getScale().x / 2);
 	//button->setScale(button->getScale() / 2);
 	button->setX(_view->getWidth() - button->getDerivedWidth() / 2);
 	button = addButton("ADD", "ADD", Vector2(_view->getWidth() - button->getDerivedWidth() / 2, 50 + (button->getDerivedHeight() + 5)* 2));
-	button->setBaseScale(button->getScale().x / 2);
+	button->setScale(button->getScale().x / 2);
 
 	button = addButton("SAVE", "SAVE", Vector2(_view->getWidth() - button->getDerivedWidth() / 2,  _content->getHeight() * 80 / 100 - button->getDerivedHeight()));
-	button->setBaseScale(button->getScale().x / 2);
+	button->setScale(button->getScale().x / 2);
 
 	button = addButton("ADD_POINT", "ADD_POINT", Vector2(_view->getWidth() - button->getDerivedWidth() / 2, 50 + (button->getDerivedHeight() + 5)* 3));
-	button->setBaseScale(button->getScale().x / 2);
+	button->setScale(button->getScale().x / 2);
 
 	_currentTextfield = createTextfield("FILE_PATH", false, 0, false);
 	_currentTextfield->setFontSize2Scale(40 * (int)_view->getWidth() / 640);

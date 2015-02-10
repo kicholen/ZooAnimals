@@ -48,9 +48,9 @@ private:
 
 	spBox9Sprite createBackground();
 	spFarmBasePanel createFarmBasePanel();
-	spButton createButton(const string& actionName, const string& buttonResAnim);
+	spTweenButton createButton(const string& actionName, const string& buttonResAnim);
 	void createElementContainerIfNeeded();
-	spButton createCloseButtonIfNeeded();
+	spTweenButton createCloseButtonIfNeeded();
 
 	spAnimatableElementContainer _gameContainer;
 	spFarmBasePanel _farmBasePanel;

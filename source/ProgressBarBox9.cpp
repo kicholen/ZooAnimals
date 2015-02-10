@@ -2,7 +2,7 @@
 #include "SharedResources.h"
 
 ProgressBarBox9::ProgressBarBox9(Vector2 size) : _progress(1.0f) {
-	setInputEnabled(false);
+	setTouchEnabled(false);
 	setAnchor(0.0f, 0.0f);
 	setSize(size.x, size.y);
 
@@ -52,7 +52,7 @@ void ProgressBarBox9::createForeground() {
 void ProgressBarBox9::createMask() {
 	_mask = new Sprite(); 
 	_mask->setAnchor(Vector2(0.0f, 0.5f));
-	_mask->setInputEnabled(false);
+	_mask->setTouchEnabled(false);
 	_mask->setVisible(false);
 	_mask->setResAnim(gameResources.getResAnim("quad_100"));//"quad_40"));
 	_mask->setScale(getWidth() / _mask->getWidth() , getHeight() / _mask->getHeight());

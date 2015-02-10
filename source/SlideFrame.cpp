@@ -117,7 +117,7 @@ void SlideFrame::setData() {
 	sliderBackground->setResAnim(_resources.getResAnim("slider_box9"));
 	sliderBackground->setSize(_slider->getWidth(), _slider->getHeight() + defaultOffset * 2);
 	sliderBackground->setPosition(_slider->getX(), _slider->getY() - defaultOffset);
-	sliderBackground->setInputEnabled(false);
+	sliderBackground->setTouchEnabled(false);
 	sliderBackground->setVerticalMode(Box9Sprite::TILING_FULL);
 	sliderBackground->setHorizontalMode(Box9Sprite::TILING_FULL);
 	sliderBackground->setGuides(50, 200, 40, 200);

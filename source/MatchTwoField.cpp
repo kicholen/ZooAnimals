@@ -99,7 +99,7 @@ void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vect
 	}
 	draggableSprite->setVisible(true);
 	draggableSprite->setPriority(1);
-	draggableSprite->setInputEnabled(true);
+	draggableSprite->setTouchEnabled(true);
 	draggableSprite->setResAnim(animalsResources.getResAnim(spriteName));
 	Vector2 basePosition = Vector2(getWidth() * 0.2f, getSlotPosition(getRandomFreeSpot()).y);
 	draggableSprite->setBasePosition(basePosition);
@@ -144,7 +144,7 @@ void MatchTwoField::touchUp(Event *event) {
 		onProperSlotFound(slot->getBasketPosition());
 	}
 	else {
-		setInputEnabled(false);
+		setTouchEnabled(false);
 		_dragging->addTween(Actor::TweenScale(_baseDraggingScale), 300);
 		_dragging->addTween(Actor::TweenPosition(_dragging->getBasePosition()), 300, 1, false, 0, Tween::ease_outBack)->setDoneCallback(CLOSURE(this, &MatchTwoField::onBackAnimationFinished));
 	}
@@ -152,7 +152,7 @@ void MatchTwoField::touchUp(Event *event) {
 }
 
 void MatchTwoField::onBackAnimationFinished(Event *event) {
-	setInputEnabled(true);
+	setTouchEnabled(true);
 	_state = mtWaiting;
 }
 
@@ -162,7 +162,7 @@ void MatchTwoField::onProperSlotFound(Vector2 animateTo) {
 	//addChild(clonedDragSprite);
 	_dragging->addTween(Actor::TweenScale(_baseDraggingScale), 300);
 	_dragging->addTween(Actor::TweenPosition(animateTo), 300, 1, false, 0, Tween::ease_outBack)->setDoneCallback(CLOSURE(this, &MatchTwoField::onSlotFoundAnimationCompleted));
-	_dragging->setInputEnabled(false);
+	_dragging->setTouchEnabled(false);
 }
 
 void MatchTwoField::onSlotFoundAnimationCompleted(Event *event) {

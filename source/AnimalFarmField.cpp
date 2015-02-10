@@ -2,7 +2,7 @@
 #include "Content.h"
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
-	setInputEnabled(false);
+	setTouchEnabled(false);
 	setAnchor(0.0f, 0.0f);
 	setSize(fieldSize);
 	_state = afCreating;

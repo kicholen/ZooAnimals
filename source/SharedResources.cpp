@@ -74,7 +74,7 @@ spTweenButton createButton(const string &name, const string &txt) {
 
 	button->setResAnim(gameResources.getResAnim(str));
 	button->setAnchor(Vector2(0.5,0.5));
-	button->setInputChildrenEnabled(false);
+	button->setTouchChildrenEnabled(false);
 	button->setBaseScale(getRoot()->getHeight() * 0.075f / button->getHeight());
 
 	if (shouldAddText) {
@@ -125,7 +125,7 @@ spShaderTweenButton createShaderButton(const string &name, const string &txt) {
 
 	button->setResAnim(gameResources.getResAnim(str));
 	button->setAnchor(Vector2(0.5,0.5));
-	button->setInputChildrenEnabled(false);
+	button->setTouchChildrenEnabled(false);
 	button->setBaseScale(getRoot()->getHeight() * 0.1f / button->getHeight());
 
 	if (shouldAddText) {
@@ -164,21 +164,26 @@ void setSpriteScaleBySize(spSprite sprite, Vector2 size) {
 	sprite->setScale(animalScale);
 }
 
-void setActorScaleBySize(spActor actor, Vector2 size) {
-	float animalScale = 1.0f;
+float getActorScaleBySize(spActor actor, Vector2 size) {
+	float actorScale = 1.0f;
 	if (actor->getWidth() > actor->getHeight()) {
-		animalScale = size.x / actor->getWidth();
-		if (animalScale * actor->getHeight() > size.y) {
-			animalScale = size.y / actor->getHeight();
+		actorScale = size.x / actor->getWidth();
+		if (actorScale * actor->getHeight() > size.y) {
+			actorScale = size.y / actor->getHeight();
 		}
 	}
 	else {
-		animalScale = size.y / actor->getHeight();
-		if (animalScale * actor->getWidth() > size.x) {
-			animalScale = size.x / actor->getWidth();
+		actorScale = size.y / actor->getHeight();
+		if (actorScale * actor->getWidth() > size.x) {
+			actorScale = size.x / actor->getWidth();
 		}
 	}
-	actor->setScale(animalScale);
+
+	return actorScale;
+}
+
+void setActorScaleBySize(spActor actor, Vector2 size) {
+	actor->setScale(getActorScaleBySize(actor, size));
 }
 
 bool isOnScreen(spActor actor) {

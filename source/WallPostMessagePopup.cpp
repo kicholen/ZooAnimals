@@ -61,7 +61,7 @@ void WallPostMessagePopup::setData() {
 	popupBackground->setResAnim(gameResources.getResAnim("popup_box9_fb"));
 	popupBackground->setSize(_view->getHeight() * 0.8f, _view->getHeight() * 0.8f);
 	popupBackground->setPosition(_view->getWidth() / 2, _view->getHeight() / 2);
-	popupBackground->setInputEnabled(false);
+	popupBackground->setTouchEnabled(false);
 	popupBackground->setVerticalMode(Box9Sprite::TILING_FULL);
 	popupBackground->setHorizontalMode(Box9Sprite::TILING_FULL);
 	popupBackground->setGuides(50, 200, 50, 200);

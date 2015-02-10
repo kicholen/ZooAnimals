@@ -162,32 +162,32 @@ spBox9Sprite FarmControlPanel::createBackground() {
 }
 
 spFarmBasePanel FarmControlPanel::createFarmBasePanel() {
-	spFarmBasePanel farmBasePanel = new FarmBasePanel(Vector2(_protrudeSize.x, _protrudeSize.y));
+	spFarmBasePanel farmBasePanel = new FarmBasePanel(Vector2(_protrudeSize.x * 0.8f, _protrudeSize.y * 0.8f));
 	farmBasePanel->setAnchor(0.0f, 0.0f);
-	farmBasePanel->setPosition(Vector2(getWidth() - _protrudeSize.x, 0.0f));
+	farmBasePanel->setPosition(Vector2(getWidth() - _protrudeSize.x * 0.9f, _protrudeSize.y * 0.1f));
 	farmBasePanel->setName("farm_base_panel");
 	farmBasePanel->addEventListener(FarmBasePanel::FarmBasePanelEvent::CLICK_EVENT, CLOSURE(this, &FarmControlPanel::handleClick));
 
 	return farmBasePanel;
 }
 
-spButton FarmControlPanel::createButton(const string& actionName, const string& buttonResAnim) {
-	spButton button = new Button();
+spTweenButton FarmControlPanel::createButton(const string& actionName, const string& buttonResAnim) {
+	spTweenButton button = new TweenButton();
 	button->setName(actionName);
 	button->setResAnim(gameResources.getResAnim(buttonResAnim));
-	button->setInputChildrenEnabled(false);
+	button->setTouchChildrenEnabled(false);
 	button->addEventListener(TouchEvent::CLICK, CLOSURE(this, &FarmControlPanel::handleClick));
 
 	return button;
 }
 
-spButton FarmControlPanel::createCloseButtonIfNeeded() {
-	spButton closeButton = getChildT<Button>("hide_shop_game_view", ep_ignore_error);
+spTweenButton FarmControlPanel::createCloseButtonIfNeeded() {
+	spTweenButton closeButton = getChildT<TweenButton>("hide_shop_game_view", ep_ignore_error);
 	if (!closeButton) {
 		closeButton = createButton("hide_shop_game_view", "back_button");
 		closeButton->attachTo(this);
 		closeButton->setAnchor(0.5f, 0.5f);
-		setActorScaleBySize(closeButton, _protrudeSize);
+		closeButton->setScale(getActorScaleBySize(closeButton, _protrudeSize));
 		closeButton->setPosition(getWidth() - _protrudeSize.x + closeButton->getDerivedWidth() / 2, closeButton->getDerivedHeight() / 2);
 	}
 
@@ -204,20 +204,6 @@ void FarmControlPanel::createElementContainerIfNeeded() {
 		dupaArray.push(createButton("dots", "back_button"));
 		dupaArray.push(createButton("shadow", "back_button"));
 		dupaArray.push(createButton("pop", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
-		dupaArray.push(createButton("match", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));
 
 		_gameContainer = new AnimatableElementContainer(Vector2(getWidth() - _protrudeSize.x, getHeight()));

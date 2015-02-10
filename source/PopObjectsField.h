@@ -3,6 +3,7 @@
 
 #include "oxygine-framework.h"
 #include "FlashUtils.h"
+#include "ParticleEmitter.h"
 
 using namespace oxygine;
 using namespace FlashUtils;
@@ -15,17 +16,11 @@ public:
 	PopObjectsField();
 	~PopObjectsField();
 
-protected:
-	virtual void doUpdate(const UpdateState &us);
-	
 private:
-	void spawnPopObjects(int count);
-	void spawnPopObject();
-	void thinkObjects();
+	void onParticlePopped(Event *ev);
 
-	void createParticles();
-
-	float _frameTime;
+	uint _particlesPoppedCount;
+	spParticleEmitter _emitter;
 };
 
 #endif

@@ -13,10 +13,14 @@ namespace oxygine
 		TweenButton();
 		~TweenButton();
 		void setBaseScale(float scale);
+		void setScale(float scale);
 
 	protected:
+		void doUpdate(const UpdateState &us);
 		virtual void updateButtonState(state s);
 	private:
+		void setBasicScale(float scale);
+
 		spTween _tween;
 		Tween::EASE _ease;
 		int _duration;

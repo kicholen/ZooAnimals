@@ -2,7 +2,8 @@
 #define _POPOBJECTSFRAME_
 
 #include "CustomFrame.h"
-#include "ParticleEmitter.h"
+#include "PopObjectsField.h"
+#include "SwipeTrailElement.h"
 
 DECLARE_SMART(PopObjectsFrame, spPopObjectsFrame);
 
@@ -14,7 +15,6 @@ public:
 	void selectTransitions();
 
 	Action loop();
-
 protected:
 	void _postHiding(Event *);
 	void _preShowing(Event *);
@@ -23,8 +23,12 @@ private:
 	void onFinished(Event *event);
 
 	void setData();
+	void addSwipeTrail();
+	void addPopField();
 
-	//spPopObjectsField _popField;
+private:
+	spSwipeTrailElement _swipeTrailElement;
+	spPopObjectsField _popField;
 };
 
 #endif

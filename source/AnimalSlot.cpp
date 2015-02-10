@@ -3,7 +3,7 @@
 
 AnimalSlot::AnimalSlot(string id) {
 	_id = id;
-	setInputEnabled(false);
+	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
 	setSize(SLOT_SIZE_X , SLOT_SIZE_Y);
 

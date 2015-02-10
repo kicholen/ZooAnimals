@@ -3,28 +3,29 @@
 
 FarmBasePanel::FarmBasePanel(Vector2 size, StackContainerAlign alignType) {
 	setData(size, alignType);
-	_score = 74239042; // todo
+	_score = 241; // todo
 	_scoreTextField = createScoreTextField();
-	addChild(createButton("play", "back_button"));
-	addChild(createButton("shop", "back_button"));
+	addChild(createTweenButton("play", "back_button"));
+	addChild(createTweenButton("shop", "back_button"));
 	addChild(_scoreTextField);
 }
 
 spTextActor FarmBasePanel::createScoreTextField() {
 	spTextActor scoreTextField = createTextfield(FlashUtils::CMath::intToString(_score), true, 0, false);
-	scoreTextField->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_RIGHT, TextStyle::VALIGN_MIDDLE));
-	scoreTextField->setFontSize2Scale(20 * (int)getRoot()->getWidth() / 480);
-	scoreTextField->setSize(getSize().x * 0.4f, getSize().y * 0.2f);
+	scoreTextField->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+	scoreTextField->setFontSize2Scale(int(getSize().x * 0.9f) / 2);//20 * (int)getRoot()->getWidth() / 480);
+	scoreTextField->setSize(getSize().x * 0.9f, getSize().y * 0.2f);
+	//scoreTextField->setWidth(getSize().x * 0.9f,);
 	scoreTextField->setPriority(3);
 
 	return scoreTextField;
 }
 
-spButton FarmBasePanel::createButton(const string& actionName, const string& buttonResAnim) {
-	spButton button = new Button();
+spTweenButton FarmBasePanel::createTweenButton(const string& actionName, const string& buttonResAnim) {
+	spTweenButton button = new TweenButton();
 	button->setName(actionName);
 	button->setResAnim(gameResources.getResAnim(buttonResAnim));
-	button->setInputChildrenEnabled(false);
+	button->setTouchChildrenEnabled(false);
 	button->addEventListener(TouchEvent::CLICK, CLOSURE(this, &FarmBasePanel::handleClick));
 
 	return button;

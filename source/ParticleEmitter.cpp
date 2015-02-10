@@ -46,7 +46,7 @@ void ParticleEmitter::spawnParticle() {
 
 	spParticle particle = _container->addParticle(Vector2(CMath::Rand(_xPosition.x, _xPosition.y), CMath::Rand(_yPosition.x, _yPosition.y)), Vector2(CMath::Rand(_xVelocity.x, _xVelocity.y), CMath::Rand(_yVelocity.x, _yVelocity.y)), CMath::Rand(_rotation.x, _rotation.y), _colors[whichColor], _resAnims[whichAnim], CMath::Rand(_lifeTime.x, _lifeTime.y), _friction, CMath::Rand(_radius.x, _radius.y), getIsParticleDestroyedOnTouch());
 	
-	if (getIsEventDispatchedOnParticleDead()) {
+	if (getIsEventDispatchedOnParticleDeadByTouch()) {
 		particle->addEventListener(Particle::ParticleEvent::DIE_EVENT, CLOSURE(this, &ParticleEmitter::onParticleDie));
 	}
 }
@@ -82,5 +82,10 @@ void ParticleEmitter::setRotation(Vector2 rotation) {
 }
 
 void ParticleEmitter::onParticleDie(Event *ev) {
-	dispatchEvent(ev);
+	if (getIsEventDispatchedOnParticleDeadByTouch()) {
+		Particle::ParticleEvent* event = static_cast<Particle::ParticleEvent*>(ev);
+		if (event->wasTouched) {
+			dispatchEvent(ev);
+		}
+	}
 }

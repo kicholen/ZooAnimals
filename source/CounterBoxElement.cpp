@@ -3,7 +3,7 @@
 #include "FlashUtils.h"
 
 CounterBoxElement::CounterBoxElement(Vector2 size, int time) : _score(0), _level(1) {
-	setInputEnabled(false);
+	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
 	setSize(size.x, size.y);
 	_timeLeft = time;

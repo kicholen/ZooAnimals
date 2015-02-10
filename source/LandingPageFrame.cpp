@@ -66,8 +66,6 @@ void LandingPageFrame::setData() {
 	text->attachTo(_view);
 	addButton("edit", "edit", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 3 + 30));
 
-
-
 	spSwipeTrailElement swipe = new SwipeTrailElement(20);
 	swipe->setSize(_view->getSize());
 	swipe->setPriority(-1000);

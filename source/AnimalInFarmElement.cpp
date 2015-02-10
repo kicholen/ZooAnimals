@@ -27,7 +27,7 @@ AnimalInFarmElement::AnimalInFarmElement(string spriteName, Vector2 size, float 
 	_randomPointOnEdge = Vector2((float)CMath::random(0, int(getWidth())), (float)CMath::random(0, int(getHeight())));
 	_shouldCalculateNewPoint = true;
 	_nextJumpDelay = 0.0f;
-	setInputEnabled(false);
+	setTouchEnabled(false);
 	setAnchor(0.0f, 0.0f);
 	createAnimalSprite();
 	createShadowSprite();

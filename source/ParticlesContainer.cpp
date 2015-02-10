@@ -33,9 +33,7 @@ spParticle ParticlesContainer::addParticle(Vector2 position, Vector2 velocity, f
 	particle->friction = friction;
 	particle->setResAnim(gameResources.getResAnim(resAnim));
 	particle->setDieOnTouch(shouldKillOnTouch);
-
 	addChild(particle);
-	_particlesArray.push(particle);
 
 	return particle;
 }
@@ -62,6 +60,7 @@ spParticle ParticlesContainer::getParticleFromPool(Vector2 position, Vector2 vel
 spParticle ParticlesContainer::createParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol) {
 	spParticle particle = new Particle(position, velocity, angle, ncol, (uint)_particlesArray.length());
 	addEventListenersToParticle(particle);
+	_particlesArray.push(particle);
 
 	return particle;
 }

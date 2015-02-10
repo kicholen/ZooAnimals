@@ -19,16 +19,14 @@ public:
 		};
 
 		uint particleNumber;
+		bool wasTouched;
 
-		ParticleEvent(uint number):Event(DIE_EVENT), particleNumber(number) {}
+		ParticleEvent(uint number, bool byTouch):Event(DIE_EVENT), particleNumber(number) {}
 	};
 	
 	Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, uint number);
 
 	//Vars:
-	float last_x;
-	float last_y;
-
 	float r;
 	unsigned int col;
 	Vector2 vel;
@@ -41,6 +39,8 @@ private:
 	bool _dead;
 	bool _shouldDieOnTouch;
 
+	float _lastX;
+	float _lastY;
 public:
 	void setDieOnTouch(bool shouldDie);
 
@@ -49,11 +49,12 @@ public:
 	void draw();
 private:
 	void doVelocity(float dt);
+	void dieByTouch(Event *ev);
 
 public:
 	float age();
 
-	void die(Event *ev = NULL);
+	void die(bool wasTouched = false);
 	void revive(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 };
 

@@ -3,7 +3,7 @@
 
 MemoryCard::MemoryCard(string cardId) {
 	_state = mcNormal;
-	setInputEnabled(false);
+	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
 	setSize(MEMORY_SIZE_X , MEMORY_SIZE_Y);
 
@@ -76,7 +76,7 @@ spBox9Sprite MemoryCard::createBackground(short zPriority) {
 void MemoryCard::createQuestionMark() {
 	_questionMark = new Sprite();
 	_questionMark->setAnchor(0.5f, 0.5f);
-	_questionMark->setInputEnabled(false);
+	_questionMark->setTouchEnabled(false);
 	_questionMark->setResAnim(gameResources.getResAnim("question_mark"));
 	_questionMark->setScale(getWidth() / _questionMark->getWidth() * 0.5f, getHeight() / _questionMark->getHeight() * 0.5f);
 	_questionMark->setPosition(getWidth() / 2, getHeight() / 2);
@@ -87,7 +87,7 @@ void MemoryCard::createMask() {
 	_mask = new Sprite(); 
 	_mask->setAnchor(0.5f, 0.5f);
 	_mask->setAlpha(1);
-	_mask->setInputEnabled(false);
+	_mask->setTouchEnabled(false);
 	_mask->setVisible(false);
 	//_mask->setColor(Color(100, 20, 20));  DEBUG
 	_mask->setRotation(45.0f * (float)DEG_TO_RAD);
