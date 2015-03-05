@@ -43,10 +43,18 @@ Action ConnectDotsFrame::loop() {
 
 void ConnectDotsFrame::onFinished(Event *event) {
 	_previousAnimal = _previousAnimal < 33 ? _previousAnimal + 1 : 0;
+	_totalScore += 1;
+	_counterBox->updateScore(_totalScore);
 	_field->reset(_previousAnimal);
 }
 
+void ConnectDotsFrame::onTimesUp(Event *event) {
+	const string &name = "result";
+	generateAction(name);
+}
+
 void ConnectDotsFrame::setData() {
+	_totalScore = 0;
 	spColorRectSprite background = new ColorRectSprite();
 	background->setColor(Color(88, 144, 217));
 	background->setSize(_view->getSize());
@@ -54,36 +62,18 @@ void ConnectDotsFrame::setData() {
 	background->setPosition(0.0f, 0.0f);
 	background->attachTo(_view);
 	_previousAnimal = 0;
-
-	_field = new ConnectDotsField(_previousAnimal);
-	//float scale = getRoot()->getHeight() * 0.8f / _field->getHeight();
-	
 	// 320 x 480
-	// todo: remove this magical hack - it's bad
-	float m_height = 100;
-	float m_width = 150;
-	bool foundOne = false;
+	float scaleFactor = (_view->getHeight() * 1.0f) / 320.0f;
 
-	while (!foundOne) {
-		if (m_height * 1.1f <= _view->getHeight() * 0.9f && m_width * 1.1f <= _view->getWidth() * 0.9f) {
-			m_height *= 1.1f;
-			m_width *= 1.1f;
-		}
-		else {
-			foundOne = true;
-		}
-	}
-	_field->setScaleX(m_width / _field->getWidth());
-	_field->setScaleY(m_height / _field->getHeight());
-
-	_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y * 0.5f - _field->getDerivedHeight() / 2);
+	_field = new ConnectDotsField(Vector2(scaleFactor * 480.0f, scaleFactor * 320.0f), _previousAnimal);
+	_field->setPosition(_view->getSize().x / 2 - _field->getDerivedWidth() / 2, _view->getSize().y * 0.5f - _field->getDerivedHeight() / 2);
 	_field->addEventListener(ConnectDotsField::ConnectDotsFieldEvent::FINISHED, CLOSURE(this, &ConnectDotsFrame::onFinished));
 	_view->addChild(_field);
 
-	//_counterBox = new CounterBoxElement(Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.15f), 120);
-	//_counterBox->addEventListener(CounterBoxElement::CounterBoxEvent::TIME_END, CLOSURE(this, &MemoryFrame::onTimesUp));
-	//_counterBox->show(true);
-	//_view->addChild(_counterBox);
+	_counterBox = new CounterBoxElement(Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.15f), 120);
+	_counterBox->addEventListener(CounterBoxElement::CounterBoxEvent::TIME_END, CLOSURE(this, &ConnectDotsFrame::onTimesUp));
+	_counterBox->show(true);
+	_view->addChild(_counterBox);
 
-	addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
+	addButton("back", "BACK", Vector2(_view->getWidth() * 0.9f, _view->getHeight() * 0.9f));
 }

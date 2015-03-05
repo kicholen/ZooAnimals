@@ -14,9 +14,9 @@ FlurryAds::~FlurryAds() {
 }
 
 void FlurryAds::init() {
-	_isFlurryAdsAvailable = s3eFlurryAppSpotAvailable();
+	_isFlurryAdsAvailable = false;//s3eFlurryAppSpotAvailable();
 	if (_isFlurryAdsAvailable) {
-		s3eFlurryAppSpotInitialize("9G322SKQ539264W5X55N");
+		//s3eFlurryAppSpotInitialize("9G322SKQ539264W5X55N");
 		registerListeners();
 	}
 }
@@ -24,7 +24,7 @@ void FlurryAds::init() {
 void FlurryAds::tryToShowFullScreen() {
 	if (_isFlurryAdsAvailable && Settings::instance.getValue("unblock_ads").as_int() == 0) {
 		s3eDebugTracePrintf("showBannerFullScreen");
-		s3eFlurryAppSpotFetchAndDisplayAdForSpace("Animals_Banner_Fullscreen", S3E_FLURRYAPPSPOT_FULLSCREEN);
+		//s3eFlurryAppSpotFetchAndDisplayAdForSpace("Animals_Banner_Fullscreen", S3E_FLURRYAPPSPOT_FULLSCREEN);
 	}
 }
 

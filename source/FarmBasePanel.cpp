@@ -3,7 +3,7 @@
 
 FarmBasePanel::FarmBasePanel(Vector2 size, StackContainerAlign alignType) {
 	setData(size, alignType);
-	_score = 241; // todo
+	_score = 2222; // todo
 	_scoreTextField = createScoreTextField();
 	addChild(createTweenButton("play", "back_button"));
 	addChild(createTweenButton("shop", "back_button"));
@@ -12,10 +12,11 @@ FarmBasePanel::FarmBasePanel(Vector2 size, StackContainerAlign alignType) {
 
 spTextActor FarmBasePanel::createScoreTextField() {
 	spTextActor scoreTextField = createTextfield(FlashUtils::CMath::intToString(_score), true, 0, false);
-	scoreTextField->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
-	scoreTextField->setFontSize2Scale(int(getSize().x * 0.9f) / 2);//20 * (int)getRoot()->getWidth() / 480);
+	TextStyle style = createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE);
+	scoreTextField->setStyle(style);
+	scoreTextField->setFontSize2Scale(15);
 	scoreTextField->setSize(getSize().x * 0.9f, getSize().y * 0.2f);
-	//scoreTextField->setWidth(getSize().x * 0.9f,);
+	scoreTextField->setFontSize2Scale(getSize().x * 0.9f / scoreTextField->getTextRect().getWidth() * scoreTextField->getFontSize2Scale());
 	scoreTextField->setPriority(3);
 
 	return scoreTextField;

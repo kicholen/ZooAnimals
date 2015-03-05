@@ -1,7 +1,7 @@
 #ifndef _FLURRYADS_
 #define _FLURRYADS_
 
-#include "s3eFlurryAppSpot.h"
+//#include "s3eFlurryAppSpot.h"
 #include "s3e.h"
 
 class FlurryAds
@@ -23,24 +23,24 @@ public:
 	void hideBannerBottom();
 protected:
 	void registerListeners() {
-		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADCLOSED, (s3eCallback)adClosedCallback, NULL);
+		/*s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADCLOSED, (s3eCallback)adClosedCallback, NULL);
 		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADSPACE_RECEIVED, (s3eCallback)adSpaceReceivedCallback, NULL);
 		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_APPLICATION_EXIT, (s3eCallback)applicationExitCallback, NULL);
 		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADSPACE_RECEIVED_FAIL, (s3eCallback)adSpaceReceivedFailCallback, NULL);
 		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADCLICKED, (s3eCallback)adClickedCallback, NULL);
 		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADOPENED,(s3eCallback) adOpenedCallback, NULL);
 		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADVIDEOCOMPLETED, (s3eCallback)adVideoCompletedCallback, NULL);
-		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADRENDERFAIL, (s3eCallback)adRenderFailCallback, NULL);
+		s3eFlurryAppSpotRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADRENDERFAIL, (s3eCallback)adRenderFailCallback, NULL);*/
 	}
 	void unregisterListeners() {
-		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADCLOSED, (s3eCallback)adClosedCallback);
+		/*s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADCLOSED, (s3eCallback)adClosedCallback);
 		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADSPACE_RECEIVED, (s3eCallback)adSpaceReceivedCallback);
 		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_APPLICATION_EXIT, (s3eCallback)applicationExitCallback);
 		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADSPACE_RECEIVED_FAIL, (s3eCallback)adSpaceReceivedFailCallback);
 		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADCLICKED, (s3eCallback)adClickedCallback);
 		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADOPENED,(s3eCallback) adOpenedCallback);
 		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADVIDEOCOMPLETED, (s3eCallback)adVideoCompletedCallback);
-		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADRENDERFAIL, (s3eCallback)adRenderFailCallback);
+		s3eFlurryAppSpotUnRegister(S3E_FLURRYAPPSPOT_CALLBACK_ADRENDERFAIL, (s3eCallback)adRenderFailCallback);*/
 	}
 private:
 	static int32 adClosedCallback(void *systemData, void *userData) {

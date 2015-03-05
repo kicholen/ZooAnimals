@@ -3,6 +3,7 @@
 #include "s3eOSExec.h"
 #include "GooglePlayInAppPurchaseManager.h"
 #include "SwipeTrailElement.h"
+#include "ZooFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -32,8 +33,10 @@ Action LandingPageFrame::loop(){
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "play") {
-			spLevelChooserFrame levelChooserFrame = new LevelChooserFrame;
-			transitionShowFrame(levelChooserFrame);
+			//spLevelChooserFrame levelChooserFrame = new LevelChooserFrame;
+			//transitionShowFrame(levelChooserFrame);
+			spZooFrame zooFrame = new ZooFrame();
+			transitionShowFrame(zooFrame);
 		}
 		else if (action.id == "facebook") {
 			s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);
@@ -70,6 +73,8 @@ void LandingPageFrame::setData() {
 	swipe->setSize(_view->getSize());
 	swipe->setPriority(-1000);
 	swipe->attachTo(_view);
+
+
 }
 
 void LandingPageFrame::playLoopedMusic() {

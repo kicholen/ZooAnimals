@@ -4,6 +4,8 @@
 #include "CustomFrame.h"
 #include "FlashUtils.h"
 #include "ConnectDotsField.h"
+#include "SharedResources.h"
+#include "CounterBoxElement.h"
 
 DECLARE_SMART(ConnectDotsFrame, spConnectDotsFrame);
 
@@ -20,11 +22,14 @@ protected:
 	void _preShowing(Event *);
 
 	void onFinished(Event *event);
+	void onTimesUp(Event *event);
 
 	void setData();
 private:
 	spConnectDotsField _field;
 	int _previousAnimal;
+	int _totalScore;
+	spCounterBoxElement _counterBox;
 	//spSoundInstance _previousSoundInstance; 
 };
 

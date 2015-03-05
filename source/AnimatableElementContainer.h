@@ -28,7 +28,9 @@ public:
 	void removeChildren();
 	void addChildren(VectorArray<spActor> children);
 private:
+	void clearStackContainers();
 	void updateChildren();
+
 	Point getProperArrayDimensions();
 	void addAnimationTween(spActor actor, bool show);
 	void setAlphaToActor(spActor actor, bool show);

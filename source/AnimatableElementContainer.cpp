@@ -59,11 +59,7 @@ void AnimatableElementContainer::removeChildren() {
 }
 
 void AnimatableElementContainer::updateChildren() {
-	for (int i = _stackContainersArray.length() - 1; i >= 0; i--) {
-		_stackContainersArray[i]->detach();
-	}
-
-	_stackContainersArray._vector.resize(0);
+	clearStackContainers();
 
 	int xDimension = getProperArrayDimensions().x;
 	int yDimension = getProperArrayDimensions().y;
@@ -85,6 +81,14 @@ void AnimatableElementContainer::updateChildren() {
 			childCounterPerStack++;
 		}
 	}
+}
+
+void AnimatableElementContainer::clearStackContainers() {
+	for (int i = _stackContainersArray.length() - 1; i >= 0; i--) {
+		_stackContainersArray[i]->detach();
+	}
+
+	_stackContainersArray._vector.resize(0);
 }
 
 Point AnimatableElementContainer::getProperArrayDimensions() {

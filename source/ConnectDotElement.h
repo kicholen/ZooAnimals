@@ -13,20 +13,19 @@ DECLARE_SMART(ConnectDotElement, spConnectDotElement);
 class ConnectDotElement : public Actor
 {
 public:
-	ConnectDotElement(string number);
+	ConnectDotElement();
 
-	void setBaseScale(Vector2 scale);
+	void addText(string number);
 
 	void playAnimation();
 	void stopAnimation();
 protected:
 	void createDotSprite();
 	void setDotSprite();
-	void createText(string number);
 
 private:
 	spSprite _dotSprite;
-	Vector2 _baseScale;
+	float _baseScaleX;
 };
 
 #endif

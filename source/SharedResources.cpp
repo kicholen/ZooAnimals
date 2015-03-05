@@ -29,7 +29,7 @@ const string ALL_ANIMALS[46] = {"bee", "cat", "cow", "dog", "duck", "goat", "hor
 spTextActor createTextfield(const string &txt, bool isHtml, int scale2size, bool multiline) {
 	spTextActor text = new TextActor();
 	text->setAnchor(0.5f, 0.5f);
-	text->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(),  Color(255, 255, 255, 255), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+	text->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(),  Color(255, 255, 255, 255), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
 	if (isHtml) {
 		text->setHtmlText(txt);
 	}
@@ -80,7 +80,7 @@ spTweenButton createButton(const string &name, const string &txt) {
 	if (shouldAddText) {
 		spTextActor text = new TextActor();
 
-		text->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(),  Color(255, 255, 255, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+		text->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(),  Color(255, 255, 255, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
 		text->setText(txt);
 
 		text->setSize(button->getSize());

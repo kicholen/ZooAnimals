@@ -53,7 +53,7 @@ void FarmControlPanel::show() {
 		return;
 	}
 	_state = fcpAnimating;
-
+	
 	spTween tween = addTween(Sprite::TweenX(-(getDerivedWidth() / 2 - _protrudeSize.x)), TWEEN_DURATION, 1, false, 0, Tween::ease_inBack);
 	tween->setName("show_part");
 	tween->setDoneCallback(CLOSURE(this, &FarmControlPanel::onTweenEnded));
@@ -199,12 +199,12 @@ void FarmControlPanel::createElementContainerIfNeeded() {
 		VectorArray<spActor> dupaArray;
 		dupaArray._vector.resize(0);
 
-		//Memory, connects dots, find shadow, match two
 		dupaArray.push(createButton("memory", "back_button")); 
 		dupaArray.push(createButton("dots", "back_button"));
 		dupaArray.push(createButton("shadow", "back_button"));
 		dupaArray.push(createButton("pop", "back_button"));
 		dupaArray.push(createButton("match", "back_button"));
+		dupaArray.push(createButton("discover", "back_button"));
 
 		_gameContainer = new AnimatableElementContainer(Vector2(getWidth() - _protrudeSize.x, getHeight()));
 		_gameContainer->addChildren(dupaArray);

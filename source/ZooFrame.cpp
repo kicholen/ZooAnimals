@@ -6,6 +6,7 @@
 #include "ConnectDotsFrame.h"
 #include "FindShadowFrame.h"
 #include "PopObjectsFrame.h"
+#include "DiscoverImageFrame.h"
 
 ZooFrame::ZooFrame() {
 	init("LandingPageFrame.xml", true);
@@ -76,6 +77,10 @@ Action ZooFrame::loop() {
 		else if (action.id == "pop") {
 			spPopObjectsFrame pop = new PopObjectsFrame();
 			transitionShowFrame(pop);
+		}
+		else if (action.id == "discover") {
+			spDiscoverImageFrame disc = new DiscoverImageFrame();
+			transitionShowFrame(disc);
 		}
 	}
 

@@ -1,25 +1,34 @@
 #include "ConnectDotElement.h"
 #include "SharedResources.h"
 
-ConnectDotElement::ConnectDotElement(string number) {
+ConnectDotElement::ConnectDotElement() {
 	setAnchor(0.5f, 0.5f);
 	setSize(DOT_SIZE_X, DOT_SIZE_Y);
-
 	createDotSprite();
-	createText(number);
 }
 
-void ConnectDotElement::setBaseScale(Vector2 baseScale) {
-	_baseScale = baseScale;
+void ConnectDotElement::addText(string number) {
+	float factor = number.length() == 1 ? 2.0f : 1.0f;
+	spTextActor numberTextField = createTextfield(number, true, 0, false);
+	numberTextField->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
+	numberTextField->setFontSize2Scale(15);
+	numberTextField->setSize(_dotSprite->getDerivedWidth() * 0.8f, _dotSprite->getDerivedHeight() * 0.8f);
+	float textWidth = numberTextField->getTextRect().getWidth() * factor;
+	numberTextField->setFontSize2Scale(int(numberTextField->getWidth() / textWidth * numberTextField->getFontSize2Scale()));
+	numberTextField->setAnchor(0.5f, 0.5f);
+	numberTextField->setPosition(getWidth() / 2, getHeight() / 2);
+	numberTextField->setPriority(3);
+	numberTextField->attachTo(this);
 }
 
 void ConnectDotElement::playAnimation() {
-	_dotSprite->addTween(Sprite::TweenScale(_dotSprite->getScale() * 1.2f), 500, -1, true)->setName("animate_dat_dot");
+	_baseScaleX = getScaleX();
+	addTween(Sprite::TweenScale(getScale() * 1.2f), 500, -1, true)->setName("animate_dat_dot");
 }
 
 void ConnectDotElement::stopAnimation() {
-	_dotSprite->removeTweensByName("animate_dat_dot");
-	_dotSprite->setScale(0.8f * DOT_SIZE_X / _dotSprite->getWidth());
+	removeTweensByName("animate_dat_dot");
+	setScale(_baseScaleX);
 }
 
 void ConnectDotElement::createDotSprite() {
@@ -30,7 +39,7 @@ void ConnectDotElement::createDotSprite() {
 }
 
 void ConnectDotElement::setDotSprite() {
-	_dotSprite->setResAnim(animalsResources.getResAnim("goat"));
+	_dotSprite->setResAnim(gameResources.getResAnim("circle_border"));
 	setAlpha(255);
 	_dotSprite->setAnchor(0.5f, 0.5f);
 	_dotSprite->setPosition(getWidth() / 2, getHeight() / 2);
@@ -41,12 +50,3 @@ void ConnectDotElement::setDotSprite() {
 	_dotSprite->setScale(dotScale);
 }
 
-void ConnectDotElement::createText(string number) {
-	spTextActor numberTextField = createTextfield(number, true, 0, false);
-	numberTextField->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
-	numberTextField->setFontSize2Scale(2 * (int)getRoot()->getWidth() / 320);
-	numberTextField->setSize(getWidth() * 0.8f, getHeight() * 0.8f);
-	numberTextField->setPosition(getWidth() / 2, getHeight() / 2);
-	numberTextField->setPriority(3);
-	numberTextField->attachTo(this);
-}

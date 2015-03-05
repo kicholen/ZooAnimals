@@ -110,6 +110,7 @@ void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vect
 }
 
 void MatchTwoField::spriteTouchDown(Event *event) {
+	//block rest objects touch
 	_dragging = safeSpCast<MatchTwoDraggable>(event->currentTarget);
 	_baseDraggingScale = _dragging->getScale();
 	_dragging->setScale(_baseDraggingScale * 1.1f);
@@ -118,6 +119,7 @@ void MatchTwoField::spriteTouchDown(Event *event) {
 }
 
 void MatchTwoField::spriteTouchUp(Event *event) {
+	// unblock objects touch
 	_dragging = safeSpCast<MatchTwoDraggable>(event->currentTarget);
 	_dragging->setPriority(_dragging->getPriority() - 1);
 	_state = mtDragging;
@@ -215,6 +217,5 @@ uint MatchTwoField::getRandomFreeSpot() {
 			}
 		}
 	}
-	int asd = 10;
 	return freeSpot + 1;
 }

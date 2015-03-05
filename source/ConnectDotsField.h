@@ -25,7 +25,7 @@ public:
 		ConnectDotsFieldEvent(EV ev):Event(ev) {}
 	};
 
-	ConnectDotsField(int levelNumber = 2);
+	ConnectDotsField(Vector2 size, int levelNumber = 2);
 
 	void reset(int level);
 

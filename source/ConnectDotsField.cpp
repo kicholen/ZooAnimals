@@ -4,16 +4,8 @@
 #include "Particle.h"
 #include "ParticleEmitter.h"
 
-ConnectDotsField::ConnectDotsField(int levelNumber) {
-	setSize(800.0f, 800.0f);//MEMORY_SIZE_X * _numberOfFields.x, MEMORY_SIZE_Y * _numberOfFields.y);
-	
-	/*spColorRectSprite bg = new ColorRectSprite();
-	bg->setColor(Color(100, 100, 100));
-	bg->setSize(getSize());
-	bg->setAnchor(0.0f, 0.0f);
-	bg->setPosition(0.0f, 0.0f);
-	bg->setPriority(-1000);
-	addChild(bg);*/
+ConnectDotsField::ConnectDotsField(Vector2 size, int levelNumber) {
+	setSize(size);
 	reset(levelNumber);
 }
 
@@ -39,7 +31,8 @@ void ConnectDotsField::fillField(int levelNumber) {
 
 			spConnectDotElement dot = getChildT<ConnectDotElement>(name, oxygine::ep_ignore_error);
 			if (!dot) {
-				dot = new ConnectDotElement(name);
+				dot = new ConnectDotElement();
+				dot->addText(name);
 				dot->setAnchor(0.5f, 0.5f);
 				dot->setName(name);
 				dot->addEventListener(TouchEvent::CLICK, CLOSURE(this, &ConnectDotsField::onDotTap));
@@ -50,7 +43,6 @@ void ConnectDotsField::fillField(int levelNumber) {
 			dot->setScale(0.0f);
 			_animatedCount++;
 			Vector2 baseDotScale = Vector2((float)g[0] * getWidth() / dot->getWidth(), (float)g[1] * getHeight() / dot->getHeight());
-			dot->setBaseScale(baseDotScale);
 			spTween tween = dot->addTween(Sprite::TweenScale(baseDotScale), 250, 1, false, 75 * bufferIndex, Tween::ease_inOutBack);
 			tween->setDoneCallback(CLOSURE(this, &ConnectDotsField::onDotAnimationCompleted));
 			dot->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
@@ -199,7 +191,7 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 		addChild(mask);
 	}
 	mask->setResAnim(animalsResources.getResAnim(g.spriteName));
-	mask->setScale((float)g[0] * getWidth() / mask->getWidth(), (float)g[1] * getHeight() / mask->getHeight());
+	mask->setScale((float)g[0] * getWidth() / mask->getWidth());
 	mask->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
 
 	spMaskedSprite masked = getChildT<MaskedSprite>("object_masked", oxygine::ep_ignore_error);
@@ -221,7 +213,7 @@ void ConnectDotsField::createOrChangeMaskedSprite(Group g) {
 	}
 	object->setVal(Vector4(0.5f, 0.5f, 0.5f, 1.0f));
 	object->setResAnim(animalsResources.getResAnim(g.spriteName));
-	object->setScale((float)g[0] * getWidth() / object->getWidth(), (float)g[1] * getHeight() / object->getHeight());
+	object->setScale((float)g[0] * getWidth() / object->getWidth());//, (float)g[1] * getHeight() / object->getHeight());
 	object->setPosition((float)g[2] * getWidth(), (float)g[3] * getHeight());
 }
 
