@@ -11,7 +11,7 @@ FarmBasePanel::FarmBasePanel(Vector2 size, StackContainerAlign alignType) {
 }
 
 spTextActor FarmBasePanel::createScoreTextField() {
-	spTextActor scoreTextField = createTextfield(FlashUtils::CMath::intToString(_score), true, 0, false);
+	spTextActor scoreTextField = createTextfield(FlashUtils::CMath::intToString(_score), true, false);
 	TextStyle style = createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE);
 	scoreTextField->setStyle(style);
 	scoreTextField->setFontSize2Scale(15);

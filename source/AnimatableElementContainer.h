@@ -26,7 +26,7 @@ public:
 	void hideContainerElements(bool shouldAnimate = false);
 
 	void removeChildren();
-	void addChildren(VectorArray<spActor> children);
+	void addChildren(VectorArray<spActor>& children);
 private:
 	void clearStackContainers();
 	void updateChildren();

@@ -61,7 +61,7 @@ void LandingPageFrame::setData() {
 	addButton("facebook", "", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 2 + 20));
 	addButton("rate", "RATE", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() + 10));
 	
-	spTextActor text = createTextfield("Loveable animals cannot wait to play with you! :)", true, 0, true);
+	spTextActor text = createTextfield("Loveable animals cannot wait to play with you! :)", true, true);
 	text->setFontSize2Scale(40 * (int)_view->getWidth() / 640);
 	text->setSize(_view->getWidth() * 0.65f, _view->getHeight() * 0.4f);
 	text->setPosition(_view->getWidth() / 2, _view->getHeight() * 0.2f);

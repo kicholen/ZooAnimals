@@ -41,7 +41,7 @@ void AnimatableElementContainer::hideContainerElements(bool shouldAnimate) {
 	}
 }
 
-void AnimatableElementContainer::addChildren(VectorArray<spActor> children) {
+void AnimatableElementContainer::addChildren(VectorArray<spActor>& children) {
 	for (int i = children.length() - 1; i >= 0; i--) {
 		_childrenArray.push(children[i]);
 	}

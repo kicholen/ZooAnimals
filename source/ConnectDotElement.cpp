@@ -9,7 +9,7 @@ ConnectDotElement::ConnectDotElement() {
 
 void ConnectDotElement::addText(string number) {
 	float factor = number.length() == 1 ? 2.0f : 1.0f;
-	spTextActor numberTextField = createTextfield(number, true, 0, false);
+	spTextActor numberTextField = createTextfield(number, true, false);
 	numberTextField->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
 	numberTextField->setFontSize2Scale(15);
 	numberTextField->setSize(_dotSprite->getDerivedWidth() * 0.8f, _dotSprite->getDerivedHeight() * 0.8f);

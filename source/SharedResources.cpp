@@ -26,7 +26,7 @@ const string ALL_ANIMALS[46] = {"bee", "cat", "cow", "dog", "duck", "goat", "hor
 
 
 
-spTextActor createTextfield(const string &txt, bool isHtml, int scale2size, bool multiline) {
+spTextActor createTextfield(const string &txt, bool isHtml, bool multiline) {
 	spTextActor text = new TextActor();
 	text->setAnchor(0.5f, 0.5f);
 	text->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(),  Color(255, 255, 255, 255), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));

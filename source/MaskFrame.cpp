@@ -147,7 +147,7 @@ void MaskFrame::setData() {
 	button = addButton("ADD_POINT", "ADD_POINT", Vector2(_view->getWidth() - button->getDerivedWidth() / 2, 50 + (button->getDerivedHeight() + 5)* 3));
 	button->setScale(button->getScale().x / 2);
 
-	_currentTextfield = createTextfield("FILE_PATH", false, 0, false);
+	_currentTextfield = createTextfield("FILE_PATH", false, false);
 	_currentTextfield->setFontSize2Scale(40 * (int)_view->getWidth() / 640);
 	_currentTextfield->setSize(button->getDerivedWidth(), button->getDerivedHeight());
 	_currentTextfield->setPosition(button->getX(), button->getY() - button->getDerivedHeight() * 3 / 2);
