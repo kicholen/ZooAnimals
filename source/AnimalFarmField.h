@@ -37,6 +37,7 @@ private:
 	void tryToAnimateAnimals(Vector2 position);
 	bool canAnimalsAnimate();
 	void setAnimalsPriorityByY();
+	Vector2 getPositionFromCenter(float angle, Vector2 center, float distanceFromCenter);
 
 	void onTouchOver(Event *event);
 
@@ -48,6 +49,8 @@ private:
 	int _count;
 	string _species;
 	bool _canAnimalsUpdate;
+
+	int _animateType;
 };
 
 

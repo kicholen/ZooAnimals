@@ -23,6 +23,7 @@ AnimalInFarmElement::AnimalInFarmElement(string spriteName, Vector2 size, float 
 	_jumpDelay = delayRandom;
 	_isWaterAnimal = isWaterAnimal;
 
+	_isJumpingExact = false;
 	_calculateNewPointCounter = 0;
 	_randomPointOnEdge = Vector2((float)CMath::random(0, int(getWidth())), (float)CMath::random(0, int(getHeight())));
 	_shouldCalculateNewPoint = true;
@@ -91,6 +92,22 @@ float AnimalInFarmElement::getShadowY() {
 	return 0.0f;
 }
 
+float AnimalInFarmElement::getShadowX() {
+	if (_state != aifCreating) {
+		return _shadowSprite->getX() + _shadowSprite->getDerivedWidth() / 2;
+	}
+	return 0.0f;
+}
+
+void AnimalInFarmElement::setAsLeader() {
+	_animalSprite->setColor(Color::Green);
+}
+
+void AnimalInFarmElement::jumpToExactPosition(Vector2 exactPosition) {
+	_exactPosition = exactPosition;
+	_isJumpingExact = true;
+}
+
 Vector2 AnimalInFarmElement::getRandomPointOnRectangleEdge() {
 	if (_shouldCalculateNewPoint) {
 		_shouldCalculateNewPoint = false;
@@ -121,11 +138,16 @@ Vector2 AnimalInFarmElement::calculateJumpPosition(Vector2 position) {
 	position = Vector2(position.x, -position.y);
 	Vector2 animalPosition = Vector2(_animalSprite->getX(), -_animalSprite->getY());
 
-	Vector2 normalizedVector = Vector2(animalPosition.x - position.x, animalPosition.y - position.y);
-	normalizedVector.normalizeTo(_jumpRange);
-	Vector2 calculatedVector = Vector2(_animalSprite->getX() - normalizedVector.x, _animalSprite->getY() + normalizedVector.y);
-	
-	return checkAndChangePointIfNeeded(calculatedVector);
+	if (_isJumpingExact && animalPosition.distance(position) <= _jumpRange) {
+		return Vector2(position.x, -position.y);
+	}
+	else {
+		Vector2 normalizedVector = Vector2(animalPosition.x - position.x, animalPosition.y - position.y);
+		normalizedVector.normalizeTo(_jumpRange);
+		Vector2 calculatedVector = Vector2(_animalSprite->getX() - normalizedVector.x, _animalSprite->getY() + normalizedVector.y);
+		return checkAndChangePointIfNeeded(calculatedVector);
+	}
+
 }
 
 Vector2 AnimalInFarmElement::checkAndChangePointIfNeeded(Vector2 point) {
@@ -147,21 +169,20 @@ Vector2 AnimalInFarmElement::checkAndChangePointIfNeeded(Vector2 point) {
 		_shouldCalculateNewPoint = true;
 		Vector2 centerVector = Vector2(animalPosition.x - rect.getCenter().x, animalPosition.y - rect.getCenter().y);
 		centerVector.normalizeTo(_jumpRange);
-		float x, y;
 		if (_animalSprite->getX() - centerVector.x <= getSize().x && _animalSprite->getX() - centerVector.x >= 0.0f) {
-			x = _animalSprite->getX() - centerVector.x;
+			point.x = _animalSprite->getX() - centerVector.x;
 		}
 		else {
-			x = _animalSprite->getX() + centerVector.x;
+			point.x = _animalSprite->getX() + centerVector.x;
 		}
 
 		if (_animalSprite->getY() - centerVector.y <= getSize().y && _animalSprite->getY() - centerVector.y >= 0.0f) {
-			y = _animalSprite->getY() - centerVector.y;
+			point.y = _animalSprite->getY() - centerVector.y;
 		}
 		else {
-			y = _animalSprite->getY() + centerVector.y;
+			point.y = _animalSprite->getY() + centerVector.y;
 		}
-		return Vector2(x, y);
+		return point;
 	}
 }
 
@@ -217,8 +238,15 @@ void AnimalInFarmElement::animateDisappear() {
 }
 
 void AnimalInFarmElement::onJumpEnded(Event *event) {
-	_state = aifWaiting;
-	_nextJumpDelay = CMath::Rand(_jumpDelay.x, _jumpDelay.y);
+	if (_isJumpingExact) {
+		_state = aifWaiting;
+		_nextJumpDelay = 0.0f;
+		//_nextJumpDelay = std::numeric_limits<float>::infinity();
+	}
+	else {
+		_state = aifWaiting;
+		_nextJumpDelay = CMath::Rand(_jumpDelay.x, _jumpDelay.y);
+	}
 }
 
 void AnimalInFarmElement::doUpdate(const UpdateState &us) {
@@ -226,8 +254,13 @@ void AnimalInFarmElement::doUpdate(const UpdateState &us) {
 		if (_nextJumpDelay > 0.0f) {
 			_nextJumpDelay -= us.dt;
 		}
-		else if (_state != aifJumping){
-			animateJump(Vector2(), true);
+		else if (_state != aifJumping) {
+			if (_isJumpingExact) {
+				animateJump(_exactPosition, false);
+			}
+			else {
+				animateJump(Vector2(), true);
+			}
 		}
 	}
 }

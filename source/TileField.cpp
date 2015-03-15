@@ -15,7 +15,7 @@ TileField::~TileField() {
 
 }
 
-void TileField::setData(string animalName) {
+void TileField::setData(string& animalName) {
 	_animalName = animalName;
 	pugi::xml_node animalParameters = Content::instance.getAnimalFarmParametersNode(animalName);
 	string baseTile = animalParameters.first_attribute().as_string();
@@ -38,7 +38,7 @@ void TileField::setData(string animalName) {
 	}
 }
 
-spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string spriteName, short priority) {
+spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string& spriteName, short priority) {
 	spSprite sprite = new Sprite();
 	sprite->setAnchor(0.0f, 0.0f);
 	sprite->setResAnim(tilesResources.getResAnim(resourceName));
@@ -49,7 +49,7 @@ spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Po
 	return sprite;
 }
 
-VectorArray<int> TileField::getFarmParameters(string animalName) {
+VectorArray<int> TileField::getFarmParameters(string& animalName) {
 	pugi::xml_node animalParameters = Content::instance.getAnimalFarmParametersNode(animalName);
 	pugi::xml_attribute attribute = animalParameters.first_attribute();
 	VectorArray<int> attributesArray;

@@ -198,7 +198,7 @@ void MatchTwoField::createSpotTakenVector(uint numberOfMatches) {
 
 uint MatchTwoField::getRandomFreeSpot() {
 	bool untilFound = true;
-	int freeSpot;
+	int freeSpot = 0;
 	int preformanceCounter = 0;
 	int randomCounter = CMath::random(2, _numberOfMatches * 3);
 

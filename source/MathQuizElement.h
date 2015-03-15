@@ -11,7 +11,7 @@ DECLARE_SMART(MathQuizElement, spMathQuizElement);
 class MathQuizElement : public Actor
 {
 public:
-	MathQuizElement(Vector2& size);
+	MathQuizElement(Vector2 size);
 	~MathQuizElement();
 
 	void setData();

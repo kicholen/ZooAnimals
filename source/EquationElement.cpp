@@ -1,7 +1,7 @@
 #include "EquationElement.h"
 #include "FlashUtils.h"
 
-EquationElement::EquationElement(Vector2& size, int a, const string& sign, int b) {
+EquationElement::EquationElement(Vector2 size, int a, const string& sign, int b) {
 	setSize(size);
 	setData(a, sign, b);
 }
@@ -106,7 +106,7 @@ int EquationElement::getDiffrentIntegerInRange(VectorArray<int>& integers, int m
 
 	return falseResult;
 }
-spEquationFragment EquationElement::createEquationFragment(Vector2& size, int count, Vector2& position, const string& name, bool isSign, const string& sign) {
+spEquationFragment EquationElement::createEquationFragment(Vector2 size, int count, Vector2 position, const string& name, bool isSign, const string& sign) {
 	spEquationFragment fragment = new EquationFragment(size, count, isSign, sign);
 	fragment->setName(name);
 	fragment->setPosition(position);

@@ -1,5 +1,6 @@
 #include "AnimalFarmField.h"
 #include "Content.h"
+#include <limits>
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setTouchEnabled(false);
@@ -23,6 +24,8 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	_zSortElements._vector.reserve(5);
 
 	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
+
+	_animateType = 1;
 }
 
 
@@ -43,6 +46,9 @@ void AnimalFarmField::setData(string animalName, uint animalsCount) {
 	createAddAnimalButton("add_animal", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.1f));
 	spTileField tileField = createTileField();
 	createCustomElements(tileField);
+	for (int i = _zSortElements.length() - 1; i >= 0; i -= 1) {
+		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
+	}
 
 	_animateDuration = 5.0f * 1000;
 	_state = afWaiting;
@@ -95,12 +101,73 @@ VectorArray<int> AnimalFarmField::getAnimalParameters(string animalName) {
 
 void AnimalFarmField::addAnimal(Event *event) {
 	VectorArray<int> parameters = getAnimalParameters(_species);
-	int x = 10;
+	/*int x = 10;
 	while (x > 0) {
 		_animalsArray.push(createAnimal(CMath::intToString(_animalsArray._vector.size() + 1), _species, (float)parameters[0], (float)parameters[1], (float)parameters[2], Vector2((float)parameters[3], (float)parameters[4]), parameters[5] == 0 ? false : true));
 		x--;
 	}
-	parameters._vector.resize(0);
+	parameters._vector.resize(0);*/
+	//_lastZSortTime = std::numeric_limits<float>::infinity();
+	//_canAnimalsUpdate = false;
+	float spaceX = getWidth() / (_animalsArray.length() + 1);
+	float spaceY = getHeight() / (_animalsArray.length() + 1);
+	float offset = 0.0f;
+	float secondOffset = 0.0f;
+
+	float startAngle = 0.0f;
+	float angleOffset = 360.0f / (float)_animalsArray.length();
+	float childDistanceFromCenter = getHeight() / 2 * 0.8f;
+
+	int counter = 0;
+	float startAngleSecond = -90.0f;
+
+	for (int i = _animalsArray.length() - 1; i >= 0; i -= 1) {
+		if (_animateType == 0) {
+			_animalsArray[i]->jumpToExactPosition(getPositionFromCenter(FlashUtils::CMath::DegToRad(startAngle), getSize() / 2, childDistanceFromCenter));
+			startAngle += angleOffset;
+		}
+		else if (_animateType == 1) {
+			offset += spaceY;
+			_animalsArray[i]->jumpToExactPosition(Vector2(getWidth() / 2, offset));
+		}
+		else if (_animateType == 2) {
+			if (counter >  _animalsArray.length() / 2) {
+				if (counter > _animalsArray.length() / 4 * 3) {
+					if (counter > _animalsArray.length() / 8 * 7) {
+						secondOffset += spaceX;
+						_animalsArray[i]->jumpToExactPosition(Vector2(secondOffset, getHeight() * 0.3f));
+					}
+					else {
+						_animalsArray[i]->jumpToExactPosition(Vector2(secondOffset, getHeight() * 0.3f));
+						secondOffset += spaceX;
+					}
+					if (counter ==  _animalsArray.length() / 8 * 7) {
+						secondOffset = getWidth() - secondOffset;
+					}
+				}
+				else {
+					offset += spaceY;
+					_animalsArray[i]->jumpToExactPosition(Vector2(getWidth() / 2, offset));
+				}
+				if (counter ==  _animalsArray.length() / 4 * 3) {
+					secondOffset = getWidth() / 2 - spaceX * 4;
+				}
+			}
+			else {
+				_animalsArray[i]->jumpToExactPosition(getPositionFromCenter(FlashUtils::CMath::DegToRad(startAngleSecond), getSize() / 2, childDistanceFromCenter));
+				startAngleSecond += angleOffset;
+			}
+			if (counter ==  _animalsArray.length() / 2) {
+				offset = spaceY * _animalsArray.length() / 3;
+			}
+			counter++;
+		}
+		else {
+			offset += spaceX;
+			_animalsArray[i]->jumpToExactPosition(Vector2(offset, getHeight() / 2));
+		}
+	}
+	_animateType = _animateType == 2 ? 0 : _animateType + 1;
 }
 
 spAnimalInFarmElement AnimalFarmField::createAnimal(string animalNumber, string spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal) {
@@ -170,7 +237,8 @@ void AnimalFarmField::setAnimalsPriorityByY() {
 	for (int i = _animalsArray.length() - 1; i >= 0; i -= 1) {
 		_animalsArray[i]->setPriority(int(_animalsArray[i]->getShadowY()));
 	}
-	for (int i = _zSortElements.length() - 1; i >= 0; i -= 1) {
-		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
-	}
+}
+
+Vector2 AnimalFarmField::getPositionFromCenter(float angle, Vector2 center, float distanceFromCenter) {
+	return Vector2(center + Vector2(sin(angle) * distanceFromCenter, cos(angle) * distanceFromCenter));
 }

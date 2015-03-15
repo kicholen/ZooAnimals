@@ -19,7 +19,7 @@ public:
 
 		EquationElementEvent(EV ev):Event(ev) {}
 	};
-	EquationElement(Vector2& size, int a, const string& sign, int b);
+	EquationElement(Vector2 size, int a, const string& sign, int b);
 	~EquationElement();
 
 	void reset(int a, const string& sign, int b);
@@ -31,7 +31,7 @@ private:
 	int getCorrectResult(int a, const string& sign, int b);
 	int getDiffrentIntegerInRange(VectorArray<int>& integers, int min, int max);
 
-	spEquationFragment createEquationFragment(Vector2& size, int count, Vector2& position, const string& name, bool isSign = false, const string& sign = "");
+	spEquationFragment createEquationFragment(Vector2 size, int count, Vector2 position, const string& name, bool isSign = false, const string& sign = "");
 
 	void onCorrectAnswerTapped(Event *event);
 };

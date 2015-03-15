@@ -1,7 +1,7 @@
 #include "MathQuizElement.h"
 #include "SharedResources.h"
 
-MathQuizElement::MathQuizElement(Vector2& size) {
+MathQuizElement::MathQuizElement(Vector2 size) {
 	setSize(size);
 	//setAnchor(0.5f, 0.5f);
 	setData();

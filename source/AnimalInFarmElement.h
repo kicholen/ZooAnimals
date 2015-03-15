@@ -20,6 +20,10 @@ public:
 	void setAnimalSprite(string spriteName);
 	void animateJump(Vector2 position, bool isRandom = false);
 	float getShadowY();
+	float getShadowX();
+
+	void setAsLeader();
+	void jumpToExactPosition(Vector2 exactPosition);
 protected:
 	void doUpdate(const UpdateState &us);
 private:
@@ -55,6 +59,8 @@ private:
 	Vector2 _jumpDelay;
 	bool _isWaterAnimal;
 
+	Vector2 _exactPosition;
+	bool _isJumpingExact;
 public:
 	bool _canUpdate;
 };
