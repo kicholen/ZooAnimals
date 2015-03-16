@@ -4,7 +4,7 @@
 
 using namespace FlashUtils;
 
-AnimalInFarmElement::AnimalInFarmElement(string spriteName, Vector2 size, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal) {
+AnimalInFarmElement::AnimalInFarmElement(string spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal) {
 	_id = spriteName;
 	_state = aifCreating;
 	_canUpdate = true;
@@ -72,8 +72,8 @@ void AnimalInFarmElement::setAnimalSprite(string id) {
 	setSpriteScaleBySize(_animalSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x));
 }
 
-void AnimalInFarmElement::animateJump(Vector2 position, bool isRandom) {
-	if (_state == aifJumping) {
+void AnimalInFarmElement::animateJump(const Vector2& position, bool isRandom) {
+	if (!canJump()) {
 		return;
 	}
 	if (isRandom) {
@@ -87,28 +87,44 @@ void AnimalInFarmElement::animateJump(Vector2 position, bool isRandom) {
 
 float AnimalInFarmElement::getShadowY() {
 	if (_state != aifCreating) {
-		return _shadowSprite->getY() + _shadowSprite->getDerivedHeight() / 2;
+		return _shadowSprite->getY();// + _shadowSprite->getDerivedHeight() / 2;
 	}
 	return 0.0f;
 }
 
 float AnimalInFarmElement::getShadowX() {
 	if (_state != aifCreating) {
-		return _shadowSprite->getX() + _shadowSprite->getDerivedWidth() / 2;
+		return _shadowSprite->getX();// + _shadowSprite->getDerivedWidth() / 2;
 	}
 	return 0.0f;
+}
+
+float AnimalInFarmElement::getJumpTime() {
+	return _jumpTime;
 }
 
 void AnimalInFarmElement::setAsLeader() {
 	_animalSprite->setColor(Color::Green);
 }
 
-void AnimalInFarmElement::jumpToExactPosition(Vector2 exactPosition) {
+void AnimalInFarmElement::jumpToExactPosition(const Vector2& exactPosition) {
 	_exactPosition = exactPosition;
 	_isJumpingExact = true;
 }
 
-Vector2 AnimalInFarmElement::getRandomPointOnRectangleEdge() {
+void AnimalInFarmElement::stopJumpingExact() {
+	_isJumpingExact = false;
+}
+
+void AnimalInFarmElement::stopJumping() {
+	_state = aifStopped;
+}
+
+void AnimalInFarmElement::resumeJumping() {
+	_state = aifWaiting;
+}
+
+const Vector2& AnimalInFarmElement::getRandomPointOnRectangleEdge() {
 	if (_shouldCalculateNewPoint) {
 		_shouldCalculateNewPoint = false;
 		
@@ -190,7 +206,7 @@ Vector2 AnimalInFarmElement::checkAndChangePointIfNeeded(Vector2 point) {
 *	I assume that passed point is always proper.
 *	Function for drawing debug line.
 */
-void AnimalInFarmElement::drawDebugLineAndJumpTo(Vector2 destinedPosition) {
+void AnimalInFarmElement::drawDebugLineAndJumpTo(const Vector2& destinedPosition) {
 	// set debug line hooked vertex
 	/*if (_debugJumpLine.get() == NULL) {
 		_debugJumpLine = new ColorRectSprite();
@@ -211,7 +227,7 @@ void AnimalInFarmElement::drawDebugLineAndJumpTo(Vector2 destinedPosition) {
 	jumpToPosition(destinedPosition);
 }
 
-void AnimalInFarmElement::jumpToPosition(Vector2 position) {
+void AnimalInFarmElement::jumpToPosition(const Vector2& position) {
 	// shadow tween position
 	_state = aifJumping;
 	spTweenQueue queueTween = new TweenQueue();
@@ -238,6 +254,9 @@ void AnimalInFarmElement::animateDisappear() {
 }
 
 void AnimalInFarmElement::onJumpEnded(Event *event) {
+	if (_state == aifStopped) {
+		return;
+	}
 	if (_isJumpingExact) {
 		_state = aifWaiting;
 		_nextJumpDelay = 0.0f;
@@ -250,7 +269,7 @@ void AnimalInFarmElement::onJumpEnded(Event *event) {
 }
 
 void AnimalInFarmElement::doUpdate(const UpdateState &us) {
-	if (_canUpdate) {
+	if (_canUpdate && _state != aifStopped) {
 		if (_nextJumpDelay > 0.0f) {
 			_nextJumpDelay -= us.dt;
 		}
@@ -263,4 +282,8 @@ void AnimalInFarmElement::doUpdate(const UpdateState &us) {
 			}
 		}
 	}
+}
+
+bool AnimalInFarmElement::canJump() {
+	return _state != aifJumping && _state != aifStopped;
 }

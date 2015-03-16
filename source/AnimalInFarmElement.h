@@ -9,21 +9,26 @@ using namespace oxygine;
 
 DECLARE_SMART(AnimalInFarmElement, spAnimalInFarmElement);
 
-typedef enum {aifCreating, aifWaiting, aifJumping} AnimalInFarmElementState;
+typedef enum {aifCreating, aifWaiting, aifJumping, aifStopped} AnimalInFarmElementState;
 
 class AnimalInFarmElement : public Actor
 {
 public:
-	AnimalInFarmElement(string spriteName, Vector2 size, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal);
+	AnimalInFarmElement(string spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal);
 	~AnimalInFarmElement();
 
 	void setAnimalSprite(string spriteName);
-	void animateJump(Vector2 position, bool isRandom = false);
+	void animateJump(const Vector2& position, bool isRandom = false);
 	float getShadowY();
 	float getShadowX();
+	float getJumpTime();
 
 	void setAsLeader();
-	void jumpToExactPosition(Vector2 exactPosition);
+	void jumpToExactPosition(const Vector2& exactPosition);
+	void stopJumpingExact();
+	void stopJumping();
+	void resumeJumping();
+
 protected:
 	void doUpdate(const UpdateState &us);
 private:
@@ -32,12 +37,13 @@ private:
 
 	void animateAppear();
 	void animateDisappear();
-	void jumpToPosition(Vector2 position);
+	void jumpToPosition(const Vector2& position);
 
-	Vector2 getRandomPointOnRectangleEdge();
-	void drawDebugLineAndJumpTo(Vector2 destinedPosition);
+	const Vector2& getRandomPointOnRectangleEdge();
+	void drawDebugLineAndJumpTo(const Vector2& destinedPosition);
 	Vector2 checkAndChangePointIfNeeded(Vector2 position);
 	Vector2 calculateJumpPosition(Vector2 position);
+	bool canJump();
 
 	// callbacks
 	void onJumpEnded(Event *event);

@@ -38,7 +38,7 @@ void TileField::setData(string& animalName) {
 	}
 }
 
-spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string& spriteName, short priority) {
+spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string spriteName, short priority) {
 	spSprite sprite = new Sprite();
 	sprite->setAnchor(0.0f, 0.0f);
 	sprite->setResAnim(tilesResources.getResAnim(resourceName));

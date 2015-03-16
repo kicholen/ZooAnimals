@@ -20,7 +20,7 @@ public:
 	~TileField();
 
 	void setData(string& animalName);
-	spSprite createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string& spriteName, short priority = -1);
+	spSprite createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string spriteName, short priority = -1);
 private:
 	VectorArray<int> getFarmParameters(string& animalName);
 	Point getCellIndex(Vector2 position);

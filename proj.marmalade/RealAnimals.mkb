@@ -26,6 +26,10 @@ files
     SpriteModel.cpp
     SpriteModel.h
 
+	[source/animations]
+	AnimalsFarmAnimations.cpp
+	AnimalsFarmAnimations.h
+
 	[source/elements/shop]
 	ShopContainer.cpp
 	ShopContainer.h
