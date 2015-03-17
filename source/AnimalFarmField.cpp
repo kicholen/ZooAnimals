@@ -1,5 +1,6 @@
 #include "AnimalFarmField.h"
 #include "Content.h"
+#include "AnimalsManager.h"
 #include <limits>
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
@@ -8,7 +9,7 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setSize(fieldSize);
 	_state = afCreating;
 	_count = 0;
-
+	
 	spColorRectSprite bg = new ColorRectSprite();
 	bg->setColor(Color(222, 100, 100));
 	bg->setSize(getSize());
@@ -31,16 +32,15 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 AnimalFarmField::~AnimalFarmField() {
 	_zSortElements._vector.resize(0);
 	_animalsFarmAnimation->releaseRef();
+	_model->releaseRef();
 }
 
 void AnimalFarmField::setData(const string& animalName, uint animalsCount) {
-	VectorArray<int> parameters = getAnimalParameters(animalName);
+	_model = AnimalsManager::instance.getAnimalModel(animalName);
 
 	for (uint i = 0; i < animalsCount; i++) {
-		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(i), animalName, (float)parameters[0], (float)parameters[1], (float)parameters[2], Vector2(parameters[3], parameters[4]), parameters[5] == 0 ? false : true)));
+		_animalsFarmAnimation->addAnimal(createAnimal(CMath::intToString(i), _model));
 	}
-	_species = animalName;
-	parameters._vector.resize(0);
 
 	createAnimalButton("add", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.1f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::addAnimal));
 	createAnimalButton("animate", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.4f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::playNextAnimalsAnimation));
@@ -57,7 +57,7 @@ void AnimalFarmField::setData(const string& animalName, uint animalsCount) {
 spTileField AnimalFarmField::createTileField() {
 	float ratio = (getSize().x / 32.0f) / (getSize().y / 32.0f);
 	spTileField tileField = new TileField(Point((int)ratio * 6, 6));
-	tileField->setData(_species);
+	tileField->setData(_model->animalName());
 	tileField->setScale(getHeight() / tileField->getHeight());
 	tileField->setName("tajle");
 	//tileField->setSize(getSize());
@@ -69,7 +69,7 @@ spTileField AnimalFarmField::createTileField() {
 }
 
 void AnimalFarmField::createCustomElements(spTileField tileField) {
-	pugi::xml_node animalParameters = Content::instance.getAnimalFarmSortParametersNode(_species);
+	pugi::xml_node animalParameters = Content::instance.getAnimalFarmSortParametersNode(_model->animalName());
 	pugi::xml_node parameter = animalParameters.first_child();
 	
 	while (parameter) {
@@ -84,45 +84,29 @@ void AnimalFarmField::createCustomElements(spTileField tileField) {
 	}
 }
 
-VectorArray<int> AnimalFarmField::getAnimalParameters(const string& animalName) {
-	pugi::xml_node animalParameters = Content::instance.getAnimalJumpParametersNode(animalName);
-	pugi::xml_attribute attribute = animalParameters.first_attribute();
-	VectorArray<int> attributesArray;
-	attributesArray._vector.resize(0);
-	attributesArray._vector.reserve(6);
-
-	while (!attribute.empty()) {
-		attributesArray.push(attribute.as_int());
-		attribute = attribute.next_attribute();
-	}
-
-	return attributesArray;
-}
-
 void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
 	_animationType = _animationType + 1 == afaCount ? static_cast<AnimalsFarmAnimationType>(0) : static_cast<AnimalsFarmAnimationType>(_animationType + 1);
 	_animalsFarmAnimation->playAnimalsAnimation(_animationType);
 }
 
 void AnimalFarmField::addAnimal(Event *event) {
-	VectorArray<int> parameters = getAnimalParameters(_species);
+	spAnimalModel model = AnimalsManager::instance.getAnimalModel(_model->animalName());
 	int x = 10;
 	while (x > 0) {
-		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(_count + 1), _species, (float)parameters[0], (float)parameters[1], (float)parameters[2], Vector2((float)parameters[3], (float)parameters[4]), parameters[5] == 0 ? false : true)));
+		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(_count + 1), _model)));
 		x--;
 	}
-	parameters._vector.resize(0);
 }
 
-spAnimalInFarmElement AnimalFarmField::createAnimal(const string& animalNumber, const string& spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal) {
+spAnimalInFarmElement AnimalFarmField::createAnimal(const string& animalNumber, spAnimalModel model) {
 	spAnimalInFarmElement animalElement = getChildT<AnimalInFarmElement>(animalNumber, oxygine::ep_ignore_error);
 	if (!animalElement) {
-		animalElement = new AnimalInFarmElement(spriteName, getSize(), jumpRange, jumpHeight, jumpTime, delayRandom, isWaterAnimal);
+		animalElement = new AnimalInFarmElement(model->animalName(), getSize(), model->jumpRange(), model->jumpHeight(), model->jumpTime(), model->jumpDelay(), model->isWaterAnimal());
 		_count += 1;
 		addChild(animalElement);
 	}
 	else {
-		animalElement->setAnimalSprite(spriteName);
+		animalElement->setAnimalSprite(model->getName());
 	}
 	animalElement->setName(animalNumber);
 

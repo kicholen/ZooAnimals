@@ -21,6 +21,7 @@
 //#include "LeadBoltManager.h"
 #include "GooglePlayInAppPurchaseManager.h"
 #include "FacebookManager.h"
+#include "AnimalsManager.h"
 
 using namespace oxygine;
 
@@ -83,6 +84,7 @@ void main_init() {
 	// managers
 	GooglePlayInAppPurchaseManager::instance.init();
 	FacebookManager::instance.init();
+	AnimalsManager::instance.init();
 
 	Frame::initialize();
 

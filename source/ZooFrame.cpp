@@ -132,6 +132,7 @@ void ZooFrame::setData() {
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		spAnimalFarmField field = new AnimalFarmField(fieldSize);
+		field->setCull(true);
 		_farmArray.push(field);
 		field->setData(animalsInside[i], 25);//CMath::random(5, 10));
 		field->setAnchor(0.5f, 0.5f);

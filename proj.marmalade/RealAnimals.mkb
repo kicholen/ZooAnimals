@@ -25,6 +25,8 @@ files
     [source/model]
     SpriteModel.cpp
     SpriteModel.h
+	AnimalModel.cpp
+	AnimalModel.h
 
 	[source/animations]
 	AnimalsFarmAnimations.cpp
@@ -213,6 +215,8 @@ files
 	[source/managers]
 	FacebookManager.cpp
 	FacebookManager.h
+	AnimalsManager.cpp
+	AnimalsManager.h
 
 	[source/touch/swipe]
 	ResolverRadialChaikin.cpp

@@ -7,6 +7,7 @@
 #include "SharedResources.h"
 #include "TileField.h"
 #include "AnimalsFarmAnimations.h"
+#include "AnimalModel.h"
 
 using namespace FlashUtils;
 using namespace oxygine;
@@ -30,8 +31,7 @@ protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
 	void createCustomElements(spTileField tileField);
-	VectorArray<int> getAnimalParameters(const string& animalName);
-	spAnimalInFarmElement createAnimal(const string& animalNumber, const string& spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal = false);
+	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);//const string& spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal = false);
 	spButton createAnimalButton(const string& buttonName, Vector2 position);
 	void animateAnimalsJump(Vector2 position);
 	bool canAnimalsAnimate();
@@ -44,9 +44,9 @@ private:
 
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;
+	spAnimalModel _model;
 
 	int _count;
-	string _species;
 };
 
 

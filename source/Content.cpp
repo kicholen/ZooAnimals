@@ -113,7 +113,7 @@ pugi::xml_node Content::getAnimalJumpParametersNode(const string &name) {
 	const pugi::char_t* pugiName = "jump_parameters";
 
 	while (!parameter.empty()) {
-		if (strcmp(pugiName, parameter.name()) == 0) { //parameter.name() == "jump_parameters") {
+		if (strcmp(pugiName, parameter.name()) == 0) {
 			return parameter;
 		}
 

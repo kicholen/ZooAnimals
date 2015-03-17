@@ -4,8 +4,7 @@
 
 using namespace FlashUtils;
 
-AnimalInFarmElement::AnimalInFarmElement(string spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal) {
-	_id = spriteName;
+AnimalInFarmElement::AnimalInFarmElement(const string& spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal) {
 	_state = aifCreating;
 	_canUpdate = true;
 	if (isWaterAnimal) {
@@ -29,8 +28,9 @@ AnimalInFarmElement::AnimalInFarmElement(string spriteName, const Vector2& size,
 	_shouldCalculateNewPoint = true;
 	_nextJumpDelay = 0.0f;
 	setTouchEnabled(false);
+	setTouchChildrenEnabled(false);
 	setAnchor(0.0f, 0.0f);
-	createAnimalSprite();
+	createAnimalSprite(spriteName);
 	createShadowSprite();
 }
 
@@ -38,10 +38,10 @@ AnimalInFarmElement::~AnimalInFarmElement() {
 
 }
 
-void AnimalInFarmElement::createAnimalSprite() {
+void AnimalInFarmElement::createAnimalSprite(const string& spriteName) {
 	_animalSprite = new Sprite();
 	_animalSprite->setPriority(0);
-	setAnimalSprite(_id);
+	setAnimalSprite(spriteName);
 	if (_isWaterAnimal) {
 		Color dupa = _animalSprite->getColor();
 		_animalSprite->setColor(Color(145, 226, 236, 180));
@@ -62,8 +62,7 @@ void AnimalInFarmElement::createShadowSprite() {
 	setSpriteScaleBySize(_shadowSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2));
 }
 
-void AnimalInFarmElement::setAnimalSprite(string id) {
-	_id = id;
+void AnimalInFarmElement::setAnimalSprite(const string& id) {
 	_animalSprite->setResAnim(animalsResources.getResAnim(id));
 	setAlpha(255);
 	_animalSprite->setAnchor(0.5f, 0.5f);

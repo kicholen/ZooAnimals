@@ -14,10 +14,10 @@ typedef enum {aifCreating, aifWaiting, aifJumping, aifStopped} AnimalInFarmEleme
 class AnimalInFarmElement : public Actor
 {
 public:
-	AnimalInFarmElement(string spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal);
+	AnimalInFarmElement(const string& spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal);
 	~AnimalInFarmElement();
 
-	void setAnimalSprite(string spriteName);
+	void setAnimalSprite(const string& spriteName);
 	void animateJump(const Vector2& position, bool isRandom = false);
 	float getShadowY();
 	float getShadowX();
@@ -32,7 +32,7 @@ public:
 protected:
 	void doUpdate(const UpdateState &us);
 private:
-	void createAnimalSprite();
+	void createAnimalSprite(const string& spriteName);
 	void createShadowSprite();
 
 	void animateAppear();
@@ -53,7 +53,6 @@ private:
 	bool _shouldCalculateNewPoint;
 	float _nextJumpDelay;
 	AnimalInFarmElementState _state;
-	string _id;
 	spSprite _animalSprite;
 	spSprite _debugJumpLine;
 	spSprite _shadowSprite;
