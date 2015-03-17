@@ -24,8 +24,6 @@ namespace oxygine
 			}
 		}; 
 
-		static FileSaver instance;
-
 		FileSaver();
 		~FileSaver();
 
@@ -36,11 +34,12 @@ namespace oxygine
 		void load();
 
 		pugi::xml_attribute addValue(const string &name);
+		pugi::xml_attribute getValue(const string &name);
 
 		pugi::xml_node getFirstNodeByName(const string &nodeName);
 		pugi::xml_attribute addAttribute(pugi::xml_node child, const string &attributeName);
 		pugi::xml_node addChild(pugi::xml_node parent, const string &childName);
-	private:
+	protected:
 		string _version;
 		string _path;
 		pugi::xml_document _doc;

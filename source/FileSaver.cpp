@@ -7,8 +7,6 @@
 
 namespace oxygine
 {
-	FileSaver FileSaver::instance;
-
 	struct xml_string_writer: pugi::xml_writer {
 		std::string result;
 
