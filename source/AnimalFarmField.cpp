@@ -32,13 +32,12 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 AnimalFarmField::~AnimalFarmField() {
 	_zSortElements._vector.resize(0);
 	_animalsFarmAnimation->releaseRef();
-	_model->releaseRef();
 }
 
-void AnimalFarmField::setData(const string& animalName, uint animalsCount) {
-	_model = AnimalsManager::instance.getAnimalModel(animalName);
+void AnimalFarmField::setData(spAnimalModel model) {
+	_model = model;
 
-	for (uint i = 0; i < animalsCount; i++) {
+	for (int i = 0; i < _model->animalsCount(); i++) {
 		_animalsFarmAnimation->addAnimal(createAnimal(CMath::intToString(i), _model));
 	}
 
@@ -90,8 +89,8 @@ void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
 }
 
 void AnimalFarmField::addAnimal(Event *event) {
-	spAnimalModel model = AnimalsManager::instance.getAnimalModel(_model->animalName());
 	int x = 10;
+	_model->setAnimalsCount(_model->animalsCount() + x);
 	while (x > 0) {
 		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(_count + 1), _model)));
 		x--;

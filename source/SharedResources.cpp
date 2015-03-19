@@ -5,7 +5,7 @@ Resources animalsResources;
 Resources editResources;
 Resources tilesResources;
 
-const string FARM[12] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl", "mouse"};
+const string FARM[12] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl_winter", "mouse"};
 
 const string WINTER[6] = {"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal"};
 
@@ -17,11 +17,11 @@ const string ASIA[8] = {"yak", "tiger", "snake", "peacock", "panda", "monkey_2",
 
 const string AUSTRALIA[8] = {"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
 
-const string ALL_ANIMALS[46] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl", "mouse",
+const string ALL_ANIMALS[45] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl_winter", "mouse",
 								"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal",
 								"dolphin", "octopus", "fish_1", "whale", "shark",
 								"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion",
-								"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot", "elephant",
+								"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot",
 								"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
 
 

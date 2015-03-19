@@ -17,8 +17,6 @@
 #include "Content.h"
 #include "Settings.h"
 #include "FlurryAnalytics.h"
-#include "FlurryAds.h"
-//#include "LeadBoltManager.h"
 #include "GooglePlayInAppPurchaseManager.h"
 #include "FacebookManager.h"
 #include "AnimalsManager.h"
@@ -48,14 +46,15 @@ void resume(Event *) {
 file::STDFileSystem extfs(true);
 
 void main_init() {
+	const string version = "1";
 	extfs.setPath(file::fs().getFullPath("ext").c_str());
 	file::mount(&extfs);
 
 	blocking::setYieldCallback(mainloop);
 
-	Content::instance.init("1");
+	Content::instance.init(version);
 	// opcje, dŸwiêku, odblokowane funkcjonalnoœci
-	Settings::instance.init("1");
+	Settings::instance.init(version);
 	Settings::instance.getValue("sounds").set_value(60);
 	Settings::instance.getValue("music").set_value(100);
 	Settings::instance.getValue("level_1").set_value(1);
@@ -76,15 +75,10 @@ void main_init() {
 	FlurryAnalytics::instance.init();
 	FlurryAnalytics::instance.onSessionStarted();
 
-	//ads
-	FlurryAds::instance.init();
-	FlurryAds::instance.tryToShowFullScreen(); // load add
-	//LeadBoltManager::instance.init();
-
 	// managers
 	GooglePlayInAppPurchaseManager::instance.init();
 	FacebookManager::instance.init();
-	AnimalsManager::instance.init();
+	AnimalsManager::instance.init(version);
 
 	Frame::initialize();
 

@@ -39,11 +39,13 @@ namespace oxygine
 	}
 
 	void FileSaver::load() {
-		_doc.reset();
 		file::buffer fb;
-		file::read(_path.c_str(), fb);
-		if (fb.getSize())
+		file::read(_path.c_str(), fb, ep_ignore_error);
+
+		if (fb.getSize()) {
+			_doc.reset();
 			_doc.load_buffer(fb.getData(), fb.getSize());
+		}
 	}
 	
 	pugi::xml_node FileSaver::getFirstNodeByName(const string &nodeName) {

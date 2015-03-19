@@ -17,7 +17,7 @@ extern const string UNDERWATER[5];
 extern const string STEPPE[7];
 extern const string ASIA[8];
 extern const string AUSTRALIA[8];
-extern const string ALL_ANIMALS[46];
+extern const string ALL_ANIMALS[45];
 
 spTextActor createTextfield(const string &txt, bool isHtml, bool multiline);
 spTweenButton createButton(const string &name, const string &txt);

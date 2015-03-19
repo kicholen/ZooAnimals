@@ -10,7 +10,7 @@ DECLARE_SMART(AnimalModel, spAnimalModel);
 class AnimalModel : public Object
 {
 public:
-	AnimalModel(const string& name);
+	AnimalModel(const string& name, int happiness, int hunger, int count);
 	~AnimalModel();
 
 	void fromContent();
@@ -21,6 +21,10 @@ public:
 	int jumpTime() const { return _jumpTime; }
 	const Vector2& jumpDelay() const { return _jumpDelay; }
 	const bool isWaterAnimal() const { return _isWaterAnimal; }
+	int hungerValue() const { return _hungerValue; }
+	int happinessValue() const { return _happinessValue; }
+	int animalsCount() const { return _count; }
+	void setAnimalsCount(int value) { _count = value; }
 
 private:
 	string _name;
@@ -30,8 +34,9 @@ private:
 	Vector2 _jumpDelay;
 	bool _isWaterAnimal;
 	
-	float _hungerValue;
-	float _tirednessValue;
+	int _count;
+	int _hungerValue;
+	int _happinessValue;
 };
 
 #endif

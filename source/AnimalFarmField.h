@@ -22,7 +22,7 @@ public:
 	AnimalFarmField(Vector2 fieldSize);
 	~AnimalFarmField();
 
-	void setData(const string& animalName, uint animalsCount);
+	void setData(spAnimalModel model);
 	void addAnimal(Event *event);
 	spTileField createTileField();
 	void playNextAnimalsAnimation(Event *event);

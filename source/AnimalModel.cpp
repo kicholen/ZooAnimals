@@ -4,8 +4,11 @@
 
 using namespace FlashUtils;
 
-AnimalModel::AnimalModel(const string& animalName) {
+AnimalModel::AnimalModel(const string& animalName, int happiness, int hunger, int count) {
 	_name = animalName;
+	_happinessValue = happiness;
+	_hungerValue = hunger;
+	_count = count;
 }
 
 void AnimalModel::fromContent() {

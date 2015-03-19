@@ -14,12 +14,23 @@ public:
 	AnimalsManager();
 	~AnimalsManager();
 
-	void init();
+	void init(const string& version);
 
 	spAnimalModel getAnimalModel(const string& name);
+	spAnimalModel getAnimalModelByRegion(const string& region, const string& name);
 
+	void store();
 private:
-	map<string, spAnimalModel> _animalsMap;
+	void createFarmAnimals();
+	void createWinterAnimals();
+	void createUnderwaterAnimals();
+	void createSteppeAnimals();
+	void createAsiaAnimals();
+	void createAustraliaAnimals();
+
+	void addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count);
+private:
+	map<string, map<string, spAnimalModel>> _animalsMap;
 };
 
 #endif

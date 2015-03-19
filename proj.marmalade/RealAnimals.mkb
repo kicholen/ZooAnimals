@@ -21,6 +21,8 @@ files
 	SharedResources.h
 	Content.cpp
 	Content.h
+	StartGameConfig.cpp
+	StartGameConfig.h
 
     [source/model]
     SpriteModel.cpp
@@ -211,6 +213,8 @@ files
 	GooglePlayInAppPurchaseManager.h
 	FileSaver.cpp
 	FileSaver.h
+	ZooSettings.cpp
+	ZooSettings.h
 
 	[source/managers]
 	FacebookManager.cpp

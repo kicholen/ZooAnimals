@@ -7,6 +7,7 @@
 #include "FindShadowFrame.h"
 #include "PopObjectsFrame.h"
 #include "DiscoverImageFrame.h"
+#include "AnimalsManager.h"
 
 ZooFrame::ZooFrame() {
 	init("LandingPageFrame.xml", true);
@@ -82,6 +83,9 @@ Action ZooFrame::loop() {
 			spDiscoverImageFrame disc = new DiscoverImageFrame();
 			transitionShowFrame(disc);
 		}
+		else if (action.id == "store") {
+			AnimalsManager::instance.store();
+		}
 	}
 
 	return _lastAction;
@@ -123,7 +127,8 @@ void ZooFrame::setData() {
 	float bottomEmptySpace = _view->getHeight() - fieldSize.y;
 	//Point tilesCounter = Point(floor(_view->getWidth() / 32.0f), floor(_view->getHeight() / 32.0f));
 	//Vector2 fieldSize = Vector2(tilesCounter.x * 32, tilesCounter.y * 32);
-	string animalsInside[] = {"tiger", "koala", "goat", "girafee", "octopus", "penguin"};//{"tiger", "monkey_2", "peacock", "parrot", "panda", "yak", "koala", "ostrich", "kangaroo", "kiwi", "tealplatypus", "crocodile", "goat", "cow", "sheep", "horse", "duck", "cat", "lion", "zebra", "rhino", "leopard", "gnu", "girafee", "octopus", "dolphin", "whale", "fish_1", "penguin", "polarbear", "wolf", "owl_winter", "walrus", "young_seal"};
+	//AnimalsManager::instance.getAnimalModel
+	string animalsInside[] = {"cat", "sheep", "owl_winter", "fox", "penguin", "polarbear", "elephant", "girafee", "gnu"};//{"tiger", "monkey_2", "peacock", "parrot", "panda", "yak", "koala", "ostrich", "kangaroo", "kiwi", "tealplatypus", "crocodile", "goat", "cow", "sheep", "horse", "duck", "cat", "lion", "zebra", "rhino", "leopard", "gnu", "girafee", "octopus", "dolphin", "whale", "fish_1", "penguin", "polarbear", "wolf", "owl_winter", "walrus", "young_seal"};
 	int sizeOfArray = sizeof(animalsInside) / sizeof( animalsInside[0]);
 	float positionX = 0.0f;
 	float offset = 15.0f;
@@ -134,7 +139,7 @@ void ZooFrame::setData() {
 		spAnimalFarmField field = new AnimalFarmField(fieldSize);
 		field->setCull(true);
 		_farmArray.push(field);
-		field->setData(animalsInside[i], 25);//CMath::random(5, 10));
+		field->setData(AnimalsManager::instance.getAnimalModel(animalsInside[i]));//CMath::random(5, 10));
 		field->setAnchor(0.5f, 0.5f);
 		field->setY(field->getDerivedHeight() / 2);
 		//field->setY(isUp ? rectangleContainer->getHeight() -  field->getDerivedHeight() / 2 : field->getDerivedHeight() / 2);
@@ -197,4 +202,6 @@ void ZooFrame::setData() {
 
 	spTweenButton button = addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
 	addButton("tiles", "remove/add tiles", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f - button->getDerivedWidth()));
+
+	addButton("store", "store", Vector2(getRoot()->getWidth() * 0.6f, getRoot()->getHeight() * 0.9f));
 }
