@@ -3,7 +3,7 @@
 #include "s3eOSExec.h"
 #include "GooglePlayInAppPurchaseManager.h"
 #include "SwipeTrailElement.h"
-#include "ZooFrame.h"
+#include "WorldMapFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -35,8 +35,8 @@ Action LandingPageFrame::loop(){
 		if (action.id == "play") {
 			//spLevelChooserFrame levelChooserFrame = new LevelChooserFrame;
 			//transitionShowFrame(levelChooserFrame);
-			spZooFrame zooFrame = new ZooFrame();
-			transitionShowFrame(zooFrame);
+			spWorldMapFrame worldFrame = new WorldMapFrame();
+			transitionShowFrame(worldFrame);
 		}
 		else if (action.id == "facebook") {
 			s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);

@@ -92,6 +92,10 @@ files
 	FarmBasePanel.cpp
 	FarmBasePanel.h
 
+	[source/elements/world]
+	WroldMapView.cpp
+	WroldMapView.h
+
     [source/gui/base]
     RotatingContainer.cpp
     RotatingContainer.h
@@ -185,7 +189,9 @@ files
     LevelChooserFrame.h
 	ZooFrame.cpp
 	ZooFrame.h
-	
+	WorldMapFrame.cpp
+	WorldMapFrame.h
+
     [source/frame/editor]
     ChooseSpriteFrame.cpp
     ChooseSpriteFrame.h
