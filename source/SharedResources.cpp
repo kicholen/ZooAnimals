@@ -5,9 +5,9 @@ Resources animalsResources;
 Resources editResources;
 Resources tilesResources;
 
-const string FARM[12] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl_winter", "mouse"};
+const string FARM[11] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "mouse"};
 
-const string WINTER[6] = {"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal"};
+const string WINTER[7] = {"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal", "owl_winter"};
 
 const string UNDERWATER[5] = {"dolphin", "octopus", "fish_1", "whale", "shark"};
 

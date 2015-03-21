@@ -10,13 +10,24 @@ DECLARE_SMART(WroldMapView, spWroldMapView);
 class WroldMapView : public Actor
 {
 public:
+	class WroldMapViewEvent : public Event
+	{
+	public:
+		enum EV {
+			CONTINENT_SWITCHED = makefourcc('C', 'S', 'W', 'M')
+		};
+
+		WroldMapViewEvent(EV ev, const string &name):Event(ev), _name(name) {}
+
+		const string _name;
+	};
+
+
 	WroldMapView(Vector2 size);
 	~WroldMapView();
 
 	void setData();
 
-protected:
-	virtual void doUpdate(const UpdateState& us);
 private:
 	void showNorthAmerica();
 	void showSouthAmerica();
@@ -31,6 +42,8 @@ private:
 	void onContinentClicked(Event *event);
 
 	void animateSprite(spSprite sprite);
+
+	float getMapScaleModifier(const string& name);
 private:
 	spSprite _northAmerica;
 	spSprite _southAmerica;

@@ -4,6 +4,7 @@
 #include "GooglePlayInAppPurchaseManager.h"
 #include "SwipeTrailElement.h"
 #include "WorldMapFrame.h"
+#include "ZooFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -35,6 +36,10 @@ Action LandingPageFrame::loop(){
 		if (action.id == "play") {
 			//spLevelChooserFrame levelChooserFrame = new LevelChooserFrame;
 			//transitionShowFrame(levelChooserFrame);
+			spZooFrame zooFrame = new ZooFrame();
+			transitionShowFrame(zooFrame);	
+		}
+		else if (action.id == "map") {
 			spWorldMapFrame worldFrame = new WorldMapFrame();
 			transitionShowFrame(worldFrame);
 		}
@@ -59,7 +64,7 @@ Action LandingPageFrame::loop(){
 void LandingPageFrame::setData() {
 	spTweenButton button = addButton("play", "PLAY", Vector2(_view->getWidth() / 2, _view->getHeight() / 2));
 	addButton("facebook", "", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 2 + 20));
-	addButton("rate", "RATE", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() + 10));
+	addButton("map", "MAP", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() + 10));
 	
 	spTextActor text = createTextfield("Loveable animals cannot wait to play with you! :)", true, true);
 	text->setFontSize2Scale(40 * (int)_view->getWidth() / 640);

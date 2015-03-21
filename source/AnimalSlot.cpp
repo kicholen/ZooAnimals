@@ -1,7 +1,7 @@
 #include "AnimalSlot.h"
 #include "SharedResources.h"
 
-AnimalSlot::AnimalSlot(string id) {
+AnimalSlot::AnimalSlot(const string& id) {
 	_id = id;
 	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
@@ -11,7 +11,7 @@ AnimalSlot::AnimalSlot(string id) {
 	createBackground();
 }
 
-void AnimalSlot::switchAnimalSprite(string id) {
+void AnimalSlot::switchAnimalSprite(const string& id) {
 	_id = id;
 	_animalSprite->setResAnim(animalsResources.getResAnim(id));
 	setAlpha(255);

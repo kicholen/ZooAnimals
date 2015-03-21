@@ -5,7 +5,7 @@
 
 const string START_REGIONS[2] = {"farm", "winter"};
 
-const string START_FARM[3] = {"cat", "sheep", "owl_winter"};
+const string START_FARM[3] = {"cat", "sheep", "dog"};
 const string START_WINTER[3] = {"fox", "penguin", "polarbear"};
 const string START_UNDERWATER[3] = {"dolphin", "octopus", "fish_1"};
 const string START_STEPPE[3] = {"elephant", "girafee", "gnu"};

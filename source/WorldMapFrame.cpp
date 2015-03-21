@@ -1,5 +1,4 @@
 #include "WorldMapFrame.h"
-#include "ZooFrame.h"
 
 #include "WroldMapView.h"
 
@@ -37,24 +36,29 @@ Action WorldMapFrame::loop() {
 			break;
 		}
 		else if (action.id == "result") {
-			spZooFrame zooFrame = new ZooFrame();
-			transitionShowFrame(zooFrame);
+
 		}
 	}
 
 	return _lastAction;
 }
 
-void WorldMapFrame::onFinished(Event *event) {
-	//FarmControlPanel::FarmControlPanelEvent *fcpe = safeCast<FarmControlPanel::FarmControlPanelEvent*>(event);
-	//generateAction(fcpe->_name);
+void WorldMapFrame::onContinentSwitched(Event *event) {
+	WroldMapView::WroldMapViewEvent *worldMapEvent = safeCast<WroldMapView::WroldMapViewEvent*>(event);
+	_animalsContainer->setRegion(worldMapEvent->_name);
 }
 
 void WorldMapFrame::setData() {
-	spWroldMapView worldMap = new WroldMapView(_view->getSize());
+	_animalsContainer = new RegionAnimalsContainer(Vector2(_view->getWidth() * 0.8f, _view->getHeight() * 0.3f));
+	_animalsContainer->setRegion("farm");
+	_animalsContainer->attachTo(_view);
+	_animalsContainer->setPosition((_view->getWidth() - _animalsContainer->getWidth()) / 2, _view->getHeight() - _animalsContainer->getHeight());
+
+	spWroldMapView worldMap = new WroldMapView(Vector2(_view->getWidth() * 0.8f, _view->getHeight() * 0.7f));
 	worldMap->setData();
 	worldMap->attachTo(_view);
+	worldMap->setPosition((_view->getWidth() - worldMap->getWidth()) / 2, 0.0f);
+	worldMap->addEventListener(WroldMapView::WroldMapViewEvent::CONTINENT_SWITCHED, CLOSURE(this, &WorldMapFrame::onContinentSwitched));
 
-	spTweenButton button = addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
-	//addButton("store", "store", Vector2(getRoot()->getWidth() * 0.6f, getRoot()->getHeight() * 0.9f));
+	addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
 }

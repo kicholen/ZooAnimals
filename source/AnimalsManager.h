@@ -18,6 +18,7 @@ public:
 
 	spAnimalModel getAnimalModel(const string& name);
 	spAnimalModel getAnimalModelByRegion(const string& region, const string& name);
+	map<string, spAnimalModel>& getAnimalRegionMap(const string& region);
 
 	void store();
 private:

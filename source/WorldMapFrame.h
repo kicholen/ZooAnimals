@@ -2,6 +2,7 @@
 #define _WORLDMAPFRAME_
 
 #include "CustomFrame.h"
+#include "RegionAnimalsContainer.h"
 
 DECLARE_SMART(WorldMapFrame, spWorldMapFrame);
 
@@ -17,9 +18,12 @@ protected:
 	void _postHiding(Event *);
 	void _preShowing(Event *);
 
-	void onFinished(Event *event);
+	void onContinentSwitched(Event *event);
 
 	void setData();
+
+private:
+	spRegionAnimalsContainer _animalsContainer;
 };
 
 #endif

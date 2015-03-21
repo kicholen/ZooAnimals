@@ -129,13 +129,18 @@ spAnimalModel AnimalsManager::getAnimalModel(const string& name) {
 		}
     }
 
-	log::error("Animal doesn't exists");
+	log::error("Animal doesn't exist");
 	return nullptr;
 }
 
 spAnimalModel AnimalsManager::getAnimalModelByRegion(const string& region, const string& name) {
 	return _animalsMap[region][name];
 }
+
+map<string, spAnimalModel>& AnimalsManager::getAnimalRegionMap(const string& name) {
+	return _animalsMap[name];
+}
+
 
 void AnimalsManager::store() {
 	for(auto const &it1 : _animalsMap) {
@@ -148,3 +153,4 @@ void AnimalsManager::store() {
 
 	ZooSettings::instance.save();
 }
+

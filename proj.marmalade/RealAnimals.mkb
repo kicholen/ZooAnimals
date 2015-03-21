@@ -95,6 +95,8 @@ files
 	[source/elements/world]
 	WroldMapView.cpp
 	WroldMapView.h
+	RegionAnimalsContainer.cpp
+	RegionAnimalsContainer.h
 
     [source/gui/base]
     RotatingContainer.cpp

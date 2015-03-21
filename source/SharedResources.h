@@ -11,8 +11,8 @@ extern Resources animalsResources;
 extern Resources editResources;
 extern Resources tilesResources;
 
-extern const string FARM[12];
-extern const string WINTER[6];
+extern const string FARM[11];
+extern const string WINTER[7];
 extern const string UNDERWATER[5];
 extern const string STEPPE[7];
 extern const string ASIA[8];
