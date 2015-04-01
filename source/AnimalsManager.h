@@ -31,7 +31,7 @@ private:
 
 	void addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count);
 private:
-	map<string, map<string, spAnimalModel>> _animalsMap;
+	map<string, map<string, spAnimalModel> > _animalsMap;
 };
 
 #endif

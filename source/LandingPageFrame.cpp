@@ -78,8 +78,6 @@ void LandingPageFrame::setData() {
 	swipe->setSize(_view->getSize());
 	swipe->setPriority(-1000);
 	swipe->attachTo(_view);
-
-
 }
 
 void LandingPageFrame::playLoopedMusic() {

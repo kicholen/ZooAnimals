@@ -50,6 +50,16 @@ void AnimalFarmField::setData(spAnimalModel model) {
 		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
 	}
 
+	// 5% base
+	// 15% max
+	// 1% offset
+
+	_animalPanel = new AnimalFarmPanel(Vector2(getWidth() * 0.05f, getWidth() * 0.05f), Vector2(getWidth() * 0.15f, getWidth() * 0.15f));
+	_animalPanel->setPosition(getWidth() * 0.94f, getHeight() - getWidth() * 0.06f);
+	_animalPanel->setData(_model);
+	_animalPanel->attachTo(this);
+	_animalPanel->setPriority(30000);
+
 	_state = afWaiting;
 }
 
@@ -128,6 +138,7 @@ void AnimalFarmField::onTouchOver(Event *event) {
 	Vector2 localPosition = safeCast<TouchEvent*>(event)->localPosition;
 
 	animateAnimalsJump(localPosition);
+	_animalPanel->closeExpandedViewIfOpen();
 }
 
 void AnimalFarmField::animateAnimalsJump(Vector2 position) {

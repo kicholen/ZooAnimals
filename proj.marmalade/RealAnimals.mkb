@@ -41,6 +41,8 @@ files
 	[source/elements/base]
 	AnimalSlot.cpp
 	AnimalSlot.h
+	ExpandedAnimalSlot.cpp
+	ExpandedAnimalSlot.h
 	CounterBoxElement.cpp
 	CounterBoxElement.h
 	MatchTwoSlot.cpp
@@ -91,6 +93,8 @@ files
 	FarmControlPanel.h
 	FarmBasePanel.cpp
 	FarmBasePanel.h
+	AnimalFarmPanel.cpp
+	AnimalFarmPanel.h
 
 	[source/elements/world]
 	WroldMapView.cpp

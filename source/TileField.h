@@ -19,7 +19,7 @@ public:
 	TileField(Point numberOfFields);
 	~TileField();
 
-	void setData(string& animalName);
+	void setData(const string& animalName);
 	spSprite createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string spriteName, short priority = -1);
 private:
 	VectorArray<int> getFarmParameters(string& animalName);

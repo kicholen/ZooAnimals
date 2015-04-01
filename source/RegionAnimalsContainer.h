@@ -3,7 +3,6 @@
 
 #include "oxygine-framework.h"
 #include "StackContainer.h"
-#include "AnimalSlot.h"
 
 using namespace oxygine;
 

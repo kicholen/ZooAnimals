@@ -1,6 +1,10 @@
 #include "AnimalSlot.h"
 #include "SharedResources.h"
 
+AnimalSlot::AnimalSlot() {
+
+}
+
 AnimalSlot::AnimalSlot(const string& id) {
 	_id = id;
 	setTouchEnabled(false);

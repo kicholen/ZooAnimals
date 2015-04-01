@@ -121,16 +121,14 @@ void AnimalsManager::addAnimalModel(const string& regionName, const string& name
 }
 
 spAnimalModel AnimalsManager::getAnimalModel(const string& name) {
-	for(auto const &it1 : _animalsMap) {
-		for(auto const &it2 : it1.second) {
-			if (it2.first == name) {
-				return it2.second;
-			}
+	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
+		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+			return innerIterator->second;
 		}
-    }
+	}
 
 	log::error("Animal doesn't exist");
-	return nullptr;
+	return new AnimalModel("", 10, 10, 10);
 }
 
 spAnimalModel AnimalsManager::getAnimalModelByRegion(const string& region, const string& name) {
@@ -143,10 +141,10 @@ map<string, spAnimalModel>& AnimalsManager::getAnimalRegionMap(const string& nam
 
 
 void AnimalsManager::store() {
-	for(auto const &it1 : _animalsMap) {
-		for(auto const &it2 : it1.second) {
-			if (it2.second->animalsCount() > 0) {
-				ZooSettings::instance.setAnimal(it1.first, it2.first, it2.second->happinessValue(), it2.second->hungerValue(), it2.second->animalsCount());
+	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
+		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+			if (innerIterator->second->animalsCount() > 0) {
+				ZooSettings::instance.setAnimal(outerIterator->first, innerIterator->first, innerIterator->second->happinessValue(), innerIterator->second->hungerValue(), innerIterator->second->animalsCount());
 			}
 		}
     }

@@ -153,7 +153,7 @@ TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle
 	return style;
 }
 
-void setSpriteScaleBySize(spSprite sprite, Vector2 size) {
+void setSpriteScaleBySize(spSprite sprite, const Vector2& size) {
 	float animalScale = 1.0f;
 	if (sprite->getWidth() > sprite->getHeight()) {
 		animalScale = size.x / sprite->getWidth();
@@ -164,7 +164,7 @@ void setSpriteScaleBySize(spSprite sprite, Vector2 size) {
 	sprite->setScale(animalScale);
 }
 
-float getActorScaleBySize(spActor actor, Vector2 size) {
+float getActorScaleBySize(spActor actor, const Vector2& size) {
 	float actorScale = 1.0f;
 	if (actor->getWidth() > actor->getHeight()) {
 		actorScale = size.x / actor->getWidth();
@@ -182,7 +182,7 @@ float getActorScaleBySize(spActor actor, Vector2 size) {
 	return actorScale;
 }
 
-void setActorScaleBySize(spActor actor, Vector2 size) {
+void setActorScaleBySize(spActor actor, const Vector2& size) {
 	actor->setScale(getActorScaleBySize(actor, size));
 }
 

@@ -13,6 +13,7 @@ DECLARE_SMART(AnimalSlot, spAnimalSlot);
 class AnimalSlot : public Actor
 {
 public:
+	AnimalSlot();
 	AnimalSlot(const string& id);
 
 	void switchAnimalSprite(const string& id);

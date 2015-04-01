@@ -1,6 +1,7 @@
 #include "RegionAnimalsContainer.h"
 #include "AnimalsManager.h"
 #include "FlashUtils.h"
+#include "ExpandedAnimalSlot.h"
 
 using namespace FlashUtils;
 
@@ -22,16 +23,16 @@ void RegionAnimalsContainer::setRegion(const string& regionName) {
 	createContainerIfDoesntExist();
 
 	int count = 0;
-	for (auto const &iterator : AnimalsManager::instance.getAnimalRegionMap(regionName)) {
+	for (map<string, spAnimalModel>::iterator innerIterator = AnimalsManager::instance.getAnimalRegionMap(regionName).begin(); innerIterator != AnimalsManager::instance.getAnimalRegionMap(regionName).end(); ++innerIterator) { // {//for (auto const &iterator : ) {
 		string name = CMath::intToString(count);
 		spAnimalSlot animalSlot = _stackContainer->getChildT<AnimalSlot>(name, oxygine::ep_ignore_error);
 		if (!animalSlot) {
-			animalSlot = new AnimalSlot(iterator.first);
+			animalSlot = new AnimalSlot(innerIterator->first);
 			_stackContainer->addChild(animalSlot);
 			animalSlot->setName(name);
 		}
 		else {
-			animalSlot->switchAnimalSprite(iterator.first);
+			animalSlot->switchAnimalSprite(innerIterator->first);
 		}
 		count++;
 	}

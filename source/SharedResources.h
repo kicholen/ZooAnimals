@@ -25,8 +25,8 @@ spShaderTweenButton createShaderButton(const string &name, const string &txt);
 
 TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle::HorizontalAlign hAlign, TextStyle::VerticalAlign vAling);
 
-void setSpriteScaleBySize(spSprite sprite, Vector2 size);
-float getActorScaleBySize(spActor sprite, Vector2 size);
-void setActorScaleBySize(spActor sprite, Vector2 size);
+void setSpriteScaleBySize(spSprite sprite, const Vector2& size);
+float getActorScaleBySize(spActor sprite, const Vector2& size);
+void setActorScaleBySize(spActor sprite, const Vector2& size);
 
 bool isOnScreen(spActor actor);

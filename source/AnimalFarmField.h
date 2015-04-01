@@ -8,6 +8,7 @@
 #include "TileField.h"
 #include "AnimalsFarmAnimations.h"
 #include "AnimalModel.h"
+#include "AnimalFarmPanel.h"
 
 using namespace FlashUtils;
 using namespace oxygine;
@@ -41,6 +42,7 @@ private:
 
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;
+	spAnimalFarmPanel _animalPanel;
 
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;

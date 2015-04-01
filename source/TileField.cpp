@@ -15,7 +15,7 @@ TileField::~TileField() {
 
 }
 
-void TileField::setData(string& animalName) {
+void TileField::setData(const string& animalName) {
 	_animalName = animalName;
 	pugi::xml_node animalParameters = Content::instance.getAnimalFarmParametersNode(animalName);
 	string baseTile = animalParameters.first_attribute().as_string();
