@@ -113,6 +113,8 @@ files
 	FarmBasePanel.h
 	AnimalFarmPanel.cpp
 	AnimalFarmPanel.h
+	FarmServiceElement.cpp
+	FarmServiceElement.h
 
 	[source/element/world]
 	WroldMapView.cpp
@@ -241,6 +243,8 @@ files
 	FileSaver.h
 	ZooSettings.cpp
 	ZooSettings.h
+	Timer.cpp
+	Timer.h
 
 	[source/manager]
 	FacebookManager.cpp

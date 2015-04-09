@@ -4,6 +4,7 @@
 #include "oxygine-framework.h"
 #include "AnimalModel.h"
 #include "TweenButton.h"
+#include "FarmServiceElement.h"
 
 using namespace oxygine;
 
@@ -21,6 +22,7 @@ public:
 	void closeExpandedViewIfOpen();
 private:
 	void handleClick(Event *event);
+	void onGameChosen(Event *event);
 	void onBackgroundAnimationFinished(Event *event);
 	void onViewSwitched(Event *event);
 
@@ -37,10 +39,10 @@ private:
 	AnimalFarmPanelState _state;
 	spAnimalModel _model;
 
-	spColorRectSprite _backgroundSprite;
+	spBox9Sprite _backgroundSprite;
 	spTweenButton _expandButton;
 
-	spTweenButton _playButton;
+	spFarmServiceElement _expandedElement;
 	spProgressBar _happyBar;
 	spSprite _happyFace;
 

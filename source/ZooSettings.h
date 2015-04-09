@@ -19,10 +19,10 @@ public:
 	pugi::xml_attribute getValue(const string &name);
 
 	pugi::xml_node getAnimal(const string& regionName, const string& animalName);
-	void setAnimal(const string& regionName, const string& name, int happiness, int hunger, int count);
+	void setAnimal(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedMS);
 
 private:
-	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count);
+	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS);
 };
 
 #endif

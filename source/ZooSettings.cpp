@@ -1,6 +1,6 @@
 #include "ZooSettings.h"
 #include "StartGameConfig.h"
-
+#include "s3eTimer.h"
 // TODO don't have better idea for filling blanks here
 
 ZooSettings ZooSettings::instance;
@@ -24,6 +24,7 @@ void ZooSettings::init(const string &version) {
 
 void ZooSettings::reset() {
 	_doc.reset();
+	int utcSeconds = s3eTimerGetUTC() / 1000;
 
 	pugi::xml_node mainNode = _doc.append_child("animals");
 	int regionArraySize = sizeof(START_REGIONS) / sizeof(START_REGIONS[0]);
@@ -33,37 +34,37 @@ void ZooSettings::reset() {
 		if (START_REGIONS[i] == "farm") {
 			int animalsArraySize = sizeof(START_FARM) / sizeof(START_FARM[0]);
 			for (int j = 0; j < animalsArraySize; j++) {
-				setAnimalByRegionNode(regionNode, START_FARM[j], 100, 100, START_ANIMALS_COUNT);
+				setAnimalByRegionNode(regionNode, START_FARM[j], 0, 0, START_ANIMALS_COUNT, utcSeconds);
 			}
 		}
 		else if (START_REGIONS[i] == "winter") {
 			int animalsArraySize = sizeof(START_WINTER) / sizeof(START_WINTER[0]);
 			for (int j = 0; j < animalsArraySize; j++) {
-				setAnimalByRegionNode(regionNode, START_WINTER[j], 100, 100, START_ANIMALS_COUNT);
+				setAnimalByRegionNode(regionNode, START_WINTER[j], 0, 0, START_ANIMALS_COUNT, utcSeconds);
 			}
 		}
 		else if (START_REGIONS[i] == "underwater") {
 			int animalsArraySize = sizeof(START_UNDERWATER) / sizeof(START_UNDERWATER[0]);
 			for (int j = 0; j < animalsArraySize; j++) {
-				setAnimalByRegionNode(regionNode, START_UNDERWATER[j], 100, 100, START_ANIMALS_COUNT);
+				setAnimalByRegionNode(regionNode, START_UNDERWATER[j], 0, 0, START_ANIMALS_COUNT, utcSeconds);
 			}
 		}
 		else if (START_REGIONS[i] == "steppe") {
 			int animalsArraySize = sizeof(START_STEPPE) / sizeof(START_STEPPE[0]);
 			for (int j = 0; j < animalsArraySize; j++) {
-				setAnimalByRegionNode(regionNode, START_STEPPE[j], 100, 100, START_ANIMALS_COUNT);
+				setAnimalByRegionNode(regionNode, START_STEPPE[j], 0, 0, START_ANIMALS_COUNT, utcSeconds);
 			}
 		}
 		else if (START_REGIONS[i] == "asia") {
 			int animalsArraySize = sizeof(START_ASIA) / sizeof(START_ASIA[0]);
 			for (int j = 0; j < animalsArraySize; j++) {
-				setAnimalByRegionNode(regionNode, START_ASIA[j], 100, 100, START_ANIMALS_COUNT);
+				setAnimalByRegionNode(regionNode, START_ASIA[j], 0, 0, START_ANIMALS_COUNT, utcSeconds);
 			}
 		}
 		else if (START_REGIONS[i] == "australia") {
 			int animalsArraySize = sizeof(START_AUSTRALIA) / sizeof(START_AUSTRALIA[0]);
 			for (int j = 0; j < animalsArraySize; j++) {
-				setAnimalByRegionNode(regionNode, START_AUSTRALIA[j], 100, 100, START_ANIMALS_COUNT);
+				setAnimalByRegionNode(regionNode, START_AUSTRALIA[j], 0, 0, START_ANIMALS_COUNT, utcSeconds);
 			}
 		}
 	}
@@ -82,14 +83,14 @@ pugi::xml_node ZooSettings::getAnimal(const string& regionName, const string& an
 	return node;
 }
 
-void ZooSettings::setAnimal(const string& regionName, const string& animalName, int happiness, int hunger, int count) {
+void ZooSettings::setAnimal(const string& regionName, const string& animalName, int happiness, int hunger, int count, int lastFeedMS) {
 	pugi::xml_node mainNode = _doc.child("animals");
 	pugi::xml_node regionNode = mainNode.child(regionName.c_str());
 	if (!regionNode) {
 		regionNode = mainNode.append_child(regionName.c_str());
 	}
 	
-	setAnimalByRegionNode(regionNode, animalName, happiness, hunger, count);
+	setAnimalByRegionNode(regionNode, animalName, happiness, hunger, count, lastFeedMS);
 }
 
 pugi::xml_attribute ZooSettings::addValue(const string &name) {
@@ -120,18 +121,23 @@ pugi::xml_attribute ZooSettings::getValue(const string &name) {
 	return attr;
 }
 
-pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count) {
+/**
+*	Reminder. If u add anything here after release, check for attribute.
+**/
+pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS) {
 	pugi::xml_node animalNode = regionNode.child(name.c_str());
 	if (!animalNode) {
 		animalNode = regionNode.append_child(name.c_str());
 		animalNode.append_attribute("h"); // happiness
 		animalNode.append_attribute("g"); // hunger
 		animalNode.append_attribute("c"); // count
+		animalNode.append_attribute("lf"); // last feed time
 	}
 
 	animalNode.attribute("h").set_value(happiness);
 	animalNode.attribute("g").set_value(hunger);
 	animalNode.attribute("c").set_value(count);
+	animalNode.attribute("lf").set_value(lastFeedMS);
 
 	return animalNode;
 }

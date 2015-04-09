@@ -16,7 +16,7 @@ AnimalInFarmElement::AnimalInFarmElement(const string& spriteName, const Vector2
 		setSize(size);
 	}
 
-	_jumpHeight = jumpHeight * getRoot()->getWidth() / 480; // hack, set it by percent in content, not this stupid way ^^ 
+	_jumpHeight = jumpHeight * getRoot()->getWidth() / 480; // todo hack, set it by percent in content, not this stupid way ^^ 
 	_jumpTime = jumpTime;
 	_jumpRange = jumpRange * getRoot()->getWidth() / 480;
 	_jumpDelay = delayRandom;

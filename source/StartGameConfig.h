@@ -13,5 +13,7 @@ extern const string START_ASIA[3];
 extern const string START_AUSTRALIA[3];
 
 extern const int START_ANIMALS_COUNT;
-
+extern const int FEED_INTERVAL_SECONDS;
+extern const int HUNGER_BARRIER_TIME_SECONDS;
+extern const int HUNGER_HAPPINES_DECREASE_PERCENT;
 #endif

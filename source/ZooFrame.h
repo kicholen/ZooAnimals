@@ -21,6 +21,7 @@ protected:
 	void _preShowing(Event *);
 
 	void onFinished(Event *event);
+	void onGameChosen(Event *event);
 
 	void setData();
 private:

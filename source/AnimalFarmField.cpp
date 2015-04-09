@@ -37,7 +37,7 @@ AnimalFarmField::~AnimalFarmField() {
 void AnimalFarmField::setData(spAnimalModel model) {
 	_model = model;
 
-	for (int i = 0; i < _model->animalsCount(); i++) {
+	for (int i = 0; i < _model->totalAnimalsCount(); i++) {
 		_animalsFarmAnimation->addAnimal(createAnimal(CMath::intToString(i), _model));
 	}
 
@@ -50,15 +50,12 @@ void AnimalFarmField::setData(spAnimalModel model) {
 		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
 	}
 
-	// 5% base
-	// 15% max
-	// 1% offset
-
-	_animalPanel = new AnimalFarmPanel(Vector2(getWidth() * 0.05f, getWidth() * 0.05f), Vector2(getWidth() * 0.15f, getWidth() * 0.15f));
-	_animalPanel->setPosition(getWidth() * 0.94f, getHeight() - getWidth() * 0.06f);
+	_animalPanel = new AnimalFarmPanel(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT / 100.0f), Vector2(getWidth() * (float)EXPANDED_SIZE_IN_PERCENT / 100.0f, getWidth() * (float)EXPANDED_SIZE_IN_PERCENT / 100.0f));
+	_animalPanel->setPosition(getWidth() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f, getHeight() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f);
 	_animalPanel->setData(_model);
 	_animalPanel->attachTo(this);
 	_animalPanel->setPriority(30000);
+	_animalPanel->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &AnimalFarmField::onGameChosen));
 
 	_state = afWaiting;
 }
@@ -102,7 +99,7 @@ void AnimalFarmField::addAnimal(Event *event) {
 	int x = 10;
 	_model->setAnimalsCount(_model->animalsCount() + x);
 	while (x > 0) {
-		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(_count + 1), _model)));
+		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(_count), _model)));
 		x--;
 	}
 }
@@ -147,4 +144,9 @@ void AnimalFarmField::animateAnimalsJump(Vector2 position) {
 
 void AnimalFarmField::doUpdate(const UpdateState& us) {
 	_animalsFarmAnimation->doUpdate(us, isOnScreen(this));
+}
+
+void AnimalFarmField::onGameChosen(Event *event) {
+	event->target = this;
+	dispatchEvent(event);
 }

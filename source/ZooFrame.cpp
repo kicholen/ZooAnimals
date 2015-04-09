@@ -96,6 +96,12 @@ void ZooFrame::onFinished(Event *event) {
 	generateAction(fcpe->_name);
 }
 
+void ZooFrame::onGameChosen(Event *event) {
+	FarmServiceElement::FarmServiceElementEvent *ev = safeCast<FarmServiceElement::FarmServiceElementEvent*>(event);
+	AnimalsManager::instance.increaseHappinessByPoints(safeSpCast<AnimalFarmField>(event->currentTarget)->getModel(), 3);
+	generateAction(ev->_name);
+}
+
 void ZooFrame::setData() {
 	_shouldRemoveTiles = true;
 	_farmArray._vector.resize(0);
@@ -125,59 +131,33 @@ void ZooFrame::setData() {
 	// ratio 1.5
 	Vector2 fieldSize = Vector2(farmHeight * 32.0f * 1.5f, farmHeight * 32.0f);
 	float bottomEmptySpace = _view->getHeight() - fieldSize.y;
-	//Point tilesCounter = Point(floor(_view->getWidth() / 32.0f), floor(_view->getHeight() / 32.0f));
-	//Vector2 fieldSize = Vector2(tilesCounter.x * 32, tilesCounter.y * 32);
-	//AnimalsManager::instance.getAnimalModel
-	string animalsInside[] = {"cat", "sheep", "owl_winter", "fox", "penguin", "polarbear", "elephant", "girafee", "gnu"};//{"tiger", "monkey_2", "peacock", "parrot", "panda", "yak", "koala", "ostrich", "kangaroo", "kiwi", "tealplatypus", "crocodile", "goat", "cow", "sheep", "horse", "duck", "cat", "lion", "zebra", "rhino", "leopard", "gnu", "girafee", "octopus", "dolphin", "whale", "fish_1", "penguin", "polarbear", "wolf", "owl_winter", "walrus", "young_seal"};
-	int sizeOfArray = sizeof(animalsInside) / sizeof( animalsInside[0]);
 	float positionX = 0.0f;
 	float offset = 15.0f;
 	float lastFieldWidth = 0.0f;
-	bool isUp = true;
 
-	for (int i = 0; i < sizeOfArray; i++) {
-		spAnimalFarmField field = new AnimalFarmField(fieldSize);
-		field->setCull(true);
-		_farmArray.push(field);
-		field->setData(AnimalsManager::instance.getAnimalModel(animalsInside[i]));//CMath::random(5, 10));
-		field->setAnchor(0.5f, 0.5f);
-		field->setY(field->getDerivedHeight() / 2);
-		//field->setY(isUp ? rectangleContainer->getHeight() -  field->getDerivedHeight() / 2 : field->getDerivedHeight() / 2);
-		if (positionX == 0.0f) {
-			positionX = field->getDerivedWidth() / 2 + offset;
-			field->setX(positionX);
-			positionX += field->getDerivedWidth() + offset;
+	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = AnimalsManager::instance.getPossesedAnimals().begin(); outerIterator != AnimalsManager::instance.getPossesedAnimals().end(); ++outerIterator) {
+		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+			spAnimalFarmField field = new AnimalFarmField(fieldSize);
+			field->setCull(true);
+			_farmArray.push(field);
+			field->setData(innerIterator->second);
+			field->setAnchor(0.5f, 0.5f);
+			field->setY(field->getDerivedHeight() / 2);
+			field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
+			if (positionX == 0.0f) {
+				positionX = field->getDerivedWidth() / 2 + offset;
+				field->setX(positionX);
+				positionX += field->getDerivedWidth() + offset;
+			}
+			else {
+				field->setX(positionX);
+				positionX += field->getDerivedWidth() + offset;
+			}
+			rectangleContainer->addChild(field);
+			lastFieldWidth = field->getDerivedWidth();
 		}
-		else {
-			field->setX(positionX);
-			positionX += field->getDerivedWidth() + offset;
-		}
-		//field->setPosition(getRoot()->getSize().x / 2 - field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - field->getDerivedHeight() / 2);
-		//field->addEventListener(AnimalFarmField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onFinished));
-		rectangleContainer->addChild(field);
-		lastFieldWidth = field->getDerivedWidth();
-		isUp = !isUp;
 	}
 
-	/*for (int i = 0; i < sizeOfArray; i++) {
-		spAnimalFarmField field = new AnimalFarmField(fieldSize);
-		field->setData(animalsInside[i], CMath::random(5, 10));
-		field->setAnchor(0.5f, 0.5f);
-		field->setY(rectangleContainer->getHeight() / 2);
-		if (positionX == 0.0f) {
-			positionX = field->getDerivedWidth() / 2 + offset;
-			field->setX(positionX);
-			positionX += field->getDerivedWidth() + offset;
-		}
-		else {
-			field->setX(positionX);
-			positionX += field->getDerivedWidth() + offset;
-		}
-		//field->setPosition(getRoot()->getSize().x / 2 - field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - field->getDerivedHeight() / 2);
-		//field->addEventListener(AnimalFarmField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onFinished));
-		rectangleContainer->addChild(field);
-		lastFieldWidth = field->getDerivedWidth();
-	}*/
 	spColorRectSprite tempSpace = new ColorRectSprite();
 	tempSpace->setColor(Color(152, 12, 42, 255));
 	tempSpace->setSize(positionX - lastFieldWidth / 2, bottomEmptySpace);

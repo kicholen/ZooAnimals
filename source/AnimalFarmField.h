@@ -10,6 +10,9 @@
 #include "AnimalModel.h"
 #include "AnimalFarmPanel.h"
 
+#define BASE_SIZE_IN_PERCENT 5
+#define EXPANDED_SIZE_IN_PERCENT 15
+#define OFFSET_EDGES 1
 using namespace FlashUtils;
 using namespace oxygine;
 
@@ -28,17 +31,22 @@ public:
 	spTileField createTileField();
 	void playNextAnimalsAnimation(Event *event);
 
+	spAnimalModel getModel() {
+		return _model;
+	}
+
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
 	void createCustomElements(spTileField tileField);
-	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);//const string& spriteName, float jumpRange, float jumpHeight, float jumpTime, Vector2 delayRandom, bool isWaterAnimal = false);
+	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);
 	spButton createAnimalButton(const string& buttonName, Vector2 position);
 	void animateAnimalsJump(Vector2 position);
 	bool canAnimalsAnimate();
 	void setAnimalsPriorityByY();
 
 	void onTouchOver(Event *event);
+	void onGameChosen(Event *event);
 
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;
