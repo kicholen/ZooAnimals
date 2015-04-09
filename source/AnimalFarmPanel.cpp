@@ -13,6 +13,7 @@ AnimalFarmPanel::~AnimalFarmPanel() {
 void AnimalFarmPanel::setData(spAnimalModel model) {
 	_model = model;
 	_state = afpNormal;
+	_isAnimating = false;
 
 	_backgroundSprite = initActor(new ColorRectSprite,
 		arg_attachTo = this,
@@ -24,25 +25,46 @@ void AnimalFarmPanel::setData(spAnimalModel model) {
 	_expandButton = initActor(new TweenButton,
 		arg_resAnim = gameResources.getResAnim("back_button"),
 		arg_attachTo = this,
-		arg_anchor = Vector2(0.0f, 0.0f),
-		arg_position = Vector2(0.0f, 0.0f));
+		arg_anchor = Vector2(0.5f, 0.5f),
+		arg_position = getSize() / 2);
 	setActorScaleBySize(_expandButton, getSize());
 	_expandButton->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmPanel::handleClick));
+
+	_playButton = initActor(new TweenButton,
+		arg_resAnim = gameResources.getResAnim("back_button"),
+		arg_attachTo = this,
+		arg_alpha = 0,
+		arg_anchor = Vector2(0.5f, 0.5f),
+		arg_position = -(_sizeExpanded / 2 - getSize()));
+	setActorScaleBySize(_playButton, _sizeExpanded);
 }
 
 void AnimalFarmPanel::closeExpandedViewIfOpen() {
-	if (_state == afpExpanded) {
+	if (_state == afpExpanded && !_isAnimating) {
+		_isAnimating = true;
+		_expandButton->removeEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmPanel::handleClick));
 		hideExpandedView();
 		switchViewToNormal();
 	}
 }
 
 void AnimalFarmPanel::handleClick(Event *event) {
-	if (_state == afpNormal) {
+	if (!_isAnimating) {
+		_isAnimating = true;
 		_expandButton->removeEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmPanel::handleClick));
-		hideNormalView();
-		switchViewToExpanded();
+		_playButton->removeEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmPanel::handleClick));
+
+		if (_state == afpNormal) {
+			hideNormalView();
+			switchViewToExpanded();
+		}
+		else if (_state == afpExpanded) {
+			hideExpandedView();
+			switchViewToNormal();
+		}
 	}
+
+	event->stopImmediatePropagation();
 }
 
 void AnimalFarmPanel::switchViewToExpanded() {
@@ -65,12 +87,8 @@ void AnimalFarmPanel::onBackgroundAnimationFinished(Event *event) {
 }
 
 void AnimalFarmPanel::showExpandedView() {
-	if (!_playButton) {
-		_playButton = initActor(new TweenButton,
-			arg_attachTo = this,
-			arg_resAnim = gameResources.getResAnim("back_button"));
-	}
-	_state = afpExpanded;
+	_playButton->addTween(TweenAlpha(255), 500)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onViewSwitched));
+	_playButton->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmPanel::handleClick));
 }
 
 void AnimalFarmPanel::showNormalView() {
@@ -83,9 +101,10 @@ void AnimalFarmPanel::hideNormalView() {
 }
 
 void AnimalFarmPanel::hideExpandedView() {
-
+	_playButton->addTween(TweenAlpha(0), 500);
 }
 
 void AnimalFarmPanel::onViewSwitched(Event *event) {
 	_state = _state == afpExpanded ? afpNormal : afpExpanded;
+	_isAnimating = false;
 }

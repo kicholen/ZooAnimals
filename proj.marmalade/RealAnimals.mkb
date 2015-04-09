@@ -30,15 +30,15 @@ files
 	AnimalModel.cpp
 	AnimalModel.h
 
-	[source/animations]
+	[source/animation]
 	AnimalsFarmAnimations.cpp
 	AnimalsFarmAnimations.h
 
-	[source/elements/shop]
+	[source/element/shop]
 	ShopContainer.cpp
 	ShopContainer.h
 
-	[source/elements/base]
+	[source/element/base]
 	AnimalSlot.cpp
 	AnimalSlot.h
 	ExpandedAnimalSlot.cpp
@@ -52,29 +52,39 @@ files
 	TileField.cpp
 	TileField.h
 
-	[source/elements/swipe]
+	[source/element/swipe]
 	SwipeTrailElement.cpp
 	SwipeTrailElement.h
 
-	[source/elements/games]
-	MemoryCard.cpp
-	MemoryCard.h
-	AnimalDropField.cpp
-	AnimalDropField.h
-	DraggableAnimal.cpp
-	DraggableAnimal.h
-	ConnectDotElement.cpp
-	ConnectDotElement.h
-	ConnectDotsField.cpp
-	ConnectDotsField.h
-	MatchTwoField.cpp
-	MatchTwoField.h
+	[source/game/findshadow]
 	FindShadowField.cpp
 	FindShadowField.h
+
+	[source/game]
+	AnimalDropField.cpp
+	AnimalDropField.h
+
+	[source/game/connectdots]
+	ConnectDotsField.cpp
+	ConnectDotsField.h
+
+	[source/game/connectdots/elements]
+	ConnectDotElement.cpp
+	ConnectDotElement.h
+
+	[source/game/matchtwo]
+	MatchTwoField.cpp
+	MatchTwoField.h
+
+	[source/game/popobjects]
 	PopObjectsField.cpp
 	PopObjectsField.h
+
+	[source/game/discover]
 	DiscoverImageField.cpp
 	DiscoverImageField.h
+
+	[source/game/discover/elements]
 	DiscoverImageElement.cpp
 	DiscoverImageElement.h
 	MathQuizElement.cpp
@@ -84,7 +94,15 @@ files
 	EquationFragment.cpp
 	EquationFragment.h
 
-	[source/elements/farm]
+	[source/game/memory]
+	MemoryField.cpp
+	MemoryField.h
+
+	[source/game/memory/elements]
+	MemoryCard.cpp
+	MemoryCard.h
+
+	[source/element/farm]
 	AnimalFarmField.cpp
 	AnimalFarmField.h
 	AnimalInFarmElement.cpp
@@ -96,7 +114,7 @@ files
 	AnimalFarmPanel.cpp
 	AnimalFarmPanel.h
 
-	[source/elements/world]
+	[source/element/world]
 	WroldMapView.cpp
 	WroldMapView.h
 	RegionAnimalsContainer.cpp
@@ -129,10 +147,6 @@ files
     ShaderTweenButton.h
 	ProgressBarBox9.cpp
 	ProgressBarBox9.h
-
-	[source/gui/games]
-	MemoryField.cpp
-	MemoryField.h
 
     [source/gui/particle]
     Particle.cpp
@@ -228,7 +242,7 @@ files
 	ZooSettings.cpp
 	ZooSettings.h
 
-	[source/managers]
+	[source/manager]
 	FacebookManager.cpp
 	FacebookManager.h
 	AnimalsManager.cpp

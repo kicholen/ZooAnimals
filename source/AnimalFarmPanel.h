@@ -45,6 +45,8 @@ private:
 	spSprite _happyFace;
 
 	Vector2 _sizeExpanded;
+
+	bool _isAnimating;
 };
 
 #endif
