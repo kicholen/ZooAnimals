@@ -38,15 +38,20 @@ public:
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
-	void createCustomElements(spTileField tileField);
+	void createSortElements(spTileField tileField);
+	void createFenceAtBottom(spTileField tileField);
+	void createFenceAtLeft(spTileField tileField);
 	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);
 	spButton createAnimalButton(const string& buttonName, Vector2 position);
 	void animateAnimalsJump(Vector2 position);
 	bool canAnimalsAnimate();
 	void setAnimalsPriorityByY();
 
+
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
+
+	Point getNumberOfTiles();
 
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;

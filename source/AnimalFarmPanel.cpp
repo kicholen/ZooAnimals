@@ -75,13 +75,13 @@ void AnimalFarmPanel::onGameChosen(Event *event) {
 }
 
 void AnimalFarmPanel::switchViewToExpanded() {
-	_backgroundSprite->addTween(TweenWidth(_sizeExpanded.x * 1.1f), 500, 1, false, 0, Tween::EASE::ease_linear);
-	_backgroundSprite->addTween(TweenHeight(_sizeExpanded.y * 1.1f), 500, 1, false, 0, Tween::EASE::ease_linear)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onBackgroundAnimationFinished));
+	_backgroundSprite->addTween(TweenWidth(_sizeExpanded.x * 1.1f), 500, 1, false, 0);
+	_backgroundSprite->addTween(TweenHeight(_sizeExpanded.y * 1.1f), 500, 1, false, 0)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onBackgroundAnimationFinished));
 }
 
 void AnimalFarmPanel::switchViewToNormal() {
-	_backgroundSprite->addTween(TweenWidth(getWidth() * 1.1f), 500, 1, false, 0, Tween::EASE::ease_linear);
-	_backgroundSprite->addTween(TweenHeight(getHeight() * 1.1f), 500, 1, false, 0, Tween::EASE::ease_linear)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onBackgroundAnimationFinished));
+	_backgroundSprite->addTween(TweenWidth(getWidth() * 1.1f), 500, 1, false, 0);
+	_backgroundSprite->addTween(TweenHeight(getHeight() * 1.1f), 500, 1, false, 0)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onBackgroundAnimationFinished));
 }
 
 void AnimalFarmPanel::onBackgroundAnimationFinished(Event *event) {

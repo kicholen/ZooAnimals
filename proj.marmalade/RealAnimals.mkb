@@ -103,8 +103,8 @@ files
 	MemoryCard.h
 
 	[source/element/farm]
-	AnimalFarmField.cpp
 	AnimalFarmField.h
+	AnimalFarmField.cpp
 	AnimalInFarmElement.cpp
 	AnimalInFarmElement.h
 	FarmControlPanel.cpp
@@ -283,4 +283,18 @@ deployment
 	["Default"]
 	android-manifest='AndroidManifest.xml'
 	android-extra-strings='(app_id,FACEBOOK_APP_ID)'
+}
+#### AUTO GENERATED deployment settings from DeployTool.exe. Do not edit below this line ####
+deployments
+{
+	["Default"]
+	android-aliasname='zelek'
+	android-keypass='Swiniak08'
+	android-keystore='debug-key.keystore'
+	android-storepass='kicha2'
+	copyright='Zelek'
+	embed-icf='1'
+	provider='Zelek'
+	version-major=0
+	version-minor=1
 }

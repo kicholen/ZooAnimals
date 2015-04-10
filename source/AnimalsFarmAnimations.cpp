@@ -102,8 +102,8 @@ void AnimalsFarmAnimations::playHorizontalAnimation() {
 	float offset = 0.0f;
 	
 	for (int i = _animalsArray.length() - 1; i >= 0; i -= 1) {
-		offset += spaceY;
 		_animalsArray[i]->jumpToExactPosition(Vector2(_playFieldSize.x / 2, offset));
+		offset += spaceY;
 	}
 }
 

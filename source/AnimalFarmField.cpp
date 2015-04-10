@@ -24,10 +24,9 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
 
 	_animationType = afaNone;
-	_animalsFarmAnimation = new AnimalsFarmAnimations(fieldSize);
+	_animalsFarmAnimation = new AnimalsFarmAnimations(Vector2(getWidth() * 0.95f, getHeight() * 0.9f));
 	_animalsFarmAnimation->addRef();
 }
-
 
 AnimalFarmField::~AnimalFarmField() {
 	_zSortElements._vector.resize(0);
@@ -45,7 +44,7 @@ void AnimalFarmField::setData(spAnimalModel model) {
 	createAnimalButton("animate", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.4f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::playNextAnimalsAnimation));
 
 	spTileField tileField = createTileField();
-	createCustomElements(tileField);
+	createSortElements(tileField);
 	for (int i = _zSortElements.length() - 1; i >= 0; i -= 1) {
 		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
 	}
@@ -61,12 +60,10 @@ void AnimalFarmField::setData(spAnimalModel model) {
 }
 
 spTileField AnimalFarmField::createTileField() {
-	float ratio = (getSize().x / 32.0f) / (getSize().y / 32.0f);
-	spTileField tileField = new TileField(Point((int)ratio * 6, 6));
+	spTileField tileField = new TileField(getNumberOfTiles());
 	tileField->setData(_model->animalName());
 	tileField->setScale(getHeight() / tileField->getHeight());
 	tileField->setName("tajle");
-	//tileField->setSize(getSize());
 	tileField->setAnchor(0.0f, 0.0f);
 	tileField->setPosition(0.0f, 0.0f);
 	tileField->setPriority(-500);
@@ -74,8 +71,8 @@ spTileField AnimalFarmField::createTileField() {
 	return tileField;
 }
 
-void AnimalFarmField::createCustomElements(spTileField tileField) {
-	pugi::xml_node animalParameters = Content::instance.getAnimalFarmSortParametersNode(_model->animalName());
+void AnimalFarmField::createSortElements(spTileField tileField) {
+	/*pugi::xml_node animalParameters = Content::instance.getAnimalFarmSortParametersNode(_model->animalName());
 	pugi::xml_node parameter = animalParameters.first_child();
 	
 	while (parameter) {
@@ -87,6 +84,31 @@ void AnimalFarmField::createCustomElements(spTileField tileField) {
 		_zSortElements.push(tileSprite);
 		addChild(tileSprite);
 		parameter = parameter.next_sibling();
+	}
+	*/
+	createFenceAtLeft(tileField);
+	createFenceAtBottom(tileField);
+}
+
+void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
+	Point tilesNumber = getNumberOfTiles();
+	int j = tilesNumber.y;
+	for (int i = 0; i < tilesNumber.x; i++) {
+		spSprite tileSprite = tileField->createTileSprite("fenceFront", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+		tileSprite->setAnchor(0.0f, 1.0f);
+		tileSprite->setPosition(tileSprite->getX() * tileField->getScaleX(), tileSprite->getY() * tileField->getScaleY() + 2.0f);
+		addChild(tileSprite);
+	}
+}
+
+void AnimalFarmField::createFenceAtLeft(spTileField tileField) {
+	Point tilesNumber = getNumberOfTiles();
+	int i = tilesNumber.x;
+	for (int j = 0; j < tilesNumber.y; j++) {
+		spSprite tileSprite = tileField->createTileSprite("fenceTop", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 2900);
+		tileSprite->setAnchor(0.0f, 0.0f);
+		tileSprite->setPosition(- tileSprite->getDerivedWidth() / 2, tileSprite->getY() * tileField->getScaleY());
+		addChild(tileSprite);
 	}
 }
 
@@ -107,8 +129,9 @@ void AnimalFarmField::addAnimal(Event *event) {
 spAnimalInFarmElement AnimalFarmField::createAnimal(const string& animalNumber, spAnimalModel model) {
 	spAnimalInFarmElement animalElement = getChildT<AnimalInFarmElement>(animalNumber, oxygine::ep_ignore_error);
 	if (!animalElement) {
-		animalElement = new AnimalInFarmElement(model->animalName(), getSize(), model->jumpRange(), model->jumpHeight(), model->jumpTime(), model->jumpDelay(), model->isWaterAnimal());
+		animalElement = new AnimalInFarmElement(model->animalName(), Vector2(getWidth() * 0.95f, getHeight() * 0.9f), model->jumpRange(), model->jumpHeight(), model->jumpTime(), model->jumpDelay(), model->isWaterAnimal());
 		_count += 1;
+		animalElement->setPosition(getWidth() * 0.025f, getHeight() * 0.05f);
 		addChild(animalElement);
 	}
 	else {
@@ -149,4 +172,9 @@ void AnimalFarmField::doUpdate(const UpdateState& us) {
 void AnimalFarmField::onGameChosen(Event *event) {
 	event->target = this;
 	dispatchEvent(event);
+}
+
+Point AnimalFarmField::getNumberOfTiles() {
+	float ratio = (getSize().x / 32.0f) / (getSize().y / 32.0f);
+	return Point(int(ratio * 6.0f), 6);
 }

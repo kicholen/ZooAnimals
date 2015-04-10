@@ -114,7 +114,7 @@ void ZooFrame::setData() {
 	background->setAnchor(0.0f, 0.0f);
 	background->setPosition(0.0f, 0.0f);
 	background->attachTo(_view);
-	background->setPriority(-10);
+	background->setPriority(-200);
 	if (_rotatingContainer) {
 		_rotatingContainer->detach();
 		_rotatingContainer = 0;
@@ -132,7 +132,7 @@ void ZooFrame::setData() {
 	Vector2 fieldSize = Vector2(farmHeight * 32.0f * 1.5f, farmHeight * 32.0f);
 	float bottomEmptySpace = _view->getHeight() - fieldSize.y;
 	float positionX = 0.0f;
-	float offset = 15.0f;
+	float offset = 0.0f;
 	float lastFieldWidth = 0.0f;
 
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = AnimalsManager::instance.getPossesedAnimals().begin(); outerIterator != AnimalsManager::instance.getPossesedAnimals().end(); ++outerIterator) {
@@ -144,26 +144,32 @@ void ZooFrame::setData() {
 			field->setAnchor(0.5f, 0.5f);
 			field->setY(field->getDerivedHeight() / 2);
 			field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
+			float ratio = (fieldSize.x / 32.0f) / (bottomEmptySpace / 32.0f);
+			spTileField tileField = new TileField(Point(int(ratio * 2.0f), 2));
+			tileField->setData("pavement");
+			tileField->setScale(bottomEmptySpace / tileField->getHeight());
+			tileField->setName("tajlee");
+			tileField->setAnchor(0.5f, 0.0f);
+			tileField->setY(fieldSize.y);
+			tileField->setPriority(-50);
+			tileField->setCull(true);
+			rectangleContainer->addChild(tileField);
+
 			if (positionX == 0.0f) {
 				positionX = field->getDerivedWidth() / 2 + offset;
 				field->setX(positionX);
+				tileField->setX(positionX);
 				positionX += field->getDerivedWidth() + offset;
 			}
 			else {
 				field->setX(positionX);
+				tileField->setX(positionX);
 				positionX += field->getDerivedWidth() + offset;
 			}
 			rectangleContainer->addChild(field);
 			lastFieldWidth = field->getDerivedWidth();
 		}
 	}
-
-	spColorRectSprite tempSpace = new ColorRectSprite();
-	tempSpace->setColor(Color(152, 12, 42, 255));
-	tempSpace->setSize(positionX - lastFieldWidth / 2, bottomEmptySpace);
-	tempSpace->setAnchor(0.0f, 0.0f);
-	tempSpace->setPosition(0.0f, _view->getHeight() - bottomEmptySpace);
-	rectangleContainer->addChild(tempSpace);
 
 	rectangleContainer->setSize(positionX - lastFieldWidth / 2, _rotatingContainer->getHeight());
 	_rotatingContainer->setContent(rectangleContainer);

@@ -6,6 +6,7 @@ using namespace FlashUtils;
 
 AnimalInFarmElement::AnimalInFarmElement(const string& spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal) {
 	_state = aifCreating;
+	
 	_canUpdate = true;
 	if (isWaterAnimal) {
 		float yOffset = size.y * ANIMAL_PERCENT_SIZE / 100.0f;
@@ -108,6 +109,7 @@ void AnimalInFarmElement::setAsLeader() {
 
 void AnimalInFarmElement::jumpToExactPosition(const Vector2& exactPosition) {
 	_exactPosition = exactPosition;
+	_exactPosition.y += getY();
 	_isJumpingExact = true;
 }
 
@@ -166,7 +168,7 @@ Vector2 AnimalInFarmElement::calculateJumpPosition(Vector2 position) {
 }
 
 Vector2 AnimalInFarmElement::checkAndChangePointIfNeeded(Vector2 point) {
-	RectF rect = RectF(getPosition(), getSize());
+	RectF rect = RectF(Vector2(0.0f, 0.0f), getSize());
 	Vector2 animalPosition = Vector2(_animalSprite->getX(), -_animalSprite->getY());
 
 	if (rect.pointIn(point)) {

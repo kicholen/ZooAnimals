@@ -3,9 +3,6 @@
 
 TileField::TileField(Point numberOfFields) {
 	_numberOfFields = numberOfFields;
-	//EventCallback cb = CLOSURE(this, &MemoryField::cardClick);
-	//addEventListener(TouchEvent::TOUCH_DOWN, cb);
-	//_state = mfWaiting;
 
 	setSize(float(TILE_SIZE_X * _numberOfFields.x), float(TILE_SIZE_Y * _numberOfFields.y));
 }
@@ -29,11 +26,9 @@ void TileField::setData(const string& animalName) {
 		parameter = parameter.next_sibling();
 	}
 
-	int bufferIndex = 0;
 	for (int i = 0; i < _numberOfFields.x; i++) {
 		for (int j = _numberOfFields.y - 1; j >= 0; j--) {
 			addChild(createTileSprite(baseTile, Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j)));
-			bufferIndex++;
 		}
 	}
 }
