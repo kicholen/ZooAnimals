@@ -49,13 +49,6 @@ void AnimalFarmField::setData(spAnimalModel model) {
 		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
 	}
 
-	_animalPanel = new AnimalFarmPanel(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT / 100.0f), Vector2(getWidth() * (float)EXPANDED_SIZE_IN_PERCENT / 100.0f, getWidth() * (float)EXPANDED_SIZE_IN_PERCENT / 100.0f));
-	_animalPanel->setPosition(getWidth() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f, getHeight() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f);
-	_animalPanel->setData(_model);
-	_animalPanel->attachTo(this);
-	_animalPanel->setPriority(30000);
-	_animalPanel->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &AnimalFarmField::onGameChosen));
-
 	_state = afWaiting;
 }
 
@@ -86,17 +79,33 @@ void AnimalFarmField::createSortElements(spTileField tileField) {
 		parameter = parameter.next_sibling();
 	}
 	*/
-	createFenceAtLeft(tileField);
 	createFenceAtBottom(tileField);
+	createFenceAtLeft(tileField);
+	createInformationTable(tileField);
 }
 
 void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
 	Point tilesNumber = getNumberOfTiles();
 	int j = tilesNumber.y;
+	int gatePosition = (int)FlashUtils::CMath::Rand(3, tilesNumber.x - 2);
+	
 	for (int i = 0; i < tilesNumber.x; i++) {
-		spSprite tileSprite = tileField->createTileSprite("fenceFront", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+		spSprite tileSprite;
+		if (i == 0) {
+			tileSprite = tileField->createTileSprite("fenceFrontSide", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+		}
+		else if (i == tilesNumber.x - 1) {
+			tileSprite = tileField->createTileSprite("fenceFrontSide", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+			tileSprite->setScaleX(-tileSprite->getScaleX());
+		}
+		else if (gatePosition == i) {
+			tileSprite = tileField->createTileSprite("fenceFrontGate", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+		}
+		else {
+			tileSprite = tileField->createTileSprite("fenceFrontCenter", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+		}
 		tileSprite->setAnchor(0.0f, 1.0f);
-		tileSprite->setPosition(tileSprite->getX() * tileField->getScaleX(), tileSprite->getY() * tileField->getScaleY() + 2.0f);
+		tileSprite->setPosition(tileSprite->getScaleX() > 0 ? tileSprite->getX() * tileField->getScaleX() : tileSprite->getX() * tileField->getScaleX() - tileSprite->getDerivedWidth(), tileSprite->getY() * tileField->getScaleY() + 2.0f);
 		addChild(tileSprite);
 	}
 }
@@ -108,8 +117,21 @@ void AnimalFarmField::createFenceAtLeft(spTileField tileField) {
 		spSprite tileSprite = tileField->createTileSprite("fenceTop", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 2900);
 		tileSprite->setAnchor(0.0f, 0.0f);
 		tileSprite->setPosition(- tileSprite->getDerivedWidth() / 2, tileSprite->getY() * tileField->getScaleY());
+		tileSprite->setPriority(3000);
 		addChild(tileSprite);
 	}
+}
+
+void AnimalFarmField::createInformationTable(spTileField tileField) {
+	Point tilesNumber = getNumberOfTiles();
+	_animalPanel = new AnimalFarmPanel(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_X / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f), Vector2(getWidth() * (float)EXPANDED_SIZE_IN_PERCENT_X / 100.0f, getWidth() * (float)EXPANDED_SIZE_IN_PERCENT_Y / 100.0f));
+	_animalPanel->setAnchor(1.0f, 1.0f);
+	_animalPanel->setPosition(getWidth(), getHeight() - _animalPanel->getHeight() / 2);// getWidth() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f, getHeight() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f);
+	_animalPanel->setData(_model);
+	_animalPanel->attachTo(this);
+	_animalPanel->setPriority(30000);
+	_animalPanel->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &AnimalFarmField::onGameChosen));
+
 }
 
 void AnimalFarmField::playNextAnimalsAnimation(Event *event) {

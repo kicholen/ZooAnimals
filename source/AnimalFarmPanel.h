@@ -41,12 +41,15 @@ private:
 
 	spBox9Sprite _backgroundSprite;
 	spTweenButton _expandButton;
+	spTextField _animalNameTextfield;
 
 	spFarmServiceElement _expandedElement;
 	spProgressBar _happyBar;
 	spSprite _happyFace;
 
 	Vector2 _sizeExpanded;
+	Vector2 _expanButtonBasePoition;
+	Vector2 _expanButtonExpandedPoition;
 
 	bool _isAnimating;
 };

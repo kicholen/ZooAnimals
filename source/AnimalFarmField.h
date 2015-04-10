@@ -10,8 +10,10 @@
 #include "AnimalModel.h"
 #include "AnimalFarmPanel.h"
 
-#define BASE_SIZE_IN_PERCENT 5
-#define EXPANDED_SIZE_IN_PERCENT 15
+#define BASE_SIZE_IN_PERCENT_X 20
+#define BASE_SIZE_IN_PERCENT_Y 8
+#define EXPANDED_SIZE_IN_PERCENT_X 30
+#define EXPANDED_SIZE_IN_PERCENT_Y 15
 #define OFFSET_EDGES 1
 using namespace FlashUtils;
 using namespace oxygine;
@@ -41,6 +43,7 @@ private:
 	void createSortElements(spTileField tileField);
 	void createFenceAtBottom(spTileField tileField);
 	void createFenceAtLeft(spTileField tileField);
+	void createInformationTable(spTileField tileField);
 	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);
 	spButton createAnimalButton(const string& buttonName, Vector2 position);
 	void animateAnimalsJump(Vector2 position);
