@@ -3,8 +3,8 @@
 
 #include "oxygine-framework.h"
 
-#define SLOT_SIZE_X 75
-#define SLOT_SIZE_Y 75
+#define SLOT_SIZE_X 70
+#define SLOT_SIZE_Y 70
 
 using namespace oxygine;
 

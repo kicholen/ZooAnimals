@@ -5,7 +5,7 @@ MemoryCard::MemoryCard(string cardId) {
 	_state = mcNormal;
 	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
-	setSize(MEMORY_SIZE_X , MEMORY_SIZE_Y);
+	setSize(DISPLAY_SIZE_X, DISPLAY_SIZE_Y);
 
 	createBackground(-1);
 	createQuestionMark();
@@ -62,15 +62,15 @@ void MemoryCard::setCardScored() {
 
 spBox9Sprite MemoryCard::createBackground(short zPriority) {
 	spBox9Sprite cardBackground = new Box9Sprite;
+	cardBackground->setHorizontalMode(Box9Sprite::StretchMode::STRETCHING);
+	cardBackground->setVerticalMode(Box9Sprite::StretchMode::STRETCHING);
 	cardBackground->setAnchor(0.5f, 0.5f);
 	cardBackground->setResAnim(gameResources.getResAnim("greyBox9"));
-	//cardBackground->setScale(getWidth() / cardBackground->getWidth(), getHeight() / cardBackground->getHeight());
 	cardBackground->setSize(getSize());
 	cardBackground->setPosition(getWidth() / 2, getHeight() / 2);
 	cardBackground->setGuides(9, 20, 9, 15);
 	cardBackground->attachTo(this);
 	cardBackground->setPriority(zPriority);
-	//cardBackground->setColor(Color(144, 217, 88));
 	return cardBackground;
 }
 
@@ -90,7 +90,6 @@ void MemoryCard::createMask() {
 	_mask->setAlpha(1);
 	_mask->setTouchEnabled(false);
 	_mask->setVisible(false);
-	//_mask->setColor(Color(100, 20, 20));  DEBUG
 	_mask->setRotation(45.0f * (float)DEG_TO_RAD);
 	_mask->setResAnim(gameResources.getResAnim("greyBox9"));
 	_mask->setScale(getHeight() / _mask->getWidth() * 1.5f, getHeight() / _mask->getHeight() * 1.5f);

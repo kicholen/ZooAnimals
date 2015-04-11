@@ -6,6 +6,9 @@
 
 #define MEMORY_SIZE_X 75
 #define MEMORY_SIZE_Y 75
+#define DISPLAY_SIZE_X 70
+#define DISPLAY_SIZE_Y 70
+
 #define DEG_TO_RAD 0.0174532925
 
 using namespace oxygine;

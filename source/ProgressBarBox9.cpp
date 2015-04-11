@@ -27,11 +27,13 @@ float ProgressBarBox9::getProgress() const {
 
 void ProgressBarBox9::createBackground() {
 	spBox9Sprite timerBackground = new Box9Sprite;
-	timerBackground->setResAnim(gameResources.getResAnim("greenButton"));
+	timerBackground->setHorizontalMode(Box9Sprite::StretchMode::STRETCHING);
+	timerBackground->setVerticalMode(Box9Sprite::StretchMode::STRETCHING);
+	timerBackground->setResAnim(gameResources.getResAnim("greyProgressBarHorizontal"));
 	timerBackground->setAnchor(Vector2(0.0f, 0.0f));
 	timerBackground->setPosition(0.0f, 0.0f);
 	timerBackground->setSize(getSize());
-	timerBackground->setGuides(8, 182, 8, 29);
+	timerBackground->setGuides(9, 116, 9, 18);
 	timerBackground->attachTo(this);
 	timerBackground->setPriority(1);
 	timerBackground->setColor(Color(255, 255, 255));
@@ -39,13 +41,14 @@ void ProgressBarBox9::createBackground() {
 
 void ProgressBarBox9::createForeground() {
 	spBox9Sprite timerForeground = new Box9Sprite;
-	timerForeground->setResAnim(gameResources.getResAnim("greenButton"));
+	timerForeground->setHorizontalMode(Box9Sprite::StretchMode::STRETCHING);
+	timerForeground->setVerticalMode(Box9Sprite::StretchMode::STRETCHING);
+	timerForeground->setResAnim(gameResources.getResAnim("greenProgressBarHorizontal"));
 	timerForeground->setAnchor(Vector2(0.0f, 0.0f));
 	timerForeground->setPosition(0.0f, 0.0f);
 	timerForeground->setSize(getSize());
-	timerForeground->setGuides(8, 182, 8, 29);
+	timerForeground->setGuides(9, 116, 9, 18);
 	timerForeground->attachTo(_masked);
-	timerForeground->setColor(Color(144, 217, 88));
 }
 
 void ProgressBarBox9::createMask() {
