@@ -47,10 +47,11 @@ void AnimalSlot::createAnimalSprite() {
 void AnimalSlot::createBackground() {
 	spBox9Sprite cardBackground = new Box9Sprite;
 	cardBackground->setAnchor(0.5f, 0.5f);
-	cardBackground->setResAnim(gameResources.getResAnim("memory_card_box9_a"));
-	cardBackground->setScale(getWidth() / cardBackground->getWidth(), getHeight() / cardBackground->getHeight());
+	cardBackground->setResAnim(gameResources.getResAnim("greyBox9"));
+	cardBackground->setSize(getSize());
+	//cardBackground->setScale(getWidth() / cardBackground->getWidth(), getHeight() / cardBackground->getHeight());
 	cardBackground->setPosition(getWidth() / 2, getHeight() / 2);
-	cardBackground->setGuides(36, 144, 36, 144);//(18, 144, 18, 144);
+	cardBackground->setGuides(9, 20, 9, 15);
 	cardBackground->attachTo(this);
 	cardBackground->setPriority(-1);
 }

@@ -27,24 +27,23 @@ float ProgressBarBox9::getProgress() const {
 
 void ProgressBarBox9::createBackground() {
 	spBox9Sprite timerBackground = new Box9Sprite;
-	timerBackground->setResAnim(gameResources.getResAnim("progress_background_9"));
+	timerBackground->setResAnim(gameResources.getResAnim("greenButton"));
 	timerBackground->setAnchor(Vector2(0.0f, 0.0f));
 	timerBackground->setPosition(0.0f, 0.0f);
 	timerBackground->setSize(getSize());
-	//timerBackground->setGuides(33, 93, 33, 93);
-	timerBackground->setGuides(7, 9, 6, 8);
+	timerBackground->setGuides(8, 182, 8, 29);
 	timerBackground->attachTo(this);
 	timerBackground->setPriority(1);
+	timerBackground->setColor(Color(255, 255, 255));
 }
 
 void ProgressBarBox9::createForeground() {
 	spBox9Sprite timerForeground = new Box9Sprite;
-	timerForeground->setResAnim(gameResources.getResAnim("progress_background_9"));
+	timerForeground->setResAnim(gameResources.getResAnim("greenButton"));
 	timerForeground->setAnchor(Vector2(0.0f, 0.0f));
 	timerForeground->setPosition(0.0f, 0.0f);
 	timerForeground->setSize(getSize());
-	//timerForeground->setGuides(33, 93, 33, 93);
-	timerForeground->setGuides(7, 9, 6, 8);
+	timerForeground->setGuides(8, 182, 8, 29);
 	timerForeground->attachTo(_masked);
 	timerForeground->setColor(Color(144, 217, 88));
 }

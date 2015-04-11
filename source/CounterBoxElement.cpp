@@ -67,7 +67,7 @@ void CounterBoxElement::createBackground() {
 
 void CounterBoxElement::createTimerTextfield() {
 	_timerTextfield = createTextfield(FlashUtils::CMath::intToString(_timeLeft), true, false);
-	_timerTextfield->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_RIGHT, TextStyle::VALIGN_MIDDLE));
+	_timerTextfield->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_RIGHT, TextStyle::VALIGN_MIDDLE));
 	_timerTextfield->setFontSize2Scale(20 * (int)getRoot()->getWidth() / 480);
 	_timerTextfield->setSize(getWidth() * 0.2f, getHeight() * 0.2f);
 	_timerTextfield->setPosition(getWidth() * 0.85f, getHeight() * 0.3f);
@@ -77,7 +77,7 @@ void CounterBoxElement::createTimerTextfield() {
 
 void CounterBoxElement::createScoreTextfield() {
 	_scoreTextfield = createTextfield("Score: 0", true, false);
-	_scoreTextfield->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(217,88,144), false, TextStyle::HALIGN_LEFT, TextStyle::VALIGN_MIDDLE));
+	_scoreTextfield->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(217,88,144), false, TextStyle::HALIGN_LEFT, TextStyle::VALIGN_MIDDLE));
 	_scoreTextfield->setFontSize2Scale(20 * (int)getRoot()->getWidth() / 480);
 	_scoreTextfield->setSize(getWidth() * 0.2f, getHeight() * 0.2f);
 	_scoreTextfield->setPosition(getWidth() * 0.8f, getHeight() * 0.7f);
@@ -87,7 +87,7 @@ void CounterBoxElement::createScoreTextfield() {
 
 void CounterBoxElement::createLevelTextfield() {
 	_levelTextfield = createTextfield("Level: 1", true, false);
-	_levelTextfield->setStyle(createTextStyle(gameResources.getResFont("halycon")->getFont(), Color(217,88,144), false, TextStyle::HALIGN_LEFT, TextStyle::VALIGN_MIDDLE));
+	_levelTextfield->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(217,88,144), false, TextStyle::HALIGN_LEFT, TextStyle::VALIGN_MIDDLE));
 	_levelTextfield->setFontSize2Scale(20 * (int)getRoot()->getWidth() / 480);
 	_levelTextfield->setSize(getWidth() * 0.2f, getHeight() * 0.2f);
 	_levelTextfield->setPosition(getWidth() * 0.15f, getHeight() * 0.7f);

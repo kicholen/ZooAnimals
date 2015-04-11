@@ -46,20 +46,17 @@ spTweenButton createButton(const string &name, const string &txt) {
 	bool shouldAddSprite = false;
 	const char *spriteName = "";
 
-	int r = rand() % 5;
-	const char *str = "button_darkblue";
+	int r = rand() % 3 + 1;
+	const char *str;
 	switch(r) {
 		case 1:
-			str = "button_purple";
+			str = "greenButton";
 			break;
 		case 2:
-			str = "button_blue";
+			str = "lightBlueButton";
 			break;
 		case 3:
-			str = "button_green";
-			break;
-		case 4:
-			str = "button_yellow";
+			str = "redButton";
 			break;
 	}
 

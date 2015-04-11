@@ -63,13 +63,14 @@ void MemoryCard::setCardScored() {
 spBox9Sprite MemoryCard::createBackground(short zPriority) {
 	spBox9Sprite cardBackground = new Box9Sprite;
 	cardBackground->setAnchor(0.5f, 0.5f);
-	cardBackground->setResAnim(gameResources.getResAnim("memory_card_box9_a"));
-	cardBackground->setScale(getWidth() / cardBackground->getWidth(), getHeight() / cardBackground->getHeight());
+	cardBackground->setResAnim(gameResources.getResAnim("greyBox9"));
+	//cardBackground->setScale(getWidth() / cardBackground->getWidth(), getHeight() / cardBackground->getHeight());
+	cardBackground->setSize(getSize());
 	cardBackground->setPosition(getWidth() / 2, getHeight() / 2);
-	cardBackground->setGuides(26, 154, 27, 153);
+	cardBackground->setGuides(9, 20, 9, 15);
 	cardBackground->attachTo(this);
 	cardBackground->setPriority(zPriority);
-	cardBackground->setColor(Color(144, 217, 88));
+	//cardBackground->setColor(Color(144, 217, 88));
 	return cardBackground;
 }
 
@@ -77,7 +78,7 @@ void MemoryCard::createQuestionMark() {
 	_questionMark = new Sprite();
 	_questionMark->setAnchor(0.5f, 0.5f);
 	_questionMark->setTouchEnabled(false);
-	_questionMark->setResAnim(gameResources.getResAnim("question_mark"));
+	_questionMark->setResAnim(gameResources.getResAnim("questionMark"));
 	_questionMark->setScale(getWidth() / _questionMark->getWidth() * 0.5f, getHeight() / _questionMark->getHeight() * 0.5f);
 	_questionMark->setPosition(getWidth() / 2, getHeight() / 2);
 	_questionMark->attachTo(this);
@@ -91,7 +92,7 @@ void MemoryCard::createMask() {
 	_mask->setVisible(false);
 	//_mask->setColor(Color(100, 20, 20));  DEBUG
 	_mask->setRotation(45.0f * (float)DEG_TO_RAD);
-	_mask->setResAnim(gameResources.getResAnim("memory_card_box9"));
+	_mask->setResAnim(gameResources.getResAnim("greyBox9"));
 	_mask->setScale(getHeight() / _mask->getWidth() * 1.5f, getHeight() / _mask->getHeight() * 1.5f);
 	_mask->setPosition(_mask->getDerivedSize() * 3 / 2);
 	addChild(_mask);

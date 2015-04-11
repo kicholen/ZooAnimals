@@ -293,8 +293,9 @@ deployments
 	android-keystore='debug-key.keystore'
 	android-storepass='kicha2'
 	copyright='Zelek'
-	embed-icf='1'
-	provider='Zelek'
+	embed-icf=1
+	provider='JellyApps'
 	version-major=0
-	version-minor=1
+	version-minor=2
+	version-revision=1
 }

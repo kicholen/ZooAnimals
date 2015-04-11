@@ -37,6 +37,7 @@ void AnimalFarmPanel::setData(spAnimalModel model) {
 	_animalNameTextfield->setAnchor(0.5f, 0.5f);
 	_animalNameTextfield->setPosition(getWidth() / 2, getHeight() / 2);
 	_animalNameTextfield->setPriority(3);
+	_animalNameTextfield->setTouchEnabled(false);
 	_animalNameTextfield->attachTo(this);
 
 	_expandButton = initActor(new TweenButton,
@@ -45,6 +46,7 @@ void AnimalFarmPanel::setData(spAnimalModel model) {
 		arg_anchor = Vector2(0.5f, 0.5f),
 		arg_rotation = FlashUtils::CMath::DegToRad(225));
 	setActorScaleBySize(_expandButton, getSize() * 0.5f);
+	_expandButton->setExtendedClickArea(30);
 	_expanButtonBasePoition = Vector2(_backgroundSprite->getX() - _backgroundSprite->getDerivedWidth() + _expandButton->getDerivedWidth() / 2, _backgroundSprite->getY() - _backgroundSprite->getDerivedHeight() + _expandButton->getDerivedHeight() / 2);
 	_expanButtonExpandedPoition = Vector2(_backgroundSprite->getX() - _sizeExpanded.x * 1.1f + _expandButton->getDerivedWidth() / 2, _backgroundSprite->getY() - _sizeExpanded.y * 1.1f + _expandButton->getDerivedHeight() / 2);
 	_expandButton->setPosition(_expanButtonBasePoition);
@@ -92,11 +94,13 @@ void AnimalFarmPanel::onGameChosen(Event *event) {
 }
 
 void AnimalFarmPanel::switchViewToExpanded() {
+	_animalNameTextfield->addTween(TweenAlpha(0), 500);
 	_backgroundSprite->addTween(TweenWidth(_sizeExpanded.x * 1.1f), 500, 1, false, 0);
 	_backgroundSprite->addTween(TweenHeight(_sizeExpanded.y * 1.1f), 500, 1, false, 0)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onBackgroundAnimationFinished));
 }
 
 void AnimalFarmPanel::switchViewToNormal() {
+	_animalNameTextfield->addTween(TweenAlpha(255), 500);
 	_backgroundSprite->addTween(TweenWidth(getWidth() * 1.1f), 500, 1, false, 0);
 	_expandButton->addTween(TweenRotation(FlashUtils::CMath::DegToRad(225)), 500);
 	_expandButton->addTween(TweenPosition(_expanButtonBasePoition), 500)->addDoneCallback(CLOSURE(this, &AnimalFarmPanel::onViewSwitched));

@@ -37,6 +37,8 @@ public:
 		return _model;
 	}
 
+	Point getNumberOfTiles();
+
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
@@ -54,7 +56,6 @@ private:
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
 
-	Point getNumberOfTiles();
 
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;

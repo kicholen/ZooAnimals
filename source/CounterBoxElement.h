@@ -52,9 +52,9 @@ private:
 
 	void onTimeEnded(Event *ev);
 
-	spTextActor _timerTextfield;
-	spTextActor _scoreTextfield;
-	spTextActor _levelTextfield;
+	spTextField _timerTextfield;
+	spTextField _scoreTextfield;
+	spTextField _levelTextfield;
 	spProgressBarBox9 _progressBar;
 
 	timeMS _timerMs;

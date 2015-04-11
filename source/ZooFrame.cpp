@@ -144,15 +144,16 @@ void ZooFrame::setData() {
 			field->setAnchor(0.5f, 0.5f);
 			field->setY(field->getDerivedHeight() / 2);
 			field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
-			float ratio = (fieldSize.x / 32.0f) / (bottomEmptySpace / 32.0f);
-			spTileField tileField = new TileField(Point(int(ratio * 2.0f), 2));
+			
+			spTileField tileField = new TileField(Point(field->getNumberOfTiles().x, 3));
 			tileField->setData("pavement");
-			tileField->setScale(bottomEmptySpace / tileField->getHeight());
+			tileField->setScale(fieldSize.x / tileField->getWidth());
 			tileField->setName("tajlee");
 			tileField->setAnchor(0.5f, 0.0f);
 			tileField->setY(fieldSize.y);
 			tileField->setPriority(-50);
 			tileField->setCull(true);
+
 			rectangleContainer->addChild(tileField);
 
 			if (positionX == 0.0f) {
@@ -175,17 +176,12 @@ void ZooFrame::setData() {
 	_rotatingContainer->setContent(rectangleContainer);
 	_rotatingContainer->setPosition(_view->getSize() / 2 - _rotatingContainer->getSize() / 2);
 	_rotatingContainer->attachTo(_view);
-
-	//_counterBox = new CounterBoxElement(Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.15f), 120);
-	//_counterBox->addEventListener(CounterBoxElement::CounterBoxEvent::TIME_END, CLOSURE(this, &MemoryFrame::onTimesUp));
-	//_counterBox->show(true);
-	//_view->addChild(_counterBox);
-
+	/*
 	spFarmControlPanel controlPanel = new FarmControlPanel(_view->getSize(), Vector2(getRoot()->getWidth() * 0.10f, getRoot()->getHeight() * 0.95f));
 	_view->addChild(controlPanel);
 	controlPanel->addEventListener(FarmControlPanel::FarmControlPanelEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onFinished));
 	controlPanel->show();
-
+	*/
 	spTweenButton button = addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
 	addButton("tiles", "remove/add tiles", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f - button->getDerivedWidth()));
 

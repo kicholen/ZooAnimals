@@ -10,7 +10,6 @@ FarmServiceElement::~FarmServiceElement() {
 }
 
 void FarmServiceElement::setData(spAnimalModel model) {
-	//createAnimalSprite(model);
 	int currentHappiness = model->happinessValue();
 	int needed = model->happinessNeededForNextAnimal();
 	int neededBefore = model->happinessNeededForCurrentAnimal();
@@ -31,20 +30,18 @@ void FarmServiceElement::createAnimalSprite(spAnimalModel model) {
 }
 
 void FarmServiceElement::createHappinessProgressBar(float happinessValue) {
-	spColorRectSprite progressBarBackground = initActor(new ColorRectSprite,
+	spSprite progressBarBackground = initActor(new Sprite,
 		arg_attachTo = this,
 		arg_anchor = Vector2(0.5f, 0.5f),
-		arg_color = Color(0x0054E0F5),
 		arg_position = Vector2(getWidth() / 6, getHeight() / 2),
-		arg_resAnim = gameResources.getResAnim("quad_40"));
-	progressBarBackground->setScale(getWidth() * 0.3f / progressBarBackground->getWidth(), getHeight() * 0.8f / progressBarBackground->getHeight());
+		arg_resAnim = gameResources.getResAnim("whiteProgressBarVertical"));
+	progressBarBackground->setScale(getWidth() * 0.2f / progressBarBackground->getWidth(), getHeight() * 0.8f / progressBarBackground->getHeight());
 
 	_happinessProgressBar = initActor(new ProgressBar,
 		arg_attachTo = this,
 		arg_anchor = Vector2(0.5f, 0.5f),
-		arg_color = Color(0x00F56954),
 		arg_position = Vector2(getWidth() / 6, getHeight() / 2),
-		arg_resAnim = gameResources.getResAnim("quad_40"));
+		arg_resAnim = gameResources.getResAnim("redProgressBarVertical"));
 	_happinessProgressBar->setDirection(_happinessProgressBar->dir_90);
 	_happinessProgressBar->setScale(progressBarBackground->getScale());
 	_happinessProgressBar->setProgress(happinessValue);
