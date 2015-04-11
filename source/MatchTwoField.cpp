@@ -110,7 +110,9 @@ void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vect
 }
 
 void MatchTwoField::spriteTouchDown(Event *event) {
-	//block rest objects touch
+	if (_state == mtDragging) {
+		return;
+	}
 	_dragging = safeSpCast<MatchTwoDraggable>(event->currentTarget);
 	_baseDraggingScale = _dragging->getScale();
 	_dragging->setScale(_baseDraggingScale * 1.1f);
@@ -134,9 +136,9 @@ void MatchTwoField::touchUp(Event *event) {
 		return;
 	}
 
-	if (_state != mtDragging) {
-		return;
-	}
+	//if (_state != mtDragging) {
+	//	return;
+	//}
 
 	spMatchTwoSlot slot = getChildT<MatchTwoSlot>(_dragging->getName() + "_basket");
 	_state = mtAnimating;
@@ -147,6 +149,7 @@ void MatchTwoField::touchUp(Event *event) {
 	}
 	else {
 		setTouchEnabled(false);
+		setTouchChildrenEnabled(false);
 		_dragging->addTween(Actor::TweenScale(_baseDraggingScale), 300);
 		_dragging->addTween(Actor::TweenPosition(_dragging->getBasePosition()), 300, 1, false, 0, Tween::ease_outBack)->setDoneCallback(CLOSURE(this, &MatchTwoField::onBackAnimationFinished));
 	}
@@ -154,6 +157,7 @@ void MatchTwoField::touchUp(Event *event) {
 }
 
 void MatchTwoField::onBackAnimationFinished(Event *event) {
+	setTouchChildrenEnabled(true);
 	setTouchEnabled(true);
 	_state = mtWaiting;
 }
