@@ -53,8 +53,8 @@ Action LevelChooserFrame::loop() {
 			transitionShowFrame(findShadow);
 		}
 		else if (action.id == "zoo_frame") {
-			spZooFrame zooFrame = new ZooFrame();
-			transitionShowFrame(zooFrame);
+//			spZooFrame zooFrame = new ZooFrame();
+//			transitionShowFrame(zooFrame);
 		}
 		/*
 		string::size_type levelChecker = action.id.find("level", 0);

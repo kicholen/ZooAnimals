@@ -30,7 +30,7 @@ void AnimalsFarmAnimations::doUpdate(const UpdateState& us, bool isOnScreen) {
 		_lastZSortTime -= us.dt;
 	}
 	else {
-		_lastZSortTime = SORT_Z_DELAY;
+		_lastZSortTime = FlashUtils::CMath::Rand(SORT_Z_DELAY_MIN, SORT_Z_DELAY_MAX);
 
 		if (isOnScreen) {
 			setAnimalsPriorityByY();
@@ -49,7 +49,7 @@ void AnimalsFarmAnimations::doUpdate(const UpdateState& us, bool isOnScreen) {
 			}
 		}
 	}
-	if (_nextSnakeUpdate > 0.0f) {
+	/*if (_nextSnakeUpdate > 0.0f) {
 		_nextSnakeUpdate -= us.dt;
 		if (_nextSnakeUpdate < 0.0f) {
 			_nextSnakeUpdate = 0.0f;
@@ -61,7 +61,7 @@ void AnimalsFarmAnimations::doUpdate(const UpdateState& us, bool isOnScreen) {
 				moveSnakeToNextAnimalPosition();
 			}
 		}
-	}
+	}*/
 }
 
 void AnimalsFarmAnimations::playAnimalsAnimation(AnimalsFarmAnimationType animationType) {

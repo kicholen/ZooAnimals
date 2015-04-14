@@ -76,7 +76,7 @@ map<string, spAnimalModel>& AnimalsManager::getAnimalsByRegion(const string& nam
 }
 
 bool AnimalsManager::isRegionPopulated(const string& regionName) {
-	return _posessedAnimalMap.count(regionName) == 0;
+	return _posessedAnimalMap.count(regionName) != 0;
 }
 
 map<string, spAnimalModel>& AnimalsManager::getPossesedAnimalsByRegion(const string& region) {

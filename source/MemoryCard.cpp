@@ -62,8 +62,8 @@ void MemoryCard::setCardScored() {
 
 spBox9Sprite MemoryCard::createBackground(short zPriority) {
 	spBox9Sprite cardBackground = new Box9Sprite;
-	cardBackground->setHorizontalMode(Box9Sprite::StretchMode::STRETCHING);
-	cardBackground->setVerticalMode(Box9Sprite::StretchMode::STRETCHING);
+	cardBackground->setHorizontalMode(Box9Sprite::STRETCHING);
+	cardBackground->setVerticalMode(Box9Sprite::STRETCHING);
 	cardBackground->setAnchor(0.5f, 0.5f);
 	cardBackground->setResAnim(gameResources.getResAnim("greyBox9"));
 	cardBackground->setSize(getSize());

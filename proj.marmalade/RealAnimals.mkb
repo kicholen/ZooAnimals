@@ -115,6 +115,12 @@ files
 	AnimalFarmPanel.h
 	FarmServiceElement.cpp
 	FarmServiceElement.h
+	SpectatorsContainer.cpp
+	SpectatorsContainer.h
+	WalkingSpectator.cpp
+	WalkingSpectator.h
+	SpectatorSpawner.cpp
+	SpectatorSpawner.h
 
 	[source/element/world]
 	WroldMapView.cpp
@@ -209,6 +215,8 @@ files
     LandingPageFrame.h
     LevelChooserFrame.cpp
     LevelChooserFrame.h
+	ZooGateFrame.cpp
+	ZooGateFrame.h
 	ZooFrame.cpp
 	ZooFrame.h
 	WorldMapFrame.cpp
@@ -297,5 +305,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=1
+	version-revision=3
 }

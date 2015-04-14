@@ -5,7 +5,8 @@
 #include "AnimalInFarmElement.h"
 #include "FlashUtils.h"
 
-#define SORT_Z_DELAY 500
+#define SORT_Z_DELAY_MIN 500
+#define SORT_Z_DELAY_MAX 1000
 
 using namespace FlashUtils;
 using namespace oxygine;

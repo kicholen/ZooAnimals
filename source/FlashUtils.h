@@ -54,7 +54,7 @@ namespace FlashUtils
 		void push(T v) {
 			_vector.push_back(v);
 		}
-
+		
 		void addAll(VectorArray<T> array) {
 			for(int i = array.length() - 1; i >= 0; i--) {
 				push(array[i]);

@@ -9,7 +9,8 @@
 #include "DiscoverImageFrame.h"
 #include "AnimalsManager.h"
 
-ZooFrame::ZooFrame() {
+ZooFrame::ZooFrame(const string& regionName) {
+	_region = regionName;
 	init("LandingPageFrame.xml", true);
 	selectTransitions();
 }
@@ -107,7 +108,6 @@ void ZooFrame::setData() {
 	_farmArray._vector.resize(0);
 	_farmArray._vector.reserve(10);
 
-
 	spColorRectSprite background = new ColorRectSprite();
 	background->setColor(Color(88, 144, 217));
 	background->setSize(_view->getSize());
@@ -134,43 +134,45 @@ void ZooFrame::setData() {
 	float positionX = 0.0f;
 	float offset = 0.0f;
 	float lastFieldWidth = 0.0f;
-
-	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = AnimalsManager::instance.getPossesedAnimals().begin(); outerIterator != AnimalsManager::instance.getPossesedAnimals().end(); ++outerIterator) {
-		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-			spAnimalFarmField field = new AnimalFarmField(fieldSize);
-			field->setCull(true);
-			_farmArray.push(field);
-			field->setData(innerIterator->second);
-			field->setAnchor(0.5f, 0.5f);
-			field->setY(field->getDerivedHeight() / 2);
-			field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
+	
+	//for (map<string, map<string, spAnimalModel> >::iterator outerIterator = AnimalsManager::instance.getPossesedAnimals().begin(); outerIterator != AnimalsManager::instance.getPossesedAnimals().end(); ++outerIterator) {
+	//	for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+	
+	for (map<string, spAnimalModel>::iterator innerIterator = AnimalsManager::instance.getPossesedAnimalsByRegion(_region).begin(); innerIterator != AnimalsManager::instance.getPossesedAnimalsByRegion(_region).end(); ++innerIterator) {
+		spAnimalFarmField field = new AnimalFarmField(fieldSize);
+		field->setCull(true);
+		_farmArray.push(field);
+		field->setData(innerIterator->second);
+		field->setAnchor(0.5f, 0.5f);
+		field->setY(field->getDerivedHeight() / 2);
+		field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
 			
-			spTileField tileField = new TileField(Point(field->getNumberOfTiles().x, 3));
-			tileField->setData("pavement");
-			tileField->setScale(fieldSize.x / tileField->getWidth());
-			tileField->setName("tajlee");
-			tileField->setAnchor(0.5f, 0.0f);
-			tileField->setY(fieldSize.y);
-			tileField->setPriority(-50);
-			tileField->setCull(true);
+		spTileField tileField = new TileField(Point(field->getNumberOfTiles().x, 3));
+		tileField->setData("pavement");
+		tileField->setScale(fieldSize.x / tileField->getWidth());
+		tileField->setName("tajlee");
+		tileField->setAnchor(0.5f, 0.0f);
+		tileField->setY(fieldSize.y);
+		tileField->setPriority(-50);
+		tileField->setCull(true);
 
-			rectangleContainer->addChild(tileField);
+		rectangleContainer->addChild(tileField);
 
-			if (positionX == 0.0f) {
-				positionX = field->getDerivedWidth() / 2 + offset;
-				field->setX(positionX);
-				tileField->setX(positionX);
-				positionX += field->getDerivedWidth() + offset;
-			}
-			else {
-				field->setX(positionX);
-				tileField->setX(positionX);
-				positionX += field->getDerivedWidth() + offset;
-			}
-			rectangleContainer->addChild(field);
-			lastFieldWidth = field->getDerivedWidth();
+		if (positionX == 0.0f) {
+			positionX = field->getDerivedWidth() / 2 + offset;
+			field->setX(positionX);
+			tileField->setX(positionX);
+			positionX += field->getDerivedWidth() + offset;
 		}
+		else {
+			field->setX(positionX);
+			tileField->setX(positionX);
+			positionX += field->getDerivedWidth() + offset;
+		}
+		rectangleContainer->addChild(field);
+		lastFieldWidth = field->getDerivedWidth();
 	}
+	//}
 
 	rectangleContainer->setSize(positionX - lastFieldWidth / 2, _rotatingContainer->getHeight());
 	_rotatingContainer->setContent(rectangleContainer);

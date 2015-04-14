@@ -27,8 +27,8 @@ float ProgressBarBox9::getProgress() const {
 
 void ProgressBarBox9::createBackground() {
 	spBox9Sprite timerBackground = new Box9Sprite;
-	timerBackground->setHorizontalMode(Box9Sprite::StretchMode::STRETCHING);
-	timerBackground->setVerticalMode(Box9Sprite::StretchMode::STRETCHING);
+	timerBackground->setHorizontalMode(Box9Sprite::STRETCHING);
+	timerBackground->setVerticalMode(Box9Sprite::STRETCHING);
 	timerBackground->setResAnim(gameResources.getResAnim("greyProgressBarHorizontal"));
 	timerBackground->setAnchor(Vector2(0.0f, 0.0f));
 	timerBackground->setPosition(0.0f, 0.0f);
@@ -41,8 +41,8 @@ void ProgressBarBox9::createBackground() {
 
 void ProgressBarBox9::createForeground() {
 	spBox9Sprite timerForeground = new Box9Sprite;
-	timerForeground->setHorizontalMode(Box9Sprite::StretchMode::STRETCHING);
-	timerForeground->setVerticalMode(Box9Sprite::StretchMode::STRETCHING);
+	timerForeground->setHorizontalMode(Box9Sprite::STRETCHING);
+	timerForeground->setVerticalMode(Box9Sprite::STRETCHING);
 	timerForeground->setResAnim(gameResources.getResAnim("greenProgressBarHorizontal"));
 	timerForeground->setAnchor(Vector2(0.0f, 0.0f));
 	timerForeground->setPosition(0.0f, 0.0f);

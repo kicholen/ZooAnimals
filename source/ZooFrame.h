@@ -11,7 +11,7 @@ DECLARE_SMART(ZooFrame, spZooFrame);
 class ZooFrame : public CustomFrame
 {
 public:
-	ZooFrame();
+	ZooFrame(const string& regionName);
 	void selectTransitions();
 
 	Action loop();
@@ -27,6 +27,7 @@ protected:
 private:
 //	spAnimalFarmField _field;
 	VectorArray<spAnimalFarmField> _farmArray;
+	string _region;
 
 	spRotatingContainer _rotatingContainer;
 	bool _shouldRemoveTiles;

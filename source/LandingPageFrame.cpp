@@ -5,6 +5,7 @@
 #include "SwipeTrailElement.h"
 #include "WorldMapFrame.h"
 #include "ZooFrame.h"
+#include "ZooGateFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -24,7 +25,7 @@ void LandingPageFrame::_postHiding(Event *) {
 }
 
 void LandingPageFrame::_preShowing(Event *) {
-	GooglePlayInAppPurchaseManager::instance.restorePurchases();
+	//GooglePlayInAppPurchaseManager::instance.restorePurchases();
 	selectTransitions();
 	setData();
 	_resources.load();
@@ -36,8 +37,10 @@ Action LandingPageFrame::loop(){
 		if (action.id == "play") {
 			//spLevelChooserFrame levelChooserFrame = new LevelChooserFrame;
 			//transitionShowFrame(levelChooserFrame);
-			spZooFrame zooFrame = new ZooFrame();
-			transitionShowFrame(zooFrame);	
+			//spZooFrame zooFrame = new ZooFrame();
+			//transitionShowFrame(zooFrame);
+			spZooGateFrame zooGateFrame = new ZooGateFrame();
+			transitionShowFrame(zooGateFrame);
 		}
 		else if (action.id == "map") {
 			spWorldMapFrame worldFrame = new WorldMapFrame();

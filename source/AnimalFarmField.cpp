@@ -126,7 +126,7 @@ void AnimalFarmField::createInformationTable(spTileField tileField) {
 	Point tilesNumber = getNumberOfTiles();
 	_animalPanel = new AnimalFarmPanel(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_X / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f), Vector2(getWidth() * (float)EXPANDED_SIZE_IN_PERCENT_X / 100.0f, getWidth() * (float)EXPANDED_SIZE_IN_PERCENT_Y / 100.0f));
 	_animalPanel->setAnchor(1.0f, 1.0f);
-	_animalPanel->setPosition(getWidth(), getHeight() - _animalPanel->getHeight() / 2);// getWidth() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f, getHeight() - getWidth() * (float)(BASE_SIZE_IN_PERCENT + OFFSET_EDGES) / 100.0f);
+	_animalPanel->setPosition(getWidth(), getHeight() - _animalPanel->getHeight() / 2);
 	_animalPanel->setData(_model);
 	_animalPanel->attachTo(this);
 	_animalPanel->setPriority(30000);
