@@ -64,7 +64,7 @@ void ZooGateFrame::onZooSectionChosen(Event *event) {
 void ZooGateFrame::setData() {
 	float tileSize = _view->getHeight() / 15;
 
-	spTileField tileField = new TileField(Point(27, 15));
+	spTileField tileField = new TileField(Point(27, 15), true);
 	float scale = _view->getHeight() / tileField->getHeight();
 	tileField->setData("zoo_first_ground");
 	tileField->setScale(scale);
@@ -77,7 +77,7 @@ void ZooGateFrame::setData() {
 
 	float tilesToViewOffsetX = (tileField->getDerivedWidth() - _view->getWidth()) / 2;
 
-	spTileField tileFieldObjects = new TileField(Point(27, 15));
+	spTileField tileFieldObjects = new TileField(Point(27, 15), true);
 	tileFieldObjects->setData("zoo_first_objects");
 	tileFieldObjects->setScale(scale);
 	tileFieldObjects->setName("object_tiles");
@@ -88,6 +88,8 @@ void ZooGateFrame::setData() {
 	tileFieldObjects->attachTo(_view);
 
 	_spawner = new SpectatorSpawner(10, tileSize * 0.8f);
+	_spawner->setTouchChildrenEnabled(false);
+	_spawner->setTouchEnabled(false);
 	_spawner->setSize(_view->getSize());
 	_view->addChild(_spawner);
 	
@@ -148,7 +150,7 @@ void ZooGateFrame::addFarmTrackToSpawner(float tileSize, float tilesToViewOffset
 	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2));
 	_spawner->addTrack(trackVector);
 	trackVector.clear();
-
+	
 	// reverted entering zoo
 	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2 - 4 * tileSize));
 	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));

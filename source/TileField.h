@@ -16,7 +16,7 @@ DECLARE_SMART(TileField, spTileField);
 class TileField : public Actor
 {
 public:
-	TileField(Point numberOfFields);
+	TileField(Point numberOfFields, bool enableCullingOnTiles = false);
 	~TileField();
 
 	void setData(const string& animalName);
@@ -28,6 +28,7 @@ private:
 	
 	Point _numberOfFields;
 	string _animalName;
+	bool _enableCullingOnTiles;
 };
 
 #endif

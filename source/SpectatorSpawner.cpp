@@ -3,9 +3,9 @@
 
 SpectatorSpawner::SpectatorSpawner(int spectatorsOnScreen, float spectatorsHeight) {
 	_tracks._vector.resize(0);
-	_tracks._vector.reserve(10);
+	_tracks._vector.reserve(spectatorsOnScreen);
 	_resAnims._vector.resize(0);
-	_resAnims._vector.reserve(10);
+	_resAnims._vector.reserve(spectatorsOnScreen);
 	_spectatorsHeight = spectatorsHeight;
 	_spectatorsOnScreen = spectatorsOnScreen;
 	_frameTime = 0.0f;
@@ -34,14 +34,8 @@ void SpectatorSpawner::addTrack(const VectorArray<Vector2>& track, bool shouldCl
 }
 
 void SpectatorSpawner::doUpdate(const UpdateState &us) {
-	_frameTime += us.dt;
-
 	if (_container->getSpectatorsInUseCount() < _spectatorsOnScreen) {
-		_frameTime = 0.0f;
-
-		//for (int i = 0; i < newSpectators; i++) {
-			spawnSpectator();
-		//}
+		spawnSpectator();
 	}
 }
 

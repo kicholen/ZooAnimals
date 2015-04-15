@@ -1,12 +1,13 @@
 #include "TileField.h"
 #include "Content.h"
 
-TileField::TileField(Point numberOfFields) {
+TileField::TileField(Point numberOfFields, bool enableCullingOnTiles) {
 	_numberOfFields = numberOfFields;
-
+	setTouchEnabled(false);
+	setTouchChildrenEnabled(false);
+	_enableCullingOnTiles = enableCullingOnTiles;
 	setSize(float(TILE_SIZE_X * _numberOfFields.x), float(TILE_SIZE_Y * _numberOfFields.y));
 }
-
 
 TileField::~TileField() {
 
@@ -43,6 +44,9 @@ spSprite TileField::createTileSprite(string resourceName, Vector2 spriteSize, Po
 	setSpriteScaleBySize(sprite, spriteSize);
 	sprite->setName(spriteName);
 	sprite->setPriority(priority);
+	if (_enableCullingOnTiles) {
+		sprite->setCull(true);
+	}
 	return sprite;
 }
 

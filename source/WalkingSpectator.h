@@ -9,7 +9,7 @@ using namespace FlashUtils;
 
 DECLARE_SMART(WalkingSpectator, spWalkingSpectator);
 
-typedef enum { wsNotUsed, wsJumping, wsWaiting } WalkingSpectatorState;
+typedef enum { wsDead, wsMoving, wsWaiting } WalkingSpectatorState;
 
 class WalkingSpectator : public Sprite
 {
@@ -30,21 +30,30 @@ public:
 
 
 	void revive(const VectorArray<Vector2>& trackPoints);
+protected:
+	void doUpdate(const UpdateState &us);
+	void doVelocity(float dt, const Vector2& destPosition);
 
 private:
 	void die();
 	void tryToAnimateToNextPosition();
 	Vector2 getNextTrackPoint();
-	void faceAccordingToMovement(float destX);
+	void setFaceAccordingToMovement(float destX);
+	void setVelocityByNextPoint();
+	void checkPositionsByNextPoint();
 
 	void onTweenEnded(Event *ev);
+
 private:
+	WalkingSpectatorState _state;
 	VectorArray<Vector2> _trackPoints;
 	uint _number;
 	bool _dead;
 
-	float _lastX;
-	float _lastY;
+	Vector2 _velocity;
+	bool _isProperX;
+	bool _isProperY;
+	//float _lastY;
 };
 
 #endif

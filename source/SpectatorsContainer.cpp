@@ -32,6 +32,8 @@ spWalkingSpectator SpectatorsContainer::addSpectator(const VectorArray<Vector2>&
 }
 
 int SpectatorsContainer::getSpectatorsInUseCount() {
+int asd = _spectatorsArray.length();
+int asd2 = _spectatorsInPool.length();
 	return _spectatorsArray.length() - _spectatorsInPool.length();
 }
 
