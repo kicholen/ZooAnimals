@@ -11,7 +11,7 @@ DECLARE_SMART(MemoryFrame, spMemoryFrame);
 class MemoryFrame : public CustomFrame
 {
 public:
-	MemoryFrame(const char* whichLevel);
+	MemoryFrame(const string& whichLevel);
 	void selectTransitions();
 
 	Action loop();

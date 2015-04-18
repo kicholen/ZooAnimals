@@ -25,8 +25,8 @@ public:
 	const bool isWaterAnimal() const { return _isWaterAnimal; }
 	int hungerValue() const { return _hungerValue; }
 	int happinessValue() const { return _happinessValue; }
-	int happinessNeededForNextAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness() + 1.0f, 1 / 0.55f)); }
-	int happinessNeededForCurrentAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness(), 1 / 0.55f)); }
+	int happinessNeededForNextAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness() + 1.0f, 1.0f / 0.55f)); }
+	int happinessNeededForCurrentAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness(), 1.0f / 0.55f)); }
 
 	void setHappiness(int value) { _happinessValue = value; }
 	/* Inviolable count, use totalAnimalsCount */
@@ -40,12 +40,28 @@ public:
 	void setLastFeedS(int value) { _lastFeedS = value; }	
 
 	const string& topGame() { return _topGame; }
-	int topGameValue() const { return _topGameValue; }
 	const string& midGame() { return _midGame; }
-	int midGameValue() const { return _midGameValue; }
 	const string& lowGame() { return _lowGame; }
-	int lowGameValue() const { return _lowGameValue; }
 
+	int getGameValue(const string& name) {
+		if (_topGame == name) {
+			return 2;
+		}
+		else if (_midGame == name) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	int getLevel() const {
+		return _level;
+	}
+
+	void setLevel(int value) {
+		_level = value;
+	}
 private:
 	int getAnimalsCountFromHappiness() const { return (int)floor(pow((float)_happinessValue, 0.55f)); }
 
@@ -62,11 +78,10 @@ private:
 	int _happinessValue;
 
 	string _topGame;
-	int _topGameValue;
 	string _midGame;
-	int _midGameValue;
 	string _lowGame;
-	int _lowGameValue;
+
+	int _level;
 
 	int _lastFeedS;
 };

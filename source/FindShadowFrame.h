@@ -10,7 +10,7 @@ DECLARE_SMART(FindShadowFrame, spFindShadowFrame);
 class FindShadowFrame : public CustomFrame
 {
 public:
-	FindShadowFrame();
+	FindShadowFrame(const string& difficulty);
 	void selectTransitions();
 
 	Action loop();
@@ -24,6 +24,7 @@ protected:
 	void setData();
 private:
 	spFindShadowField _field;
+	string _difficulty;
 };
 
 #endif

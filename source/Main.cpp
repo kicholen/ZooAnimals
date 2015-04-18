@@ -20,6 +20,7 @@
 #include "GooglePlayInAppPurchaseManager.h"
 #include "FacebookManager.h"
 #include "AnimalsManager.h"
+#include "MoneyManager.h"
 
 using namespace oxygine;
 
@@ -79,6 +80,7 @@ void main_init() {
 	GooglePlayInAppPurchaseManager::instance.init();
 	FacebookManager::instance.init();
 	AnimalsManager::instance.init(version);
+	MoneyManager::instance.init(version);
 
 	Frame::initialize();
 

@@ -1,7 +1,8 @@
 #include "FindShadowFrame.h"
 
-FindShadowFrame::FindShadowFrame() {
+FindShadowFrame::FindShadowFrame(const string& difficulty) {
 	init("LandingPageFrame.xml", true);
+	_difficulty = difficulty;
 	selectTransitions();
 }
 

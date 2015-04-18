@@ -13,7 +13,7 @@ DECLARE_SMART(DiscoverImageFrame, spDiscoverImageFrame);
 class DiscoverImageFrame : public CustomFrame
 {
 public:
-	DiscoverImageFrame();
+	DiscoverImageFrame(const string& difficulty);
 	~DiscoverImageFrame();
 
 	void selectTransitions();
@@ -33,6 +33,8 @@ private:
 	spMathQuizElement _quizElement;
 	int _previousAnimal;
 	int _totalScore;
+
+	string _difficulty;
 };
 
 #endif

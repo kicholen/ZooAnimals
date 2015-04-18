@@ -57,10 +57,10 @@ pugi::xml_attribute Content::getParameterValue(const string &name) {
 	OX_ASSERT(data);
 	pugi::xml_node child = data.child("parameters");
 	OX_ASSERT(child);
-	pugi::xml_attribute attr = child.attribute("value");
-	OX_ASSERT(attr);
+	pugi::xml_node parameter = child.child(name.c_str());
+	OX_ASSERT(parameter);
 
-	return attr;
+	return parameter.attribute("value");
 }
 
 pugi::xml_node Content::getMatchTwoLevelNode(uint number) {

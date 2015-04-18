@@ -1,7 +1,7 @@
 #include "MemoryFrame.h"
 #include "FlurryAnalytics.h"
 
-MemoryFrame::MemoryFrame(const char* whichLevel) {
+MemoryFrame::MemoryFrame(const string& whichLevel) {
 	init("LandingPageFrame.xml", true);
 	_whichLevel = whichLevel;
 	_size = getSize();

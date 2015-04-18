@@ -24,8 +24,6 @@ const string ALL_ANIMALS[45] = {"bee", "cat", "cow", "dog", "duck", "goat", "hor
 								"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot",
 								"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
 
-
-
 spTextActor createTextfield(const string &txt, bool isHtml, bool multiline) {
 	spTextActor text = new TextActor();
 	text->setAnchor(0.5f, 0.5f);

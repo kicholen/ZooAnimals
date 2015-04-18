@@ -1,7 +1,8 @@
 #include "ConnectDotsFrame.h"
 
-ConnectDotsFrame::ConnectDotsFrame() {
+ConnectDotsFrame::ConnectDotsFrame(const string& difficulty) {
 	init("LandingPageFrame.xml", true);
+	_difficulty = difficulty;
 	selectTransitions();
 }
 

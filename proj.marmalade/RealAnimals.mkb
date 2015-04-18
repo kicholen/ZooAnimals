@@ -171,8 +171,6 @@ files
 	[source/frame/memory]
 	MemoryFrame.cpp
 	MemoryFrame.h
-	ChooseMemoryDifficultyFrame.cpp
-	ChooseMemoryDifficultyFrame.h
 	
 	[source/frame/connectdots]
 	ConnectDotsFrame.cpp
@@ -209,6 +207,8 @@ files
     [source/frame/levels]
     PresentAnimalsFrame.cpp
     PresentAnimalsFrame.h
+	ChooseGameDifficultyFrame.cpp
+	ChooseGameDifficultyFrame.h
 
     [source/frame/main]
     LandingPageFrame.cpp
@@ -259,6 +259,8 @@ files
 	FacebookManager.h
 	AnimalsManager.cpp
 	AnimalsManager.h
+	MoneyManager.cpp
+	MoneyManager.h
 
 	[source/touch/swipe]
 	ResolverRadialChaikin.cpp
@@ -305,5 +307,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=3
+	version-revision=5
 }

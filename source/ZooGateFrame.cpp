@@ -87,7 +87,7 @@ void ZooGateFrame::setData() {
 	tileFieldObjects->setPriority(-50);
 	tileFieldObjects->attachTo(_view);
 
-	_spawner = new SpectatorSpawner(10, tileSize * 0.8f);
+	_spawner = new SpectatorSpawner(25, tileSize * 0.8f);
 	_spawner->setTouchChildrenEnabled(false);
 	_spawner->setTouchEnabled(false);
 	_spawner->setSize(_view->getSize());
@@ -114,6 +114,13 @@ void ZooGateFrame::setData() {
 	if (AnimalsManager::instance.isRegionPopulated("australia")) {
 		addAustraliaTrackToSpawner(tileSize, tilesToViewOffsetX);
 	}
+
+
+	// test
+	addAsiaTrackToSpawner(tileSize, tilesToViewOffsetX);
+	addSteppeTrackToSpawner(tileSize, tilesToViewOffsetX);
+	addAustraliaTrackToSpawner(tileSize, tilesToViewOffsetX);
+	addUnderwaterTrackToSpawner(tileSize, tilesToViewOffsetX);
 
 	addPossibleSpritesToSpawner();
 
@@ -162,22 +169,113 @@ void ZooGateFrame::addFarmTrackToSpawner(float tileSize, float tilesToViewOffset
 
 void ZooGateFrame::addWinterTrackToSpawner(float tileSize, float tilesToViewOffsetX) {
 	VectorArray<Vector2> trackVector;
+	// entering zoo
+	trackVector.push(Vector2(tileSize * 7 + tileSize / 2 - tilesToViewOffsetX, 0.0f));
+	trackVector.push(Vector2(tileSize * 7 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 2 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 2 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
+
+	// reverted entering zoo
+	trackVector.push(Vector2(tileSize * 7 + tileSize / 2 - tilesToViewOffsetX, 0.0f));
+	trackVector.push(Vector2(tileSize * 7 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 2 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 2 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(_view->getWidth(), _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
 }
 
 void ZooGateFrame::addUnderwaterTrackToSpawner(float tileSize, float tilesToViewOffsetX) {
 	VectorArray<Vector2> trackVector;
+	// entering zoo
+	trackVector.push(Vector2(_view->getWidth(), tileSize / 2 + 1 * tileSize));
+	trackVector.push(Vector2(tileSize * 18 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 1 * tileSize));
+	trackVector.push(Vector2(tileSize * 18 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
+
+	// reverted entering zoo
+	trackVector.push(Vector2(_view->getWidth(), tileSize / 2 + 1 * tileSize));
+	trackVector.push(Vector2(tileSize * 18 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 1 * tileSize));
+	trackVector.push(Vector2(tileSize * 18 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(_view->getWidth(), _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
 }
 
 void ZooGateFrame::addSteppeTrackToSpawner(float tileSize, float tilesToViewOffsetX) {
 	VectorArray<Vector2> trackVector;
+	// entering zoo
+	trackVector.push(Vector2(0.0f, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
+
+	// reverted entering zoo
+	trackVector.push(Vector2(0.0f, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 9 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2 - 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(_view->getWidth(), _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
 }
 
 void ZooGateFrame::addAsiaTrackToSpawner(float tileSize, float tilesToViewOffsetX) {
 	VectorArray<Vector2> trackVector;
+	// entering zoo
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, 0.0f));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
+
+	// reverted entering zoo
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, 0.0f));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(_view->getWidth(), _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
 }
 
 void ZooGateFrame::addAustraliaTrackToSpawner(float tileSize, float tilesToViewOffsetX) {
 	VectorArray<Vector2> trackVector;
+	// entering zoo
+	trackVector.push(Vector2(_view->getWidth(), tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(0.0f, _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
+
+	// reverted entering zoo
+	trackVector.push(Vector2(_view->getWidth(), tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, tileSize / 2 + 4 * tileSize));
+	trackVector.push(Vector2(tileSize * 14 + tileSize / 2 - tilesToViewOffsetX, _view->getHeight() - tileSize / 2));
+	trackVector.push(Vector2(_view->getWidth(), _view->getHeight() - tileSize / 2));
+	_spawner->addTrack(trackVector);
+	trackVector.clear();
 }
 
 void ZooGateFrame::addGoToFarmSignPost(float tileSize) {

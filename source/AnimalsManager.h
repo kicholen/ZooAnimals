@@ -61,7 +61,7 @@ private:
 	void createAustraliaAnimals();
 	void createTimer();
 
-	void addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS);
+	void addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS, int level = -1);
 
 	void updater(Event* event);
 
@@ -75,6 +75,8 @@ private:
 private:
 	map<string, map<string, spAnimalModel> > _animalsMap;
 	map<string, map<string, spAnimalModel> > _posessedAnimalMap;
+
+	int _speciesPossesedCount;
 
 	spTimer _timer;
 };

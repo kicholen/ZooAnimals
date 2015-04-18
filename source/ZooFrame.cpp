@@ -1,13 +1,8 @@
 #include "ZooFrame.h"
 #include "FarmControlPanel.h"
-
-#include "ChooseMemoryDifficultyFrame.h"
-#include "MatchTwoFrame.h"
-#include "ConnectDotsFrame.h"
-#include "FindShadowFrame.h"
-#include "PopObjectsFrame.h"
-#include "DiscoverImageFrame.h"
 #include "AnimalsManager.h"
+#include "ChooseGameDifficultyFrame.h"
+#include "MoneyManager.h"
 
 ZooFrame::ZooFrame(const string& regionName) {
 	_region = regionName;
@@ -60,32 +55,13 @@ Action ZooFrame::loop() {
 			}
 			_shouldRemoveTiles = !_shouldRemoveTiles;
 		}
-		else if (action.id == "memory") {
-			spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
+		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
+			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
 			transitionShowFrame(chooserFrame);
-		}
-		else if (action.id == "dots") {
-			spConnectDotsFrame connectFrame = new ConnectDotsFrame();
-			transitionShowFrame(connectFrame);
-		}
-		else if (action.id == "shadow") {
-			spFindShadowFrame findShadow = new FindShadowFrame();
-			transitionShowFrame(findShadow);
-		}
-		else if (action.id == "match") {
-			spMatchTwoFrame matchTwo = new MatchTwoFrame();
-			transitionShowFrame(matchTwo);
-		}
-		else if (action.id == "pop") {
-			spPopObjectsFrame pop = new PopObjectsFrame();
-			transitionShowFrame(pop);
-		}
-		else if (action.id == "discover") {
-			spDiscoverImageFrame disc = new DiscoverImageFrame();
-			transitionShowFrame(disc);
 		}
 		else if (action.id == "store") {
 			AnimalsManager::instance.store();
+			MoneyManager::instance.store();
 		}
 	}
 
@@ -99,7 +75,12 @@ void ZooFrame::onFinished(Event *event) {
 
 void ZooFrame::onGameChosen(Event *event) {
 	FarmServiceElement::FarmServiceElementEvent *ev = safeCast<FarmServiceElement::FarmServiceElementEvent*>(event);
-	AnimalsManager::instance.increaseHappinessByPoints(safeSpCast<AnimalFarmField>(event->currentTarget)->getModel(), 3);
+	
+	// TODO move it from here to end of the game
+	spAnimalModel model = safeSpCast<AnimalFarmField>(event->currentTarget)->getModel();
+	AnimalsManager::instance.increaseHappinessByPoints(model, 3);
+	MoneyManager::instance.increaseMoneyOnGameFinished(model->getLevel(), model->getGameValue(ev->_name), "easy");
+
 	generateAction(ev->_name);
 }
 

@@ -2,7 +2,7 @@
 
 
 WalkingSpectator::WalkingSpectator(const VectorArray<Vector2>& trackPoints, uint number) {
-	_velocity = Vector2(CMath::Rand(0.2, 0.5f), CMath::Rand(0.2, 0.5f));
+	_velocity = Vector2(CMath::Rand(0.2f, 0.5f), CMath::Rand(0.2f, 0.5f));
 	setTouchEnabled(false);
 	setTouchChildrenEnabled(false);
 	_number = number;
@@ -18,10 +18,9 @@ WalkingSpectator::~WalkingSpectator() {
 }
 
 void WalkingSpectator::die() {
-	if (!_dead) {
+	if (_state != wsDead) {
 		detach();
-		_dead = true;
-		_state == wsDead;
+		_state = wsDead;
 
 		WalkingSpectatorEvent spectatorEvent(_number);
 		dispatchEvent(&spectatorEvent);
@@ -30,8 +29,8 @@ void WalkingSpectator::die() {
 
 void WalkingSpectator::revive(const VectorArray<Vector2>& trackPoints) {
 	_trackPoints = trackPoints;
-	_dead = false;
 
+	setPosition(-1000.0f, 10000.0f);
 	setScale(1.0f);
 	setPosition(_trackPoints._vector.back());
 	_trackPoints._vector.pop_back();

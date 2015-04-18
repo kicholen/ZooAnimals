@@ -1,8 +1,9 @@
 #include "DiscoverImageFrame.h"
 #include "SharedResources.h"
 
-DiscoverImageFrame::DiscoverImageFrame() {
+DiscoverImageFrame::DiscoverImageFrame(const string& difficulty) {
 	init("LandingPageFrame.xml", true);
+	_difficulty = difficulty;
 	selectTransitions();
 }
 

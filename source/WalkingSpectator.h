@@ -48,12 +48,10 @@ private:
 	WalkingSpectatorState _state;
 	VectorArray<Vector2> _trackPoints;
 	uint _number;
-	bool _dead;
 
 	Vector2 _velocity;
 	bool _isProperX;
 	bool _isProperY;
-	//float _lastY;
 };
 
 #endif

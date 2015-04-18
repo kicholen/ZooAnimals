@@ -1,8 +1,9 @@
 #include "PopObjectsFrame.h"
 
 
-PopObjectsFrame::PopObjectsFrame() {
+PopObjectsFrame::PopObjectsFrame(const string& difficulty) {
 	init("LandingPageFrame.xml", true);
+	_difficulty = difficulty;
 	selectTransitions();
 }
 

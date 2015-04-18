@@ -10,7 +10,7 @@ DECLARE_SMART(MatchTwoFrame, spMatchTwoFrame);
 class MatchTwoFrame : public CustomFrame
 {
 public:
-	MatchTwoFrame(void);
+	MatchTwoFrame(const string& difficulty);
 	void selectTransitions();
 
 	Action loop();
@@ -24,7 +24,7 @@ protected:
 	void setData();
 private:
 	spMatchTwoField _field;
-
+	string _difficulty;
 	//spSoundInstance _previousSoundInstance; 
 };
 

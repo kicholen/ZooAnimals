@@ -7,9 +7,8 @@
 AnimalsManager AnimalsManager::instance;
 
 AnimalsManager::AnimalsManager() {
-
+	_speciesPossesedCount = 0;
 }
-
 
 AnimalsManager::~AnimalsManager() {
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
@@ -99,7 +98,7 @@ void AnimalsManager::increaseHappinessByPoints(spAnimalModel model, int points) 
 void AnimalsManager::store() {
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
 		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-			ZooSettings::instance.setAnimal(outerIterator->first, innerIterator->first, innerIterator->second->happinessValue(), innerIterator->second->hungerValue(), innerIterator->second->animalsCount(), innerIterator->second->lastFeedS());
+			ZooSettings::instance.setAnimal(outerIterator->first, innerIterator->first, innerIterator->second->happinessValue(), innerIterator->second->hungerValue(), innerIterator->second->animalsCount(), innerIterator->second->lastFeedS(), innerIterator->second->getLevel());
 		}
 	}
 
@@ -113,7 +112,7 @@ void AnimalsManager::createFarmAnimals() {
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, FARM[i]);
 		if (animalNode) {
-			addAnimalModel(regionName, FARM[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int());
+			addAnimalModel(regionName, FARM[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int(), animalNode.attribute("l").as_int());
 		}
 		else {
 			addAnimalModel(regionName, FARM[i], 0, 0, 0, 0);
@@ -128,7 +127,7 @@ void AnimalsManager::createWinterAnimals() {
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, WINTER[i]);
 		if (animalNode) {
-			addAnimalModel(regionName, WINTER[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int());
+			addAnimalModel(regionName, WINTER[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int(), animalNode.attribute("l").as_int());
 		}
 		else {
 			addAnimalModel(regionName, WINTER[i], 0, 0, 0, 0);
@@ -143,7 +142,7 @@ void AnimalsManager::createUnderwaterAnimals() {
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, UNDERWATER[i]);
 		if (animalNode) {
-			addAnimalModel(regionName, UNDERWATER[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int());
+			addAnimalModel(regionName, UNDERWATER[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int(), animalNode.attribute("l").as_int());
 		}
 		else {
 			addAnimalModel(regionName, UNDERWATER[i], 0, 0, 0, 0);
@@ -158,7 +157,7 @@ void AnimalsManager::createSteppeAnimals() {
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, STEPPE[i]);
 		if (animalNode) {
-			addAnimalModel(regionName, STEPPE[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int());
+			addAnimalModel(regionName, STEPPE[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int(), animalNode.attribute("l").as_int());
 		}
 		else {
 			addAnimalModel(regionName, STEPPE[i], 0, 0, 0, 0);
@@ -173,7 +172,7 @@ void AnimalsManager::createAsiaAnimals() {
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, ASIA[i]);
 		if (animalNode) {
-			addAnimalModel(regionName, ASIA[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int());
+			addAnimalModel(regionName, ASIA[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int(), animalNode.attribute("l").as_int());
 		}
 		else {
 			addAnimalModel(regionName, ASIA[i], 0, 0, 0, 0);
@@ -188,7 +187,7 @@ void AnimalsManager::createAustraliaAnimals() {
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, AUSTRALIA[i]);
 		if (animalNode) {
-			addAnimalModel(regionName, AUSTRALIA[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int());
+			addAnimalModel(regionName, AUSTRALIA[i], animalNode.attribute("h").as_int(), animalNode.attribute("g").as_int(), animalNode.attribute("c").as_int(), animalNode.attribute("lf").as_int(), animalNode.attribute("l").as_int());
 		}
 		else {
 			addAnimalModel(regionName, AUSTRALIA[i], 0, 0, 0, 0);
@@ -202,13 +201,15 @@ void AnimalsManager::createTimer() {
 	_timer->start();
 }
 
-void AnimalsManager::addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS) {
+void AnimalsManager::addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS, int level) {
 	spAnimalModel model = new AnimalModel(name, happiness, hunger, count, lastFeedS);
+	model->setLevel(level);
 	model->fromContent();
 	_animalsMap[regionName].insert(make_pair(name, model));
 
 	
 	if (count > 0) {
+		_speciesPossesedCount += 1;
 		_posessedAnimalMap[regionName].insert(make_pair(name, model));
 	}
 }

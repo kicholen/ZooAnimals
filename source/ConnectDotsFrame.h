@@ -12,7 +12,7 @@ DECLARE_SMART(ConnectDotsFrame, spConnectDotsFrame);
 class ConnectDotsFrame : public CustomFrame
 {
 public:
-	ConnectDotsFrame();
+	ConnectDotsFrame(const string& difficulty);
 	void selectTransitions();
 
 	Action loop();
@@ -30,6 +30,8 @@ private:
 	int _previousAnimal;
 	int _totalScore;
 	spCounterBoxElement _counterBox;
+
+	string _difficulty;
 	//spSoundInstance _previousSoundInstance; 
 };
 

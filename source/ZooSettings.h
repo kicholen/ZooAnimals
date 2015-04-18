@@ -15,14 +15,14 @@ public:
 	void init(const string& version);
 	void reset();
 
-	pugi::xml_attribute addValue(const string &name);
-	pugi::xml_attribute getValue(const string &name);
+	pugi::xml_attribute addPlayerValue(const string &name);
+	pugi::xml_attribute getPlayerValue(const string &name);
 
 	pugi::xml_node getAnimal(const string& regionName, const string& animalName);
-	void setAnimal(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedMS);
+	void setAnimal(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
 
 private:
-	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS);
+	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
 };
 
 #endif

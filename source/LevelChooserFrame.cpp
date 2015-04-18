@@ -5,7 +5,7 @@
 #include "GooglePlayInAppPurchaseManager.h"
 #include "Settings.h"
 #include "ShaderSprite.h"
-#include "ChooseMemoryDifficultyFrame.h"
+#include "ChooseGameDifficultyFrame.h"
 
 #include "MatchTwoFrame.h"
 
@@ -36,47 +36,14 @@ Action LevelChooserFrame::loop() {
 		else if (action.id == "back") {
 			break;
 		}
-		else if (action.id == "memory") {
-			spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
+		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
+			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
 			transitionShowFrame(chooserFrame);
-		}
-		else if (action.id == "connect_dots") {
-			spConnectDotsFrame connectFrame = new ConnectDotsFrame();
-			transitionShowFrame(connectFrame);
-		}
-		else if (action.id == "match_two") {
-			spMatchTwoFrame matchTwo = new MatchTwoFrame();
-			transitionShowFrame(matchTwo);
-		}
-		else if (action.id == "find_shadow") {
-			spFindShadowFrame findShadow = new FindShadowFrame();
-			transitionShowFrame(findShadow);
 		}
 		else if (action.id == "zoo_frame") {
 //			spZooFrame zooFrame = new ZooFrame();
 //			transitionShowFrame(zooFrame);
 		}
-		/*
-		string::size_type levelChecker = action.id.find("level", 0);
-		string::size_type availableChecker = action.id.find("level", 0);
-
-		if (levelChecker != string::npos && availableChecker == string::npos) {
-			transitionShowFrameAsDialog(buyItemPopup);
-		}
-		else if (levelChecker != string::npos && availableChecker != string::npos) {
-			//Settings::instance.getValue("level_enter").set_value(Settings::instance.getValue("level_enter").as_int() + 1);
-			//spPresentAnimalsFrame presentAnimalsFrame = new PresentAnimalsFrame(action.id.c_str());
-			//transitionShowFrame(presentAnimalsFrame);
-		}
-		else if (action.id == "close") {
-			break;
-		}
-		else if (action.id == "back") {
-			break;
-		}
-		if (action.id == "wall_post") {
-			transitionShowFrameAsDialog(wallPostPopup);
-		}*/
 	}
 
 	return _lastAction;

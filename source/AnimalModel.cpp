@@ -53,20 +53,11 @@ void AnimalModel::fromContent() {
 		if (!strcmp(name, "top")) {
 			_topGame = attribute.as_string();
 		}
-		else if (!strcmp(name, "top_value")) {
-			_topGameValue = attribute.as_int();
-		}
 		else if (!strcmp(name, "mid")) {
 			_midGame = attribute.as_string();
 		}
-		if (!strcmp(name, "mid_value")) {
-			_midGameValue = attribute.as_int();
-		}
 		else if (!strcmp(name, "low")) {
 			_lowGame = attribute.as_string();
-		}
-		if (!strcmp(name, "low_value")) {
-			_lowGameValue = attribute.as_int();
 		}
 		attribute = attribute.next_attribute();
 	}
