@@ -14,6 +14,8 @@ MoneyManager::~MoneyManager() {
 
 void MoneyManager::init(const string& version) {
 	_money = ZooSettings::instance.getPlayerValue("money").as_int();
+	_secondMultiplier = Content::instance.getParameterValue("second_multi").as_double();
+	_thirdMultiplier = Content::instance.getParameterValue("third_multi").as_double();
 	_cashGainMultiplier = Content::instance.getParameterValue("cash_gain_multiplier").as_double();
 	_cashGainPower = Content::instance.getParameterValue("cash_gain_power").as_double();
 	_zooCount = Content::instance.getParameterAsInt("zoo_count");
@@ -22,27 +24,33 @@ void MoneyManager::init(const string& version) {
 
 void MoneyManager::increaseMoneyOnGameFinished(int zooLevel, int game, const string& difficulty) {
 	_money += getMoneyGained(zooLevel, game, difficulty);
+	dispatchMoneyCountEvent();
+}
+
+int MoneyManager::getMoney() {
+	return _money;
 }
 
 /*
 ** ZooLevel - when zoo is unblocked level is signed to it [0, zoo_count - 1]
-** game - top - 3 / medium - 2 / low - 1
+** game - top - 2 / medium - 1 / low - 0
 ** difficulty - easy / normal / hard
 */
 int MoneyManager::getMoneyGained(int zooLevel, int game, const string& difficulty) {
 	int gameDifficulty = 0;
-	
+	int gamesPerAnimal = 3;
+
 	if (difficulty == "easy") {
-		gameDifficulty = 1;
+		gameDifficulty = 0;
 	}
 	else if (difficulty == "normal") {
-		gameDifficulty = 2;
+		gameDifficulty = 1;
 	}
 	else {
-		gameDifficulty = 3;
+		gameDifficulty = 2;
 	}
-	// TODO
-	return _moneyGainer[zooLevel * gameDifficulty][game];
+	
+	return _moneyGainer[zooLevel * gamesPerAnimal + gameDifficulty][game];
 }
 
 void MoneyManager::store() {
@@ -51,30 +59,32 @@ void MoneyManager::store() {
 }
 
 void MoneyManager::fillMoneyGainer() {
-	//_moneyGainer.reserve(16);
 	int gamesPerZoo = 3;
-	_moneyGainer = vector<vector<int> >(_zooCount, vector<int>(gamesPerZoo - 1));
+	int difficulties = 3;
+	_moneyGainer = vector<vector<int> >(_zooCount * difficulties, vector<int>(gamesPerZoo));
 
 	// fill statics
 	_moneyGainer[0][0] = 1;
 	_moneyGainer[0][1] = 2;
 	_moneyGainer[0][2] = 3;
-	
-	
+
 	for (int i = 0; i < 3; i++) {
-		_moneyGainer[1][i] = (int)round(_cashGainMultiplier * (double)_moneyGainer[0][i]);
-		_moneyGainer[2][i] = (int)round(_cashGainMultiplier * (double)_moneyGainer[0][i]);
+		_moneyGainer[1][i] = (int)round(_secondMultiplier * (double)_moneyGainer[0][i]);
+		_moneyGainer[2][i] = (int)round(_thirdMultiplier * (double)_moneyGainer[0][i]);
 	}
-	
 	_moneyGainer[3][0] = 2;
-	_moneyGainer[3][1] = (int)round(pow(_cashGainMultiplier * (double)_moneyGainer[1][1], _cashGainPower));
-	_moneyGainer[3][2] = (int)round(pow(_cashGainMultiplier * (double)_moneyGainer[1][2], _cashGainPower));
+	_moneyGainer[3][1] = (int)round(pow(_cashGainMultiplier * (double)_moneyGainer[0][1], _cashGainPower));
+	_moneyGainer[3][2] = (int)round(pow(_cashGainMultiplier * (double)_moneyGainer[0][2], _cashGainPower));
 
 	// fill rest
-	for (int i = 4; i < _zooCount; i++) {
+	for (int i = 4; i < _zooCount * difficulties; i++) {
 		for (int j = 0; j < gamesPerZoo; j++) {
 			_moneyGainer[i][j] = (int)round(pow(_cashGainMultiplier * (double)_moneyGainer[i - 3][j], _cashGainPower));
 		}
 	}
+}
 
+void MoneyManager::dispatchMoneyCountEvent() {
+	MoneyEvent ev(MoneyEvent::MONEY_COUNT, _money);
+	getRoot()->dispatchEvent(&ev);
 }

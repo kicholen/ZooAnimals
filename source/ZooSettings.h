@@ -14,6 +14,7 @@ public:
 
 	void init(const string& version);
 	void reset();
+	void save();
 
 	pugi::xml_attribute addPlayerValue(const string &name);
 	pugi::xml_attribute getPlayerValue(const string &name);

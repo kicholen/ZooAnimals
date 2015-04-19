@@ -76,6 +76,10 @@ void ZooSettings::reset() {
 	checkNode.append_attribute("version").set_value(_version.c_str());
 }
 
+void ZooSettings::save() {
+	FileSaver::save();
+}
+
 pugi::xml_node ZooSettings::getAnimal(const string& regionName, const string& animalName) {
 	pugi::xml_node node = _doc.child("animals").child(regionName.c_str());
 	if (!node) {

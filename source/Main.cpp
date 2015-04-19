@@ -32,8 +32,8 @@ DECLARE_SMART(MainActor, spMainActor);
 
 spLandingPageFrame landingPageFrame;
 spSlideFrame slideFrame;
-spBuyItemPopup buyItemPopup;
-spWallPostMessagePopup wallPostPopup;
+//spBuyItemPopup buyItemPopup;
+//spWallPostMessagePopup wallPostPopup;
 
 void main_preinit() {
 }
@@ -105,9 +105,10 @@ void main_init() {
 	spTransition tr = new TransitionSimple();
 
 	landingPageFrame = new LandingPageFrame();
+
 	slideFrame = new SlideFrame();
-	buyItemPopup = new BuyItemPopup();
-	wallPostPopup = new WallPostMessagePopup();
+	//buyItemPopup = new BuyItemPopup();
+	//wallPostPopup = new WallPostMessagePopup();
 
 	try {
 		transitionSwitchFrame(landingPageFrame, tr);
@@ -133,12 +134,12 @@ void main_destroy() {
 	//delete &FacebookManager::instance;
 
 	landingPageFrame = 0;
-	slideFrame = 0;
-	buyItemPopup = 0;
-	wallPostPopup = 0;
 
 	Frame::free();
 
+	editResources.free();
+	tilesResources.free();
+	animalsResources.free();
 	gameResources.free();
 	SoundSystem::instance->release();
 }

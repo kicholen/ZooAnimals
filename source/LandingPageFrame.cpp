@@ -6,6 +6,9 @@
 #include "WorldMapFrame.h"
 #include "ZooFrame.h"
 #include "ZooGateFrame.h"
+#include "DatabaseManager.h"
+#include "AnimalsManager.h"
+#include "MoneyCounterElement.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -59,6 +62,10 @@ Action LandingPageFrame::loop(){
 			spMaskFrame maskFrame = new MaskFrame();
 			transitionShowFrame(maskFrame);
 		}
+		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
+			DatabaseManager::instance.save();
+			break;
+		}
 	}
 
 	return _lastAction;
@@ -81,6 +88,12 @@ void LandingPageFrame::setData() {
 	swipe->setSize(_view->getSize());
 	swipe->setPriority(-1000);
 	swipe->attachTo(_view);
+
+
+	spMoneyCounterElement counter = new MoneyCounterElement();
+	counter->show();
+	counter->setPriority(1000);
+	getRoot()->addChild(counter);
 }
 
 void LandingPageFrame::playLoopedMusic() {

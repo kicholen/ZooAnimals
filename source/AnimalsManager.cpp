@@ -37,6 +37,7 @@ void AnimalsManager::init(const string& version) {
 	createAsiaAnimals();
 	createAustraliaAnimals();
 	createTimer();
+	addRef();
 }
 
 void AnimalsManager::feedAnimalByModel(spAnimalModel model) {
@@ -101,8 +102,6 @@ void AnimalsManager::store() {
 			ZooSettings::instance.setAnimal(outerIterator->first, innerIterator->first, innerIterator->second->happinessValue(), innerIterator->second->hungerValue(), innerIterator->second->animalsCount(), innerIterator->second->lastFeedS(), innerIterator->second->getLevel());
 		}
 	}
-
-	ZooSettings::instance.save();
 }
 
 void AnimalsManager::createFarmAnimals() {

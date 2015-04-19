@@ -51,6 +51,8 @@ files
 	MatchTwoDraggable.h
 	TileField.cpp
 	TileField.h
+	MoneyCounterElement.cpp
+	MoneyCounterElement.h
 
 	[source/element/swipe]
 	SwipeTrailElement.cpp
@@ -145,7 +147,7 @@ files
 	StackContainer.h
 	AnimatableElementContainer.cpp
 	AnimatableElementContainer.h
-
+	
     [source/gui/common]
     TweenButton.h
     TweenButton.cpp
@@ -155,6 +157,8 @@ files
     ShaderTweenButton.h
 	ProgressBarBox9.cpp
 	ProgressBarBox9.h
+	TweenTextField.cpp
+	TweenTextField.h
 
     [source/gui/particle]
     Particle.cpp
@@ -261,6 +265,8 @@ files
 	AnimalsManager.h
 	MoneyManager.cpp
 	MoneyManager.h
+	DatabaseManager.cpp
+	DatabaseManager.h
 
 	[source/touch/swipe]
 	ResolverRadialChaikin.cpp
