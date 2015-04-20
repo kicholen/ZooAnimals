@@ -30,7 +30,7 @@ MoneyCounterElement::MoneyCounterElement(MoneyCounterElementState state) {
 }
 
 MoneyCounterElement::~MoneyCounterElement() {
-
+	getRoot()->removeEventListener(MoneyManager::MoneyEvent::MONEY_COUNT, CLOSURE(this, &MoneyCounterElement::onMoneyChanged));
 }
 
 void MoneyCounterElement::setDisplayState(MoneyCounterElementState state) {
@@ -123,19 +123,19 @@ void MoneyCounterElement::updateTextFields() {
 	int bronzeMoney = getBronzeMoney();
 	if (_bronzeTextField->getValue() != bronzeMoney) {
 		_bronzeTextField->addTween(TweenTextField::TweenTextInt(bronzeMoney), ANIMATION_TIME, 1);
-		_updateSizeTime = ANIMATION_TIME;
+		_updateSizeTime = ANIMATION_TIME + 100.0f;
 	}
 
 	int silverMoney = getSilverMoney();
 	if (_silverTextField->getValue() != silverMoney) {
 		_silverTextField->addTween(TweenTextField::TweenTextInt(silverMoney), ANIMATION_TIME, 1);
-		_updateSizeTime = ANIMATION_TIME;
+		_updateSizeTime = ANIMATION_TIME + 100.0f;
 	}
 
 	int goldMoney = getGoldMoney();
 	if (_goldTextField->getValue() != goldMoney) {
 		_goldTextField->addTween(TweenTextField::TweenTextInt(goldMoney), ANIMATION_TIME, 1);
-		_updateSizeTime = ANIMATION_TIME;
+		_updateSizeTime = ANIMATION_TIME + 100.0f;
 	}
 }
 
