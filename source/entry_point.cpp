@@ -6,7 +6,6 @@
 
 #include "Main.h"
 #include "FlurryAnalytics.h"
-#include "DatabaseManager.h"
 
 using namespace oxygine;
 
@@ -27,9 +26,8 @@ public:
 	}
 
 	void onDeactivate(Event *) {
-		core::reset();
 		FlurryAnalytics::instance.onSessionEnded();
-		DatabaseManager::instance.save();
+		core::reset();
 	}
 };
 

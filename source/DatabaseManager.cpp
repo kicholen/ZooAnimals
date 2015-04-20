@@ -11,10 +11,14 @@ DatabaseManager::DatabaseManager() {
 }
 
 DatabaseManager::~DatabaseManager() {
-
+	getRoot()->removeEventListener(RootActor::DEACTIVATE, CLOSURE(this, &DatabaseManager::save));
 }
 
-void DatabaseManager::save() {
+void DatabaseManager::init() {
+	getRoot()->addEventListener(RootActor::DEACTIVATE, CLOSURE(this, &DatabaseManager::save));
+}
+
+void DatabaseManager::save(Event *ev) {
 	AnimalsManager::instance.store();
 	MoneyManager::instance.store();
 	ZooSettings::instance.save();

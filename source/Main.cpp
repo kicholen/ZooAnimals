@@ -21,6 +21,7 @@
 #include "FacebookManager.h"
 #include "AnimalsManager.h"
 #include "MoneyManager.h"
+#include "DatabaseManager.h"
 
 using namespace oxygine;
 
@@ -81,6 +82,7 @@ void main_init() {
 	FacebookManager::instance.init();
 	AnimalsManager::instance.init(version);
 	MoneyManager::instance.init(version);
+	DatabaseManager::instance.init();
 
 	Frame::initialize();
 

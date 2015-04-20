@@ -313,5 +313,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=5
+	version-revision=6
 }

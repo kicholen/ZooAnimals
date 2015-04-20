@@ -63,7 +63,7 @@ Action LandingPageFrame::loop(){
 			transitionShowFrame(maskFrame);
 		}
 		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
-			DatabaseManager::instance.save();
+			DatabaseManager::instance.save(0);
 			break;
 		}
 	}
