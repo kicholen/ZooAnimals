@@ -116,9 +116,6 @@ void ZooFrame::setData() {
 	float offset = 0.0f;
 	float lastFieldWidth = 0.0f;
 	
-	//for (map<string, map<string, spAnimalModel> >::iterator outerIterator = AnimalsManager::instance.getPossesedAnimals().begin(); outerIterator != AnimalsManager::instance.getPossesedAnimals().end(); ++outerIterator) {
-	//	for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-	
 	for (map<string, spAnimalModel>::iterator innerIterator = AnimalsManager::instance.getPossesedAnimalsByRegion(_region).begin(); innerIterator != AnimalsManager::instance.getPossesedAnimalsByRegion(_region).end(); ++innerIterator) {
 		spAnimalFarmField field = new AnimalFarmField(fieldSize);
 		field->setCull(true);
@@ -153,7 +150,6 @@ void ZooFrame::setData() {
 		rectangleContainer->addChild(field);
 		lastFieldWidth = field->getDerivedWidth();
 	}
-	//}
 
 	rectangleContainer->setSize(positionX - lastFieldWidth / 2, _rotatingContainer->getHeight());
 	_rotatingContainer->setContent(rectangleContainer);

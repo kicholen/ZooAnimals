@@ -208,6 +208,10 @@ files
 	WallPostMessagePopup.cpp
 	WallPostMessagePopup.h
 
+	[source/frame/shop]
+	ShopFrame.cpp
+	ShopFrame.h
+
     [source/frame/levels]
     PresentAnimalsFrame.cpp
     PresentAnimalsFrame.h

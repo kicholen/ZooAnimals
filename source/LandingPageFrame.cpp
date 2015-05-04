@@ -9,6 +9,7 @@
 #include "DatabaseManager.h"
 #include "AnimalsManager.h"
 #include "MoneyCounterElement.h"
+#include "ShopFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -50,7 +51,9 @@ Action LandingPageFrame::loop(){
 			transitionShowFrame(worldFrame);
 		}
 		else if (action.id == "facebook") {
-			s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);
+			spShopFrame shopFrame = new ShopFrame();
+			transitionShowFrame(shopFrame);
+			//s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);
 		}
 		else if (action.id == "rate") {
 			s3eOSExecExecute("https://play.google.com/store/apps/details?id=com.Zelek.ToddlersAnimals", false);
