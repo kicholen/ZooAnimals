@@ -271,6 +271,8 @@ files
 	MoneyManager.h
 	DatabaseManager.cpp
 	DatabaseManager.h
+	ExpManager.cpp
+	ExpManager.h
 
 	[source/touch/swipe]
 	ResolverRadialChaikin.cpp

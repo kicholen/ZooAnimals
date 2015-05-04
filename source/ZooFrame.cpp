@@ -3,6 +3,7 @@
 #include "AnimalsManager.h"
 #include "ChooseGameDifficultyFrame.h"
 #include "MoneyManager.h"
+#include "ExpManager.h"
 
 ZooFrame::ZooFrame(const string& regionName) {
 	_region = regionName;
@@ -79,6 +80,7 @@ void ZooFrame::onGameChosen(Event *event) {
 	// TODO move it from here to end of the game
 	spAnimalModel model = safeSpCast<AnimalFarmField>(event->currentTarget)->getModel();
 	AnimalsManager::instance.increaseHappinessByPoints(model, 3);
+	ExpManager::instance.increaseExpByPoints(3);
 	MoneyManager::instance.increaseMoneyOnGameFinished(model->getLevel(), model->getGameValue(ev->_name), "easy");
 
 	generateAction(ev->_name);

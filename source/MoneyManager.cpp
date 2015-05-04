@@ -14,10 +14,10 @@ MoneyManager::~MoneyManager() {
 
 void MoneyManager::init(const string& version) {
 	_money = ZooSettings::instance.getPlayerValue("money").as_int();
-	_secondMultiplier = Content::instance.getParameterValue("second_multi").as_double();
-	_thirdMultiplier = Content::instance.getParameterValue("third_multi").as_double();
-	_cashGainMultiplier = Content::instance.getParameterValue("cash_gain_multiplier").as_double();
-	_cashGainPower = Content::instance.getParameterValue("cash_gain_power").as_double();
+	_secondMultiplier = Content::instance.getParameterValue("second_multi_cash").as_double();
+	_thirdMultiplier = Content::instance.getParameterValue("third_multi_cash").as_double();
+	_cashGainMultiplier = Content::instance.getParameterValue("gain_multiplier_cash").as_double();
+	_cashGainPower = Content::instance.getParameterValue("gain_power_cash").as_double();
 	_zooCount = Content::instance.getParameterAsInt("zoo_count");
 	fillMoneyGainer();
 }
@@ -55,7 +55,6 @@ int MoneyManager::getMoneyGained(int zooLevel, int game, const string& difficult
 
 void MoneyManager::store() {
 	ZooSettings::instance.addPlayerValue("money").set_value(_money);
-	ZooSettings::instance.save();
 }
 
 void MoneyManager::fillMoneyGainer() {

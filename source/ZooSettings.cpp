@@ -28,6 +28,7 @@ void ZooSettings::reset() {
 	int level = 0;
 
 	addPlayerValue("money").set_value(START_MONEY);
+	addPlayerValue("exp").set_value(START_EXP);
 
 	pugi::xml_node mainNode = _doc.append_child("animals");
 	int regionArraySize = sizeof(START_REGIONS) / sizeof(START_REGIONS[0]);

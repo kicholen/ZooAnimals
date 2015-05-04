@@ -30,7 +30,9 @@ MoneyCounterElement::MoneyCounterElement(MoneyCounterElementState state) {
 }
 
 MoneyCounterElement::~MoneyCounterElement() {
-	getRoot()->removeEventListener(MoneyManager::MoneyEvent::MONEY_COUNT, CLOSURE(this, &MoneyCounterElement::onMoneyChanged));
+	if (getRoot()) {
+		getRoot()->removeEventListener(MoneyManager::MoneyEvent::MONEY_COUNT, CLOSURE(this, &MoneyCounterElement::onMoneyChanged));
+	}
 }
 
 void MoneyCounterElement::setDisplayState(MoneyCounterElementState state) {
