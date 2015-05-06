@@ -5,6 +5,11 @@
 
 using namespace FlashUtils;
 
+/*  Controls money flow:
+**  - how much is gained through games
+**  - stores money do db
+**  - informs display stuff on money change by event
+*/
 class MoneyManager : EventDispatcher
 {
 public:

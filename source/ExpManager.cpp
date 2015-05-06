@@ -39,7 +39,6 @@ void ExpManager::fillNeededExp() {
 	_expNeededForLevels = vector<int>(_levelCount);
 	for (int i = 0; i <= _levelCount; i++) {
 		_expNeededForLevels[i] = (int)round(_expGainerMultiplier * pow((double)i, _expGainPower));
-		//oxygine::log::warning(FlashUtils::CMath::intToString(_expNeededForLevels[i]).c_str());
 		if (_exp >= _expNeededForLevels[i]) {
 			_level += 1;
 		}

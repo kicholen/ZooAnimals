@@ -3,19 +3,25 @@
 
 #include "oxygine-framework.h"
 //#include "SharedResources.h"
-#include "RotatingContainer.h"
 //#include "FlashUtils.h"
+
+#define OFFSET 4.0f
 
 using namespace oxygine;
 //using namespace FlashUtils;
 
 DECLARE_SMART(ShopContainer, spShopContainer);
 
-class ShopContainer : public RotatingContainer
+class ShopContainer : public Actor
 {
 public:
-	ShopContainer();
+	ShopContainer(const Vector2& size);
 	~ShopContainer();
+
+	void setData();
+
+private:
+	void onItemBuy(Event *ev);
 };
 
 #endif

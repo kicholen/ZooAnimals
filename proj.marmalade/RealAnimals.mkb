@@ -29,6 +29,8 @@ files
     SpriteModel.h
 	AnimalModel.cpp
 	AnimalModel.h
+	ShopItemModel.cpp
+	ShopItemModel.h
 
 	[source/animation]
 	AnimalsFarmAnimations.cpp
@@ -37,6 +39,8 @@ files
 	[source/element/shop]
 	ShopContainer.cpp
 	ShopContainer.h
+	ShopItem.cpp
+	ShopItem.h
 
 	[source/element/base]
 	AnimalSlot.cpp
@@ -273,6 +277,8 @@ files
 	DatabaseManager.h
 	ExpManager.cpp
 	ExpManager.h
+	ShopManager.cpp
+	ShopManager.h
 
 	[source/touch/swipe]
 	ResolverRadialChaikin.cpp

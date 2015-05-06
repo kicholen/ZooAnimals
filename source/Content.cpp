@@ -172,3 +172,15 @@ pugi::xml_node Content::getAnimalFarmSortParametersNode(const string &name) {
 pugi::xml_node Content::getAnimalFarmNoSortParametersNode(const string &name) {
 	return getAnimalFarmParametersNode(name).child("no_sort");
 }
+
+pugi::xml_node Content::getShopFirstChildNode(const string& shopType) {
+	pugi::xml_node data = _contentDocument.child("data");
+	OX_ASSERT(data);
+	pugi::xml_node shop = data.child("shop");
+	OX_ASSERT(shop);
+	pugi::xml_node specificShop = shop.child(shopType.c_str());
+	OX_ASSERT(specificShop);
+	
+
+	return specificShop.first_child();
+}

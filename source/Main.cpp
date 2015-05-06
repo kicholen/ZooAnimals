@@ -23,6 +23,7 @@
 #include "MoneyManager.h"
 #include "DatabaseManager.h"
 #include "ExpManager.h"
+#include "ShopManager.h"
 
 using namespace oxygine;
 
@@ -85,6 +86,7 @@ void main_init() {
 	MoneyManager::instance.init(version);
 	DatabaseManager::instance.init();
 	ExpManager::instance.init(version);
+	ShopManager::instance.init(version);
 
 	Frame::initialize();
 

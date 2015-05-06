@@ -1,5 +1,6 @@
 #include "ShopFrame.h"
 #include "SlidingActor.h"
+#include "ShopContainer.h"
 
 ShopFrame::ShopFrame() {
 	init("LandingPageFrame.xml", true);
@@ -41,20 +42,8 @@ Action ShopFrame::loop() {
 }
 
 void ShopFrame::setData() {
-	spSlidingActor container = new SlidingActor();
-	container->setSize(_view->getWidth(), _view->getHeight());
-	container->setPriority(-5);
-
-	spColorRectSprite content = new ColorRectSprite();
-	content->setSize(container->getWidth(), container->getHeight() * 2.0f);
-	content->setColor(Color(0, 0, 22, 120));
-
-	spColorRectSprite test = new ColorRectSprite();
-	test->setSize(container->getWidth(), container->getHeight());
-	test->setColor(Color::Aqua);
-
-	content->addChild(test);
-	container->setContent(content);
-	container->setPosition(_view->getSize() / 2 - container->getSize() / 2);
-	container->attachTo(_view);
+	spShopContainer shopContainer = new ShopContainer(_view->getSize());
+	shopContainer->setData();
+	shopContainer->setPosition(_view->getSize() / 2 - shopContainer->getSize() / 2);
+	shopContainer->attachTo(_view);
 }
