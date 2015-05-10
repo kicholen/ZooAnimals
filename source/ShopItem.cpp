@@ -9,6 +9,7 @@ ShopItem::ShopItem(const Vector2& size, spShopItemModel model) {
 	createBackground();
 	createItemSprite(model);
 	createBuyButton();
+	_itemId = model->index();
 }
 
 ShopItem::~ShopItem() {

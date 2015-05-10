@@ -23,7 +23,8 @@ void RegionAnimalsContainer::setRegion(const string& regionName) {
 	createContainerIfDoesntExist();
 
 	int count = 0;
-	for (map<string, spAnimalModel>::iterator innerIterator = AnimalsManager::instance.getAnimalsByRegion(regionName).begin(); innerIterator != AnimalsManager::instance.getAnimalsByRegion(regionName).end(); ++innerIterator) {
+	animalMap animalMap = AnimalsManager::instance.getAnimalsByRegion(regionName);
+	for (animalMap::iterator innerIterator = animalMap.begin(); innerIterator != animalMap.end(); ++innerIterator) {
 		string name = CMath::intToString(count);
 		spAnimalSlot animalSlot = _stackContainer->getChildT<AnimalSlot>(name, oxygine::ep_ignore_error);
 		if (!animalSlot) {

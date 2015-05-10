@@ -15,7 +15,7 @@ extern const string FARM[11];
 extern const string WINTER[7];
 extern const string UNDERWATER[5];
 extern const string STEPPE[7];
-extern const string ASIA[8];
+extern const string ASIA[7];
 extern const string AUSTRALIA[8];
 extern const string ALL_ANIMALS[45];
 

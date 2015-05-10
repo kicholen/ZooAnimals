@@ -212,6 +212,12 @@ files
 	WallPostMessagePopup.cpp
 	WallPostMessagePopup.h
 
+	[source/frame/popup]
+	ItemBoughtPopup.cpp
+	ItemBoughtPopup.h
+	OutOfMoneyPopup.cpp
+	OutOfMoneyPopup.h
+	
 	[source/frame/shop]
 	ShopFrame.cpp
 	ShopFrame.h
@@ -279,6 +285,16 @@ files
 	ExpManager.h
 	ShopManager.cpp
 	ShopManager.h
+	LanguageManager.cpp
+	LanguageManager.h
+
+	[source/factory]
+	LockitFactory.cpp
+	LockitFactory.h
+
+	[source/factory/products]
+	Lockit.cpp
+	Lockit.h
 
 	[source/touch/swipe]
 	ResolverRadialChaikin.cpp

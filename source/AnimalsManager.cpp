@@ -71,7 +71,7 @@ spAnimalModel AnimalsManager::getAnimalModelByRegion(const string& region, const
 	return _animalsMap[region][name];
 }
 
-map<string, spAnimalModel>& AnimalsManager::getAnimalsByRegion(const string& name) {
+const animalMap& AnimalsManager::getAnimalsByRegion(const string& name) {
 	return _animalsMap[name];
 }
 
@@ -79,11 +79,11 @@ bool AnimalsManager::isRegionPopulated(const string& regionName) {
 	return _posessedAnimalMap.count(regionName) != 0;
 }
 
-map<string, spAnimalModel>& AnimalsManager::getPossesedAnimalsByRegion(const string& region) {
+const animalMap& AnimalsManager::getPossesedAnimalsByRegion(const string& region) {
 	return _posessedAnimalMap[region];
 }
 
-map<string, map<string, spAnimalModel> >& AnimalsManager::getPossesedAnimals() {
+const map<string, animalMap >& AnimalsManager::getPossesedAnimals() {
 	return _posessedAnimalMap;
 }
 
@@ -96,9 +96,23 @@ void AnimalsManager::increaseHappinessByPoints(spAnimalModel model, int points) 
 	}
 }
 
+void AnimalsManager::increaseAnimalCountByBuy(const string& region, const string& name, int count) {
+	spAnimalModel model = getAnimalModelByRegion(region, name);
+	model->setAnimalsCount(model->animalsCount() + count);
+
+	if (_posessedAnimalMap[region].count(name) == 0) {
+		_speciesPossesedCount += 1;
+		model->setLevel(_speciesPossesedCount);
+		model->setLastFeedS(getCurrentTimeInSeconds());
+		_posessedAnimalMap[region].insert(make_pair(name, model));
+	}
+
+	dispatchAnimalCountChangedEvent(model);
+}
+
 void AnimalsManager::store() {
-	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
-		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+	for (map<string, animalMap >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
+		for (animalMap::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
 			ZooSettings::instance.setAnimal(outerIterator->first, innerIterator->first, innerIterator->second->happinessValue(), innerIterator->second->hungerValue(), innerIterator->second->animalsCount(), innerIterator->second->lastFeedS(), innerIterator->second->getLevel());
 		}
 	}
@@ -205,7 +219,6 @@ void AnimalsManager::addAnimalModel(const string& regionName, const string& name
 	model->setLevel(level);
 	model->fromContent();
 	_animalsMap[regionName].insert(make_pair(name, model));
-
 	
 	if (count > 0) {
 		_speciesPossesedCount += 1;
@@ -217,8 +230,8 @@ void AnimalsManager::updater(Event* event) {
 	Timer::TimerEvent* timerEvent = static_cast<Timer::TimerEvent*>(event);
 	int currentTime = getCurrentTimeInSeconds();
 
-	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
-		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+	for (map<string, animalMap >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
+		for (animalMap::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
 			if (canAnimalBeFedByModel(innerIterator->second)) {
 				dispatchAnimalCanBeFedEvent(innerIterator->second);
 			}

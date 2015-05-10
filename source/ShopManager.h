@@ -8,6 +8,7 @@
 using namespace FlashUtils;
 
 typedef map<int, spShopItemModel> itemmap;
+typedef enum { smBought, smNotEnoughtMoney} ShopManagerBuyResult;
 
 /*  Stores ShopItemModels
 **  - any animal can wear any wearable, content so much
@@ -37,6 +38,8 @@ public:
 	void init(const string& version);
 
 	const itemmap& getAnimalModels() const;
+	spShopItemModel getItemByIndex(int index);
+	ShopManagerBuyResult buyItemByMoney(spShopItemModel model);
 
 private:
 	void createShopItemsFromContent();

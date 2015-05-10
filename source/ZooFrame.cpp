@@ -58,7 +58,7 @@ Action ZooFrame::loop() {
 		}
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
-			transitionShowFrame(chooserFrame);
+			transitionShowFrameAsDialog(chooserFrame);
 		}
 		else if (action.id == "store") {
 			AnimalsManager::instance.store();
@@ -118,7 +118,8 @@ void ZooFrame::setData() {
 	float offset = 0.0f;
 	float lastFieldWidth = 0.0f;
 	
-	for (map<string, spAnimalModel>::iterator innerIterator = AnimalsManager::instance.getPossesedAnimalsByRegion(_region).begin(); innerIterator != AnimalsManager::instance.getPossesedAnimalsByRegion(_region).end(); ++innerIterator) {
+	animalMap animaMap = AnimalsManager::instance.getPossesedAnimalsByRegion(_region);
+	for (animalMap::iterator innerIterator = animaMap.begin(); innerIterator != animaMap.end(); ++innerIterator) {
 		spAnimalFarmField field = new AnimalFarmField(fieldSize);
 		field->setCull(true);
 		_farmArray.push(field);

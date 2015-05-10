@@ -11,6 +11,8 @@ using namespace FlashUtils;
 
 #define UPDATER_STEP_IN_SECONDS 10
 
+typedef map<string, spAnimalModel> animalMap;
+
 class AnimalsManager : public EventDispatcher
 {
 public:
@@ -42,12 +44,13 @@ public:
 
 	spAnimalModel getAnimalModel(const string& name);
 	spAnimalModel getAnimalModelByRegion(const string& region, const string& name);
-	map<string, spAnimalModel>& getAnimalsByRegion(const string& region);
+	const animalMap& getAnimalsByRegion(const string& region);
 
-	map<string, spAnimalModel>& getPossesedAnimalsByRegion(const string& region);
-	map<string, map<string, spAnimalModel> >& getPossesedAnimals();
+	const animalMap& getPossesedAnimalsByRegion(const string& region);
+	const map<string, animalMap >& getPossesedAnimals();
 
 	void increaseHappinessByPoints(spAnimalModel model, int points);
+	void increaseAnimalCountByBuy(const string& region, const string& name, int count);
 
 	bool isRegionPopulated(const string& regionName);
 
@@ -73,8 +76,8 @@ private:
 	int getCurrentTimeInSeconds();
 
 private:
-	map<string, map<string, spAnimalModel> > _animalsMap;
-	map<string, map<string, spAnimalModel> > _posessedAnimalMap;
+	map<string, animalMap > _animalsMap;
+	map<string, animalMap > _posessedAnimalMap;
 
 	int _speciesPossesedCount;
 

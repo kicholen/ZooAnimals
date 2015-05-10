@@ -34,8 +34,8 @@ namespace oxygine
 
 	void FileSaver::reset() {
 		_doc.reset();
-		pugi::xml_node root = _doc.append_child("box2d");
-		root.append_child("bodies");
+		//pugi::xml_node root = _doc.append_child("box2d");
+		//root.append_child("bodies");
 	}
 
 	void FileSaver::load() {

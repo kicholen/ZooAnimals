@@ -1,15 +1,15 @@
-#ifndef _SHOPFRAME_
-#define _SHOPFRAME_
+#ifndef _ITEMBOUGHTPOPUP_
+#define _ITEMBOUGHTPOPUP_
 
 #include "CustomFrame.h"
 #include "ShopItemModel.h"
 
-DECLARE_SMART(ShopFrame, spShopFrame);
+DECLARE_SMART(ItemBoughtPopup, spItemBoughtPopup);
 
-class ShopFrame : public CustomFrame
+class ItemBoughtPopup : public CustomFrame
 {
 public:
-	ShopFrame();
+	ItemBoughtPopup(spShopItemModel model);
 
 	void selectTransitions();
 
@@ -21,10 +21,6 @@ protected:
 
 private:
 	void setData();
-
-	void onItemBuy(Event *ev);
-
-	bool canItemBeBought(int price);
 
 private:
 	spShopItemModel _model;

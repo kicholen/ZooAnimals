@@ -27,6 +27,11 @@ void MoneyManager::increaseMoneyOnGameFinished(int zooLevel, int game, const str
 	dispatchMoneyCountEvent();
 }
 
+void MoneyManager::decreaseMoneyOnItemBought(int money) {
+	_money -= money;
+	dispatchMoneyCountEvent();
+}
+
 int MoneyManager::getMoney() {
 	return _money;
 }

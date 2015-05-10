@@ -37,6 +37,7 @@ namespace oxygine
 		pugi::xml_attribute getValue(const string &name);
 
 		pugi::xml_node getFirstNodeByName(const string &nodeName);
+
 		pugi::xml_attribute addAttribute(pugi::xml_node child, const string &attributeName);
 		pugi::xml_node addChild(pugi::xml_node parent, const string &childName);
 	protected:

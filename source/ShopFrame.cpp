@@ -1,6 +1,11 @@
 #include "ShopFrame.h"
 #include "SlidingActor.h"
 #include "ShopContainer.h"
+#include "ShopItem.h"
+#include "MoneyManager.h"
+#include "ShopManager.h"
+#include "OutOfMoneyPopup.h"
+#include "ItemBoughtPopup.h"
 
 ShopFrame::ShopFrame() {
 	init("LandingPageFrame.xml", true);
@@ -32,13 +37,32 @@ Action ShopFrame::loop() {
 		if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			break;
 		}
-		/*else if (action.id == "memory") {
-			//spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
-			//transitionShowFrame(chooserFrame);
-		}*/
+		else if (action.id == "out_of_money") {
+			spOutOfMoneyPopup outOfMoneyPopup = new OutOfMoneyPopup(_model);
+			transitionShowFrameAsDialog(outOfMoneyPopup);
+		}
+		else if (action.id == "buy") {
+			spItemBoughtPopup itemBoughtPopup = new ItemBoughtPopup(_model);
+			transitionShowFrameAsDialog(itemBoughtPopup);
+		}
 	}
 
 	return _lastAction;
+}
+
+void ShopFrame::onItemBuy(Event *ev) {
+	ShopItem::ShopItemEvent *shopEvent = safeCast<ShopItem::ShopItemEvent*>(ev);
+	
+	_model = ShopManager::instance.getItemByIndex(shopEvent->itemId);
+
+	ShopManagerBuyResult result = ShopManager::instance.buyItemByMoney(_model);
+
+	if (result == ShopManagerBuyResult::smBought) {
+		generateAction("buy");
+	}
+	else {
+		generateAction("out_of_money");
+	}
 }
 
 void ShopFrame::setData() {
@@ -46,4 +70,9 @@ void ShopFrame::setData() {
 	shopContainer->setData();
 	shopContainer->setPosition(_view->getSize() / 2 - shopContainer->getSize() / 2);
 	shopContainer->attachTo(_view);
+	shopContainer->addEventListener(ShopItem::ShopItemEvent::BUY_ITEM, CLOSURE(this, &ShopFrame::onItemBuy));
+}
+
+bool ShopFrame::canItemBeBought(int price) {
+	return MoneyManager::instance.getMoney() > price;
 }

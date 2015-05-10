@@ -34,6 +34,7 @@ public:
 	void init(const string& version);
 
 	void increaseMoneyOnGameFinished(int zooLevel, int game, const string& difficulty);
+	void decreaseMoneyOnItemBought(int money);
 	int getMoney();
 	int getMoneyGained(int zooLevel, int game, const string& difficulty);
 

@@ -24,6 +24,7 @@
 #include "DatabaseManager.h"
 #include "ExpManager.h"
 #include "ShopManager.h"
+#include "LanguageManager.h"
 
 using namespace oxygine;
 
@@ -87,6 +88,7 @@ void main_init() {
 	DatabaseManager::instance.init();
 	ExpManager::instance.init(version);
 	ShopManager::instance.init(version);
+	LanguageManager::instance.init(Language::lmEnglish);
 
 	Frame::initialize();
 

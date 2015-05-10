@@ -13,7 +13,7 @@ const string UNDERWATER[5] = {"dolphin", "octopus", "fish_1", "whale", "shark"};
 
 const string STEPPE[7] = {"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion"};
 
-const string ASIA[8] = {"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot", "elephant"};
+const string ASIA[7] = {"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot"};
 
 const string AUSTRALIA[8] = {"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
 

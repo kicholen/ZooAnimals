@@ -1,5 +1,7 @@
 #include "ShopManager.h"
 #include "Content.h"
+#include "MoneyManager.h"
+#include "AnimalsManager.h"
 
 ShopManager ShopManager::instance;
 
@@ -18,50 +20,83 @@ void ShopManager::init(const string& version) {
 	createShopItemsFromContent();
 }
 
-
 void ShopManager::createShopItemsFromContent() {
 	createMap(_animalItemMap, "animals");
-
-	//	_itemsMap = 
 }
 
 void ShopManager::createMap(itemmap &map, const string& shopType) {
-	pugi::xml_node itemShop = Content::instance.getShopFirstChildNode(shopType);
-	int index = 0;
-	int lockit;
-	const char* resource;
-	int price;
+	pugi::xml_node animalShop = Content::instance.getShopFirstChildNode(shopType);
 
-	while (!itemShop.empty()) {
-		pugi::xml_attribute attribute = itemShop.first_attribute();
-		
-		while (!attribute.empty()) {
-			const char *name = attribute.name();
+	while (!animalShop.empty()) {
+		int index;
+		int lockit;
+		const char* resource;
+		int price;
+		const char* region = animalShop.name();
+		pugi::xml_node itemShop = animalShop.first_child();
 
-			if (!strcmp(name, "lockit")) {
-				lockit = attribute.as_int();
+		while (!itemShop.empty()) {
+			pugi::xml_attribute attribute = itemShop.first_attribute();
+
+			while (!attribute.empty()) {
+				const char *name = attribute.name();
+
+				if (!strcmp(name, "index")) {
+					index = attribute.as_int();
+				}
+				else if (!strcmp(name, "lockit")) {
+					lockit = attribute.as_int();
+				}
+				else if (!strcmp(name, "resource")) {
+					resource = attribute.as_string();
+				}
+				else if (!strcmp(name, "price")) {
+					price = attribute.as_int();
+				}
+
+				attribute = attribute.next_attribute();
 			}
-			else if (!strcmp(name, "resource")) {
-				resource = attribute.as_string();
-			}
-			else if (!strcmp(name, "price")) {
-				price = attribute.as_int();
-			}
-		
-			attribute = attribute.next_attribute();
+			spShopItemModel model = new ShopItemModel(index, resource, region, lockit, price);
+
+			map.insert(make_pair(index, model));
+
+			itemShop = itemShop.next_sibling();
 		}
-		spShopItemModel model = new ShopItemModel(resource, lockit, price);
-		
-		map.insert(make_pair(index, model));
-		index += 1;
 
-		itemShop = itemShop.next_sibling();
+		animalShop = animalShop.next_sibling();
 	}
 }
 
 const itemmap& ShopManager::getAnimalModels() const {
 	return _animalItemMap;
 }
+
+spShopItemModel ShopManager::getItemByIndex(int index) {
+	if (_animalItemMap.count(index) > 0) {
+		return _animalItemMap[index];
+	}
+	if (_itemsMap.count(index) > 0) {
+		return _itemsMap[index];
+	}
+	if (_mixMap.count(index) > 0) {
+		return _mixMap[index];
+	}
+
+	OX_ASSERT(false);
+	return new ShopItemModel(0, "", "", 0, 0);
+}
+
+ShopManagerBuyResult ShopManager::buyItemByMoney(spShopItemModel model) {
+	if (MoneyManager::instance.getMoney() > model->price()) {
+		MoneyManager::instance.decreaseMoneyOnItemBought(model->price());
+		AnimalsManager::instance.increaseAnimalCountByBuy(model->region(), model->resource(), 1);
+		return smBought;
+	}
+	else {
+		return smNotEnoughtMoney;
+	}
+}
+
 
 // todo
 void ShopManager::updateShopItemsFromBackendAsync() {
