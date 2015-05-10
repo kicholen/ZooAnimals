@@ -28,10 +28,10 @@ void ShopManager::createMap(itemmap &map, const string& shopType) {
 	pugi::xml_node animalShop = Content::instance.getShopFirstChildNode(shopType);
 
 	while (!animalShop.empty()) {
-		int index;
-		int lockit;
+		int index = 0;
+		int lockit = 0;
 		const char* resource;
-		int price;
+		int price = 0;
 		const char* region = animalShop.name();
 		pugi::xml_node itemShop = animalShop.first_child();
 
@@ -89,7 +89,7 @@ spShopItemModel ShopManager::getItemByIndex(int index) {
 ShopManagerBuyResult ShopManager::buyItemByMoney(spShopItemModel model) {
 	if (MoneyManager::instance.getMoney() > model->price()) {
 		MoneyManager::instance.decreaseMoneyOnItemBought(model->price());
-		AnimalsManager::instance.increaseAnimalCountByBuy(model->region(), model->resource(), 1);
+		AnimalsManager::instance.increaseAnimalCount(model->region(), model->resource(), 1);
 		return smBought;
 	}
 	else {

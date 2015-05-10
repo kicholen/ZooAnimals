@@ -57,7 +57,7 @@ void ShopFrame::onItemBuy(Event *ev) {
 
 	ShopManagerBuyResult result = ShopManager::instance.buyItemByMoney(_model);
 
-	if (result == ShopManagerBuyResult::smBought) {
+	if (result == smBought) {
 		generateAction("buy");
 	}
 	else {

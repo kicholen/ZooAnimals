@@ -92,21 +92,18 @@ spShaderTweenButton createShaderButton(const string &name, const string &txt) {
 	bool shouldAddSprite = false;
 	const char *spriteName = "";
 
-	int r = rand() % 5;
-	const char *str = "button_darkblue";
-	switch(r) {
-		case 1:
-			str = "button_purple";
-			break;
-		case 2:
-			str = "button_blue";
-			break;
-		case 3:
-			str = "button_green";
-			break;
-		case 4:
-			str = "button_yellow";
-			break;
+	int r = rand() % 3 + 1;
+	const char *str;
+	switch (r) {
+	case 1:
+		str = "greenButton";
+		break;
+	case 2:
+		str = "lightBlueButton";
+		break;
+	case 3:
+		str = "redButton";
+		break;
 	}
 
 	if (name == "facebook") {

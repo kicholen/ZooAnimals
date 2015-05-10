@@ -3,6 +3,7 @@
 
 AnimatableElementContainer::AnimatableElementContainer(Vector2 size, float offsetPercent) {
 	setSize(size);
+	setTouchEnabled(false);
 	_offsetPercent = offsetPercent;
 	_needsUpdateArrayDimensions = false;
 	_stackContainersArray._vector.resize(0);

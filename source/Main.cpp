@@ -88,7 +88,7 @@ void main_init() {
 	DatabaseManager::instance.init();
 	ExpManager::instance.init(version);
 	ShopManager::instance.init(version);
-	LanguageManager::instance.init(Language::lmEnglish);
+	LanguageManager::instance.init(0);
 
 	Frame::initialize();
 

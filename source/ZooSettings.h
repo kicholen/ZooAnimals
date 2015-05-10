@@ -6,7 +6,7 @@
 class ZooSettings : public FileSaver
 {
 public:
-	
+
 	static ZooSettings instance;
 
 	ZooSettings();
@@ -14,6 +14,7 @@ public:
 
 	void init(const string& version);
 	void reset();
+	void finishStartAnimalChoice();
 	void save();
 
 	pugi::xml_attribute addPlayerValue(const string &name);
@@ -22,8 +23,12 @@ public:
 	pugi::xml_node getAnimal(const string& regionName, const string& animalName);
 	void setAnimal(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
 
+	bool shouldShowChooseAnimalPopup() { return _shouldShowChooseAnimalPopup; }
+
 private:
 	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
+
+	bool _shouldShowChooseAnimalPopup;
 };
 
 #endif

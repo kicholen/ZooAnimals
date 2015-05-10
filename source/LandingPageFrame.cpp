@@ -10,6 +10,8 @@
 #include "AnimalsManager.h"
 #include "MoneyCounterElement.h"
 #include "ShopFrame.h"
+#include "ChooseStartAnimalFrame.h"
+#include "ZooSettings.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -39,12 +41,20 @@ Action LandingPageFrame::loop(){
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "play") {
-			//spLevelChooserFrame levelChooserFrame = new LevelChooserFrame;
-			//transitionShowFrame(levelChooserFrame);
-			//spZooFrame zooFrame = new ZooFrame();
-			//transitionShowFrame(zooFrame);
-			spZooGateFrame zooGateFrame = new ZooGateFrame();
-			transitionShowFrame(zooGateFrame);
+			if (ZooSettings::instance.shouldShowChooseAnimalPopup()) {
+				spChooseStartAnimalFrame chooseAnimal = new ChooseStartAnimalFrame();
+				Action innerAction = transitionShowFrameAsDialog(chooseAnimal);
+
+				if (innerAction.id == "play") {
+					ZooSettings::instance.finishStartAnimalChoice();
+					spZooGateFrame zooGateFrame = new ZooGateFrame();
+					transitionShowFrame(zooGateFrame);
+				}
+			}
+			else {
+				spZooGateFrame zooGateFrame = new ZooGateFrame();
+				transitionShowFrame(zooGateFrame);
+			}
 		}
 		else if (action.id == "map") {
 			spWorldMapFrame worldFrame = new WorldMapFrame();
@@ -91,7 +101,6 @@ void LandingPageFrame::setData() {
 	swipe->setSize(_view->getSize());
 	swipe->setPriority(-1000);
 	swipe->attachTo(_view);
-
 
 	spMoneyCounterElement counter = new MoneyCounterElement();
 	counter->show();

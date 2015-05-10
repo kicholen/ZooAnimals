@@ -2,13 +2,13 @@
 #include "SharedResources.h"
 
 OutOfMoneyPopup::OutOfMoneyPopup(spShopItemModel model) {
-	init("LandingPageFrame.xml", true);
+	init("LandingPageFrame.xml", false);
 	selectTransitions();
 	_model = model;
 }
 
 void OutOfMoneyPopup::selectTransitions() {
-	spTransition transition = new TransitionFade;
+	spTransition transition = new TransitionScale;
 	setTransitionIn(transition);
 	setTransitionOut(transition);
 }

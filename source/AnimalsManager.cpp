@@ -55,11 +55,13 @@ bool AnimalsManager::canAnimalBeFedByModel(spAnimalModel model) {
 bool AnimalsManager::canAnimalBeFedByName(const string& name) {
 	return canAnimalBeFedByModel(getAnimalModel(name));
 }
-
+// time consuming, maps was made on purpose, and here it is removed
 spAnimalModel AnimalsManager::getAnimalModel(const string& name) {
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
 		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-			return innerIterator->second;
+			if (innerIterator->second->animalName() == name) {
+				return innerIterator->second;
+			}
 		}
 	}
 
@@ -96,7 +98,7 @@ void AnimalsManager::increaseHappinessByPoints(spAnimalModel model, int points) 
 	}
 }
 
-void AnimalsManager::increaseAnimalCountByBuy(const string& region, const string& name, int count) {
+void AnimalsManager::increaseAnimalCount(const string& region, const string& name, int count) {
 	spAnimalModel model = getAnimalModelByRegion(region, name);
 	model->setAnimalsCount(model->animalsCount() + count);
 
@@ -108,6 +110,22 @@ void AnimalsManager::increaseAnimalCountByBuy(const string& region, const string
 	}
 
 	dispatchAnimalCountChangedEvent(model);
+}
+
+void AnimalsManager::increaseAnimalCount(spAnimalModel model, int count) {
+	model->setAnimalsCount(model->animalsCount() + count);
+	const string& region = getAnimalRegion(model);
+
+	if (_posessedAnimalMap[region].count(model->animalName()) == 0) {
+		_speciesPossesedCount += 1;
+		model->setLevel(_speciesPossesedCount);
+		model->setLastFeedS(getCurrentTimeInSeconds());
+		_posessedAnimalMap[region].insert(make_pair(model->animalName(), model));
+	}
+
+	dispatchAnimalCountChangedEvent(model);
+	
+
 }
 
 void AnimalsManager::store() {
@@ -224,6 +242,19 @@ void AnimalsManager::addAnimalModel(const string& regionName, const string& name
 		_speciesPossesedCount += 1;
 		_posessedAnimalMap[regionName].insert(make_pair(name, model));
 	}
+}
+
+const string& AnimalsManager::getAnimalRegion(spAnimalModel model) {
+	for (map<string, animalMap >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
+		for (animalMap::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+			if (innerIterator->second->animalName() == model->animalName()) {
+				return outerIterator->first;
+			}
+		}
+	}
+
+	OX_ASSERT(false);
+	return "";
 }
 
 void AnimalsManager::updater(Event* event) {

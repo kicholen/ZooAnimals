@@ -15,15 +15,15 @@ public:
 
 	LanguageManager();
 	~LanguageManager();
-	void init(Language type);
+	void init(int type);
 
 	string getText(int lockitNumber);
 
-	void setLanguage(Language type);
+	void setLanguage(int type);
 
 	//void save(Event *ev);
 private:
-	const char* getLanguageCode(Language type);
+	string getLanguageCode(int type);
 
 private:
 	Lockit* _lockit;

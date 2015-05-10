@@ -50,7 +50,8 @@ public:
 	const map<string, animalMap >& getPossesedAnimals();
 
 	void increaseHappinessByPoints(spAnimalModel model, int points);
-	void increaseAnimalCountByBuy(const string& region, const string& name, int count);
+	void increaseAnimalCount(const string& region, const string& name, int count);
+	void increaseAnimalCount(spAnimalModel model, int count);
 
 	bool isRegionPopulated(const string& regionName);
 
@@ -65,6 +66,7 @@ private:
 	void createTimer();
 
 	void addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS, int level = -1);
+	const string& getAnimalRegion(spAnimalModel model);
 
 	void updater(Event* event);
 

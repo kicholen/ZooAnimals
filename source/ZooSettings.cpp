@@ -7,6 +7,7 @@ ZooSettings ZooSettings::instance;
 
 ZooSettings::ZooSettings() {
 	_path = "ZooSettings.xml";
+	_shouldShowChooseAnimalPopup = false;
 }
 
 
@@ -31,7 +32,9 @@ void ZooSettings::reset() {
 	addPlayerValue("exp").set_value(START_EXP);
 
 	pugi::xml_node mainNode = _doc.append_child("animals");
-	int regionArraySize = sizeof(START_REGIONS) / sizeof(START_REGIONS[0]);
+
+	_shouldShowChooseAnimalPopup = true;
+	/*int regionArraySize = sizeof(START_REGIONS) / sizeof(START_REGIONS[0]);
 
 	for (int i = 0; i < regionArraySize; i++) {
 		pugi::xml_node regionNode = mainNode.append_child(START_REGIONS[i].c_str());
@@ -72,7 +75,12 @@ void ZooSettings::reset() {
 			}
 		}
 	}
+	finishStartAnimalChoice();
+	*/
+}
 
+void ZooSettings::finishStartAnimalChoice() {
+	_shouldShowChooseAnimalPopup = false;
 	pugi::xml_node checkNode = _doc.append_child("check");
 	checkNode.append_attribute("version").set_value(_version.c_str());
 }

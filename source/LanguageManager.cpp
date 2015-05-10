@@ -15,7 +15,7 @@ LanguageManager::~LanguageManager() {
 	}
 }
 
-void LanguageManager::init(Language type) {
+void LanguageManager::init(int type) {
 	setLanguage(type);
 }
 
@@ -24,17 +24,17 @@ string LanguageManager::getText(int lockitNumber) {
 	return _lockit->getText(lockitNumber);
 }
 
-void LanguageManager::setLanguage(Language type) {
+void LanguageManager::setLanguage(int type) {
 	if (_lockit) {
 		_lockit->reset();
 		_lockit = NULL;
 	}
 
-	_lockit = LockitFactory::getInstance(getLanguageCode(type));
+	_lockit = LockitFactory::getInstance(getLanguageCode(type).c_str());
 }
 
-const char* LanguageManager::getLanguageCode(Language type) {
-	const char* languageCode;
+string LanguageManager::getLanguageCode(int type) {
+	string languageCode;
 	if (type == lmEnglish) {
 		languageCode = "EN_en";
 	}

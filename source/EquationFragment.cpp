@@ -75,7 +75,6 @@ void EquationFragment::onBackgroundTweenEnded(Event *event) {
 	_container->showContainerElements(true);
 }
 
-// todo
 void EquationFragment::show(bool shouldAnimate) {
 	setVisible(true);
 }

@@ -39,15 +39,8 @@ Action ZooGateFrame::loop() {
 		else if (action.id == "close") {
 			break;
 		}
-		else if (action.id == "result") {
-			break; // todo
-		}
-		else if (action.id == "memory") {
-			//spChooseMemoryDifficultyFrame chooserFrame = new ChooseMemoryDifficultyFrame();
-			//transitionShowFrame(chooserFrame);
-		}
-		else if (action.id == "farm") {
-			spZooFrame zooFrame = new ZooFrame("farm");
+		else if (action.id == "farm" || action.id == "winter" || action.id == "underwater" || action.id == "steppe" || action.id == "asia" || action.id == "australia") {
+			spZooFrame zooFrame = new ZooFrame(action.id);
 			transitionShowFrame(zooFrame);
 		}
 	}
@@ -97,30 +90,28 @@ void ZooGateFrame::setData() {
 
 	if (AnimalsManager::instance.isRegionPopulated("farm")) {
 		addFarmTrackToSpawner(tileSize, tilesToViewOffsetX);
-		addGoToFarmSignPost(tileSize);
+		addSignPost(tileSize, "farm", Vector2(tileSize / 2.0f, tileSize * 10.0f - tileSize / 2.0f));
 	}
 	if (AnimalsManager::instance.isRegionPopulated("winter")) {
 		addWinterTrackToSpawner(tileSize, tilesToViewOffsetX);
+		addSignPost(tileSize, "winter", Vector2(tileSize * 8.0f + tileSize / 2.0f - tilesToViewOffsetX, tileSize / 2.0f));
 	}
 	if (AnimalsManager::instance.isRegionPopulated("underwater")) {
 		addUnderwaterTrackToSpawner(tileSize, tilesToViewOffsetX);
+		addSignPost(tileSize, "underwater", Vector2(_view->getWidth() - tileSize / 2.0f, tileSize / 2.0f));
 	}
 	if (AnimalsManager::instance.isRegionPopulated("steppe")) {
 		addSteppeTrackToSpawner(tileSize, tilesToViewOffsetX);
+		addSignPost(tileSize, "steppe", Vector2(tileSize / 2.0f, tileSize / 2.0f + 3.0f * tileSize));
 	}
 	if (AnimalsManager::instance.isRegionPopulated("asia")) {
 		addAsiaTrackToSpawner(tileSize, tilesToViewOffsetX);
+		addSignPost(tileSize, "asia", Vector2(tileSize * 15.0f + tileSize / 2.0f - tilesToViewOffsetX, tileSize / 2.0f));
 	}
 	if (AnimalsManager::instance.isRegionPopulated("australia")) {
 		addAustraliaTrackToSpawner(tileSize, tilesToViewOffsetX);
+		addSignPost(tileSize, "australia", Vector2(_view->getWidth() - tileSize / 2.0f, tileSize / 2.0f + 3.0f * tileSize));
 	}
-
-
-	// test
-	addAsiaTrackToSpawner(tileSize, tilesToViewOffsetX);
-	addSteppeTrackToSpawner(tileSize, tilesToViewOffsetX);
-	addAustraliaTrackToSpawner(tileSize, tilesToViewOffsetX);
-	addUnderwaterTrackToSpawner(tileSize, tilesToViewOffsetX);
 
 	addPossibleSpritesToSpawner();
 
@@ -278,23 +269,21 @@ void ZooGateFrame::addAustraliaTrackToSpawner(float tileSize, float tilesToViewO
 	trackVector.clear();
 }
 
-void ZooGateFrame::addGoToFarmSignPost(float tileSize) {
+void ZooGateFrame::addSignPost(float tileSize, const string& region, const Vector2& position) {
 	spButton button = new Button();
-	button->setName("farm");
+	button->setName(region);
 	button->setResAnim(tilesResources.getResAnim("informationTable"));
 	button->setAnchor(Vector2(0.5, 0.5));
 	button->setTouchChildrenEnabled(false);
 	setSpriteScaleBySize(button, Vector2(tileSize, tileSize));
-	spTextActor text = new TextActor();
+	spTextField text = new TextField();
 	text->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(255, 255, 255, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
-	text->setText("farm");
+	text->setText(region);
 	text->setSize(button->getDerivedSize());
 	button->addChild(text);
 	button->attachTo(_view);
-	button->setPosition(tileSize / 2, tileSize * 10 - tileSize / 2);
+	button->setPosition(position);
 	button->addEventListener(TouchEvent::CLICK, CLOSURE(this, &ZooGateFrame::onButtonClicked));
-	//button->setBaseScale(getRoot()->getHeight() * 0.075f / button->getHeight());
-	
 }
 
 void ZooGateFrame::addPossibleSpritesToSpawner() {

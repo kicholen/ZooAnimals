@@ -65,7 +65,7 @@ void MoneyCounterElement::show(bool shouldAnimate) {
 		addTween(Sprite::TweenPosition(_showPosition), 300, 1, false, 0, Tween::ease_outBack);
 	}
 	else {
-		setY(-getDerivedHeight() / 2);
+		setPosition(_showPosition);
 	}
 }
 

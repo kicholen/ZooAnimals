@@ -151,7 +151,9 @@ files
 	StackContainer.h
 	AnimatableElementContainer.cpp
 	AnimatableElementContainer.h
-	
+	ItemPickerElement.cpp
+	ItemPickerElement.h
+
     [source/gui/common]
     TweenButton.h
     TweenButton.cpp
@@ -239,6 +241,10 @@ files
 	ZooFrame.h
 	WorldMapFrame.cpp
 	WorldMapFrame.h
+
+	[source/frame/unique]
+	ChooseStartAnimalFrame.cpp
+	ChooseStartAnimalFrame.h
 
     [source/frame/editor]
     ChooseSpriteFrame.cpp
@@ -341,5 +347,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=6
+	version-revision=7
 }
