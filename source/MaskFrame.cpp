@@ -11,7 +11,7 @@ using namespace FlashUtils;
 MaskFrame::MaskFrame() {
 	init("MaskFrame.xml", true);
 
-	slideFrame->addEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &MaskFrame::onGoBack));
+//	slideFrame->addEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &MaskFrame::onGoBack));
 
 	selectTransitions();
 }
@@ -26,7 +26,7 @@ Action MaskFrame::loop() {
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "slideFrame") {
-			transitionShowFrameAsDialog(slideFrame);
+//			transitionShowFrameAsDialog(slideFrame);
 		}
 		else if (action.id == "back") {
 			break;
@@ -95,7 +95,7 @@ void MaskFrame::onShowSliderFrame(Event *event) {
 }
 
 void MaskFrame::_postHiding(Event *) {
-	slideFrame->removeEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &MaskFrame::onGoBack));
+//	slideFrame->removeEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &MaskFrame::onGoBack));
 	_view->removeChildren();
 	_resources.unload();
 }

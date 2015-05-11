@@ -57,6 +57,8 @@ files
 	TileField.h
 	MoneyCounterElement.cpp
 	MoneyCounterElement.h
+	CloseFrameElement.cpp
+	CloseFrameElement.h
 
 	[source/element/swipe]
 	SwipeTrailElement.cpp
@@ -245,6 +247,8 @@ files
 	[source/frame/unique]
 	ChooseStartAnimalFrame.cpp
 	ChooseStartAnimalFrame.h
+	LoadingFrame.cpp
+	LoadingFrame.h
 
     [source/frame/editor]
     ChooseSpriteFrame.cpp

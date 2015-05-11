@@ -13,9 +13,10 @@ void main_destroy();
 void main_update();
 
 extern SoundPlayer sPlayer;
-
+/*
 DECLARE_SMART(LandingPageFrame, spLandingPageFrame);
 DECLARE_SMART(SlideFrame, spSlideFrame);
 
 extern spLandingPageFrame landingPageFrame;
 extern spSlideFrame slideFrame;
+*/

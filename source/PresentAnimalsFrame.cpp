@@ -7,7 +7,7 @@
 PresentAnimalsFrame::PresentAnimalsFrame(const char* whichLevel) {
 	init(whichLevel, true);
 	_whichLevel = whichLevel;
-	slideFrame->addEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &PresentAnimalsFrame::onGoBack));
+//	slideFrame->addEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &PresentAnimalsFrame::onGoBack));
 
 	selectTransitions();
 }
@@ -20,7 +20,7 @@ void PresentAnimalsFrame::selectTransitions() {
 
 void PresentAnimalsFrame::_postHiding(Event *) {
 	FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
-	slideFrame->removeEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &PresentAnimalsFrame::onGoBack));
+//	slideFrame->removeEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &PresentAnimalsFrame::onGoBack));
 	_view->removeChildren();
 	_resources.unload();
 
@@ -38,7 +38,7 @@ Action PresentAnimalsFrame::loop() {
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "slideFrame" || action.id == "_btn_back_") {
-			transitionShowFrameAsDialog(slideFrame);
+//			transitionShowFrameAsDialog(slideFrame);
 		}
 		else if (action.id == "back") {
 			break;
