@@ -3,7 +3,7 @@
 
 #include "oxygine-framework.h"
 
-#define ANIMAL_PERCENT_SIZE 5
+#define ANIMAL_PERCENT_SIZE 5.0f
 
 using namespace oxygine;
 
@@ -23,6 +23,7 @@ public:
 	float getShadowX();
 	float getJumpTime();
 
+	void addTooltipToAnimal(spActor actor);
 	void setAsLeader();
 	void jumpToExactPosition(const Vector2& exactPosition);
 	void stopJumpingExact();

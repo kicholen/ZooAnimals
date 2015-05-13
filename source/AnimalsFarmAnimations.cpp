@@ -74,6 +74,11 @@ void AnimalsFarmAnimations::doUpdate(const UpdateState& us, bool isOnScreen) {
 	}*/
 }
 
+void AnimalsFarmAnimations::attachElementToRandomAnimal(spActor actor) {
+	int max = _animalsArray.length() > 1 ? _animalsArray.length() - 1 : 1;
+	_animalsArray[CMath::random(0, max)]->addTooltipToAnimal(actor);
+}
+
 void AnimalsFarmAnimations::playAnimalsAnimation(AnimalsFarmAnimationType animationType) {
 	switch (animationType) {
 	case afaVertical:

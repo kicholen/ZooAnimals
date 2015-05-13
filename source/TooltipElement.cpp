@@ -7,7 +7,7 @@
 */
 TooltipElement::TooltipElement(const Vector2& size, const string& background, const string& spriteName, int lockitId) {
 	setSize(size);
-
+	setAnchor(0.0f, 1.0f);
 	setData(background, spriteName, lockitId);
 }
 
@@ -15,20 +15,29 @@ TooltipElement::~TooltipElement() {
 
 }
 
-void TooltipElement::show() {
-	addTween(TweenScale(1.0f), 300, 1, false, 0, Tween::ease_outBounce);
+void TooltipElement::showForTime(int ms) {
+	show();
+	hide(true, ms);
 }
 
-void TooltipElement::hide(bool shouldDetach) {
+void TooltipElement::show() {
+	Vector2 currentScale = getScale();
+
+	setScale(0.0f);
+	addTween(TweenScale(currentScale), 500, 1, false, 0, Tween::ease_outBounce);
+}
+
+void TooltipElement::hide(bool shouldDetach, int delay) {
 	if (shouldDetach) {
-		addTween(TweenScale(0.0f), 300, 1, false, 0, Tween::ease_outBounce)->addDoneCallback(CLOSURE(this, &TooltipElement::onTweenEnded));
+		addTween(TweenScale(0.0f), 300, 1, false, delay, Tween::ease_outBounce)->addDoneCallback(CLOSURE(this, &TooltipElement::onTweenEnded));
 	}
 	else {
-		addTween(TweenScale(0.0f), 300, 1, false, 0, Tween::ease_outBounce);
+		addTween(TweenScale(0.0f), 300, 1, false, delay, Tween::ease_outBounce);
 	}
 }
 
 void TooltipElement::setData(const string& background, const string& spriteName, int lockitId) {
+	createBackground(background);
 	bool wasTextFieldAdded = createTextfieldIfNeeded(lockitId);
 	
 	if (!wasTextFieldAdded) {
@@ -36,6 +45,7 @@ void TooltipElement::setData(const string& background, const string& spriteName,
 	}
 }
 
+// todo set it to box9sprite
 void TooltipElement::createBackground(const string& background) {
 	_background = initActor(new Sprite,
 		arg_anchor = Vector2(0.5f, 0.5f),
@@ -43,27 +53,37 @@ void TooltipElement::createBackground(const string& background) {
 		arg_priority = -20,
 		arg_animFrame = gameResources.getResAnim(background),
 		arg_position = getSize() / 2.0f);
+	_background->setScaleX(getWidth() / _background->getWidth());
+	_background->setScaleY(getHeight() / _background->getHeight());
 }
 
 bool TooltipElement::createTextfieldIfNeeded(int lockitId) {
-	if (lockitId != 0) {
+	if (lockitId == 0) {
 		return false;
 	}
 
 	TextStyle style;
 	style.font = gameResources.getResFont("nobile_bold")->getFont();
-	style.vAlign = TextStyle::VALIGN_TOP;
+	style.vAlign = TextStyle::VALIGN_MIDDLE;
+	style.hAlign = TextStyle::HALIGN_CENTER;
+	style.multiline = true;
+	style.color = Color(35, 145, 245);
+	
 
 	_textField = initActor(new TextField,
 		arg_style = style,
 		arg_hAlign = TextStyle::HALIGN_MIDDLE,
 		arg_vAlign = TextStyle::VALIGN_MIDDLE,
 		arg_attachTo = this,
-		arg_width = getWidth(),
-		arg_height = getHeight(),
+		arg_width = _background->getDerivedWidth(),
+		arg_height = _background->getDerivedHeight(),
 		arg_input = false,
 		arg_priority = 20,
 		arg_text = LanguageManager::instance.getText(lockitId));
+
+	setTextFieldRectToSize(_textField, _background->getDerivedSize());
+
+	return true;
 }
 
 void TooltipElement::createSprite(const string& spriteName) {
@@ -72,8 +92,8 @@ void TooltipElement::createSprite(const string& spriteName) {
 		arg_attachTo = this,
 		arg_priority = 20,
 		arg_animFrame = gameResources.getResAnim(spriteName),
-		arg_position = getSize() / 2.0f);
-	_sprite->setScale(getActorScaleBySize(_sprite, getSize()));
+		arg_position = _background->getSize() / 2.0f);
+	_sprite->setScale(getActorScaleBySize(_sprite, _background->getSize()));
 }
 
 void TooltipElement::onTweenEnded(Event *ev) {

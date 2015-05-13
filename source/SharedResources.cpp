@@ -145,6 +145,24 @@ TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle
 	return style;
 }
 
+/*
+* Magical 15 number, 
+*/
+void setTextFieldRectToSize(spTextField textField, const Vector2& size) {
+	if (textField->getFontSize2Scale() == 0) {
+		textField->setFontSize2Scale(15);
+	}
+
+	int textSize = 0;
+	if (textField->getTextRect().getWidth() > size.x) {
+		textSize = int(size.x / textField->getTextRect().getWidth() * textField->getFontSize2Scale());
+	}
+	else if (textField->getTextRect().getHeight() > size.y) {
+		textSize = int(size.y / textField->getTextRect().getHeight() * textField->getFontSize2Scale());
+	}
+	textField->setFontSize2Scale(textSize);
+}
+
 void setSpriteScaleBySize(spSprite sprite, const Vector2& size) {
 	float animalScale = 1.0f;
 	if (sprite->getWidth() > sprite->getHeight()) {

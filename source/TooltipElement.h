@@ -13,8 +13,9 @@ public:
 	TooltipElement(const Vector2& size, const string& background, const string& spriteName, int lockitId = 0);
 	~TooltipElement();
 
+	void showForTime(int ms);
 	void show();
-	void hide(bool shouldDetach);
+	void hide(bool shouldDetach, int delay = 0);
 
 private:
 	void setData(const string& background, const string& spriteName, int lockitId);

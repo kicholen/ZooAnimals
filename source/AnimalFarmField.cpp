@@ -28,6 +28,7 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	_animationType = afaNone;
 	_animalsFarmAnimation = new AnimalsFarmAnimations(Vector2(getWidth() * 0.95f, getHeight() * 0.9f));
 	_animalsFarmAnimation->addRef();
+	_lastTooltipShowTime = TOOLTIP_START_SHOW;
 }
 
 AnimalFarmField::~AnimalFarmField() {
@@ -197,7 +198,21 @@ void AnimalFarmField::animateAnimalsJump(Vector2 position) {
 }
 
 void AnimalFarmField::doUpdate(const UpdateState& us) {
-	_animalsFarmAnimation->doUpdate(us, isOnScreen(this));
+	bool isVisible = isOnScreen(this);
+	_animalsFarmAnimation->doUpdate(us, isVisible);
+
+	if (isVisible) {
+		if (_lastTooltipShowTime > 0.0f) {
+			_lastTooltipShowTime -= us.dt;
+		}
+		else {
+			_lastTooltipShowTime = FlashUtils::CMath::Rand(TOOLTIP_RESHOW_MIN, TOOLTIP_RESHOW_MAX);
+
+			// some action like animal is hungry or happy or wanna play or say sth
+			_animalsFarmAnimation->attachElementToRandomAnimal(createTooltipElement());
+			_tooltip->showForTime(5000);
+		}
+	}
 }
 
 void AnimalFarmField::onGameChosen(Event *event) {
@@ -225,4 +240,11 @@ void AnimalFarmField::onAnimalCountChanged(Event *ev) {
 Point AnimalFarmField::getNumberOfTiles() {
 	float ratio = (getSize().x / 32.0f) / (getSize().y / 32.0f);
 	return Point(int(ratio * 6.0f), 6);
+}
+
+spTooltipElement AnimalFarmField::createTooltipElement() {
+	if (!_tooltip) {
+		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getWidth(), ANIMAL_PERCENT_SIZE / 100.0f * getHeight()), "circle_border", "", 10);
+	}
+	return _tooltip;
 }

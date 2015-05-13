@@ -57,10 +57,10 @@ void AnimalInFarmElement::createShadowSprite() {
 	_shadowSprite->setPriority(_animalSprite->getPriority() - 1);
 	_shadowSprite->setColor(Color(0, 0, 0));
 	_shadowSprite->setResAnim(animalsResources.getResAnim("shadow_animal"));
-	_shadowSprite->setPosition(Vector2(_animalSprite->getX(), _animalSprite->getY() + _animalSprite->getDerivedHeight() / 2));
+	_shadowSprite->setPosition(Vector2(_animalSprite->getX(), _animalSprite->getY() + _animalSprite->getDerivedHeight() / 2.0f));
 	_shadowSprite->setVisible(_isWaterAnimal ? false : true);
 	addChild(_shadowSprite);
-	setSpriteScaleBySize(_shadowSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2));
+	setSpriteScaleBySize(_shadowSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f));
 }
 
 void AnimalInFarmElement::setAnimalSprite(const string& id) {
@@ -101,6 +101,12 @@ float AnimalInFarmElement::getShadowX() {
 
 float AnimalInFarmElement::getJumpTime() {
 	return _jumpTime;
+}
+
+void AnimalInFarmElement::addTooltipToAnimal(spActor actor) {
+	actor->setScale(Vector2(1.0f / _animalSprite->getScaleX(), 1.0f / _animalSprite->getScaleY()));
+	actor->setX(_animalSprite->getWidth() / 2.0f);
+	_animalSprite->addChild(actor);
 }
 
 void AnimalInFarmElement::setAsLeader() {

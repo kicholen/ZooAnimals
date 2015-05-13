@@ -9,12 +9,18 @@
 #include "AnimalsFarmAnimations.h"
 #include "AnimalModel.h"
 #include "AnimalFarmPanel.h"
+#include "TooltipElement.h"
 
 #define BASE_SIZE_IN_PERCENT_X 20
 #define BASE_SIZE_IN_PERCENT_Y 8
 #define EXPANDED_SIZE_IN_PERCENT_X 30
 #define EXPANDED_SIZE_IN_PERCENT_Y 15
 #define OFFSET_EDGES 1
+
+#define TOOLTIP_START_SHOW 5000
+#define TOOLTIP_RESHOW_MIN 10000
+#define TOOLTIP_RESHOW_MAX 15000
+
 using namespace FlashUtils;
 using namespace oxygine;
 
@@ -53,6 +59,7 @@ private:
 	bool canAnimalsAnimate();
 	void setAnimalsPriorityByY();
 
+	spTooltipElement createTooltipElement();
 
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
@@ -65,8 +72,10 @@ private:
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;
 	spAnimalModel _model;
+	spTooltipElement _tooltip;
 
 	int _count;
+	float _lastTooltipShowTime;
 };
 
 

@@ -26,6 +26,7 @@ public:
 	void animateAnimalsJump(Vector2 position);
 	void playAnimalsAnimation(AnimalsFarmAnimationType animationType);
 	void doUpdate(const UpdateState &us, bool isOnScreen);
+	void attachElementToRandomAnimal(spActor actor);
 
 	int getAnimalsCount();
 private:
