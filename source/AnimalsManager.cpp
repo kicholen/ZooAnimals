@@ -17,11 +17,6 @@ AnimalsManager::~AnimalsManager() {
 		}
 	}
 	_animalsMap.clear();
-	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
-		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-			innerIterator->second->releaseRef();
-		}
-	}
 	_posessedAnimalMap.clear();
 
 	_timer->detach();
@@ -37,6 +32,7 @@ void AnimalsManager::init(const string& version) {
 	createAsiaAnimals();
 	createAustraliaAnimals();
 	createTimer();
+	updater(0);
 	addRef();
 }
 

@@ -41,7 +41,7 @@ Action ZooFrame::loop() {
 			break;
 		}
 		else if (action.id == "result") {
-			break; // todo
+			break;
 		}
 		else if (action.id == "tiles") {
 			if (_shouldRemoveTiles) {
@@ -59,10 +59,6 @@ Action ZooFrame::loop() {
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
 			transitionShowFrameAsDialog(chooserFrame);
-		}
-		else if (action.id == "store") {
-			AnimalsManager::instance.store();
-			MoneyManager::instance.store();
 		}
 	}
 

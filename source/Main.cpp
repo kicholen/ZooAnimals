@@ -45,8 +45,7 @@ void main_init() {
 	SoundPlayer::initialize();
 
 	Frame::initialize();
-	// load just start xml
-	
+
 	spTransition tr = new TransitionSimple();
 	spLoadingFrame loadingFrame = new LoadingFrame();
 
@@ -58,6 +57,10 @@ void main_init() {
 	}
 
 	core::requestQuit();
+}
+
+void onRequestExit(Event *ev) {
+
 }
 
 void main_update() {

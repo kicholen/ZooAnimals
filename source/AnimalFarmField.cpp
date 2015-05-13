@@ -22,6 +22,8 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	_zSortElements._vector.reserve(5);
 
 	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
+	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
+	AnimalsManager::instance.addEventListener(AnimalsManager::AnimalEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onAnimalCountChanged));
 
 	_animationType = afaNone;
 	_animalsFarmAnimation = new AnimalsFarmAnimations(Vector2(getWidth() * 0.95f, getHeight() * 0.9f));
@@ -40,8 +42,8 @@ void AnimalFarmField::setData(spAnimalModel model) {
 		_animalsFarmAnimation->addAnimal(createAnimal(CMath::intToString(i), _model));
 	}
 
-	createAnimalButton("add", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.1f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::addAnimal));
-	createAnimalButton("animate", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.4f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::playNextAnimalsAnimation));
+	//createAnimalButton("add", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.1f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::addAnimal));
+	//createAnimalButton("animate", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.4f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::playNextAnimalsAnimation));
 
 	spTileField tileField = createTileField();
 	createSortElements(tileField);
@@ -140,12 +142,12 @@ void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
 }
 
 void AnimalFarmField::addAnimal(Event *event) {
-	int x = 10;
+	/*int x = 10;
 	_model->setAnimalsCount(_model->animalsCount() + x);
 	while (x > 0) {
 		_animalsFarmAnimation->addAnimal((createAnimal(CMath::intToString(_count), _model)));
 		x--;
-	}
+	}*/
 }
 
 spAnimalInFarmElement AnimalFarmField::createAnimal(const string& animalNumber, spAnimalModel model) {
@@ -162,6 +164,13 @@ spAnimalInFarmElement AnimalFarmField::createAnimal(const string& animalNumber, 
 	animalElement->setName(animalNumber);
 
 	return animalElement;
+}
+
+void AnimalFarmField::removeLastAnimal() {
+	spAnimalInFarmElement animalElement = _animalsFarmAnimation->removeAnimal();
+	OX_ASSERT(animalElement);
+	animalElement->detach();
+	_count--;
 }
 
 spButton AnimalFarmField::createAnimalButton(const string& buttonName, Vector2 position) {
@@ -194,6 +203,23 @@ void AnimalFarmField::doUpdate(const UpdateState& us) {
 void AnimalFarmField::onGameChosen(Event *event) {
 	event->target = this;
 	dispatchEvent(event);
+}
+
+void AnimalFarmField::onAnimalCountChanged(Event *ev) {
+	//AnimalsManager::AnimalEvent *animalEvent = safeCast<AnimalsManager::AnimalEvent*>(ev);
+	int countDiff = _model->totalAnimalsCount() - _count;
+	if (countDiff != 0) {
+		if (countDiff > 0) {
+			for (int i = _model->totalAnimalsCount(); i < _model->totalAnimalsCount() + countDiff; i++) {
+				_animalsFarmAnimation->addAnimal(createAnimal(CMath::intToString(i), _model));
+			}
+		}
+		else {
+			for (int i = _model->totalAnimalsCount() + countDiff; i == _model->totalAnimalsCount(); i--) {
+				removeLastAnimal();
+			}
+		}
+	}
 }
 
 Point AnimalFarmField::getNumberOfTiles() {

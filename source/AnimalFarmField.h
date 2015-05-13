@@ -47,6 +47,7 @@ private:
 	void createFenceAtLeft(spTileField tileField);
 	void createInformationTable(spTileField tileField);
 	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);
+	void removeLastAnimal();
 	spButton createAnimalButton(const string& buttonName, Vector2 position);
 	void animateAnimalsJump(Vector2 position);
 	bool canAnimalsAnimate();
@@ -55,7 +56,7 @@ private:
 
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
-
+	void onAnimalCountChanged(Event *ev);
 
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;

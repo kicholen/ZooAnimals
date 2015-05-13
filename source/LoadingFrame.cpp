@@ -44,6 +44,7 @@ Action LoadingFrame::loop(){
 		if (action.id == "game_loaded") {
 			spLandingPageFrame landingPage = new LandingPageFrame();
 			transitionSwitchFrame(landingPage);
+			break;
 		}
 	}
 

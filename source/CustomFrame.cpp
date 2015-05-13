@@ -5,6 +5,8 @@
 #include "SoundInstance.h"
 #include "SharedResources.h"
 
+spMoneyCounterElement CustomFrame::_moneyCounter = 0;
+
 CustomFrame::CustomFrame() {
 	_content = new Actor;
 	_content->attachTo(_holder);

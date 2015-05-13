@@ -8,6 +8,7 @@
 #include "TweenButton.h"
 #include "ShaderTweenButton.h"
 #include "Transition.h"
+#include "MoneyCounterElement.h"
 
 using namespace oxygine;
 
@@ -20,6 +21,8 @@ public:
 	spShaderTweenButton addShaderButton(const string &name, const string &text, Vector2 position);
 
 protected:
+	static spMoneyCounterElement _moneyCounter;
+
 	virtual void selectTransitions();
 
 	virtual void _preShowing(Event *);

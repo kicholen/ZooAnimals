@@ -29,6 +29,7 @@ public:
 		FlurryAnalytics::instance.onSessionEnded();
 		core::reset();
 	}
+
 };
 
 int mainloop() {

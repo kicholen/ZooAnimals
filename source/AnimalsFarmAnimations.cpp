@@ -19,6 +19,16 @@ void AnimalsFarmAnimations::addAnimal(spAnimalInFarmElement animal) {
 	_animalsArray.push(animal);
 }
 
+spAnimalInFarmElement AnimalsFarmAnimations::removeAnimal() {
+	spAnimalInFarmElement element = _animalsArray._vector.back();
+	_animalsArray._vector.pop_back();
+	return element;
+}
+
+int AnimalsFarmAnimations::getAnimalsCount() {
+	return _animalsArray.length();
+}
+
 void AnimalsFarmAnimations::animateAnimalsJump(Vector2 position) {
 	for (int i = _animalsArray.length() - 1; i >= 0; i -= 1) {
 		_animalsArray[i]->animateJump(position);

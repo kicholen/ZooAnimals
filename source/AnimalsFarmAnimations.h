@@ -22,10 +22,12 @@ public:
 	~AnimalsFarmAnimations();
 
 	void addAnimal(spAnimalInFarmElement animal);
+	spAnimalInFarmElement removeAnimal();
 	void animateAnimalsJump(Vector2 position);
 	void playAnimalsAnimation(AnimalsFarmAnimationType animationType);
 	void doUpdate(const UpdateState &us, bool isOnScreen);
 
+	int getAnimalsCount();
 private:
 	Vector2 getPositionFromCenter(float angle, Vector2 center, float distanceFromCenter);
 	void setAnimalsPriorityByY();

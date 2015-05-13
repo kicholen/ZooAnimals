@@ -102,10 +102,7 @@ void LandingPageFrame::setData() {
 	swipe->setPriority(-1000);
 	swipe->attachTo(_view);
 
-	spMoneyCounterElement counter = new MoneyCounterElement();
-	counter->show();
-	counter->setPriority(1000);
-	getRoot()->addChild(counter);
+	createGlobalElementsIfDoesntExist();
 }
 
 void LandingPageFrame::playLoopedMusic() {
@@ -126,4 +123,14 @@ void LandingPageFrame::playLoopedMusic() {
 
 void LandingPageFrame::onMusicDone(Event *event) {
 	playLoopedMusic();
+}
+
+void LandingPageFrame::createGlobalElementsIfDoesntExist() {
+	if (!_moneyCounter) {
+		_moneyCounter = new MoneyCounterElement();
+		_moneyCounter->show();
+		_moneyCounter->setName("money_counter");
+		_moneyCounter->setPriority(1000);
+		getRoot()->addChild(_moneyCounter);
+	}
 }

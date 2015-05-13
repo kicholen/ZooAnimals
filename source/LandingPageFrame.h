@@ -23,6 +23,10 @@ protected:
 	void setData();
 	void playLoopedMusic();
 	void onMusicDone(Event *event);
+
+private:
+	void createGlobalElementsIfDoesntExist();
+
 };
 
 #endif
