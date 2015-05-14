@@ -33,12 +33,10 @@ void WalkingSpectator::revive(const VectorArray<Vector2>& trackPoints) {
 	setPosition(-1000.0f, 10000.0f);
 	setScale(1.0f);
 	setPosition(_trackPoints._vector.back());
-	_trackPoints._vector.pop_back();
 	_state = wsWaiting;
 
 	setVelocityByNextPoint();
 	checkPositionsByNextPoint();
-	setFaceAccordingToMovement(_trackPoints._vector.back().x);
 }
 
 void WalkingSpectator::doUpdate(const UpdateState &us) {
@@ -58,7 +56,7 @@ void WalkingSpectator::doUpdate(const UpdateState &us) {
 		_isProperX = false;
 		_isProperY = false;
 		_trackPoints._vector.pop_back();
-
+		
 		if (_trackPoints._vector.empty()) {
 			die();
 		}
