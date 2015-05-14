@@ -12,7 +12,6 @@ CustomFrame::CustomFrame() {
 	_content->attachTo(_holder);
 	_view = new Actor;
 	_view->attachTo(_holder);
-	_whichBackground = 0;
 
 	addEventListener(Frame::EVENT_PRESHOWING, CLOSURE(this, &CustomFrame::_preShowing));
 	addEventListener(Frame::EVENT_POSTHIDING, CLOSURE(this, &CustomFrame::_postHiding));
@@ -42,8 +41,7 @@ void CustomFrame::playClickSound(Event *event) {
 }
 
 void CustomFrame::selectTransitions() {
-	int c = 55;
-	// Abstract function
+
 }
 
 void CustomFrame::_preShowing(Event *) {
@@ -72,40 +70,5 @@ void CustomFrame::init(const string &xml, bool shouldAddBackground) {
 		bg->setScale(_content->getWidth() / bg->getWidth(), _content->getHeight() / bg->getHeight());
 		bg->attachTo(_content);
 		bg->setPriority(10);
-		_whichBackground++;
 	}
-
-	if (true) {
-		//animateBackground();
-	}
-}
-
-
-void CustomFrame::animateBackground() {
-	spActor background = _content->getChild("_background");
-	spTween tween = new Tween();
-	tween = createTween(Actor::TweenAlpha(0), 500);
-	tween->setDoneCallback(CLOSURE(this, &CustomFrame::onBackgroundTweenCompleted));
-	background->addTween(tween);
-
-	spSprite newBg = new Sprite;
-	newBg->setResAnim(_resources.getResAnim(getBackground()));
-	newBg->setScale(_content->getWidth() / newBg->getWidth(), _content->getHeight() / newBg->getHeight());
-	newBg->setName("_new_background");
-	newBg->attachTo(_content);
-	newBg->setPriority(0);
-	_whichBackground++;
-	if (_whichBackground == 2) {
-		_whichBackground = 0;
-	}
-}
-
-void CustomFrame::onBackgroundTweenCompleted(Event *event) {
-	_content->removeChild(_content->getChild(event->currentTarget->getName()));
-	_content->getChild("_new_background")->setName("_background");
-	_content->getChild("_background")->setPriority(10);
-}
-
-string CustomFrame::getBackground() {
-	return "back";
 }

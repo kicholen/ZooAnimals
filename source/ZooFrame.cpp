@@ -2,6 +2,7 @@
 #include "FarmControlPanel.h"
 #include "AnimalsManager.h"
 #include "ChooseGameDifficultyFrame.h"
+#include "PresentAnimalsFrame.h"
 #include "MoneyManager.h"
 #include "ExpManager.h"
 
@@ -59,6 +60,10 @@ Action ZooFrame::loop() {
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
 			transitionShowFrameAsDialog(chooserFrame);
+		}
+		else if (action.id == "present") {
+			spPresentAnimalsFrame presentFrame = new PresentAnimalsFrame(_farmArray[0]->getModel());
+			transitionShowFrameAsDialog(presentFrame);
 		}
 	}
 
@@ -161,7 +166,7 @@ void ZooFrame::setData() {
 	controlPanel->show();
 	*/
 	spTweenButton button = addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
-	addButton("tiles", "remove/add tiles", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f - button->getDerivedWidth()));
+	addButton("present", "present", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f - button->getDerivedWidth()));
 
 	addButton("store", "store", Vector2(getRoot()->getWidth() * 0.6f, getRoot()->getHeight() * 0.9f));
 }

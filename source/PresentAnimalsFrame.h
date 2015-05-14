@@ -5,6 +5,7 @@
 #include "LandingPageFrame.h"
 #include "SpriteSpawner.h"
 #include "FlashUtils.h"
+#include "AnimalModel.h"
 
 using namespace FlashUtils;
 
@@ -13,7 +14,7 @@ DECLARE_SMART(PresentAnimalsFrame, spPresentAnimalsFrame);
 class PresentAnimalsFrame : public CustomFrame
 {
 public:
-	PresentAnimalsFrame(const char* whichLevel);
+	PresentAnimalsFrame(spAnimalModel model);
 	void selectTransitions();
 
 	Action loop();
@@ -25,11 +26,8 @@ protected:
 
 	void setData();
 
-	void stopPreviousAndPlayNewSound(string soundName);
-	int getLevelToLoad();
 private:
-	spSoundInstance _previousSoundInstance; 
-	string _whichLevel;
+	spAnimalModel _model;
 };
 
 #endif

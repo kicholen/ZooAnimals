@@ -3,32 +3,29 @@
 #include "SoundPlayer.h"
 #include "SoundInstance.h"
 #include "ResSound.h"
+#include "AnimalCardElement.h"
 
-PresentAnimalsFrame::PresentAnimalsFrame(const char* whichLevel) {
-	init(whichLevel, true);
-	_whichLevel = whichLevel;
-//	slideFrame->addEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &PresentAnimalsFrame::onGoBack));
+PresentAnimalsFrame::PresentAnimalsFrame(spAnimalModel model) {
+	init("LandingPageFrame.xml", false);
 
+	_model = model;
 	selectTransitions();
 }
 
 void PresentAnimalsFrame::selectTransitions() {
-	spTransition transition = new TransitionQuads;
+	spTransition transition = new TransitionMove;
 	setTransitionIn(transition);
 	setTransitionOut(transition);
 }
 
 void PresentAnimalsFrame::_postHiding(Event *) {
-	FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
-//	slideFrame->removeEventListener(SlideFrame::GoBackToPreviousFrameEvent::GO_BACK, CLOSURE(this, &PresentAnimalsFrame::onGoBack));
+	//FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
 	_view->removeChildren();
 	_resources.unload();
-
-	_whichLevel.clear();
 }
 
 void PresentAnimalsFrame::_preShowing(Event *) {
-	FlurryAnalytics::instance.onLevelEnterEvent(_whichLevel.c_str());
+	//FlurryAnalytics::instance.onLevelEnterEvent(_whichLevel.c_str());
 	selectTransitions();
 	_resources.load();
 	setData();
@@ -37,8 +34,8 @@ void PresentAnimalsFrame::_preShowing(Event *) {
 Action PresentAnimalsFrame::loop() {
 	while (1) {
 		Action action = waitAction();
-		if (action.id == "slideFrame" || action.id == "_btn_back_") {
-//			transitionShowFrameAsDialog(slideFrame);
+		if (action.id == "_btn_back_") {
+			break;
 		}
 		else if (action.id == "back") {
 			break;
@@ -56,25 +53,10 @@ void PresentAnimalsFrame::onGoBack(Event *event) {
 	generateAction(name);
 }
 
-void PresentAnimalsFrame::onShowSliderFrame(Event *event) {
-	const string &name ="slideFrame";
-	generateAction(name);
-}
-
 void PresentAnimalsFrame::setData() {
-	spButton sliderButton = new Button();
-	sliderButton->setResAnim(gameResources.getResAnim("back_button"));
-	sliderButton->setScale(_content->getWidth() * 8 / 100 / sliderButton->getWidth());
-	sliderButton->setPosition(Vector2(_content->getWidth() * 9 / 10 - 12, _content->getHeight() * 95 / 100 - sliderButton->getDerivedHeight()));
-
-	sliderButton->setName("slideFrame");
-	sliderButton->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &PresentAnimalsFrame::onShowSliderFrame));
-	
-	VectorArray<Group*> *groupArray = new VectorArray<Group*>();
-
-	int levelToLoad = getLevelToLoad();
-
-	groupArray = SpriteSpawner::getLevelData(1);
+	spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), _model);
+	animalCard->setPosition(_view->getSize() / 2.0f);
+	_view->addChild(animalCard);
 	// we move position for every next animal whole screen to right, for every left animal, whole screen to left
 	// also we block swipe until previous one ends
 	//for(int i = 0; i < groupArray->length(); i++) {
@@ -83,35 +65,4 @@ void PresentAnimalsFrame::setData() {
 	//		addDraggableSprite(g.spriteName, Vector2(0.5f, 0.5f), g[0], g[1], g[2], g[3], g[4]);
 	//	}
 	//}
-
-	sliderButton->attachTo(_view);
-}
-
-void PresentAnimalsFrame::stopPreviousAndPlayNewSound(string soundName) {
-	if (_previousSoundInstance) {
-		_previousSoundInstance->stop();
-	}
-	_previousSoundInstance = sPlayer.play(soundName + "_sound");
-}
-
-int PresentAnimalsFrame::getLevelToLoad() {
-	int returnValue = 0;
-
-	if (_whichLevel == "level_1") {
-		returnValue = 1;
-	}
-	else if(_whichLevel == "level_2") {
-		returnValue = 2;
-	}
-	else if(_whichLevel == "level_3") {
-		returnValue = 3;
-	}
-	else if(_whichLevel == "level_4") {
-		returnValue = 4;
-	}
-	else if(_whichLevel == "level_5") {
-		returnValue = 5;
-	}
-
-	return returnValue;
 }

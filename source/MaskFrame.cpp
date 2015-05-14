@@ -106,11 +106,6 @@ void MaskFrame::_preShowing(Event *) {
 	_resources.load();
 }
 
-string MaskFrame::getBackground() {
-	string backgroundsList[] = {"back", "background2", "background3", "background4" };
-	return backgroundsList[_whichBackground];
-}
-
 void MaskFrame::_clicked(Event *event) {
 }
 
@@ -129,11 +124,6 @@ void MaskFrame::setData() {
 	sliderButton->setName("slideFrame");
 	sliderButton->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &MaskFrame::onShowSliderFrame));
 	
-	spTween tween = new Tween();
-	tween = createTween(TweenDummy(), 3000, -1);
-	tween->setDoneCallback(CLOSURE(this, &MaskFrame::switchBackground));
-	sliderButton->addTween(tween);
-
 	spTweenButton button = addButton("CLEAR", "CLEAR", Vector2(_view->getWidth(), 50));
 	button->setScale(button->getScale().x / 2);
 	//button->setScale(button->getScale() / 2);
@@ -156,10 +146,6 @@ void MaskFrame::setData() {
 	_currentTextfield->addEventListener(TouchEvent::CLICK, CLOSURE(this, &MaskFrame::onClick));
 	_inputTextfield = new InputText;
 	_inputTextfield->addEventListener(Event::COMPLETE, CLOSURE(this, &MaskFrame::onComplete));
-}
-
-void MaskFrame::switchBackground(Event *event) {
-	animateBackground();
 }
 
 void MaskFrame::addDraggableSprite(string spriteName, Vector2 anchorPoint, float scaleX, float scaleY, float positionX, float positionY, int priorityZ, bool fromEditResources = false) {

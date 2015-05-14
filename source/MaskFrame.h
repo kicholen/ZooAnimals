@@ -30,7 +30,6 @@ protected:
 	
 	void onGoBack(Event *event);
 	void onShowSliderFrame(Event *event);
-	void switchBackground(Event *event);
 	void onClick(Event *ev);
 	void onComplete(Event *ev);
 

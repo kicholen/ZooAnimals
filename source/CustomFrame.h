@@ -29,17 +29,11 @@ protected:
 
 	virtual void _postHiding(Event *);
 
-	virtual string getBackground();
-
 	void init(const string &xml, bool shouldAddBackground);
 	void init(const string &xml);
 
-	void animateBackground();
-	void onBackgroundTweenCompleted(Event *event);
-	
 	void playClickSound(Event *event);
 
-	int _whichBackground;
 	spActor _view;
 	spActor _content;
 

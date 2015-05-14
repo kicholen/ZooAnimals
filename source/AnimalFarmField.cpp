@@ -32,6 +32,7 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 }
 
 AnimalFarmField::~AnimalFarmField() {
+	AnimalsManager::instance.removeEventListener(AnimalsManager::AnimalEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onAnimalCountChanged));
 	_zSortElements._vector.resize(0);
 	_animalsFarmAnimation->releaseRef();
 }

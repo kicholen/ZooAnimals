@@ -20,6 +20,8 @@ extern const string AUSTRALIA[8];
 extern const string ALL_ANIMALS[45];
 
 spTextActor createTextfield(const string &txt, bool isHtml, bool multiline);
+spTextField createTextFieldInBoundries(const string& text, const Vector2& boundries, TextStyle style);
+
 spTweenButton createButton(const string &name, const string &txt);
 spShaderTweenButton createShaderButton(const string &name, const string &txt);
 

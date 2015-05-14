@@ -129,6 +129,10 @@ files
 	WalkingSpectator.h
 	SpectatorSpawner.cpp
 	SpectatorSpawner.h
+	TooltipElement.cpp
+	TooltipElement.h
+	AnimalCardElement.cpp
+	AnimalCardElement.h
 
 	[source/element/world]
 	WroldMapView.cpp

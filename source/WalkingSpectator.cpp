@@ -1,6 +1,5 @@
 #include "WalkingSpectator.h"
 
-
 WalkingSpectator::WalkingSpectator(const VectorArray<Vector2>& trackPoints, uint number) {
 	_velocity = Vector2(CMath::Rand(0.2f, 0.5f), CMath::Rand(0.2f, 0.5f));
 	setTouchEnabled(false);

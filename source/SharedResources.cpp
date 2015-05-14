@@ -145,22 +145,40 @@ TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle
 	return style;
 }
 
+spTextField createTextFieldInBoundries(const string& text, const Vector2& boundries, TextStyle style) {
+	spTextField textField = initActor(new TextField,
+		arg_style = style,
+		arg_hAlign = TextStyle::HALIGN_MIDDLE,
+		arg_vAlign = TextStyle::VALIGN_MIDDLE,
+		arg_width = boundries.x,
+		arg_height = boundries.y,
+		arg_input = false,
+		arg_priority = 10,
+		arg_text = text);
+
+	setTextFieldRectToSize(textField, boundries);
+
+	return textField;
+}
+
 /*
-* Magical 15 number, 
+* todo find better way to set fontsize2scale, much hacks here
 */
 void setTextFieldRectToSize(spTextField textField, const Vector2& size) {
 	if (textField->getFontSize2Scale() == 0) {
-		textField->setFontSize2Scale(15);
+		textField->setFontSize2Scale(textField->getMultiline() ? 20 : 50);
 	}
-
+	
 	int textSize = 0;
 	if (textField->getTextRect().getWidth() > size.x) {
 		textSize = int(size.x / textField->getTextRect().getWidth() * textField->getFontSize2Scale());
+		textField->setFontSize2Scale(textSize);
 	}
-	else if (textField->getTextRect().getHeight() > size.y) {
+
+	if (textField->getTextRect().getHeight() > size.y) {
 		textSize = int(size.y / textField->getTextRect().getHeight() * textField->getFontSize2Scale());
+		textField->setFontSize2Scale(textSize);
 	}
-	textField->setFontSize2Scale(textSize);
 }
 
 void setSpriteScaleBySize(spSprite sprite, const Vector2& size) {
