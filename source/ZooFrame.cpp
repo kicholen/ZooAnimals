@@ -62,7 +62,7 @@ Action ZooFrame::loop() {
 			transitionShowFrameAsDialog(chooserFrame);
 		}
 		else if (action.id == "present") {
-			spPresentAnimalsFrame presentFrame = new PresentAnimalsFrame(_farmArray[0]->getModel());
+			spPresentAnimalsFrame presentFrame = new PresentAnimalsFrame(_region);
 			transitionShowFrameAsDialog(presentFrame);
 		}
 	}

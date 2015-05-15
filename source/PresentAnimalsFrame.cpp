@@ -5,11 +5,12 @@
 #include "ResSound.h"
 #include "AnimalCardElement.h"
 #include "SwipeActor.h"
+#include "AnimalsManager.h"
 
-PresentAnimalsFrame::PresentAnimalsFrame(spAnimalModel model) {
+PresentAnimalsFrame::PresentAnimalsFrame(const string& region) {
 	init("LandingPageFrame.xml", false);
 
-	_model = model;
+	_region = region;
 	selectTransitions();
 }
 
@@ -50,26 +51,29 @@ Action PresentAnimalsFrame::loop() {
 }
 
 void PresentAnimalsFrame::setData() {
-	spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), _model);
-	animalCard->setPosition(_view->getSize() / 2.0f);
-	_view->addChild(animalCard);
+	_cardNavigator = new CardNavigator(1);
+	_cardNavigator->setPosition(_view->getSize() / 2.0f);
+	_view->addChild(_cardNavigator);
+
+	animalMap animaMap = AnimalsManager::instance.getPossesedAnimalsByRegion(_region);
+	for (animalMap::iterator innerIterator = animaMap.begin(); innerIterator != animaMap.end(); ++innerIterator) {
+		spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), innerIterator->second);
+		animalCard->setPosition(_view->getSize() / 2.0f);
+		//_view->addChild(animalCard);
+		_cardNavigator->addCard(animalCard);
+	}
 
 	spSwipeActor swipeActor = new SwipeActor(2.0f, 0.30f);
 	swipeActor->setSize(_view->getSize());
-	swipeActor->addEventListener(SwipeActor::SwipeEvent::LEFT, CLOSURE(this, &PresentAnimalsFrame::onSwipeEvent));
-	swipeActor->addEventListener(SwipeActor::SwipeEvent::RIGHT, CLOSURE(this, &PresentAnimalsFrame::onSwipeEvent));
+	swipeActor->addEventListener(SwipeActor::SwipeEvent::LEFT, CLOSURE(this, &PresentAnimalsFrame::onSwipeLeft));
+	swipeActor->addEventListener(SwipeActor::SwipeEvent::RIGHT, CLOSURE(this, &PresentAnimalsFrame::onSwipeRight));
 	_view->addChild(swipeActor);
-
-	// we move position for every next animal whole screen to right, for every left animal, whole screen to left
-	// also we block swipe until previous one ends
-	//for(int i = 0; i < groupArray->length(); i++) {
-	//	Group &g = *(*groupArray)[i];
-	//	if(g[0] > 0) {
-	//		addDraggableSprite(g.spriteName, Vector2(0.5f, 0.5f), g[0], g[1], g[2], g[3], g[4]);
-	//	}
-	//}
 }
 
-void PresentAnimalsFrame::onSwipeEvent(Event *ev) {
-	int asd = 10;
+void PresentAnimalsFrame::onSwipeLeft(Event *ev) {
+	_cardNavigator->animateToNextCard();
+}
+
+void PresentAnimalsFrame::onSwipeRight(Event *ev) {
+	_cardNavigator->animateToPreviousCard();
 }

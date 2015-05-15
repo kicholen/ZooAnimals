@@ -6,6 +6,7 @@
 #include "SpriteSpawner.h"
 #include "FlashUtils.h"
 #include "AnimalModel.h"
+#include "CardNavigator.h"
 
 using namespace FlashUtils;
 
@@ -14,7 +15,7 @@ DECLARE_SMART(PresentAnimalsFrame, spPresentAnimalsFrame);
 class PresentAnimalsFrame : public CustomFrame
 {
 public:
-	PresentAnimalsFrame(spAnimalModel model);
+	PresentAnimalsFrame(const string& region);
 	void selectTransitions();
 
 	Action loop();
@@ -24,9 +25,12 @@ protected:
 
 	void setData();
 
-	void onSwipeEvent(Event *ev);
+	void onSwipeLeft(Event *ev);
+	void onSwipeRight(Event *ev);
 private:
-	spAnimalModel _model;
+	spCardNavigator _cardNavigator;
+	string _region;
+
 };
 
 #endif
