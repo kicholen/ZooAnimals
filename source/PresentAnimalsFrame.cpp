@@ -4,6 +4,7 @@
 #include "SoundInstance.h"
 #include "ResSound.h"
 #include "AnimalCardElement.h"
+#include "SwipeActor.h"
 
 PresentAnimalsFrame::PresentAnimalsFrame(spAnimalModel model) {
 	init("LandingPageFrame.xml", false);
@@ -48,15 +49,17 @@ Action PresentAnimalsFrame::loop() {
 	return _lastAction;
 }
 
-void PresentAnimalsFrame::onGoBack(Event *event) {
-	const string &name ="close";
-	generateAction(name);
-}
-
 void PresentAnimalsFrame::setData() {
 	spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), _model);
 	animalCard->setPosition(_view->getSize() / 2.0f);
 	_view->addChild(animalCard);
+
+	spSwipeActor swipeActor = new SwipeActor(2.0f, 0.30f);
+	swipeActor->setSize(_view->getSize());
+	swipeActor->addEventListener(SwipeActor::SwipeEvent::LEFT, CLOSURE(this, &PresentAnimalsFrame::onSwipeEvent));
+	swipeActor->addEventListener(SwipeActor::SwipeEvent::RIGHT, CLOSURE(this, &PresentAnimalsFrame::onSwipeEvent));
+	_view->addChild(swipeActor);
+
 	// we move position for every next animal whole screen to right, for every left animal, whole screen to left
 	// also we block swipe until previous one ends
 	//for(int i = 0; i < groupArray->length(); i++) {
@@ -65,4 +68,8 @@ void PresentAnimalsFrame::setData() {
 	//		addDraggableSprite(g.spriteName, Vector2(0.5f, 0.5f), g[0], g[1], g[2], g[3], g[4]);
 	//	}
 	//}
+}
+
+void PresentAnimalsFrame::onSwipeEvent(Event *ev) {
+	int asd = 10;
 }

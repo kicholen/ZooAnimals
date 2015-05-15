@@ -19,13 +19,12 @@ public:
 
 	Action loop();
 protected:
-	void onGoBack(Event *event);
-	void onShowSliderFrame(Event *event);
 	void _postHiding(Event *);
 	void _preShowing(Event *);
 
 	void setData();
 
+	void onSwipeEvent(Event *ev);
 private:
 	spAnimalModel _model;
 };
