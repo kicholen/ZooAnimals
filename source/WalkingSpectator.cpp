@@ -48,7 +48,7 @@ void WalkingSpectator::doUpdate(const UpdateState &us) {
 	}
 
 	Vector2 destPosition = _trackPoints._vector.back();
-	doVelocity(us.dt, destPosition);
+	doVelocity((float)us.dt, destPosition);
 	checkPositionsByNextPoint();
 
 	if (_isProperX && _isProperY) {

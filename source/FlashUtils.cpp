@@ -44,7 +44,7 @@ namespace FlashUtils
 
 	unsigned int CMath::GetHueFromARGB(unsigned int col) {
 		Color32 cola = HexToARGB(col);
-		return (unsigned int)((180.0f/M_PI) * atan2(sqrtf(3.0f) * (cola[2] - cola[3]), 2*cola[1] - cola[2] - cola[3]));
+		return (unsigned int)((180.0f / M_PI) * atan2(sqrtf(3.0f) * (cola[2] - cola[3]), 2*cola[1] - cola[2] - cola[3]));
 	}
 
 	bool CMath::ColorEqual2(unsigned int col1, unsigned int col2, float low, float buffer) {

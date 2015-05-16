@@ -136,7 +136,7 @@ void WroldMapView::showEurope() {
 			arg_name = "farm",
 			arg_resAnim = gameResources.getResAnim("europe"));
 		_europe->setScale(_map->getScale());
-		_europe->setPosition(_map->getScaleX() * 417.5, _map->getScaleY() * 90.0f);
+		_europe->setPosition(_map->getScaleX() * 417.5f, _map->getScaleY() * 90.0f);
 		_europe->addEventListener(TouchEvent::CLICK, CLOSURE(this, &WroldMapView::onContinentClicked));
 	}
 }

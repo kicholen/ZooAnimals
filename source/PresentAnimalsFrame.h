@@ -2,8 +2,6 @@
 #define _PRESENTANIMALSFRAME_
 
 #include "CustomFrame.h"
-#include "LandingPageFrame.h"
-#include "SpriteSpawner.h"
 #include "FlashUtils.h"
 #include "AnimalModel.h"
 #include "CardNavigator.h"

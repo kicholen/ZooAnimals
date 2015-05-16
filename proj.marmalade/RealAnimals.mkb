@@ -159,6 +159,8 @@ files
 	AnimatableElementContainer.h
 	ItemPickerElement.cpp
 	ItemPickerElement.h
+	SwipeActor.cpp
+	SwipeActor.h
 
     [source/gui/common]
     TweenButton.h
@@ -171,6 +173,8 @@ files
 	ProgressBarBox9.h
 	TweenTextField.cpp
 	TweenTextField.h
+	CardNavigator.cpp
+	CardNavigator.h
 
     [source/gui/particle]
     Particle.cpp
@@ -319,6 +323,24 @@ files
 	[source/opengl]
 	GLShaderTriangleStrip.cpp
 	GLShaderTriangleStrip.h
+
+	[source/box2d]
+	Box2DDebugDraw.cpp
+	Box2DDebugDraw.h
+	Box2dContainer.cpp
+	Box2dContainer.h
+	Player2d.cpp
+	Player2d.h
+	TwoDContactListener.h
+	Dynamic2d.cpp
+	Dynamic2d.h
+	Static2d.cpp
+	Static2d.h
+	Kinematic2d.cpp
+	Kinematic2d.h
+	Entity.h
+	Floor2d.cpp
+	Floor2d.h
 }
 
 subprojects
@@ -329,6 +351,7 @@ subprojects
 	oxygine-sound
 	s3eFlurry
 	s3eAndroidGooglePlayBilling
+	box2d/box2d
 }
 
 assets

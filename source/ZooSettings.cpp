@@ -25,7 +25,7 @@ void ZooSettings::init(const string &version) {
 
 void ZooSettings::reset() {
 	_doc.reset();
-	int utcSeconds = s3eTimerGetUTC() / 1000;
+	int utcSeconds = (int)s3eTimerGetUTC() / 1000;
 	int level = 0;
 
 	addPlayerValue("money").set_value(START_MONEY);

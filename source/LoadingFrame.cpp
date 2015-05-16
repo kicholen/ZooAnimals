@@ -102,6 +102,9 @@ void LoadingFrame::initSettings(Event *ev) {
 }
 
 void LoadingFrame::initManagers(Event *ev) {
+	Point *ad = new Point((int)getRoot()->getWidth(), (int)getRoot()->getHeight());
+	SpriteSpawner::Initialize(*ad);
+
 	GooglePlayInAppPurchaseManager::instance.init();
 	FacebookManager::instance.init();
 	AnimalsManager::instance.init(_version);
@@ -129,8 +132,7 @@ void LoadingFrame::loadGameResource() {
 }
 
 void LoadingFrame::devPurposes() {
-	//Point *ad = new Point((int)getRoot()->getWidth(), (int)getRoot()->getHeight());
-	//SpriteSpawner::Initialize(*ad);
+	
 }
 
 void LoadingFrame::loadedResource(Event *ev) {

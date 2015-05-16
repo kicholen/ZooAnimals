@@ -1,8 +1,5 @@
 #include "PresentAnimalsFrame.h"
 #include "FlurryAnalytics.h"
-#include "SoundPlayer.h"
-#include "SoundInstance.h"
-#include "ResSound.h"
 #include "AnimalCardElement.h"
 #include "SwipeActor.h"
 #include "AnimalsManager.h"
@@ -59,7 +56,6 @@ void PresentAnimalsFrame::setData() {
 	for (animalMap::iterator innerIterator = animaMap.begin(); innerIterator != animaMap.end(); ++innerIterator) {
 		spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), innerIterator->second);
 		animalCard->setPosition(_view->getSize() / 2.0f);
-		//_view->addChild(animalCard);
 		_cardNavigator->addCard(animalCard);
 	}
 
