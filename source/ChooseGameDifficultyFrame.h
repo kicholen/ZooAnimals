@@ -10,7 +10,7 @@ DECLARE_SMART(ChooseGameDifficultyFrame, spChooseGameDifficultyFrame);
 class ChooseGameDifficultyFrame : public CustomFrame
 {
 public:
-	ChooseGameDifficultyFrame(const string& gameName);
+	ChooseGameDifficultyFrame();
 	void selectTransitions();
 
 	Action loop();
@@ -20,9 +20,6 @@ protected:
 
 	void setData();
 
-	void startGame(const string& difficulty);
-private:
-	string _gameName;
 };
 
 #endif

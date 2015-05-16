@@ -7,7 +7,7 @@ using namespace oxygine;
 
 DECLARE_SMART(CardNavigator, spCardNavigator);
 enum CardNavigatorAlign { cnVertical = 0, cnHorizontal = 1 };
-
+typedef enum CardNavigatorState { cnBlock, cnWait };
 /*
 *	CardNavigator will automatically be size of added items, changing size of this element will do nothing.
 *	Remember to call updateCards.
@@ -17,7 +17,7 @@ enum CardNavigatorAlign { cnVertical = 0, cnHorizontal = 1 };
 class CardNavigator : public Actor
 {
 public:
-	CardNavigator(int alignType = 0, float offsetBetweenCards = 0.05f);
+	CardNavigator(int alignType = 0, float offsetBetweenCards = 10.0f);
 	~CardNavigator();
 	
 	void addCard(spActor actor);
@@ -30,13 +30,17 @@ public:
 	void animateToCardByIndex(int index);
 
 private:
-	void animateToIndex(int index);
+	void setPositionByIndex(int index, bool shouldAnimate);
 
 	void setChildPosition(spActor actor);
+	float getIndexPosition(int index);
 
+	void onTweenEnded(Event *ev);
+private:
 	int _currentChildIndex;
 	int _childrenCount;
 	CardNavigatorAlign _alignType;
+	CardNavigatorState _state;
 	float _offsetBetweenCards;
 };
 

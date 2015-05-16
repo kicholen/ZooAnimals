@@ -8,6 +8,7 @@ CardNavigator::CardNavigator(int alignType, float offsetBetweenCards) {
 	else {
 		setAnchor(0.0f, 0.5f);
 	}
+	_state = cnWait;
 	_offsetBetweenCards = offsetBetweenCards;
 	_childrenCount = 0;
 	_currentChildIndex = 1;
@@ -25,13 +26,13 @@ void CardNavigator::addCard(spActor actor) {
 
 void CardNavigator::animateToNextCard() {
 	if (_currentChildIndex + 1 <= _childrenCount) {
-		animateToIndex(_currentChildIndex + 1);
+		setPositionByIndex(_currentChildIndex + 1, true);
 	}
 }
 
 void CardNavigator::animateToPreviousCard() {
 	if (_currentChildIndex - 1 > 0) {
-		animateToIndex(_currentChildIndex - 1);
+		setPositionByIndex(_currentChildIndex - 1, true);
 	}
 }
 
@@ -45,7 +46,7 @@ void CardNavigator::setChildPosition(spActor actor) {
 			setWidth(actor->getDerivedWidth());
 			setY(getY() - actor->getDerivedHeight() / 2);
 		}
-		setHeight(getHeight() + actor->getDerivedHeight());
+		setHeight(getHeight() + actor->getDerivedHeight() + _offsetBetweenCards);
 
 		actor->setPosition(getWidth() / 2.0f, getHeight() - actor->getDerivedHeight() / 2.0f);
 	}
@@ -54,24 +55,49 @@ void CardNavigator::setChildPosition(spActor actor) {
 			setHeight(actor->getDerivedHeight());
 			setX(getX() - actor->getDerivedWidth() / 2);
 		}
-		setWidth(getWidth() + actor->getDerivedWidth());
+		setWidth(getWidth() + actor->getDerivedWidth() + _offsetBetweenCards);
 
 		actor->setPosition(getWidth() - actor->getDerivedWidth() / 2.0f, getHeight() / 2.0f);
 	}
 }
 
-void CardNavigator::animateToIndex(int index) {
-	if (_childrenCount == 0) {
+void CardNavigator::setPositionByIndex(int index, bool shouldAnimate) {
+	if (_childrenCount == 0 || _state == cnBlock) {
 		return;
 	}
 
-	int diff = index - _currentChildIndex;// std::max(_currentChildIndex, index) - std::min(_currentChildIndex, index);
+	float position = getIndexPosition(index);
 	if (_alignType == cnVertical) {
-		setY(getY() - diff * getHeight() / _childrenCount);
+		if (shouldAnimate) {
+			addTween(TweenY(position), 300)->addDoneCallback(CLOSURE(this, &CardNavigator::onTweenEnded));
+			_state = cnBlock;
+		}
+		setY(position);
 	}
 	else {
-		setX(getX() - diff * getWidth() / _childrenCount);
+		if (shouldAnimate) {
+			addTween(TweenX(position), 300)->addDoneCallback(CLOSURE(this, &CardNavigator::onTweenEnded));
+			_state = cnBlock;
+		}
+		setX(position);
 	}
 
 	_currentChildIndex = index;
+}
+
+float CardNavigator::getIndexPosition(int index) {
+	int diff = index - _currentChildIndex;
+	float position = 0.0f;
+	if (_alignType == cnVertical) {
+		position = getY() - diff * getHeight() / _childrenCount;
+	}
+	else {
+		position = getX() - diff * getWidth() / _childrenCount;
+	}
+
+	return position;
+}
+
+void CardNavigator::onTweenEnded(Event *ev) {
+	_state = cnWait;
 }

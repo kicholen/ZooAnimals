@@ -51,7 +51,7 @@ Action PresentAnimalsFrame::loop() {
 }
 
 void PresentAnimalsFrame::setData() {
-	_cardNavigator = new CardNavigator(1);
+	_cardNavigator = new CardNavigator(1, 30.0f);
 	_cardNavigator->setPosition(_view->getSize() / 2.0f);
 	_view->addChild(_cardNavigator);
 
@@ -63,7 +63,7 @@ void PresentAnimalsFrame::setData() {
 		_cardNavigator->addCard(animalCard);
 	}
 
-	spSwipeActor swipeActor = new SwipeActor(2.0f, 0.30f);
+	spSwipeActor swipeActor = new SwipeActor(1.0f, 0.30f);
 	swipeActor->setSize(_view->getSize());
 	swipeActor->addEventListener(SwipeActor::SwipeEvent::LEFT, CLOSURE(this, &PresentAnimalsFrame::onSwipeLeft));
 	swipeActor->addEventListener(SwipeActor::SwipeEvent::RIGHT, CLOSURE(this, &PresentAnimalsFrame::onSwipeRight));

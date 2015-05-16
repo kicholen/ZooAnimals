@@ -6,6 +6,13 @@
 #include "MoneyManager.h"
 #include "ExpManager.h"
 
+#include "MemoryFrame.h"
+#include "MatchTwoFrame.h"
+#include "ConnectDotsFrame.h"
+#include "FindShadowFrame.h"
+#include "PopObjectsFrame.h"
+#include "DiscoverImageFrame.h"
+
 ZooFrame::ZooFrame(const string& regionName) {
 	_region = regionName;
 	init("LandingPageFrame.xml", true);
@@ -56,10 +63,43 @@ Action ZooFrame::loop() {
 				}
 			}
 			_shouldRemoveTiles = !_shouldRemoveTiles;
+			break;
 		}
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
-			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
-			transitionShowFrameAsDialog(chooserFrame);
+			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
+
+			Action innerAction = transitionShowFrameAsDialog(chooserFrame, 0, 0, true);
+
+			if (innerAction.id == "back" || innerAction.id == "_btn_back_") {
+				// do nothing
+				int asd = 10;
+			}
+			else {
+				if (action.id == "memory") {
+					spMemoryFrame memoryFrame = new MemoryFrame(innerAction.id);
+					transitionShowFrame(memoryFrame);
+				}
+				else if (action.id == "dots") {
+					spConnectDotsFrame connectFrame = new ConnectDotsFrame(innerAction.id);
+					transitionShowFrame(connectFrame);
+				}
+				else if (action.id == "shadow") {
+					spFindShadowFrame findShadow = new FindShadowFrame(innerAction.id);
+					transitionShowFrame(findShadow);
+				}
+				else if (action.id == "match") {
+					spMatchTwoFrame matchTwo = new MatchTwoFrame(innerAction.id);
+					transitionShowFrame(matchTwo);
+				}
+				else if (action.id == "pop") {
+					spPopObjectsFrame pop = new PopObjectsFrame(innerAction.id);
+					transitionShowFrame(pop);
+				}
+				else if (action.id == "discover") {
+					spDiscoverImageFrame disc = new DiscoverImageFrame(innerAction.id);
+					transitionShowFrame(disc);
+				}
+			}
 		}
 		else if (action.id == "present") {
 			spPresentAnimalsFrame presentFrame = new PresentAnimalsFrame(_region);

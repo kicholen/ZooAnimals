@@ -37,7 +37,7 @@ Action LevelChooserFrame::loop() {
 			break;
 		}
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
-			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame(action.id);
+			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
 			transitionShowFrame(chooserFrame);
 		}
 		else if (action.id == "zoo_frame") {

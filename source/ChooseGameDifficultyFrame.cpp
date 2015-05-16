@@ -1,69 +1,31 @@
 #include "ChooseGameDifficultyFrame.h"
-#include "MemoryFrame.h"
-#include "MatchTwoFrame.h"
-#include "ConnectDotsFrame.h"
-#include "FindShadowFrame.h"
-#include "PopObjectsFrame.h"
-#include "DiscoverImageFrame.h"
-#include "AnimalsManager.h"
 
-ChooseGameDifficultyFrame::ChooseGameDifficultyFrame(const string& gameName) {
+ChooseGameDifficultyFrame::ChooseGameDifficultyFrame() {
 	init("LandingPageFrame.xml", false);
 	selectTransitions();
-	_gameName = gameName;
 }
 
 Action ChooseGameDifficultyFrame::loop() {
 	while (1) {
 		Action action = waitAction();
-		if (action.id == "back" || action.id == "_btn_back_") {
-			break;
-		}
-		else if (action.id == "close") {
-			break;
-		}
-		else if (action.id == "result") {
+		if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			break;
 		}
 		else if (action.id == "easy" || action.id == "hard" || action.id == "normal") {
-			startGame(action.id);
+			spTransition transitionOut = new TransitionInstant;
+			setTransitionOut(transitionOut);
+			break;
 		}
 	}
 
 	return _lastAction;
 }
 
-void ChooseGameDifficultyFrame::startGame(const string& difficulty) {
-	if (_gameName == "memory") {
-		spMemoryFrame memoryFrame = new MemoryFrame(difficulty);
-		transitionShowFrame(memoryFrame);
-	}
-	else if (_gameName == "dots") {
-		spConnectDotsFrame connectFrame = new ConnectDotsFrame(difficulty);
-		transitionShowFrame(connectFrame);
-	}
-	else if (_gameName == "shadow") {
-		spFindShadowFrame findShadow = new FindShadowFrame(difficulty);
-		transitionShowFrame(findShadow);
-	}
-	else if (_gameName == "match") {
-		spMatchTwoFrame matchTwo = new MatchTwoFrame(difficulty);
-		transitionShowFrame(matchTwo);
-	}
-	else if (_gameName == "pop") {
-		spPopObjectsFrame pop = new PopObjectsFrame(difficulty);
-		transitionShowFrame(pop);
-	}
-	else if (_gameName == "discover") {
-		spDiscoverImageFrame disc = new DiscoverImageFrame(difficulty);
-		transitionShowFrame(disc);
-	}
-}
-
 void ChooseGameDifficultyFrame::selectTransitions() {
-	spTransition transition = new TransitionMove;
-	setTransitionIn(transition);
-	setTransitionOut(transition);
+	spTransition transitionIn = new TransitionMove;
+	setTransitionIn(transitionIn);
+	spTransition transitionOut = new TransitionMove;
+	setTransitionOut(transitionOut);
 }
 
 void ChooseGameDifficultyFrame::_postHiding(Event *) {
