@@ -216,6 +216,10 @@ files
 	DiscoverImageFrame.cpp
 	DiscoverImageFrame.h
 
+	[source/frame/jump]
+	JumpOverFrame.cpp
+	JumpOverFrame.h
+
 	[source/frame/utils]
     BuyItemPopup.cpp
     BuyItemPopup.h
@@ -309,6 +313,8 @@ files
 	[source/factory]
 	LockitFactory.cpp
 	LockitFactory.h
+	Box2dFactory.cpp
+	Box2dFactory.h
 
 	[source/factory/products]
 	Lockit.cpp

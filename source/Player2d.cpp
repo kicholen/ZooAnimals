@@ -69,7 +69,7 @@ Player2d::~Player2d() {
 }
 
 void Player2d::update(float playerPosition) {
-	b2Vec2 vel = m_body->GetLinearVelocity();
+	/*b2Vec2 vel = m_body->GetLinearVelocity();
 	vel.x = 15;
     m_body->SetLinearVelocity(vel);
 
@@ -96,7 +96,7 @@ void Player2d::update(float playerPosition) {
 	if (_jumpTimeout > 0) {
 		_jumpTimeout--;
 	}
-
+	*/
 	// rotate
 	//if (_numContacts == 0) {
 	//	m_body->SetTransform(m_body->GetPosition(), m_body->GetAngle() + ROT_PER_FRAME * DEGTORAD);

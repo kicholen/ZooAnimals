@@ -36,7 +36,7 @@ void Static2d::update(float playerPosition) {
 		unsigned char alpha = 255;
 		_sprite->setAlpha(0);
 		_sprite->addTween(Actor::TweenAlpha(alpha), 2000 / 4, 1);//, true, 0, Tween::ease_inExpo);
-		_sprite->addTween(Actor::TweenY(entityPosition.y), 2000 / 4)->addEventListener(TweenEvent::DONE, CLOSURE(this, &Static2d::onTweenDone));//, 1, true, 0, Tween::ease_inExpo);
+		_sprite->addTween(Actor::TweenY(entityPosition.y), 2000 / 4)->addDoneCallback(CLOSURE(this, &Static2d::onTweenDone));//, 1, true, 0, Tween::ease_inExpo);
 		_sprite->setX(entityPosition.x);
 		_wasTweenAdded = true;
 	}

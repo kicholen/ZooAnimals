@@ -21,7 +21,7 @@ void AnimalSlot::switchAnimalSprite(const string& id) {
 	setAlpha(255);
 	_animalSprite->setAnchor(0.5f, 0.5f);
 	_animalSprite->setPosition(getWidth() / 2, getHeight() / 2);
-	
+
 	float scaleInParent = 0.8f;
 	float animalScale = 1.0f;
 	if (_animalSprite->getWidth() > _animalSprite->getHeight()) {

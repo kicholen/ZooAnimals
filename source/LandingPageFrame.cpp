@@ -12,6 +12,7 @@
 #include "ShopFrame.h"
 #include "ChooseStartAnimalFrame.h"
 #include "ZooSettings.h"
+#include "JumpOverFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -72,8 +73,10 @@ Action LandingPageFrame::loop(){
 			transitionShowFrame(maskFrame);
 		}*/
 		else if (action.id == "edit") {
-			spMaskFrame maskFrame = new MaskFrame();
-			transitionShowFrame(maskFrame);
+			spJumpOverFrame jumpFrame = new JumpOverFrame();
+			transitionShowFrame(jumpFrame);
+			//spMaskFrame maskFrame = new MaskFrame();
+			//transitionShowFrame(maskFrame);
 		}
 		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			DatabaseManager::instance.save(0);

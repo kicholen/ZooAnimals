@@ -237,17 +237,7 @@ void SpriteSpawner::Initialize(const Point &size) {
 	float halfx = getRoot()->getWidth() / 2.0f;
 	float halfy = getRoot()->getHeight() / 2.0f;
 
-//#if READ_XML
 	readLevelsXml("xmls/WorldData.xml", halfx * 2, halfy * 2);
-//#else
-	
-//	AddLevel(3, new WorldData(new WaveData(2, new SpriteModel(1.0, 1.0, halfx, halfy, "bee.png"))));//, halfy, 0, 0, 5, RGB(126, 0, 0), 0, 0, 0, 0, -1))));
-	
-	//2
-	//AddLevel(0.5, new LevelData(new WaveData(2, new SpriteModel(halfx, halfy, 0, 0, 5, RGB(0, 126, 0), 0, 0, 0, 0, -1)) ));
-	//3
-	//AddLevel(0.5, new LevelData(new WaveData(2, new SpriteModel(halfx, halfy, 0, 0, 5, RGB(0, 0, 126), 0, 0, 0, 0, -1)) ));
-//#endif
 }
 
 VectorArray<Group*>* SpriteSpawner::getLevelData(int levelNumber = 0) {
