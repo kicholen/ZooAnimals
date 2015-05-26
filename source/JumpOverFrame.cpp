@@ -1,10 +1,16 @@
 #include "JumpOverFrame.h"
-#include "Box2dContainer.h"
 #include "Box2dFactory.h"
 
 JumpOverFrame::JumpOverFrame() {
-	init("LandingPageFrame.xml", true);
+	init("LandingPageFrame.xml", false);
 	selectTransitions();
+
+	spColorRectSprite bg = new ColorRectSprite;
+	bg->setName("_background");
+	bg->setColor(Color(88, 144, 217));
+	bg->setSize(_content->getSize());
+	bg->attachTo(_content);
+	bg->setPriority(10);
 }
 
 void JumpOverFrame::selectTransitions() {
@@ -44,28 +50,38 @@ Action JumpOverFrame::loop() {
 		else if (action.id == "debug") {
 			showHideDebug();
 		}
+		else if (action.id == "restart") {
+			safeSpCast<Box2dContainer>(_view->getChild("box2d"))->forceRestart();
+		}
 	}
 
 	return _lastAction;
 }
 
 void JumpOverFrame::setData() {
-	spBox2dContainer world = new Box2dContainer();
-	world->attachTo(_view);
-	world->setPosition(0.0f, 0.0f);
-
-//	world->addEventListener(Box2dContainer::LevelWonEvent::LEVEL_WON, CLOSURE(this, &JumpOverFrame::onGoBack));
-//	world->addEventListener(Box2dContainer::LevelRestartEvent::LEVEL_RESTART, CLOSURE(this, &JumpOverFrame::onLevelRestart));
-	world->setName("box2d");
+	_world = new Box2dContainer(_view->getSize());
+	_world->attachTo(_view);
+	_world->setPosition(0.0f, 0.0f);
+	_world->setName("box2d");
 	
-	spBox2dFactory factory = new Box2dFactory(world->_world, world, P2M_RATIO);
-	factory->addRef();
+	spBox2dFactory factory = new Box2dFactory(_world->_world, _world, P2M_RATIO);
 
-	world->addPlayer(safeCast<Player2d*>(factory->createEntity(EntityType::player2d, getRoot()->getSize() / 2.0f, BodyType::dynamicBody, false)));
+	_world->addPlayer(safeCast<Player2d*>(factory->createEntity(EntityType::player2d, Vector2(getRoot()->getWidth() * 0.2f, getRoot()->getHeight() * 0.2f), BodyType::dynamicBody, false)));
+	
+	_world->addEntity(factory->createEntity(EntityType::floor2d, Vector2(0.0f, _view->getHeight() * 0.1f), BodyType::staticBody, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
+	_world->addEntity(factory->createEntity(EntityType::floor2d, Vector2(_view->getWidth(), _view->getHeight() * 0.1f), BodyType::staticBody, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
+	
+	_world->addEntity(factory->createEntity(EntityType::randomObstacle2d, Vector2(_view->getWidth(), _view->getHeight() * 0.2f), BodyType::staticBody, false));
 
-	world->addEntity(factory->createEntity(EntityType::static2d, Vector2(_view->getWidth() * 0.4f, _view->getHeight() * 0.8f), BodyType::staticBody, false));
-	world->addEntity(factory->createEntity(EntityType::static2d, Vector2(_view->getWidth() * 0.8f, _view->getHeight() * 0.8f), BodyType::staticBody, false));
+	_world->pauseWorldAfter(2);
 
+	spActor touchActor = new Actor();
+	touchActor->setSize(_view->getSize());
+	touchActor->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(_world.get(), &Box2dContainer::onTouchDown));
+	touchActor->addEventListener(TouchEvent::TOUCH_UP, CLOSURE(_world.get(), &Box2dContainer::onTouchUp));
+	touchActor->attachTo(_view);
+
+	addButton("restart", "restart", Vector2(_view->getWidth() * 0.1f, _view->getHeight() * 0.9f));
 	addButton("back", "BACK", Vector2(_view->getWidth() * 0.3f, _view->getHeight() * 0.9f));
 	addButton("pause", "PAUSE", Vector2(_view->getWidth() * 0.6f, _view->getHeight() * 0.9f));
 	addButton("debug", "DEBUG", Vector2(_view->getWidth() * 0.9f, _view->getHeight() * 0.9f));
@@ -74,34 +90,8 @@ void JumpOverFrame::setData() {
 
 void JumpOverFrame::showHideDebug() {
 	safeSpCast<Box2dContainer>(_view->getChild("box2d"))->showHideDebug();
-	/*
-	spActor actor = _view->getFirstChild();
-	while (actor) {
-		if (actor->getName() == "box2d") {
-			safeSpCast<Box2dContainer>(actor)->showHideDebug();
-		}
-		actor = actor->getNextSibling();
-	}*/
 }
 
 void JumpOverFrame::pauseWorld() {
 	safeSpCast<Box2dContainer>(_view->getChild("box2d"))->pauseWorld();
-	/*
-	spActor actor = _view->getFirstChild();
-	while (actor) {
-		if (actor->getName() == "box2d") {
-			safeSpCast<Box2dContainer>(actor)->pauseWorld();
-		}
-		actor = actor->getNextSibling();
-	}*/
-}
-
-void JumpOverFrame::addQuad() {
-//	safeSpCast<Box2dContainer>(_view->getChild("box2d"))->addQuad();
-/*	while (actor) {
-		if (actor->getName() == "box2d") {
-			safeSpCast<Box2dContainer>(actor)->addQuad();
-		}
-		actor = actor->getNextSibling();
-	}*/
 }

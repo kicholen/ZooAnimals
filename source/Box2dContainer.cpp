@@ -1,10 +1,8 @@
 #include "Box2dContainer.h"
 
-Box2dContainer::Box2dContainer() : _world(0), _isWorldPaused(false) {
+Box2dContainer::Box2dContainer(const Vector2& size) : _world(0), _isWorldPaused(false), _pauseWorldInFrames(-1) {
 	SCALE = P2M_RATIO;
-	float boxScaleFactor = getRoot()->getHeight() / 640;
-	setScale(boxScaleFactor);
-	setSize(getRoot()->getSize().x * 10 / boxScaleFactor, getRoot()->getSize().y / boxScaleFactor);
+	setSize(size);
 
 	Vector2 pos = getPosition();
 	Vector2 scl = getScale();
@@ -14,12 +12,10 @@ Box2dContainer::Box2dContainer() : _world(0), _isWorldPaused(false) {
 	_worldHeight = (float)(getRoot()->getSize().y / SCALE);
 	_worldStep = 1000.0f;
 
-	addEventListener(TouchEvent::TOUCH_DOWN, (detail::CreateClosure(&Box2dContainer::onTouchDown).Init<&Box2dContainer::onTouchDown>(this)));
-	addEventListener(TouchEvent::TOUCH_UP, (detail::CreateClosure(&Box2dContainer::onTouchUp).Init<&Box2dContainer::onTouchUp>(this)));
-
 	_world = new b2World(b2Vec2(0, 30), false);
 	_world->SetContactListener(&contactListenerInstance);
-
+	
+	_forceRestart = false;
 	_previousFrameX = -19380;
 }
 
@@ -78,31 +74,42 @@ void Box2dContainer::showHideDebug() {
 }
 
 void Box2dContainer::pauseWorld() {
-	_isWorldPaused = !_isWorldPaused;
+	if (_isWorldPaused) {
+		_isWorldPaused = false;
+		_pauseWorldInFrames = -1;
+	}
+	else {
+		_isWorldPaused = true;
+	}
+}
+
+void Box2dContainer::pauseWorldAfter(int frames) {
+	_pauseWorldInFrames = frames;
 }
 
 void Box2dContainer::doUpdate(const UpdateState &us) {
-	bool shouldRestartLevel = false;
+	bool shouldSoftRestartLevel = false;
+	updatePause();
 
 	if (!_isWorldPaused) {
 		_world->Step(us.dt / _worldStep, 6, 2);
-		/*
+		
 		float currentFrameX = -convert(_player->getBody()->GetPosition()).x * getRoot()->getHeight() / 640;
 	
 		if (currentFrameX != _previousFrameX) {
 			_previousFrameX = currentFrameX;
 		}
 		else {
-			shouldRestartLevel = true;
+			shouldSoftRestartLevel = true;
 		}
 	
 		float playerPosition = _previousFrameX + getRoot()->getWidth() * 0.2f;
 		//_floor->setX(_previousFrameX);
 
 		setX(playerPosition);
-		float playerPosition = convert(_player->getBody()->GetPosition()).x;
-		*/
-		float playerPosition = convert(_player->getBody()->GetPosition()).x;
+		playerPosition = convert(_player->getBody()->GetPosition()).x;
+		
+		//float playerPosition = convert(_player->getBody()->GetPosition()).x;
 
 		b2Body *body = _world->GetBodyList();
 
@@ -110,7 +117,7 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 			Entity *entity = (Entity *)body->GetUserData();
 			b2Body *next = body->GetNext();
 
-			if (entity) {// && entity->_sprite
+			if (entity && entity->_sprite) {
 				entity->update(playerPosition);
 			}
 
@@ -118,7 +125,7 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 		}
 	}
 	else {
-		/*float currentFrameX = -convert(_player->getBody()->GetPosition()).x * getRoot()->getHeight() / 640;
+		float currentFrameX = -convert(_player->getBody()->GetPosition()).x * getRoot()->getHeight() / 640;
 	
 		if (currentFrameX != _previousFrameX) {
 			_previousFrameX = currentFrameX;
@@ -129,8 +136,8 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 
 		setX(playerPosition);
 		playerPosition = convert(_player->getBody()->GetPosition()).x;
-		*/
-		float playerPosition = convert(_player->getBody()->GetPosition()).x;
+		
+		//float playerPosition = convert(_player->getBody()->GetPosition()).x;
 		b2Body *body = _world->GetBodyList();
 		
 		while(body) {
@@ -150,7 +157,12 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 	
 	removeBodies();
 
-	if (shouldRestartLevel) {
+	if (shouldSoftRestartLevel) {
+		pauseWorld();
+		_player->animateDeath(CLOSURE(this, &Box2dContainer::onPlayerDeathAnimationFinished));
+	}
+	else if (_forceRestart) {
+		_forceRestart = false;
 		restart();
 	}
 }
@@ -205,6 +217,11 @@ void Box2dContainer::restart() {
 	dispatchEvent(&LevelRestartEvent);
 }
 
+void Box2dContainer::onPlayerDeathAnimationFinished(Event *ev) {
+	pauseWorld();
+	restart();
+}
+
 /*
 void Box2dContainer::addQuad() {
 	if (_isWorldPaused) {
@@ -253,3 +270,12 @@ void Box2dContainer::addQuad() {
 		clonedBody->SetUserData(staticObject);
 	}
 }*/
+
+void Box2dContainer::updatePause() {
+	if (_pauseWorldInFrames > 0) {
+		_pauseWorldInFrames--;
+		if (_pauseWorldInFrames == 0) {
+			_isWorldPaused = true;
+		}
+	}
+}

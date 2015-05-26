@@ -7,7 +7,7 @@ Player2d::Player2d(b2World* world, b2Body *body, string bodyName, float scale) {
 	m_body->SetFixedRotation(true);
 	m_body->SetGravityScale(4.0f);
 	// set first sensor
-	b2PolygonShape sensorShape;
+	/*b2PolygonShape sensorShape;
 	b2FixtureDef sensorFixtureDef;
 	b2Fixture* currentFixture = m_body->GetFixtureList();
 	float32 fixtureRadius = currentFixture->GetShape()->m_radius;
@@ -22,7 +22,7 @@ Player2d::Player2d(b2World* world, b2Body *body, string bodyName, float scale) {
 	fixture1->SetFriction(0.0f);
 	fixture1->SetDensity(1.0f);
 	fixture1->SetRestitution(0.0f);
-	fixture1->SetUserData((void*)3);
+	fixture1->SetUserData((void*)3);*/
 /*
 	sensorShape.SetAsBox(fixtureRadius * 0.9f, fixtureRadius * 0.1, b2Vec2(0, fixtureRadius * 0.95), 0);
 	sensorFixtureDef.shape = &sensorShape;
@@ -69,7 +69,7 @@ Player2d::~Player2d() {
 }
 
 void Player2d::update(float playerPosition) {
-	/*b2Vec2 vel = m_body->GetLinearVelocity();
+	b2Vec2 vel = m_body->GetLinearVelocity();
 	vel.x = 15;
     m_body->SetLinearVelocity(vel);
 
@@ -96,7 +96,6 @@ void Player2d::update(float playerPosition) {
 	if (_jumpTimeout > 0) {
 		_jumpTimeout--;
 	}
-	*/
 	// rotate
 	//if (_numContacts == 0) {
 	//	m_body->SetTransform(m_body->GetPosition(), m_body->GetAngle() + ROT_PER_FRAME * DEGTORAD);
@@ -113,6 +112,9 @@ void Player2d::update(float playerPosition) {
 }
 
 void Player2d::restart() {
+	unsigned char alpha = 255;
+	_sprite->setAlpha(alpha);
+	_sprite->setScale(_spriteScale);
 	m_body->SetTransform(_startPosition, 0);
 	_contacting = false;
 	_shouldJump = false;
@@ -251,6 +253,17 @@ void Player2d::startJump() {
 
 void Player2d::stopJump() {
 	_shouldJump = false;
+}
+
+void Player2d::animateDeath(EventCallback onAnimationEnd) {
+	_spriteScale = _sprite->getScale();
+	const b2Vec2& pos = m_body->GetPosition();
+	const Vector2& entityPosition = convert(pos);
+	_sprite->addTween(Actor::TweenY(entityPosition.y - (_sprite->getDerivedHeight() * 2.0f)), 2000 / 6);
+	_sprite->addTween(Actor::TweenScale(_spriteScale * 1.2f), 2000 / 6);
+	unsigned char alpha = 0;
+	_sprite->addTween(Actor::TweenAlpha(alpha), 2000 / 6, 1, false, 2000 / 6);
+	_sprite->addTween(Actor::TweenY(entityPosition.y + (_sprite->getDerivedHeight() * 4.0f)), 2000 / 6, 1, false, 2000 / 6)->addDoneCallback(onAnimationEnd);
 }
 
 b2Vec2 Player2d::convertForce(const Vector2 &force) {

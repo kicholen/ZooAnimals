@@ -38,7 +38,7 @@ public:
 		Box2dEvent(EV ev) :Event(ev) {};
 	};
 
-	Box2dContainer();
+	Box2dContainer(const Vector2& size);
 	~Box2dContainer();
 
 	b2World *_world;
@@ -54,15 +54,20 @@ public:
 	void slowMode(bool enable);
 	void showHideDebug();
 	void pauseWorld();
+	void pauseWorldAfter(int frames);
+	void forceRestart() { _forceRestart = true;  }
 
-protected:
 	void onTouchDown(Event *event);
 	void onTouchUp(Event *event);
+protected:
 
 	void doUpdate(const UpdateState &us);
+	void updatePause();
 
 	void removeBodies();
 	void restart();
+
+	void onPlayerDeathAnimationFinished(Event *ev);
 private:
 	b2Vec2 convert(const Vector2 &pos);
 	Vector2 convert(const b2Vec2 &pos);
@@ -80,7 +85,9 @@ private:
 
 	float _previousFrameX;
 
+	int _pauseWorldInFrames; // -1 - no pause, 0 - now
 	bool _isWorldPaused;
+	bool _forceRestart;
 };
 
 #endif

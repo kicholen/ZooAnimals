@@ -2,6 +2,7 @@
 #define _JUMPOVERFRAME_
 
 #include "CustomFrame.h"
+#include "Box2dContainer.h"
 
 DECLARE_SMART(JumpOverFrame, spJumpOverFrame);
 
@@ -25,6 +26,9 @@ protected:
 	void showHideDebug();
 	void pauseWorld();
 	void addQuad();
+
+private:
+	spBox2dContainer _world;
 };
 
 #endif

@@ -27,6 +27,8 @@ public:
 	void startJump();
 	void stopJump();
 
+	void animateDeath(EventCallback onAnimationEnd);
+
 	b2Body *getBody();
 
 protected:
@@ -51,6 +53,7 @@ private:
 	int _frameCounter;
 
 	bool _jumpOnThisFrame;
+	Vector2 _spriteScale;
 };
 
 #endif

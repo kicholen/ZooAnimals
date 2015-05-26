@@ -13,7 +13,7 @@ DECLARE_SMART(Box2dFactory, spBox2dFactory);
 
 typedef enum { staticBody, kinematicBody, dynamicBody } BodyType;
 typedef enum { circleShape, rectangleShape } FixtureShape;
-typedef enum EntityType { player2d, static2d, kinematic2d, dynamic2d, floor2d };
+typedef enum EntityType { player2d, static2d, kinematic2d, dynamic2d, floor2d, randomObstacle2d };
 
 class Box2dFactory : public Object
 {
@@ -21,6 +21,7 @@ public:
 	Box2dFactory(b2World *world, spActor oxyWorld, float scale);
 
 	Entity* createEntity(EntityType type, const Vector2& position, BodyType bodyType, bool bullet);
+	Entity* createEntity(EntityType type, const Vector2& position, BodyType bodyType, bool bullet, const Vector2& size);
 
 protected:
 	void getPlayer();
@@ -31,14 +32,16 @@ protected:
 private:
 	void attachFixture(b2Body* body, VectorArray<Vector2*> *oxyVertices);
 	void attachFixture(b2Body* body, float radius, const Vector2& position);
+	void attachFixture(b2Body* body, const Vector2& size);
 
 	b2CircleShape* createCircleShape(const Vector2& position, float radius);
 	b2PolygonShape* createPolygonShape(VectorArray<Vector2*> *oxyVertices);
+	b2PolygonShape* createPolygonShape(const Vector2& size);
 
 	b2Body* createBody(const Vector2& position, BodyType bodyType, bool bullet);
 	b2FixtureDef* createFixture(double density = 1.0f, double friction = 1.0f, bool isSensor = false);
 
-	spSprite createSprite(const string& spriteName, const Vector2& size);
+	spSprite createSprite(ResAnim* res, const Vector2& size, bool shouldScale = true);
 
 	b2Vec2 convertBody(const Vector2 &pos);
 	Vector2 convertBody(const b2Vec2 &pos);
