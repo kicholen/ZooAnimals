@@ -2,6 +2,7 @@
 #define _CARDNAVIGATOR_
 
 #include "oxygine-framework.h"
+#include "deque"
 
 using namespace oxygine;
 
@@ -36,12 +37,14 @@ private:
 	float getIndexPosition(int index);
 
 	void onTweenEnded(Event *ev);
+	void updatePriority();
 private:
 	int _currentChildIndex;
 	int _childrenCount;
 	CardNavigatorAlign _alignType;
 	CardNavigatorState _state;
 	float _offsetBetweenCards;
+	deque<spActor> _cards;
 };
 
 #endif

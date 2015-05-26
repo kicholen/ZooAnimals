@@ -4,6 +4,7 @@
 #include "oxygine-framework.h"
 #include "AnimalModel.h"
 #include "AnimalSlot.h"
+#include "TouchBlock.h"
 
 using namespace oxygine;
 
@@ -11,9 +12,20 @@ using namespace oxygine;
 
 DECLARE_SMART(AnimalCardElement, spAnimalCardElement);
 
+typedef enum { acsZoomed, acsUnzoomed, acsAnimating } AnimalCardState;
+
 class AnimalCardElement : public Actor
 {
 public:
+	class AnimalCardEvent : public Event {
+	public:
+		enum EV {
+			PHOTO_CLICKED = makefourcc('A', 'C', 'P', 'C')
+		};
+
+		AnimalCardEvent(EV ev) : Event(PHOTO_CLICKED) {}
+	};
+
 	AnimalCardElement(const Vector2& size, spAnimalModel model);
 	~AnimalCardElement();
 
@@ -27,8 +39,16 @@ private:
 
 	spTextField createText(int lockitId, const Vector2& boundries, bool multiline = false);
 
+	void onPhotoClicked(Event *ev);
+	void onZoomEnded(Event *ev);
+	void onUnzoomEnded(Event *ev);
 private:
+	Vector2 _baseScale;
+	Vector2 _basePosition;
+	
 	spAnimalSlot _animalSlot;
+	spTouchBlock _touchBlocker;
+	AnimalCardState _state;
 };
 
 #endif

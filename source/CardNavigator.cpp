@@ -15,13 +15,15 @@ CardNavigator::CardNavigator(int alignType, float offsetBetweenCards) {
 }
 
 CardNavigator::~CardNavigator() {
-
+	_cards.clear();
 }
 
 void CardNavigator::addCard(spActor actor) {
+	_cards.push_back(actor);
 	addChild(actor);
 	setChildPosition(actor);
 	_childrenCount++;
+	updatePriority();
 }
 
 void CardNavigator::animateToNextCard() {
@@ -83,6 +85,7 @@ void CardNavigator::setPositionByIndex(int index, bool shouldAnimate) {
 	}
 
 	_currentChildIndex = index;
+	updatePriority();
 }
 
 float CardNavigator::getIndexPosition(int index) {
@@ -100,4 +103,15 @@ float CardNavigator::getIndexPosition(int index) {
 
 void CardNavigator::onTweenEnded(Event *ev) {
 	_state = cnWait;
+}
+
+void CardNavigator::updatePriority() {
+	for (int i = 0; i < _cards.size(); i++) {
+		if (i < _currentChildIndex - 1 || i > _currentChildIndex - 1) {
+			_cards[i]->setPriority(-1);
+		}
+		else {
+			_cards[i]->setPriority(1);
+		}
+	}
 }

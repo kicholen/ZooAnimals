@@ -8,6 +8,7 @@ AnimalSlot::AnimalSlot() {
 AnimalSlot::AnimalSlot(const string& id) {
 	_id = id;
 	setTouchEnabled(false);
+	setTouchChildrenEnabled(false);
 	setAnchor(0.5f, 0.5f);
 	setSize(SLOT_SIZE_X , SLOT_SIZE_Y);
 

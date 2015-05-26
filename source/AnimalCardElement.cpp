@@ -5,9 +5,9 @@
 AnimalCardElement::AnimalCardElement(const Vector2& size, spAnimalModel model) {
 	setSize(size);
 	setAnchor(0.5f, 0.5f);
-	setTouchChildrenEnabled(false);
-	setTouchEnabled(false);
 	setData(model);
+	setTouchEnabled(false);
+	_state = acsUnzoomed;
 }
 
 AnimalCardElement::~AnimalCardElement() {
@@ -27,23 +27,27 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	spTextField nameTextField = createText(10, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
 	nameTextField->setAnchor(0.5f, 0.0f);
 	nameTextField->setX(getWidth() * 0.75f);
+	nameTextField->setTouchEnabled(false);
 	addChild(nameTextField);
 
 	// height
 	spTextField heightTextField = createText(10, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
 	heightTextField->setY(nameTextField->getY() + nameTextField->getTextRect().getBottom() + offset);
 	heightTextField->setX(getWidth() * 0.5f);
+	heightTextField->setTouchEnabled(false);
 	addChild(heightTextField);
 
 	// wieght
 	spTextField weightTextField = createText(10, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
 	weightTextField->setY(heightTextField->getY() + heightTextField->getTextRect().getBottom() + offset);
+	weightTextField->setTouchEnabled(false);
 	weightTextField->setX(getWidth() * 0.5f);
 	addChild(weightTextField);
 
 	// class
 	spTextField classTextField = createText(10, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
 	classTextField->setY(weightTextField->getY() + weightTextField->getTextRect().getBottom() + offset);
+	classTextField->setTouchEnabled(false);
 	classTextField->setX(getWidth() * 0.5f);
 	addChild(classTextField);
 
@@ -51,10 +55,25 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	spTextField factTextField = createText(51, Vector2(getWidth() * 0.8f, getHeight() * 0.3f), true);
 	factTextField->setAnchor(0.5f, 0.0f);
 	factTextField->setY(classTextField->getY() + classTextField->getTextRect().getBottom() + offset);
+	factTextField->setTouchEnabled(false);
 	factTextField->setX(getWidth() / 2.0f);
 	addChild(factTextField);
 
-	// photos 1 - 3
+	// photos 1
+	spSprite photo = new Sprite();
+	photo->setPriority(30);
+	photo->setResAnim(gameResources.getResAnim("underwater_2"));
+	photo->setAnchor(0.5f, 0.5f);
+	photo->setScale(getActorScaleBySize(photo, Vector2(getWidth() * 0.8f, getHeight() * 0.25f)));
+	photo->setPosition(getWidth() / 2.0f, factTextField->getY() + factTextField->getTextRect().getBottom() + offset + photo->getDerivedHeight() / 2.0f);
+	photo->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalCardElement::onPhotoClicked));
+	photo->attachTo(this);
+
+	_touchBlocker = new TouchBlock(getRoot()->getSize() * 1.2f);
+	_touchBlocker->setAnchor(0.5f, 0.5f);
+	_touchBlocker->setPosition(getSize() / 2.0f);
+	_touchBlocker->setPriority(20);
+	addChild(_touchBlocker);
 }
 
 void AnimalCardElement::setAnimalSlot(const string& spriteName) {
@@ -78,6 +97,7 @@ void AnimalCardElement::createBackground() {
 		arg_attachTo = this,
 		arg_size = getSize(),
 		arg_priority = -1);
+	cardBackground->setTouchEnabled(false);
 	cardBackground->setHorizontalMode(Box9Sprite::STRETCHING);
 	cardBackground->setVerticalMode(Box9Sprite::STRETCHING);
 	cardBackground->setGuides(7, 37, 7, 37);
@@ -92,4 +112,31 @@ spTextField AnimalCardElement::createText(int lockitId, const Vector2& boundries
 	style.color = Color(35, 145, 245);
 
 	return createTextFieldInBoundries(LanguageManager::instance.getText(lockitId), boundries, style);
+}
+
+void AnimalCardElement::onPhotoClicked(Event *ev) {
+	if (_state != acsAnimating) {
+		spSprite photo = safeCast<Sprite*>(ev->currentTarget.get());
+
+		if (_state == acsUnzoomed) {
+			_baseScale = photo->getScale();
+			_basePosition = photo->getPosition();
+			photo->addTween(Actor::TweenPosition(getSize() / 2.0f), 400);
+			photo->addTween(Actor::TweenScale(getActorScaleBySize(photo, getRoot()->getSize() * 0.9f)), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onZoomEnded));
+		}
+		else {
+			photo->addTween(Actor::TweenPosition(_basePosition), 400);
+			photo->addTween(Actor::TweenScale(_baseScale), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onUnzoomEnded));
+		}
+		_touchBlocker->changeState();
+		_state = acsAnimating;
+	}
+}
+
+void AnimalCardElement::onZoomEnded(Event *ev) {
+	_state = acsZoomed;
+}
+
+void AnimalCardElement::onUnzoomEnded(Event *ev) {
+	_state = acsUnzoomed;
 }

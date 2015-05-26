@@ -3,6 +3,7 @@
 #include "AnimalCardElement.h"
 #include "SwipeActor.h"
 #include "AnimalsManager.h"
+#include "SharedResources.h"
 
 PresentAnimalsFrame::PresentAnimalsFrame(const string& region) {
 	init("LandingPageFrame.xml", false);
@@ -49,17 +50,21 @@ Action PresentAnimalsFrame::loop() {
 
 void PresentAnimalsFrame::setData() {
 	_cardNavigator = new CardNavigator(1, 30.0f);
+	_cardNavigator->setPriority(5);
 	_cardNavigator->setPosition(_view->getSize() / 2.0f);
+	_cardNavigator->setTouchEnabled(false);
 	_view->addChild(_cardNavigator);
 
 	animalMap animaMap = AnimalsManager::instance.getPossesedAnimalsByRegion(_region);
 	for (animalMap::iterator innerIterator = animaMap.begin(); innerIterator != animaMap.end(); ++innerIterator) {
 		spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), innerIterator->second);
 		animalCard->setPosition(_view->getSize() / 2.0f);
+		animalCard->setCull(true);
 		_cardNavigator->addCard(animalCard);
 	}
-
+	
 	spSwipeActor swipeActor = new SwipeActor(1.0f, 0.30f);
+	swipeActor->setPriority(4);
 	swipeActor->setSize(_view->getSize());
 	swipeActor->addEventListener(SwipeActor::SwipeEvent::LEFT, CLOSURE(this, &PresentAnimalsFrame::onSwipeLeft));
 	swipeActor->addEventListener(SwipeActor::SwipeEvent::RIGHT, CLOSURE(this, &PresentAnimalsFrame::onSwipeRight));
