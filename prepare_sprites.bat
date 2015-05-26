@@ -23,4 +23,7 @@ python ../TheGameH2O/modules/oxy/oxygine-oxygine-framework/tools/process_xml2.py
 python ../TheGameH2O/modules/oxy/oxygine-oxygine-framework/tools/process_xml2.py -x xmls/SixthLevelFrame.xml --src_data data --dest_data data/ext
 
 
+python ../../Development/oxygine-framework/tools/oxyresbuild.py -x xmls/animals/bee.xml --src_data data --dest_data data/ext
+
+
 PAUSE

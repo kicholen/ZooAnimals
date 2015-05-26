@@ -11,7 +11,8 @@ AnimalCardElement::AnimalCardElement(const Vector2& size, spAnimalModel model) {
 }
 
 AnimalCardElement::~AnimalCardElement() {
-
+	realAnimalResource.unload();
+	realAnimalResource.free();
 }
 
 void AnimalCardElement::switchAnimalModel(spAnimalModel model) {
@@ -60,14 +61,14 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	addChild(factTextField);
 
 	// photos 1
-	spSprite photo = new Sprite();
-	photo->setPriority(30);
-	photo->setResAnim(gameResources.getResAnim("underwater_2"));
-	photo->setAnchor(0.5f, 0.5f);
-	photo->setScale(getActorScaleBySize(photo, Vector2(getWidth() * 0.8f, getHeight() * 0.25f)));
-	photo->setPosition(getWidth() / 2.0f, factTextField->getY() + factTextField->getTextRect().getBottom() + offset + photo->getDerivedHeight() / 2.0f);
-	photo->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalCardElement::onPhotoClicked));
-	photo->attachTo(this);
+	_photo = new Sprite();
+	_photo->setPriority(30);
+	_photo->setResAnim(gameResources.getResAnim("underwater_2"));
+	_photo->setAnchor(0.5f, 0.5f);
+	_photo->setScale(getActorScaleBySize(_photo, Vector2(getWidth() * 0.8f, getHeight() * 0.25f)));
+	_photo->setPosition(getWidth() / 2.0f, factTextField->getY() + factTextField->getTextRect().getBottom() + offset + _photo->getDerivedHeight() / 2.0f);
+	_photo->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalCardElement::onPhotoClicked));
+	_photo->attachTo(this);
 
 	_touchBlocker = new TouchBlock(getRoot()->getSize() * 1.2f);
 	_touchBlocker->setAnchor(0.5f, 0.5f);
@@ -116,20 +117,43 @@ spTextField AnimalCardElement::createText(int lockitId, const Vector2& boundries
 
 void AnimalCardElement::onPhotoClicked(Event *ev) {
 	if (_state != acsAnimating) {
-		spSprite photo = safeCast<Sprite*>(ev->currentTarget.get());
-
 		if (_state == acsUnzoomed) {
-			_baseScale = photo->getScale();
-			_basePosition = photo->getPosition();
-			photo->addTween(Actor::TweenPosition(getSize() / 2.0f), 400);
-			photo->addTween(Actor::TweenScale(getActorScaleBySize(photo, getRoot()->getSize() * 0.9f)), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onZoomEnded));
+			const string& resurceSufix = "bee.xml";
+			realAnimalResource.loadXML("xmls/animals/" + resurceSufix, 0, false);
+
+			spThreadLoading threadLoader = new ThreadLoading();
+			threadLoader->addEventListener(ThreadLoading::COMPLETE, CLOSURE(this, &AnimalCardElement::onResourceLoaded));
+			threadLoader->add(&realAnimalResource);
+			threadLoader->start(this);
+
+			_baseScale = _photo->getScale();
+			_basePosition = _photo->getPosition();
+			_photo->addTween(Actor::TweenPosition(getSize() / 2.0f), 400);
+			_photo->addTween(Actor::TweenScale(getActorScaleBySize(_photo, getRoot()->getSize() * 0.9f)), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onZoomEnded));
 		}
 		else {
-			photo->addTween(Actor::TweenPosition(_basePosition), 400);
-			photo->addTween(Actor::TweenScale(_baseScale), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onUnzoomEnded));
+			realAnimalResource.unload();
+			_photo->removeTweens();
+			const Vector2& sizeBefore = _photo->getDerivedSize();
+			_photo->setResAnim(gameResources.getResAnim("underwater_2"));
+			_photo->setScale(getActorScaleBySize(_photo, sizeBefore));
+			_photo->addTween(Actor::TweenPosition(_basePosition), 400);
+			_photo->addTween(Actor::TweenScale(_baseScale), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onUnzoomEnded));
 		}
 		_touchBlocker->changeState();
 		_state = acsAnimating;
+	}
+}
+
+// w8 here until tween andloading is completed
+void AnimalCardElement::onResourceLoaded(Event *ev) {
+	if (_photo) {
+		const Vector2& sizeBefore = _photo->getDerivedSize();
+		_photo->setResAnim(realAnimalResource.getResAnim("bee"));// _photo->getResAnim()->getName()));
+		_photo->removeTweens(true);
+		_photo->setScale(getActorScaleBySize(_photo, sizeBefore));// getRoot()->getSize() * 0.9f));
+
+		_photo->addTween(Actor::TweenScale(getActorScaleBySize(_photo, getRoot()->getSize() * 0.9f)), 600, 1, false, 0, Tween::ease_inCirc);
 	}
 }
 

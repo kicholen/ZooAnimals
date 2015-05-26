@@ -42,12 +42,17 @@ private:
 	void onPhotoClicked(Event *ev);
 	void onZoomEnded(Event *ev);
 	void onUnzoomEnded(Event *ev);
+	void onResourceLoaded(Event *ev);
 private:
 	Vector2 _baseScale;
 	Vector2 _basePosition;
-	
+	spSprite _photo;
+
 	spAnimalSlot _animalSlot;
 	spTouchBlock _touchBlocker;
+
+	Resources realAnimalResource;
+
 	AnimalCardState _state;
 };
 

@@ -28,7 +28,6 @@ protected:
 private:
 	spCardNavigator _cardNavigator;
 	string _region;
-
 };
 
 #endif
