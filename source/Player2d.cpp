@@ -60,6 +60,7 @@ Player2d::Player2d(b2World* world, b2Body *body, string bodyName, float scale) {
 	_jumpTimeout = 0;
 	_jumpOnThisFrame = false;
 	_frameCounter = 0;
+	_wasScaleSet = false;
 }
 
 Player2d::~Player2d() {
@@ -114,7 +115,9 @@ void Player2d::update(float playerPosition) {
 void Player2d::restart() {
 	unsigned char alpha = 255;
 	_sprite->setAlpha(alpha);
-	_sprite->setScale(_spriteScale);
+	if (_wasScaleSet) {
+		_sprite->setScale(_spriteScale);
+	}
 	m_body->SetTransform(_startPosition, 0);
 	_contacting = false;
 	_shouldJump = false;
@@ -256,6 +259,7 @@ void Player2d::stopJump() {
 }
 
 void Player2d::animateDeath(EventCallback onAnimationEnd) {
+	_wasScaleSet = true;
 	_spriteScale = _sprite->getScale();
 	const b2Vec2& pos = m_body->GetPosition();
 	const Vector2& entityPosition = convert(pos);

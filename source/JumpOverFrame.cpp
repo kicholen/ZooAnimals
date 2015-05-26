@@ -1,5 +1,6 @@
 #include "JumpOverFrame.h"
 #include "Box2dFactory.h"
+#include "QueueTextAnimation.h"
 
 JumpOverFrame::JumpOverFrame() {
 	init("LandingPageFrame.xml", false);
@@ -45,7 +46,7 @@ Action JumpOverFrame::loop() {
 			break; // todo
 		}
 		else if (action.id == "pause") {
-			pauseWorld();
+			pauseWorld(0);
 		}
 		else if (action.id == "debug") {
 			showHideDebug();
@@ -81,6 +82,17 @@ void JumpOverFrame::setData() {
 	touchActor->addEventListener(TouchEvent::TOUCH_UP, CLOSURE(_world.get(), &Box2dContainer::onTouchUp));
 	touchActor->attachTo(_view);
 
+	spQueueTextAnimation animation = new QueueTextAnimation();
+	animation->setAnchor(0.5f, 0.5f);
+	animation->setSize(_view->getSize() / 2.0f);
+	animation->setPosition(_view->getSize() / 2.0f);
+	animation->attachTo(_view);
+	animation->addTextToQueue("start");
+	animation->addTextToQueue("1");
+	animation->addTextToQueue("2");
+	animation->addTextToQueue("3");
+	animation->start(CLOSURE(this, &JumpOverFrame::pauseWorld));
+
 	addButton("restart", "restart", Vector2(_view->getWidth() * 0.1f, _view->getHeight() * 0.9f));
 	addButton("back", "BACK", Vector2(_view->getWidth() * 0.3f, _view->getHeight() * 0.9f));
 	addButton("pause", "PAUSE", Vector2(_view->getWidth() * 0.6f, _view->getHeight() * 0.9f));
@@ -92,6 +104,6 @@ void JumpOverFrame::showHideDebug() {
 	safeSpCast<Box2dContainer>(_view->getChild("box2d"))->showHideDebug();
 }
 
-void JumpOverFrame::pauseWorld() {
+void JumpOverFrame::pauseWorld(Event *ev) {
 	safeSpCast<Box2dContainer>(_view->getChild("box2d"))->pauseWorld();
 }

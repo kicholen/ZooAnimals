@@ -35,6 +35,8 @@ files
 	[source/animation]
 	AnimalsFarmAnimations.cpp
 	AnimalsFarmAnimations.h
+	QueueTextAnimation.cpp
+	QueueTextAnimation.h
 
 	[source/element/shop]
 	ShopContainer.cpp
@@ -347,6 +349,8 @@ files
 	Entity.h
 	Floor2d.cpp
 	Floor2d.h
+	RandomObstacle2d.cpp
+	RandomObstacle2d.h
 }
 
 subprojects

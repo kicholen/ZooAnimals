@@ -94,7 +94,7 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 	if (!_isWorldPaused) {
 		_world->Step(us.dt / _worldStep, 6, 2);
 		
-		float currentFrameX = -convert(_player->getBody()->GetPosition()).x * getRoot()->getHeight() / 640;
+		float currentFrameX = -convert(_player->getBody()->GetPosition()).x;
 	
 		if (currentFrameX != _previousFrameX) {
 			_previousFrameX = currentFrameX;
@@ -125,7 +125,7 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 		}
 	}
 	else {
-		float currentFrameX = -convert(_player->getBody()->GetPosition()).x * getRoot()->getHeight() / 640;
+		float currentFrameX = -convert(_player->getBody()->GetPosition()).x;
 	
 		if (currentFrameX != _previousFrameX) {
 			_previousFrameX = currentFrameX;

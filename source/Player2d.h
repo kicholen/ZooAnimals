@@ -53,6 +53,7 @@ private:
 	int _frameCounter;
 
 	bool _jumpOnThisFrame;
+	bool _wasScaleSet;
 	Vector2 _spriteScale;
 };
 

@@ -24,7 +24,7 @@ protected:
 	void setData();
 
 	void showHideDebug();
-	void pauseWorld();
+	void pauseWorld(Event *ev);
 	void addQuad();
 
 private:
