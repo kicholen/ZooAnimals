@@ -67,12 +67,12 @@ void JumpOverFrame::setData() {
 	
 	spBox2dFactory factory = new Box2dFactory(_world->_world, _world, P2M_RATIO);
 
-	_world->addPlayer(safeCast<Player2d*>(factory->createEntity(EntityType::player2d, Vector2(getRoot()->getWidth() * 0.2f, getRoot()->getHeight() * 0.2f), BodyType::dynamicBody, false)));
+	_world->addPlayer(safeCast<Player2d*>(factory->createEntity(0, Vector2(getRoot()->getWidth() * 0.2f, getRoot()->getHeight() * 0.2f), 2, false)));
 	
-	_world->addEntity(factory->createEntity(EntityType::floor2d, Vector2(0.0f, _view->getHeight() * 0.1f), BodyType::staticBody, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
-	_world->addEntity(factory->createEntity(EntityType::floor2d, Vector2(_view->getWidth(), _view->getHeight() * 0.1f), BodyType::staticBody, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
+	_world->addEntity(factory->createEntity(4, Vector2(0.0f, _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
+	_world->addEntity(factory->createEntity(4, Vector2(_view->getWidth(), _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
 	
-	_world->addEntity(factory->createEntity(EntityType::randomObstacle2d, Vector2(_view->getWidth(), _view->getHeight() * 0.2f), BodyType::staticBody, false));
+	_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth(), _view->getHeight() * 0.2f), 0, false));
 
 	_world->pauseWorldAfter(2);
 

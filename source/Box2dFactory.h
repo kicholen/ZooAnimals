@@ -20,8 +20,8 @@ class Box2dFactory : public Object
 public:
 	Box2dFactory(b2World *world, spActor oxyWorld, float scale);
 
-	Entity* createEntity(EntityType type, const Vector2& position, BodyType bodyType, bool bullet);
-	Entity* createEntity(EntityType type, const Vector2& position, BodyType bodyType, bool bullet, const Vector2& size);
+	Entity* createEntity(int type, const Vector2& position, int bodyType, bool bullet);
+	Entity* createEntity(int type, const Vector2& position, int bodyType, bool bullet, const Vector2& size);
 
 protected:
 	void getPlayer();
@@ -38,7 +38,7 @@ private:
 	b2PolygonShape* createPolygonShape(VectorArray<Vector2*> *oxyVertices);
 	b2PolygonShape* createPolygonShape(const Vector2& size);
 
-	b2Body* createBody(const Vector2& position, BodyType bodyType, bool bullet);
+	b2Body* createBody(const Vector2& position, int bodyType, bool bullet);
 	b2FixtureDef* createFixture(double density = 1.0f, double friction = 1.0f, bool isSensor = false);
 
 	spSprite createSprite(ResAnim* res, const Vector2& size, bool shouldScale = true);

@@ -28,7 +28,7 @@ void TouchBlock::changeState() {
 void TouchBlock::show() {
 	_state = qsAnimating;
 	createTouchQuadIfDoesntExist();
-	unsigned char alpha = 120;
+	unsigned char alpha = 180;
 	_touchQuad->addTween(TweenAlpha(alpha), 500)->addDoneCallback(CLOSURE(this, &TouchBlock::onShowEnded));
 }
 

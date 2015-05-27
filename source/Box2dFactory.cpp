@@ -14,7 +14,7 @@ Box2dFactory::Box2dFactory(b2World *world, spActor oxyWorld, float scale) {
 	SCALE = scale;
 }
 
-Entity* Box2dFactory::createEntity(EntityType type, const Vector2& position, BodyType bodyType, bool bullet) {
+Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyType, bool bullet) {
 	b2Body* body = createBody(position, bodyType, bullet);
 
 	if (type == player2d) {
@@ -108,7 +108,7 @@ Entity* Box2dFactory::createEntity(EntityType type, const Vector2& position, Bod
 	}
 }
 
-Entity* Box2dFactory::createEntity(EntityType type, const Vector2& position, BodyType bodyType, bool bullet, const Vector2& size) {
+Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyType, bool bullet, const Vector2& size) {
 	b2Body* body = createBody(position, bodyType, bullet);
 
 	if (type == player2d) {
@@ -262,7 +262,7 @@ b2PolygonShape* Box2dFactory::createPolygonShape(const Vector2& size) {
 	return polygonShape;
 }
 
-b2Body* Box2dFactory::createBody(const Vector2& position, BodyType bodyType, bool bullet) {
+b2Body* Box2dFactory::createBody(const Vector2& position, int bodyType, bool bullet) {
 	b2BodyDef bodyDef;
 	b2Vec2 bodyPosition = convertBody(position);
 	bodyDef.position = bodyPosition;

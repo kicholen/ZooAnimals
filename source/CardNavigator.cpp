@@ -46,7 +46,7 @@ void CardNavigator::setChildPosition(spActor actor) {
 	if (_alignType == cnVertical) {
 		if (_childrenCount == 0) {
 			setWidth(actor->getDerivedWidth());
-			setY(getY() - actor->getDerivedHeight() / 2);
+			setY(getY() - actor->getDerivedHeight() / 2 - _offsetBetweenCards);
 		}
 		setHeight(getHeight() + actor->getDerivedHeight() + _offsetBetweenCards);
 
@@ -55,7 +55,7 @@ void CardNavigator::setChildPosition(spActor actor) {
 	else {
 		if (_childrenCount == 0) {
 			setHeight(actor->getDerivedHeight());
-			setX(getX() - actor->getDerivedWidth() / 2);
+			setX(getX() - actor->getDerivedWidth() / 2 - _offsetBetweenCards);
 		}
 		setWidth(getWidth() + actor->getDerivedWidth() + _offsetBetweenCards);
 
@@ -109,9 +109,11 @@ void CardNavigator::updatePriority() {
 	for (int i = 0; i < _cards.size(); i++) {
 		if (i < _currentChildIndex - 1 || i > _currentChildIndex - 1) {
 			_cards[i]->setPriority(-1);
+			_cards[i]->setTouchChildrenEnabled(false);
 		}
 		else {
 			_cards[i]->setPriority(1);
+			_cards[i]->setTouchChildrenEnabled(true);
 		}
 	}
 }

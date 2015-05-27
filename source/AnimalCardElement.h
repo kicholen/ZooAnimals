@@ -26,7 +26,7 @@ public:
 		AnimalCardEvent(EV ev) : Event(PHOTO_CLICKED) {}
 	};
 
-	AnimalCardElement(const Vector2& size, spAnimalModel model);
+	AnimalCardElement(const Vector2& size, spAnimalModel model, ResAnim* thumbRes);
 	~AnimalCardElement();
 
 	void switchAnimalModel(spAnimalModel model);
@@ -51,9 +51,10 @@ private:
 	spAnimalSlot _animalSlot;
 	spTouchBlock _touchBlocker;
 
-	Resources realAnimalResource;
+	Resources _realAnimalResource;
 
 	AnimalCardState _state;
+	ResAnim* _thumbRes;
 };
 
 #endif

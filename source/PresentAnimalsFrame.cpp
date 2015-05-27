@@ -6,7 +6,7 @@
 #include "SharedResources.h"
 
 PresentAnimalsFrame::PresentAnimalsFrame(const string& region) {
-	init("LandingPageFrame.xml", false);
+	init("RealAnimalsThumb.xml", false);
 
 	_region = region;
 	selectTransitions();
@@ -57,7 +57,7 @@ void PresentAnimalsFrame::setData() {
 
 	animalMap animaMap = AnimalsManager::instance.getPossesedAnimalsByRegion(_region);
 	for (animalMap::iterator innerIterator = animaMap.begin(); innerIterator != animaMap.end(); ++innerIterator) {
-		spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), innerIterator->second);
+		spAnimalCardElement animalCard = new AnimalCardElement(Vector2(_view->getHeight() * 0.6f, _view->getHeight() * 0.8f), innerIterator->second, _resources.getResAnim(innerIterator->second->animalName()));
 		animalCard->setPosition(_view->getSize() / 2.0f);
 		animalCard->setCull(true);
 		_cardNavigator->addCard(animalCard);
