@@ -1,11 +1,11 @@
 #include "JumpOverFrame.h"
 #include "Box2dFactory.h"
 #include "QueueTextAnimation.h"
+#include "SharedResources.h"
 
 JumpOverFrame::JumpOverFrame() {
 	init("LandingPageFrame.xml", false);
 	selectTransitions();
-
 	spColorRectSprite bg = new ColorRectSprite;
 	bg->setName("_background");
 	bg->setColor(Color(88, 144, 217));

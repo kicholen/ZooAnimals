@@ -225,4 +225,3 @@ bool isOnScreen(spActor actor) {
 
 	return false;
 }
-

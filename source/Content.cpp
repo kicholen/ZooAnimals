@@ -144,6 +144,27 @@ pugi::xml_node Content::getAnimalGamePreferenceNode(const string &name) {
 	return pugi::xml_node();
 }
 
+pugi::xml_node Content::getAnimalInfoNode(const string &name) {
+	pugi::xml_node data = _contentDocument.child("data");
+	OX_ASSERT(data);
+	pugi::xml_node zoo = data.child("zoo");
+	OX_ASSERT(zoo);
+	pugi::xml_node animal = zoo.child(name.c_str());
+	OX_ASSERT(animal);
+	pugi::xml_node parameter = animal.first_child();
+	const pugi::char_t* pugiName = "info";
+
+	while (!parameter.empty()) {
+		if (strcmp(pugiName, parameter.name()) == 0) {
+			return parameter;
+		}
+
+		parameter = parameter.next_sibling();
+	}
+
+	return pugi::xml_node();
+}
+
 pugi::xml_node Content::getAnimalFarmParametersNode(const string &name) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);

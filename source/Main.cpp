@@ -4,8 +4,8 @@
 #include "Transition.h"
 #include "Blocking.h"
 #include "Main.h"
-#include "SoundPlayer.h"
-#include "SoundSystem.h"
+//#include "SoundPlayer.h"
+//#include "SoundSystem.h"
 #include "oxygine-framework.h"
 #include "core/STDFileSystem.h"
 
@@ -17,7 +17,7 @@ using namespace oxygine;
 
 int mainloop();
 
-SoundPlayer sPlayer;
+//SoundPlayer sPlayer;
 
 file::STDFileSystem extfs(true);
 
@@ -39,10 +39,10 @@ void main_init() {
 	file::mount(&extfs);
 
 	//initialize our sound system with 16 channels
-	SoundSystem::instance = SoundSystem::create();
-	SoundSystem::instance->init(4);
+	//SoundSystem::instance = SoundSystem::create();
+	//SoundSystem::instance->init(4);
 
-	SoundPlayer::initialize();
+	//SoundPlayer::initialize();
 
 	Frame::initialize();
 
@@ -64,13 +64,13 @@ void onRequestExit(Event *ev) {
 }
 
 void main_update() {
-	SoundSystem::instance->update();
-	sPlayer.update();
+	//SoundSystem::instance->update();
+	//sPlayer.update();
 }
 
 void main_destroy() {
-	sPlayer.stop();
-	SoundSystem::instance->stop();
+	//sPlayer.stop();
+	//SoundSystem::instance->stop();
 	FlurryAnalytics::instance.onSessionEnded();
 	//delete &FlurryAnalytics::instance;
 	//delete &FlurryAds::instance;
@@ -83,5 +83,5 @@ void main_destroy() {
 	tilesResources.free();
 	animalsResources.free();
 	gameResources.free();
-	SoundSystem::instance->release();
+	//SoundSystem::instance->release();
 }

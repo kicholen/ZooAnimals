@@ -1,7 +1,7 @@
 #ifndef _GOOGLEANALYTICS_
 #define _GOOGLEANALYTICS_
 
-#include "s3eFlurry.h"
+//#include "s3eFlurry.h"
 #include "s3eDevice.h"
 
 namespace oxygine

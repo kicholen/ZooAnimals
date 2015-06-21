@@ -2,7 +2,7 @@
 #include "RenderState.h"
 #include "MaskedSprite.h"
 #include "FlurryAnalytics.h"
-#include "SoundInstance.h"
+//#include "SoundInstance.h"
 #include "SharedResources.h"
 
 spMoneyCounterElement CustomFrame::_moneyCounter = 0;
@@ -37,7 +37,7 @@ spShaderTweenButton CustomFrame::addShaderButton(const string &name, const strin
 }
 
 void CustomFrame::playClickSound(Event *event) {
-	spSoundInstance instance = sPlayer.play("button_click");
+//	spSoundInstance instance = sPlayer.play("button_click");
 }
 
 void CustomFrame::selectTransitions() {

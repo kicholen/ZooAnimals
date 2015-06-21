@@ -30,10 +30,7 @@ void Particle::think(float dt) {
 }
 
 void Particle::draw() {
-
-	float sx = r / 3.5f;
-	float sy = r / 3.5f;
-	setScale(Vector2(sx, sy));
+	setScale(r * 2.0f / getHeight());
 	
 	if (col != 1) {
 		Color32 c = CMath::HexRGBToColor32(col);
@@ -65,7 +62,7 @@ void Particle::die(bool wasTouched) {
 		detach();
 		_dead = true;
 		
-		ParticleEvent particleEvent(_number, wasTouched);
+		ParticleEvent particleEvent(this, wasTouched);
 		dispatchEvent(&particleEvent);
 	}
 }

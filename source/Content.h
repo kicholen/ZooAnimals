@@ -29,6 +29,8 @@ public:
 
 	pugi::xml_node getAnimalJumpParametersNode(const string &name);
 	pugi::xml_node getAnimalGamePreferenceNode(const string &name);
+	pugi::xml_node getAnimalInfoNode(const string &name);
+
 	pugi::xml_node getAnimalFarmParametersNode(const string &name);
 	pugi::xml_node getAnimalFarmSortParametersNode(const string &name);
 	pugi::xml_node getAnimalFarmNoSortParametersNode(const string &name);

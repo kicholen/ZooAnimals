@@ -1,7 +1,7 @@
 #ifndef _FACEBOOKMANAGER_
 #define _FACEBOOKMANAGER_
 
-#include "s3eFacebook.h"
+//#include "s3eFacebook.h"
 #include "s3e.h"
 #include "FlashUtils.h"
 

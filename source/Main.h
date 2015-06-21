@@ -1,7 +1,7 @@
 #include "Frame.h"
 #include "Sprite.h"
 #include "res/Resources.h"
-#include "SoundPlayer.h"
+//#include "SoundPlayer.h"
 
 using namespace oxygine;
 
@@ -12,7 +12,7 @@ void main_init();
 void main_destroy();
 void main_update();
 
-extern SoundPlayer sPlayer;
+//extern SoundPlayer sPlayer;
 /*
 DECLARE_SMART(LandingPageFrame, spLandingPageFrame);
 DECLARE_SMART(SlideFrame, spSlideFrame);

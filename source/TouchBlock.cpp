@@ -17,6 +17,10 @@ TouchBlock::~TouchBlock() {
 }
 
 void TouchBlock::changeState() {
+	if (_touchQuad) {
+		_touchQuad->removeTweens(true);
+	}
+
 	if (_state == qsHidden) {
 		show();
 	}
@@ -28,14 +32,18 @@ void TouchBlock::changeState() {
 void TouchBlock::show() {
 	_state = qsAnimating;
 	createTouchQuadIfDoesntExist();
-	unsigned char alpha = 180;
-	_touchQuad->addTween(TweenAlpha(alpha), 500)->addDoneCallback(CLOSURE(this, &TouchBlock::onShowEnded));
+	unsigned char alpha = 0;
+	_touchQuad->setAlpha(alpha);
+	alpha = 180;
+	_touchQuad->addTween(TweenAlpha(alpha), 400)->addDoneCallback(CLOSURE(this, &TouchBlock::onShowEnded));
 }
 
 void TouchBlock::hide() {
 	_state = qsAnimating;
-	unsigned char alpha = 0;
-	_touchQuad->addTween(TweenAlpha(alpha), 500)->addDoneCallback(CLOSURE(this, &TouchBlock::onHideEnded));
+	unsigned char alpha = 180;
+	_touchQuad->setAlpha(alpha);
+	alpha = 0;
+	_touchQuad->addTween(TweenAlpha(alpha), 400)->addDoneCallback(CLOSURE(this, &TouchBlock::onHideEnded));
 }
 
 void TouchBlock::createTouchQuadIfDoesntExist() {

@@ -3,7 +3,6 @@
 options
 {
     module_path="../../../../../Development/oxygine-framework/oxygine/marmalade"
-	module_path="../../../../../Development/oxygine-sound"
 	s3e-data-dir="../data"
     enable-exceptions=1
 }
@@ -357,12 +356,8 @@ files
 
 subprojects
 {
-	s3eFacebook
     iwgl
     oxygine-framework
-	oxygine-sound
-	s3eFlurry
-	s3eAndroidGooglePlayBilling
 	box2d/box2d
 }
 
@@ -390,5 +385,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=9
+	version-revision=10
 }

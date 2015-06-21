@@ -1,7 +1,7 @@
 #ifndef _GOOGLEPLAYINAPPPURCHASEMANAGER_
 #define _GOOGLEPLAYINAPPPURCHASEMANAGER_
 
-#include "s3eAndroidGooglePlayBilling.h"
+//#include "s3eAndroidGooglePlayBilling.h"
 #include "s3e.h"
 #include "FlashUtils.h"
 #include "Settings.h"
@@ -25,20 +25,20 @@ public:
 
 protected:
 	void registerListeners() {
-		s3eAndroidGooglePlayBillingRegister(S3E_ANDROIDGOOGLEPLAYBILLING_LIST_PRODUCTS_CALLBACK, listCallback, NULL);
+		/*s3eAndroidGooglePlayBillingRegister(S3E_ANDROIDGOOGLEPLAYBILLING_LIST_PRODUCTS_CALLBACK, listCallback, NULL);
 		s3eAndroidGooglePlayBillingRegister(S3E_ANDROIDGOOGLEPLAYBILLING_RESTORE_CALLBACK, restoreCallback, NULL);
 		s3eAndroidGooglePlayBillingRegister(S3E_ANDROIDGOOGLEPLAYBILLING_PURCHASE_CALLBACK, purchaseCallback, NULL);
-		s3eAndroidGooglePlayBillingRegister(S3E_ANDROIDGOOGLEPLAYBILLING_CONSUME_CALLBACK, consumeCallback, NULL);
+		s3eAndroidGooglePlayBillingRegister(S3E_ANDROIDGOOGLEPLAYBILLING_CONSUME_CALLBACK, consumeCallback, NULL);*/
 	}
 	void unregisterListeners() {
-		s3eAndroidGooglePlayBillingUnRegister(S3E_ANDROIDGOOGLEPLAYBILLING_LIST_PRODUCTS_CALLBACK, listCallback);
+		/*s3eAndroidGooglePlayBillingUnRegister(S3E_ANDROIDGOOGLEPLAYBILLING_LIST_PRODUCTS_CALLBACK, listCallback);
 		s3eAndroidGooglePlayBillingUnRegister(S3E_ANDROIDGOOGLEPLAYBILLING_RESTORE_CALLBACK, restoreCallback);
 		s3eAndroidGooglePlayBillingUnRegister(S3E_ANDROIDGOOGLEPLAYBILLING_PURCHASE_CALLBACK, purchaseCallback);
-		s3eAndroidGooglePlayBillingUnRegister(S3E_ANDROIDGOOGLEPLAYBILLING_CONSUME_CALLBACK, consumeCallback);
+		s3eAndroidGooglePlayBillingUnRegister(S3E_ANDROIDGOOGLEPLAYBILLING_CONSUME_CALLBACK, consumeCallback);*/
 	}
 private:
 	static int32 listCallback(void *systemData, void *userData) {
-		if (systemData) {
+		/*if (systemData) {
 			s3eAndroidGooglePlayBillingSkuResponse *skus = (s3eAndroidGooglePlayBillingSkuResponse*)systemData;
 			string str;
 
@@ -61,12 +61,12 @@ private:
 					s3eDebugOutputString("}");
 				}
 			}
-		}
+		}*/
 		return 1;
 	}
 
 	static int32 restoreCallback(void* systemData, void* userData) {
-		if (systemData) {
+		/*if (systemData) {
 			bool wasProductPurchased = false;
 			s3eAndroidGooglePlayBillingRestoreResponse *rr = (s3eAndroidGooglePlayBillingRestoreResponse*)systemData;
 			string str;
@@ -116,12 +116,12 @@ private:
 				Settings::instance.getValue("unblock_ads").set_value(0);
 				Settings::instance.save();
 			}
-		}
+		}*/
 		return 1;
 	}
 
 	static int32 purchaseCallback(void* systemData, void* userData) {
-		if (systemData) {
+		/*if (systemData) {
 			bool wasProductPurchased = false;
 			s3eAndroidGooglePlayBillingPurchaseResponse *pr = (s3eAndroidGooglePlayBillingPurchaseResponse*)systemData;
 			string str;
@@ -155,12 +155,12 @@ private:
 				Settings::instance.getValue("unblock_ads").set_value(1);
 				Settings::instance.save();
 			}
-		}
+		}*/
 		return 1;
 	}
 
 	static int32 consumeCallback(void* systemData, void* userData) {
-		if (systemData) {
+		/*if (systemData) {
 			s3eAndroidGooglePlayBillingConsumeResponse *cr = (s3eAndroidGooglePlayBillingConsumeResponse*)systemData;
 			string str;
 
@@ -170,7 +170,7 @@ private:
 			}
 			if (cr->m_Status == S3E_ANDROIDGOOGLEPLAYBILLING_RESULT_OK)
 				s3eDebugOutputString("consumed");
-		}
+		}*/
 		return 1;
 	}
 private:

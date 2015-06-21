@@ -21,6 +21,7 @@ private:
 
 	uint _particlesPoppedCount;
 	spParticleEmitter _emitter;
+	spParticlesContainer _container;
 };
 
 #endif

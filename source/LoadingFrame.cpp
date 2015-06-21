@@ -118,7 +118,7 @@ void LoadingFrame::initManagers(Event *ev) {
 }
 
 void LoadingFrame::initSoundPlayer(Event *ev) {
-	sPlayer.setResources(&gameResources);
+//	sPlayer.setResources(&gameResources);
 	loadGameResource();
 }
 

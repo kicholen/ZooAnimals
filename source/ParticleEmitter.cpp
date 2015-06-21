@@ -26,6 +26,7 @@ ParticleEmitter::ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 x
 ParticleEmitter::~ParticleEmitter() {
 	_container->removeParticles();
 	_colors._vector.resize(0);
+	_resAnims._vector.resize(0);
 }
 
 void ParticleEmitter::doUpdate(const UpdateState &us) {

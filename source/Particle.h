@@ -18,10 +18,10 @@ public:
 			DIE_EVENT = makefourcc('P', 'D', 'E', 'E')
 		};
 
-		uint particleNumber;
+		Particle* particle;
 		bool wasTouched;
 
-		ParticleEvent(uint number, bool byTouch):Event(DIE_EVENT), particleNumber(number) {}
+		ParticleEvent(Particle* particle_, bool byTouch) :Event(DIE_EVENT), particle(particle_), wasTouched(byTouch) {}
 	};
 	
 	Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, uint number);
@@ -33,6 +33,9 @@ public:
 	float friction;
 	float lifetime;
 
+	uint getNumber() {
+		return _number;
+	}
 private:
 	float _birthday;
 	uint _number;

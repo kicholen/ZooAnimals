@@ -38,11 +38,16 @@ private:
 	void createBackground();
 
 	spTextField createText(int lockitId, const Vector2& boundries, bool multiline = false);
+	spTextField createText(const string& text, const Vector2& boundries, bool multiline = false);
 
 	void onPhotoClicked(Event *ev);
 	void onZoomEnded(Event *ev);
 	void onUnzoomEnded(Event *ev);
 	void onResourceLoaded(Event *ev);
+
+	void increaseEventCounter();
+	void decreaseEventCounter();
+	void changStateIfNeeded();
 private:
 	Vector2 _baseScale;
 	Vector2 _basePosition;
@@ -54,6 +59,7 @@ private:
 	Resources _realAnimalResource;
 
 	AnimalCardState _state;
+	int _eventsCounter;
 	ResAnim* _thumbRes;
 };
 

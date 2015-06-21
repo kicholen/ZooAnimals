@@ -9,7 +9,7 @@ AnimalCardElement::AnimalCardElement(const Vector2& size, spAnimalModel model, R
 	const string& resurceSufix = _thumbRes->getName() + ".xml";
 	_realAnimalResource.loadXML("xmls/animals/" + resurceSufix, 0, false);
 	_state = acsUnzoomed;
-
+	_eventsCounter = 0;
 	setData(model);
 	setTouchEnabled(false);
 }
@@ -29,36 +29,50 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	float offset = 5.0f;
 
 	// name
-	spTextField nameTextField = createText(10, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
+	spTextField nameTextField = createText(model->nameLockit(), Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
 	nameTextField->setAnchor(0.5f, 0.0f);
 	nameTextField->setX(getWidth() * 0.75f);
 	nameTextField->setTouchEnabled(false);
 	addChild(nameTextField);
 
-	// height
-	spTextField heightTextField = createText(10, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
-	heightTextField->setY(nameTextField->getY() + nameTextField->getTextRect().getBottom() + offset);
-	heightTextField->setX(getWidth() * 0.5f);
-	heightTextField->setTouchEnabled(false);
-	addChild(heightTextField);
+	// lifespan
+	/*spTextField lifespanTextField = createText(59, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
+	lifespanTextField->setY(nameTextField->getY() + nameTextField->getTextRect().getBottom() + offset);
+	lifespanTextField->setX(getWidth() * 0.5f);
+	lifespanTextField->setTouchEnabled(false);
+	addChild(lifespanTextField);
+	*/
+	
+	const string& lifespanResult = LanguageManager::instance.getText(104) + ": " + FlashUtils::CMath::intToString(model->lifespan()) + LanguageManager::instance.getText(105);
+	spTextField lifespanResultTextfield = createText(lifespanResult, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
+	int fontScale = lifespanResultTextfield->getFontSize2Scale();
+	lifespanResultTextfield->setY(nameTextField->getY() + nameTextField->getTextRect().getBottom() + offset);
+	lifespanResultTextfield->setX(getWidth() * 0.5f);
+	lifespanResultTextfield->setTouchEnabled(false);
+	addChild(lifespanResultTextfield);
 
-	// wieght
-	spTextField weightTextField = createText(10, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
-	weightTextField->setY(heightTextField->getY() + heightTextField->getTextRect().getBottom() + offset);
+	// lifespan
+	const string& weightResult = LanguageManager::instance.getText(106) + ": " + FlashUtils::CMath::intToString(model->weight()) + LanguageManager::instance.getText(107);
+	spTextField weightTextField = createText(weightResult, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
+	weightTextField->setFontSize2Scale(fontScale);
+	weightTextField->setY(lifespanResultTextfield->getY() + lifespanResultTextfield->getTextRect().getBottom() + offset);
 	weightTextField->setTouchEnabled(false);
 	weightTextField->setX(getWidth() * 0.5f);
 	addChild(weightTextField);
 
 	// class
-	spTextField classTextField = createText(10, Vector2(getWidth() * 0.2f, getHeight() * 0.1f));
+	const string& classResult = LanguageManager::instance.getText(108) + ": " + LanguageManager::instance.getText(model->groupLockit());
+	spTextField classTextField = createText(classResult, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
+	classTextField->setFontSize2Scale(fontScale);
 	classTextField->setY(weightTextField->getY() + weightTextField->getTextRect().getBottom() + offset);
 	classTextField->setTouchEnabled(false);
 	classTextField->setX(getWidth() * 0.5f);
 	addChild(classTextField);
 
 	// fun fact
-	spTextField factTextField = createText(51, Vector2(getWidth() * 0.8f, getHeight() * 0.3f), true);
+	spTextField factTextField = createText(model->infoLockit(), Vector2(getWidth() * 0.8f, getHeight() * 0.3f), true);
 	factTextField->setAnchor(0.5f, 0.0f);
+	factTextField->setFontSize2Scale(fontScale);
 	factTextField->setY(classTextField->getY() + classTextField->getTextRect().getBottom() + offset);
 	factTextField->setTouchEnabled(false);
 	factTextField->setX(getWidth() / 2.0f);
@@ -119,8 +133,20 @@ spTextField AnimalCardElement::createText(int lockitId, const Vector2& boundries
 	return createTextFieldInBoundries(LanguageManager::instance.getText(lockitId), boundries, style);
 }
 
+spTextField AnimalCardElement::createText(const string& text, const Vector2& boundries, bool multiline) {
+	TextStyle style;
+	style.font = gameResources.getResFont("nobile_bold")->getFont();
+	style.vAlign = TextStyle::VALIGN_MIDDLE;
+	style.hAlign = TextStyle::HALIGN_CENTER;
+	style.multiline = multiline;
+	style.color = Color(35, 145, 245);
+
+	return createTextFieldInBoundries(text, boundries, style);
+}
+
 void AnimalCardElement::onPhotoClicked(Event *ev) {
 	if (_state != acsAnimating) {
+
 		if (_state == acsUnzoomed) {
 			spThreadLoading threadLoader = new ThreadLoading();
 			threadLoader->addEventListener(ThreadLoading::COMPLETE, CLOSURE(this, &AnimalCardElement::onResourceLoaded));
@@ -134,6 +160,8 @@ void AnimalCardElement::onPhotoClicked(Event *ev) {
 		}
 		else {
 			_realAnimalResource.unload();
+			decreaseEventCounter();
+			decreaseEventCounter();
 			_photo->removeTweens();
 			const Vector2& sizeBefore = _photo->getDerivedSize();
 			_photo->setResAnim(_thumbRes);
@@ -146,7 +174,7 @@ void AnimalCardElement::onPhotoClicked(Event *ev) {
 	}
 }
 
-// todo probably should w8 here, make counter if boh actions are completed
+// todo : hack here -> on some devices loading atlas can take long time, and it is possible that user will have to wait over 1s here
 void AnimalCardElement::onResourceLoaded(Event *ev) {
 	if (_photo) {
 		const Vector2& sizeBefore = _photo->getDerivedSize();
@@ -155,16 +183,38 @@ void AnimalCardElement::onResourceLoaded(Event *ev) {
 		_photo->removeTweens(true);
 		_photo->setScale(getActorScaleBySize(_photo, sizeBefore));
 		_photo->setPosition(positionBefore);
-
 		_photo->addTween(Actor::TweenPosition(getSize() / 2.0f), 500);
-		_photo->addTween(Actor::TweenScale(getActorScaleBySize(_photo, getRoot()->getSize() * 0.9f)), 600, 1, false, 0, Tween::ease_inCirc);
+		_photo->addTween(Actor::TweenScale(getActorScaleBySize(_photo, getRoot()->getSize() * 0.9f)), 600, 1, false, 0, Tween::ease_inCirc)->addDoneCallback(CLOSURE(this, &AnimalCardElement::onZoomEnded));
+
+		increaseEventCounter();
 	}
 }
 
 void AnimalCardElement::onZoomEnded(Event *ev) {
-	_state = acsZoomed;
+	increaseEventCounter();
 }
 
 void AnimalCardElement::onUnzoomEnded(Event *ev) {
-	_state = acsUnzoomed;
+	decreaseEventCounter();
+}
+
+void AnimalCardElement::decreaseEventCounter() {
+	--_eventsCounter;
+
+	changStateIfNeeded();
+}
+
+void AnimalCardElement::increaseEventCounter() {
+	++_eventsCounter;
+
+	changStateIfNeeded();
+}
+
+void AnimalCardElement::changStateIfNeeded() {
+	if (_eventsCounter == 3) {
+		_state = acsZoomed;
+	}
+	else if (_eventsCounter == 0) {
+		_state = acsUnzoomed;
+	}
 }

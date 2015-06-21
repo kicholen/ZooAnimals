@@ -12,42 +12,42 @@ GooglePlayInAppPurchaseManager::~GooglePlayInAppPurchaseManager() {
 }
 
 void GooglePlayInAppPurchaseManager::init() {
-	_isGooglePlayInAppPurchaseAvailable = s3eAndroidGooglePlayBillingAvailable();
+/*	_isGooglePlayInAppPurchaseAvailable = s3eAndroidGooglePlayBillingAvailable();
 	if (_isGooglePlayInAppPurchaseAvailable) {
 		s3eAndroidGooglePlayBillingStart(publicKey);
 		registerListeners();
 		_isGooglePlayInAppPurchaseAvailable = s3eAndroidGooglePlayBillingIsSupported();
-	}
+	}*/
 }
 
 void GooglePlayInAppPurchaseManager::queryShop() {
-	if (_isGooglePlayInAppPurchaseAvailable) {
+	/*if (_isGooglePlayInAppPurchaseAvailable) {
 		s3eDebugOutputString("Marmalade-GooglePlayIAP- query shop");
 		const char *inAppSkus[] = {
 			"test_product"//"levels_ads_unblock"
 		};
 		s3eAndroidGooglePlayBillingRequestProductInformation(inAppSkus, sizeof(inAppSkus) / sizeof(const char*), NULL, NULL);
-	}
+	}*/
 }
 
 void GooglePlayInAppPurchaseManager::restorePurchases() {
-	if (_isGooglePlayInAppPurchaseAvailable) {
+	/*if (_isGooglePlayInAppPurchaseAvailable) {
 		s3eDebugOutputString("Marmalade-GooglePlayIAP- restore purchases");
 		s3eAndroidGooglePlayBillingRestoreTransactions();
-	}
+	}*/
 }
 
 void GooglePlayInAppPurchaseManager::purchaseProduct(const char* productId, bool isConsumable) {
-	if (_isGooglePlayInAppPurchaseAvailable) {
+	/*if (_isGooglePlayInAppPurchaseAvailable) {
 		s3eDebugOutputString("Marmalade-GooglePlayIAP- purchase product");
 		//string randomPayload = CMath::stringFormat("TestPayload %d", int(FlashUtils::CMath::Rand(1, 10000)));
 		s3eAndroidGooglePlayBillingRequestPurchase(productId, isConsumable);//, randomPayload.c_str());
-	}
+	}*/
 }
 void GooglePlayInAppPurchaseManager::consumeProduct() {
-	if (_isGooglePlayInAppPurchaseAvailable) {
+	/*if (_isGooglePlayInAppPurchaseAvailable) {
 		s3eDebugOutputString("Marmalade-GooglePlayIAP- consume product");
 		s3eAndroidGooglePlayBillingConsumeItem("dupa");
-	}
+	}*/
 }
 

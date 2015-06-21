@@ -43,6 +43,12 @@ public:
 	const string& midGame() { return _midGame; }
 	const string& lowGame() { return _lowGame; }
 
+	int lifespan() { return _lifespan; }
+	int weight() { return _weight; }
+	int groupLockit() { return _groupLockit; }
+	int infoLockit() { return _infoLockit; }
+	int nameLockit() { return _nameLockit; }
+
 	int getGameValue(const string& name) {
 		if (_topGame == name) {
 			return 2;
@@ -80,6 +86,12 @@ private:
 	string _topGame;
 	string _midGame;
 	string _lowGame;
+
+	int _lifespan;
+	int _weight;
+	int _groupLockit;
+	int _infoLockit;
+	int _nameLockit;
 
 	int _level;
 

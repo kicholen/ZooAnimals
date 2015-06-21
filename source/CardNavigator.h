@@ -38,6 +38,9 @@ private:
 
 	void onTweenEnded(Event *ev);
 	void updatePriority();
+
+	const Vector2& getBasePosition(spActor actor);
+
 private:
 	int _currentChildIndex;
 	int _childrenCount;

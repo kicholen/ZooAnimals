@@ -2,7 +2,7 @@
 
 ParticlesContainer::ParticlesContainer() {
 	_particlesArray._vector.resize(0);
-	_particlesArray._vector.reserve(100);
+	_particlesArray._vector.reserve(20);
 	_particlesInPool._vector.resize(0);
 	_particlesInPool._vector.reserve(10);
 }
@@ -33,6 +33,8 @@ spParticle ParticlesContainer::addParticle(Vector2 position, Vector2 velocity, f
 	particle->friction = friction;
 	particle->setResAnim(gameResources.getResAnim(resAnim));
 	particle->setDieOnTouch(shouldKillOnTouch);
+	particle->setScale(radius * 2.0f / particle->getHeight());
+
 	addChild(particle);
 
 	return particle;
@@ -71,5 +73,5 @@ void ParticlesContainer::addEventListenersToParticle(spParticle particle) {
 
 void ParticlesContainer::onParticleDie(Event *ev) {
 	Particle::ParticleEvent* event = static_cast<Particle::ParticleEvent*>(ev);
-	_particlesInPool.push(event->particleNumber);
+	_particlesInPool.push(event->particle->getNumber());
 }

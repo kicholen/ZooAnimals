@@ -61,4 +61,28 @@ void AnimalModel::fromContent() {
 		}
 		attribute = attribute.next_attribute();
 	}
+
+	animalParameters = Content::instance.getAnimalInfoNode(_name);
+	attribute = animalParameters.first_attribute();
+
+	while (!attribute.empty()) {
+		const char *name = attribute.name();
+
+		if (!strcmp(name, "lifespan")) {
+			_lifespan = attribute.as_int();
+		}
+		else if (!strcmp(name, "weight")) {
+			_weight = attribute.as_int();
+		}
+		else if (!strcmp(name, "l_group")) {
+			_groupLockit = attribute.as_int();
+		}
+		else if (!strcmp(name, "l_info")) {
+			_infoLockit = attribute.as_int();
+		}
+		else if (!strcmp(name, "l_name")) {
+			_nameLockit = attribute.as_int();
+		}
+		attribute = attribute.next_attribute();
+	}
 }

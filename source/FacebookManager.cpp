@@ -8,26 +8,26 @@ FacebookManager::FacebookManager() : _currentSession(NULL), _currentRequest(NULL
 }
 
 FacebookManager::~FacebookManager() {
-	deleteCurrentRequest();
+	/*deleteCurrentRequest();
 
 	if (_currentSession) {
 		s3eFBTerminate(_currentSession);
 		_currentSession = NULL;
-	}
+	}*/
 }
 
 void FacebookManager::init() {
-	_isFacebookAvailable = s3eFacebookAvailable() == S3E_TRUE;
+	/*_isFacebookAvailable = s3eFacebookAvailable() == S3E_TRUE;
 	if (_isFacebookAvailable) {
 		s3eDebugOutputString(CMath::stringFormat(" API FB - available : %s", "true").c_str());
 	}
 	else {
 		s3eDebugOutputString(CMath::stringFormat(" API FB - available : %s", "false").c_str());
-	}
+	}*/
 }
 
 void FacebookManager::logIn(bool withActionPermisstion) {
-	if (_isFacebookAvailable) {
+	/*if (_isFacebookAvailable) {
 		char lAppId[S3E_CONFIG_STRING_MAX];
 		s3eConfigGetString("APP", "FacebookAppId", lAppId);
 		//s3eDebugOutputString(CMath::stringFormat(" API FB - Trying to log in by appId: %s", lAppId).c_str());
@@ -50,30 +50,30 @@ void FacebookManager::logIn(bool withActionPermisstion) {
 		else {
 			_status = FB_LOG_IN_FAILED;
 		}
-	}
+	}*/
 }
 
 void FacebookManager::logOut() {
-	if (_isFacebookAvailable && _currentSession) {
+	/*if (_isFacebookAvailable && _currentSession) {
 		s3eFBSession_Logout(_currentSession);
 		_loggedIn = false;
 		_status = FB_NOT_LOGGED_IN;
-	}
+	}*/
 }
 
 void FacebookManager::loginCallback(struct s3eFBSession* session, s3eResult* loginResult, void *userData) {
-	if (*loginResult == S3E_RESULT_SUCCESS) {
+	/*if (*loginResult == S3E_RESULT_SUCCESS) {
 		FacebookManager::instance._status = FB_LOGGED_IN;
 		FacebookManager::instance._loggedIn = true;
 	}
 	else {
 		FacebookManager::instance._status = FB_LOG_IN_FAILED;
 		FacebookManager::instance._loggedIn = false;
-	}
+	}*/
 }
 
 void FacebookManager::beginDialogRequest(const char* graphPath, const char* httpMethod, bool useAccessToken) {
-	if (_currentDialog) {
+	/*if (_currentDialog) {
 		return;
 	}
 
@@ -85,17 +85,17 @@ void FacebookManager::beginDialogRequest(const char* graphPath, const char* http
 			s3eConfigGetString("APP", "FacebookAppSecret", lAppId);
 			addToDialogRequest("api_key", lAppId);
 		}
-	}
+	}*/
 }
 
 void FacebookManager::addToDialogRequest(const char* param, const char* data) {
-	if (_isFacebookAvailable && _currentSession && _currentDialog) {
+	/*if (_isFacebookAvailable && _currentSession && _currentDialog) {
 		s3eFBDialog_AddParamString(_currentDialog, param, data);
-	}
+	}*/
 }
 
 void FacebookManager::finishDialogRequest() {
-	if (_isFacebookAvailable && _currentSession && _currentDialog) {
+	/*if (_isFacebookAvailable && _currentSession && _currentDialog) {
 		if (s3eFBDialog_Show(_currentDialog, FacebookManager::dialogRequestCallback, NULL) == S3E_RESULT_SUCCESS) {
 			_status = FB_DIALOG_REQUEST_SENDING;
 		}
@@ -103,11 +103,11 @@ void FacebookManager::finishDialogRequest() {
 			deleteCurrentDialog();
 			_status = FB_DIALOG_REQUEST_FAILED;
 		}
-	}
+	}*/
 }
 
 void FacebookManager::beginGraphRequest(const char* graphPath, const char* httpMethod, bool useAccessToken) {
-	if (_currentRequest) {
+	/*if (_currentRequest) {
 		return;
 	}
 
@@ -117,17 +117,17 @@ void FacebookManager::beginGraphRequest(const char* graphPath, const char* httpM
 		if (_currentRequest && useAccessToken) {
 			addToGraphRequest("access_token", s3eFBSession_AccessToken(_currentSession));
 		}
-	}
+	}*/
 }
 
 void FacebookManager::addToGraphRequest(const char* param, const char* data) {
-	if (_isFacebookAvailable && _currentSession && _currentRequest) {
+	/*if (_isFacebookAvailable && _currentSession && _currentRequest) {
 		s3eFBRequest_AddParamString(_currentRequest, param, data);
-	}
+	}*/
 }
 
 void FacebookManager::finishGraphRequest() {
-	if (_isFacebookAvailable && _currentSession && _currentRequest) {
+	/*if (_isFacebookAvailable && _currentSession && _currentRequest) {
 		if (s3eFBRequest_Send(_currentRequest, FacebookManager::graphRequestCallback, NULL) == S3E_RESULT_SUCCESS) {
 			_status = FB_GRAPH_REQUEST_SENDING;
 		}
@@ -135,24 +135,24 @@ void FacebookManager::finishGraphRequest() {
 			deleteCurrentRequest();
 			_status = FB_GRAPH_REQUEST_FAILED;
 		}
-	}
+	}*/
 }
 
 void FacebookManager::dialogRequestCallback(struct s3eFBDialog* request, s3eResult* requestResult, void* userData) {
-	if (*requestResult == S3E_RESULT_SUCCESS) {
+	/*if (*requestResult == S3E_RESULT_SUCCESS) {
 		FacebookManager::instance._status = FB_DIALOG_REQUEST_SUCCESS;
 	}
 	else {
 		FacebookManager::instance._status = FB_DIALOG_REQUEST_FAILED;
 	}
-	FacebookManager::instance.deleteCurrentDialog();
+	FacebookManager::instance.deleteCurrentDialog();*/
 }
 
 void FacebookManager::deleteCurrentDialog() {
-	if (_currentDialog) {
+	/*if (_currentDialog) {
 		s3eFBDialog_Delete(_currentDialog);
 		_currentDialog = NULL;
-	}
+	}*/
 }
 
 void FacebookManager::graphRequestCallback(struct s3eFBRequest* request, s3eResult* requestResult, void* userData) {
@@ -166,8 +166,8 @@ void FacebookManager::graphRequestCallback(struct s3eFBRequest* request, s3eResu
 }
 
 void FacebookManager::deleteCurrentRequest() {
-	if (_currentRequest) {
+	/*if (_currentRequest) {
 		s3eFBRequest_Delete(_currentRequest);
 		_currentRequest = NULL;
-	}
+	}*/
 }
