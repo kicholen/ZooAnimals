@@ -10,7 +10,7 @@ DECLARE_SMART(TooltipElement, spTooltipElement);
 class TooltipElement : public Actor
 {
 public:
-	TooltipElement(const Vector2& size, const string& background, const string& spriteName, int lockitId = 0);
+	TooltipElement(const Vector2& size, const std::string& background, const std::string& spriteName, int lockitId = 0);
 	~TooltipElement();
 
 	void showForTime(int ms);
@@ -18,10 +18,10 @@ public:
 	void hide(bool shouldDetach, int delay = 0);
 
 private:
-	void setData(const string& background, const string& spriteName, int lockitId);
-	void createBackground(const string& background);
+	void setData(const std::string& background, const std::string& spriteName, int lockitId);
+	void createBackground(const std::string& background);
 	bool createTextfieldIfNeeded(int lockitId);
-	void createSprite(const string& spriteName);
+	void createSprite(const std::string& spriteName);
 
 	void onTweenEnded(Event *ev);
 private:

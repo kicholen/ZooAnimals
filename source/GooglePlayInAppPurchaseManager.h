@@ -40,7 +40,7 @@ private:
 	static int32 listCallback(void *systemData, void *userData) {
 		/*if (systemData) {
 			s3eAndroidGooglePlayBillingSkuResponse *skus = (s3eAndroidGooglePlayBillingSkuResponse*)systemData;
-			string str;
+			std::string str;
 
 			if (skus->m_ErrorMsg) {
 				str = FlashUtils::CMath::stringFormat("List Sku returned : %d, %s", (int)skus->m_Status, skus->m_ErrorMsg);
@@ -69,7 +69,7 @@ private:
 		/*if (systemData) {
 			bool wasProductPurchased = false;
 			s3eAndroidGooglePlayBillingRestoreResponse *rr = (s3eAndroidGooglePlayBillingRestoreResponse*)systemData;
-			string str;
+			std::string str;
 
 			bool wasErrorCatched = false;
 
@@ -124,7 +124,7 @@ private:
 		/*if (systemData) {
 			bool wasProductPurchased = false;
 			s3eAndroidGooglePlayBillingPurchaseResponse *pr = (s3eAndroidGooglePlayBillingPurchaseResponse*)systemData;
-			string str;
+			std::string str;
 
 			if (pr->m_ErrorMsg) {
 				str = FlashUtils::CMath::stringFormat("Purchase returned : %d, %s", (int)pr->m_Status, pr->m_ErrorMsg);
@@ -162,7 +162,7 @@ private:
 	static int32 consumeCallback(void* systemData, void* userData) {
 		/*if (systemData) {
 			s3eAndroidGooglePlayBillingConsumeResponse *cr = (s3eAndroidGooglePlayBillingConsumeResponse*)systemData;
-			string str;
+			std::string str;
 
 			if (cr->m_ErrorMsg) {
 				str = CMath::stringFormat("Purchase returned : %d, %s", (int)cr->m_Status, cr->m_ErrorMsg);

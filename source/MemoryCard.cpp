@@ -1,7 +1,7 @@
 #include "MemoryCard.h"
 #include "SharedResources.h"
 
-MemoryCard::MemoryCard(string cardId) {
+MemoryCard::MemoryCard(std::string cardId) {
 	_state = mcNormal;
 	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
@@ -14,7 +14,7 @@ MemoryCard::MemoryCard(string cardId) {
 	createAnimalSprite(cardId);
 }
 
-void MemoryCard::set(string id) {
+void MemoryCard::set(std::string id) {
 	_animalSlot->switchAnimalSprite(id);
 	_mask->setPosition(_mask->getDerivedSize() * 3 / 2);
 	setVisible(true);
@@ -104,7 +104,7 @@ void MemoryCard::createMaskedSprite() {
 	_masked->setMask(_mask);
 }
 
-void MemoryCard::createAnimalSprite(string id) {
+void MemoryCard::createAnimalSprite(std::string id) {
 	_animalSlot = new AnimalSlot(id);
 	_animalSlot->setAnchor(0.5f, 0.5f);
 	_animalSlot->setPosition(getWidth() / 2, getHeight() / 2);

@@ -22,7 +22,7 @@ spTextActor FarmBasePanel::createScoreTextField() {
 	return scoreTextField;
 }
 
-spTweenButton FarmBasePanel::createTweenButton(const string& actionName, const string& buttonResAnim) {
+spTweenButton FarmBasePanel::createTweenButton(const std::string& actionName, const std::string& buttonResAnim) {
 	spTweenButton button = new TweenButton();
 	button->setName(actionName);
 	button->setResAnim(gameResources.getResAnim(buttonResAnim));
@@ -33,7 +33,7 @@ spTweenButton FarmBasePanel::createTweenButton(const string& actionName, const s
 }
 
 void FarmBasePanel::handleClick(Event *event) {
-	const string &name = event->target->getName();
+	const std::string &name = event->target->getName();
 
 	FarmBasePanelEvent gameEvent(FarmBasePanelEvent::CLICK_EVENT, name);
 	dispatchEvent(&gameEvent);

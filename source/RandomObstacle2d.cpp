@@ -1,7 +1,7 @@
 #include "RandomObstacle2d.h"
 #include "SharedResources.h"
 
-RandomObstacle2d::RandomObstacle2d(b2World* world, b2Body *body, string bodyName, float scale) : _wasStartPositionSet(false) {
+RandomObstacle2d::RandomObstacle2d(b2World* world, b2Body *body, std::string bodyName, float scale) : _wasStartPositionSet(false) {
 	m_body = body;
 	m_world = world;
 	m_body->SetUserData(this);

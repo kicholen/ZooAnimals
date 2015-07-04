@@ -14,7 +14,7 @@ public:
 	}
 
 	double v[15];
-	string spriteName;
+	std::string spriteName;
 };
 
 class SpriteContainer

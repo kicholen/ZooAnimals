@@ -1,7 +1,7 @@
 #include "EquationElement.h"
 #include "FlashUtils.h"
 
-EquationElement::EquationElement(Vector2 size, int a, const string& sign, int b) {
+EquationElement::EquationElement(Vector2 size, int a, const std::string& sign, int b) {
 	setSize(size);
 	setData(a, sign, b);
 }
@@ -10,7 +10,7 @@ EquationElement::~EquationElement() {
 
 }
 
-void EquationElement::reset(int a, const string& sign, int b) {
+void EquationElement::reset(int a, const std::string& sign, int b) {
 	removeChildren();
 	setData(a, sign, b);
 }
@@ -24,7 +24,7 @@ void EquationElement::show() {
 	}
 }
 
-void EquationElement::switchToAnotherView(const string& assetName) {
+void EquationElement::switchToAnotherView(const std::string& assetName) {
 	spActor actor = _children._first;
 	while (actor) {
 		spEquationFragment fragment = safeSpCast<EquationFragment>(actor);
@@ -33,7 +33,7 @@ void EquationElement::switchToAnotherView(const string& assetName) {
 	}
 }
 
-void EquationElement::setData(int a, const string& sign, int b) {
+void EquationElement::setData(int a, const std::string& sign, int b) {
 	createEquationFragment(Vector2(getWidth() / 4.0f, getHeight() * 0.8f), a, Vector2(getWidth() / 8.0f, getHeight() / 2.0f), "first")->attachTo(this);
 	createEquationFragment(Vector2(getWidth() / 10.0f, getHeight() * 0.8f), 0, Vector2(getWidth() / 4.0f + getWidth() / 20.0f, getHeight() / 2.0f), "sign", true, sign)->attachTo(this);
 	createEquationFragment(Vector2(getWidth() / 4.0f, getHeight() * 0.8f), b, Vector2(getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 8.0f, getHeight() / 2), "second")->attachTo(this);
@@ -65,7 +65,7 @@ void EquationElement::setData(int a, const string& sign, int b) {
 	positionVector.clear();
 }
 
-int EquationElement::getCorrectResult(int a, const string& sign, int b) {
+int EquationElement::getCorrectResult(int a, const std::string& sign, int b) {
 	if (sign == "+") {
 		return a + b;
 	}
@@ -106,7 +106,7 @@ int EquationElement::getDiffrentIntegerInRange(VectorArray<int>& integers, int m
 
 	return falseResult;
 }
-spEquationFragment EquationElement::createEquationFragment(Vector2 size, int count, Vector2 position, const string& name, bool isSign, const string& sign) {
+spEquationFragment EquationElement::createEquationFragment(Vector2 size, int count, Vector2 position, const std::string& name, bool isSign, const std::string& sign) {
 	spEquationFragment fragment = new EquationFragment(size, count, isSign, sign);
 	fragment->setName(name);
 	fragment->setPosition(position);

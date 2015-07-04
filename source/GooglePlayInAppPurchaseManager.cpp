@@ -40,7 +40,7 @@ void GooglePlayInAppPurchaseManager::restorePurchases() {
 void GooglePlayInAppPurchaseManager::purchaseProduct(const char* productId, bool isConsumable) {
 	/*if (_isGooglePlayInAppPurchaseAvailable) {
 		s3eDebugOutputString("Marmalade-GooglePlayIAP- purchase product");
-		//string randomPayload = CMath::stringFormat("TestPayload %d", int(FlashUtils::CMath::Rand(1, 10000)));
+		//std::string randomPayload = CMath::stringFormat("TestPayload %d", int(FlashUtils::CMath::Rand(1, 10000)));
 		s3eAndroidGooglePlayBillingRequestPurchase(productId, isConsumable);//, randomPayload.c_str());
 	}*/
 }

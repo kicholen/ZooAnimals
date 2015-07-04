@@ -14,13 +14,13 @@ public:
 	DiscoverImageElement(Vector2 size);
 	~DiscoverImageElement();
 
-	void reset(const string& assetName, int numberOfElements);
+	void reset(const std::string& assetName, int numberOfElements);
 	void discoverNextElement();
 	bool isImageDiscovered();
 private:
 	void animateNextElementDisappear();
 
-	void setData(const string& assetName);
+	void setData(const std::string& assetName);
 	spProgressBar createProgressBar();
 	
 	void setNumberOfElements(int value) { _numberOfElements = value; }

@@ -21,7 +21,7 @@ void SpectatorsContainer::removeSpectators() {
 	_spectatorsInPool.clear();
 }
 
-spWalkingSpectator SpectatorsContainer::addSpectator(const VectorArray<Vector2>& trackPoints, const string &resAnim, float height) {
+spWalkingSpectator SpectatorsContainer::addSpectator(const VectorArray<Vector2>& trackPoints, const std::string &resAnim, float height) {
 	spWalkingSpectator spectator = getSpectator(trackPoints);
 	spectator->setResAnim(tilesResources.getResAnim(resAnim));
 	float scale = height / spectator->getHeight();

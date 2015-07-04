@@ -5,26 +5,26 @@ Resources animalsResources;
 Resources editResources;
 Resources tilesResources;
 
-const string FARM[11] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "mouse"};
+const std::string FARM[11] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "mouse"};
 
-const string WINTER[7] = {"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal", "owl_winter"};
+const std::string WINTER[7] = {"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal", "owl_winter"};
 
-const string UNDERWATER[5] = {"dolphin", "octopus", "fish_1", "whale", "shark"};
+const std::string UNDERWATER[5] = {"dolphin", "octopus", "fish_1", "whale", "shark"};
 
-const string STEPPE[7] = {"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion"};
+const std::string STEPPE[7] = {"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion"};
 
-const string ASIA[7] = {"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot"};
+const std::string ASIA[7] = {"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot"};
 
-const string AUSTRALIA[8] = {"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
+const std::string AUSTRALIA[8] = {"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
 
-const string ALL_ANIMALS[45] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl_winter", "mouse",
+const std::string ALL_ANIMALS[45] = {"bee", "cat", "cow", "dog", "duck", "goat", "horse", "sheep", "snail", "squirell", "owl_winter", "mouse",
 								"fox", "penguin", "polarbear", "walrus", "wolf", "young_seal",
 								"dolphin", "octopus", "fish_1", "whale", "shark",
 								"elephant", "girafee", "gnu", "leopard", "rhino", "zebra", "lion",
 								"yak", "tiger", "snake", "peacock", "panda", "monkey_2", "parrot",
 								"crocodile", "kangaroo", "kiwi", "koala", "ostrich", "tealplatypus", "turtle", "dingo"};
 
-spTextActor createTextfield(const string &txt, bool isHtml, bool multiline) {
+spTextActor createTextfield(const std::string &txt, bool isHtml, bool multiline) {
 	spTextActor text = new TextActor();
 	text->setAnchor(0.5f, 0.5f);
 	text->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(),  Color(255, 255, 255, 255), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
@@ -37,7 +37,7 @@ spTextActor createTextfield(const string &txt, bool isHtml, bool multiline) {
 	return text;
 }
 
-spTweenButton createButton(const string &name, const string &txt) {
+spTweenButton createButton(const std::string &name, const std::string &txt) {
 	spTweenButton button = new TweenButton();
 	button->setName(name);
 	bool shouldAddText = true;
@@ -85,7 +85,7 @@ spTweenButton createButton(const string &name, const string &txt) {
 	return button;
 }
 
-spShaderTweenButton createShaderButton(const string &name, const string &txt) {
+spShaderTweenButton createShaderButton(const std::string &name, const std::string &txt) {
 	spShaderTweenButton button = new ShaderTweenButton();
 	button->setName(name);
 	bool shouldAddText = true;
@@ -145,7 +145,7 @@ TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle
 	return style;
 }
 
-spTextField createTextFieldInBoundries(const string& text, const Vector2& boundries, TextStyle style) {
+spTextField createTextFieldInBoundries(const std::string& text, const Vector2& boundries, TextStyle style) {
 	spTextField textField = initActor(new TextField,
 		arg_style = style,
 		arg_hAlign = TextStyle::HALIGN_MIDDLE,

@@ -23,9 +23,9 @@ public:
 protected:
 	void _postHiding(Event *);
 	void _preShowing(Event *);
-	string getBackground();
+	std::string getBackground();
 	void _clicked(Event *event);
-	void onClicked(string id, timeMS duration, timeMS delay);
+	void onClicked(std::string id, timeMS duration, timeMS delay);
 	void swapAnimation();
 	
 	void onGoBack(Event *event);
@@ -35,7 +35,7 @@ protected:
 
 	void setData();
 
-	void addDraggableSprite(string spriteName, Vector2 anchorPoint, float scaleX, float scaleY, float positionX, float positionY, int priorityZ, bool fromEditResources);
+	void addDraggableSprite(std::string spriteName, Vector2 anchorPoint, float scaleX, float scaleY, float positionX, float positionY, int priorityZ, bool fromEditResources);
 	void onSpawnSprite(Event *event);
 
 private:

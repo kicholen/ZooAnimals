@@ -10,13 +10,13 @@ ShopManager::ShopManager() {
 }
 
 ShopManager::~ShopManager() {
-	for (map<int, spShopItemModel>::iterator innerIterator = _animalItemMap.begin(); innerIterator != _animalItemMap.end(); ++innerIterator) {
+	for (std::map<int, spShopItemModel>::iterator innerIterator = _animalItemMap.begin(); innerIterator != _animalItemMap.end(); ++innerIterator) {
 		innerIterator->second->releaseRef();
 	}
 	_animalItemMap.clear();
 }
 
-void ShopManager::init(const string& version) {
+void ShopManager::init(const std::string& version) {
 	createShopItemsFromContent();
 }
 
@@ -24,7 +24,7 @@ void ShopManager::createShopItemsFromContent() {
 	createMap(_animalItemMap, "animals");
 }
 
-void ShopManager::createMap(itemmap &map, const string& shopType) {
+void ShopManager::createMap(itemmap &map, const std::string& shopType) {
 	pugi::xml_node animalShop = Content::instance.getShopFirstChildNode(shopType);
 
 	while (!animalShop.empty()) {
@@ -58,7 +58,7 @@ void ShopManager::createMap(itemmap &map, const string& shopType) {
 			}
 			spShopItemModel model = new ShopItemModel(index, resource, region, lockit, price);
 
-			map.insert(make_pair(index, model));
+			map.insert(std::make_pair(index, model));
 
 			itemShop = itemShop.next_sibling();
 		}

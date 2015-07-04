@@ -1,7 +1,7 @@
 #include "Floor2d.h"
 #include "SharedResources.h"
 
-Floor2d::Floor2d(b2World* world, b2Body *body, string bodyName, float scale) : _wasStartPositionSet(false) {
+Floor2d::Floor2d(b2World* world, b2Body *body, std::string bodyName, float scale) : _wasStartPositionSet(false) {
 	m_body = body;
 	m_world = world;
 	m_body->SetUserData(this);

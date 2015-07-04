@@ -7,7 +7,7 @@
 
 using namespace FlashUtils;
 
-typedef map<int, spShopItemModel> itemmap;
+typedef std::map<int, spShopItemModel> itemmap;
 typedef enum { smBought, smNotEnoughtMoney} ShopManagerBuyResult;
 
 /*  Stores ShopItemModels
@@ -35,7 +35,7 @@ public:
 	ShopManager();
 	~ShopManager();
 
-	void init(const string& version);
+	void init(const std::string& version);
 
 	const itemmap& getAnimalModels() const;
 	spShopItemModel getItemByIndex(int index);
@@ -45,7 +45,7 @@ private:
 	void createShopItemsFromContent();
 	void updateShopItemsFromBackendAsync();
 
-	void createMap(itemmap &map, const string& shopType);
+	void createMap(itemmap &map, const std::string& shopType);
 
 private:
 	itemmap _animalItemMap;

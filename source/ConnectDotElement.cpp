@@ -7,7 +7,7 @@ ConnectDotElement::ConnectDotElement() {
 	createDotSprite();
 }
 
-void ConnectDotElement::addText(string number) {
+void ConnectDotElement::addText(std::string number) {
 	float factor = number.length() == 1 ? 2.0f : 1.0f;
 	spTextActor numberTextField = createTextfield(number, true, false);
 	numberTextField->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(144, 217, 88), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));

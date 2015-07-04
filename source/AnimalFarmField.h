@@ -52,9 +52,9 @@ private:
 	void createFenceAtBottom(spTileField tileField);
 	void createFenceAtLeft(spTileField tileField);
 	void createInformationTable(spTileField tileField);
-	spAnimalInFarmElement createAnimal(const string& animalNumber, spAnimalModel model);
+	spAnimalInFarmElement createAnimal(const std::string& animalNumber, spAnimalModel model);
 	void removeLastAnimal();
-	spButton createAnimalButton(const string& buttonName, Vector2 position);
+	spButton createAnimalButton(const std::string& buttonName, Vector2 position);
 	void animateAnimalsJump(Vector2 position);
 	bool canAnimalsAnimate();
 	void setAnimalsPriorityByY();

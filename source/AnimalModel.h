@@ -12,12 +12,12 @@ DECLARE_SMART(AnimalModel, spAnimalModel);
 class AnimalModel : public Object
 {
 public:
-	AnimalModel(const string& name, int happiness, int hunger, int count, int lastFeedS);
+	AnimalModel(const std::string& name, int happiness, int hunger, int count, int lastFeedS);
 	~AnimalModel();
 
 	void fromContent();
 public:
-	string animalName() { return _name; }
+	std::string animalName() { return _name; }
 	int jumpHeight() const { return _jumpHeight; }
 	int jumpRange() const { return _jumpRange; }
 	int jumpTime() const { return _jumpTime; }
@@ -39,9 +39,9 @@ public:
 	int lastFeedS() const { return _lastFeedS; }
 	void setLastFeedS(int value) { _lastFeedS = value; }	
 
-	const string& topGame() { return _topGame; }
-	const string& midGame() { return _midGame; }
-	const string& lowGame() { return _lowGame; }
+	const std::string& topGame() { return _topGame; }
+	const std::string& midGame() { return _midGame; }
+	const std::string& lowGame() { return _lowGame; }
 
 	int lifespan() { return _lifespan; }
 	int weight() { return _weight; }
@@ -49,7 +49,7 @@ public:
 	int infoLockit() { return _infoLockit; }
 	int nameLockit() { return _nameLockit; }
 
-	int getGameValue(const string& name) {
+	int getGameValue(const std::string& name) {
 		if (_topGame == name) {
 			return 2;
 		}
@@ -72,7 +72,7 @@ private:
 	int getAnimalsCountFromHappiness() const { return (int)floor(pow((float)_happinessValue, 0.55f)); }
 
 private:
-	string _name;
+	std::string _name;
 	int _jumpHeight;
 	int _jumpRange;
 	int _jumpTime;
@@ -83,9 +83,9 @@ private:
 	int _hungerValue;
 	int _happinessValue;
 
-	string _topGame;
-	string _midGame;
-	string _lowGame;
+	std::string _topGame;
+	std::string _midGame;
+	std::string _lowGame;
 
 	int _lifespan;
 	int _weight;

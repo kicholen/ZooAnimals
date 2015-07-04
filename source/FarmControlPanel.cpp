@@ -23,14 +23,14 @@ FarmControlPanel::FarmControlPanel(Vector2 size, Vector2 protrudeSize) {
 }
 
 void FarmControlPanel::handleClick(Event *event) {
-	const string &name = event->target->getName();
+	const std::string &name = event->target->getName();
 	
 	if (name == "back" || name == "_btn_back_") {
 
 	}
 	else if (name == "farm_base_panel") {
 		FarmBasePanel::FarmBasePanelEvent *fbpe = safeCast<FarmBasePanel::FarmBasePanelEvent*>(event);
-		const string eventName = fbpe->_name;
+		const std::string eventName = fbpe->_name;
 
 		if (eventName == "play") {
 			showGamesView();
@@ -72,7 +72,7 @@ void FarmControlPanel::hide() {
 
 void FarmControlPanel::onTweenEnded(Event *event) {
 	TweenEvent *te = safeCast<TweenEvent*>(event);
-	const string &name = te->tween->getName();
+	const std::string &name = te->tween->getName();
 
 	if (name == "show_part") {
 		_state = fcpPartShown;
@@ -171,7 +171,7 @@ spFarmBasePanel FarmControlPanel::createFarmBasePanel() {
 	return farmBasePanel;
 }
 
-spTweenButton FarmControlPanel::createButton(const string& actionName, const string& buttonResAnim) {
+spTweenButton FarmControlPanel::createButton(const std::string& actionName, const std::string& buttonResAnim) {
 	spTweenButton button = new TweenButton();
 	button->setName(actionName);
 	button->setResAnim(gameResources.getResAnim(buttonResAnim));

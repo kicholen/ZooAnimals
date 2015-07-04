@@ -17,8 +17,8 @@ class CustomFrame : public Frame
 public:
 	CustomFrame();
 	
-	spTweenButton addButton(const string &name, const string &text, Vector2 position);
-	spShaderTweenButton addShaderButton(const string &name, const string &text, Vector2 position);
+	spTweenButton addButton(const std::string &name, const std::string &text, Vector2 position);
+	spShaderTweenButton addShaderButton(const std::string &name, const std::string &text, Vector2 position);
 
 protected:
 	static spMoneyCounterElement _moneyCounter;
@@ -29,8 +29,8 @@ protected:
 
 	virtual void _postHiding(Event *);
 
-	void init(const string &xml, bool shouldAddBackground);
-	void init(const string &xml);
+	void init(const std::string &xml, bool shouldAddBackground);
+	void init(const std::string &xml);
 
 	void playClickSound(Event *event);
 

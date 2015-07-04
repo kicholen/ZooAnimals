@@ -14,35 +14,35 @@ public:
 
 	Content();
 	~Content();
-	void init(const string &version);
+	void init(const std::string &version);
 	void reset();
 	void load();
 
-	int getParameterAsInt(const string &name);
-	bool getParameterAsBool(const string &name);
-	float getParameterAsFloat(const string &name);
-	string getParameterAsString(const string &name);
+	int getParameterAsInt(const std::string &name);
+	bool getParameterAsBool(const std::string &name);
+	float getParameterAsFloat(const std::string &name);
+	std::string getParameterAsString(const std::string &name);
 
-	pugi::xml_attribute getParameterValue(const string &name);
+	pugi::xml_attribute getParameterValue(const std::string &name);
 
 	pugi::xml_node getMatchTwoLevelNode(uint number);
 
-	pugi::xml_node getAnimalJumpParametersNode(const string &name);
-	pugi::xml_node getAnimalGamePreferenceNode(const string &name);
-	pugi::xml_node getAnimalInfoNode(const string &name);
+	pugi::xml_node getAnimalJumpParametersNode(const std::string &name);
+	pugi::xml_node getAnimalGamePreferenceNode(const std::string &name);
+	pugi::xml_node getAnimalInfoNode(const std::string &name);
 
-	pugi::xml_node getAnimalFarmParametersNode(const string &name);
-	pugi::xml_node getAnimalFarmSortParametersNode(const string &name);
-	pugi::xml_node getAnimalFarmNoSortParametersNode(const string &name);
-	pugi::xml_node getShopFirstChildNode(const string& shopType);
+	pugi::xml_node getAnimalFarmParametersNode(const std::string &name);
+	pugi::xml_node getAnimalFarmSortParametersNode(const std::string &name);
+	pugi::xml_node getAnimalFarmNoSortParametersNode(const std::string &name);
+	pugi::xml_node getShopFirstChildNode(const std::string& shopType);
 	
-	int getGameLevelsCount(const string &gameName);
+	int getGameLevelsCount(const std::string &gameName);
 private:
-	void setPath(const string &path);
+	void setPath(const std::string &path);
 
 private:
-	string _version;
-	string _path;
+	std::string _version;
+	std::string _path;
 	pugi::xml_document _contentDocument;
 };
 

@@ -29,7 +29,7 @@ protected:
 private:
 	void createBackground();
 	spTweenTextField createMoneyTextfield(int money);
-	spSprite createMoneyIcon(const string& spriteName);
+	spSprite createMoneyIcon(const std::string& spriteName);
 
 	int getBronzeMoney();
 	int getSilverMoney();

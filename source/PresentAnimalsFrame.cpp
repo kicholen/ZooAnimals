@@ -5,7 +5,7 @@
 #include "AnimalsManager.h"
 #include "SharedResources.h"
 
-PresentAnimalsFrame::PresentAnimalsFrame(const string& region) {
+PresentAnimalsFrame::PresentAnimalsFrame(const std::string& region) {
 	init("RealAnimalsThumb.xml", false);
 
 	_region = region;

@@ -1,7 +1,7 @@
 #include "MatchTwoFrame.h"
 #include "Content.h"
 
-MatchTwoFrame::MatchTwoFrame(const string& difficulty) {
+MatchTwoFrame::MatchTwoFrame(const std::string& difficulty) {
 	init("LandingPageFrame.xml", true);
 	_difficulty = difficulty;
 	selectTransitions();

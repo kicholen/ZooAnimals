@@ -17,7 +17,7 @@ public:
 	SpectatorSpawner(int spectatorsOnScreen, float scaleSpectatorsToHeight);
 	~SpectatorSpawner();
 
-	void addResAnim(const string &resAnim, bool shouldClear = false);
+	void addResAnim(const std::string &resAnim, bool shouldClear = false);
 	void addTrack(const VectorArray<Vector2>& track, bool shouldClear = false);
 
 protected:
@@ -25,7 +25,7 @@ protected:
 	void spawnSpectator();
 
 private:
-	VectorArray<string> _resAnims;
+	VectorArray<std::string> _resAnims;
 	VectorArray<VectorArray<Vector2> > _tracks;
 	int _spectatorsOnScreen;
 	float _frameTime;

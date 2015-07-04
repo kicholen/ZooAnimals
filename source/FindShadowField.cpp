@@ -2,7 +2,7 @@
 #include "SharedResources.h"
 #include "FlashUtils.h"
 
-FindShadowField::FindShadowField(Vector2 size, int numberOfShadows, string mainObjectName) {
+FindShadowField::FindShadowField(Vector2 size, int numberOfShadows, std::string mainObjectName) {
 	setSize(size);
 	_animatedCount = 0;
 	_state = fsWaiting;
@@ -11,13 +11,13 @@ FindShadowField::FindShadowField(Vector2 size, int numberOfShadows, string mainO
 	restart(numberOfShadows, mainObjectName);
 }
 
-void FindShadowField::restart(int numberOfShadows, string mainObjectName) {
+void FindShadowField::restart(int numberOfShadows, std::string mainObjectName) {
 	_wheel->clear();
 	fillField(numberOfShadows, mainObjectName);
 	animateField();
 }
 
-void FindShadowField::fillField(int numberOfShadows, string mainObjectName) {
+void FindShadowField::fillField(int numberOfShadows, std::string mainObjectName) {
 	_mainSprite = createSprite(mainObjectName, mainObjectName, false);
 	_mainSprite->setPriority(10);
 	_wheel->addMainChild(_mainSprite);
@@ -69,7 +69,7 @@ void FindShadowField::dispatchShadowFoundEvent(Event *event) {
 	dispatchEvent(&findEvent);
 }
 
-spSprite FindShadowField::createSprite(string name, string spriteName, bool isShadowSprite) {
+spSprite FindShadowField::createSprite(std::string name, std::string spriteName, bool isShadowSprite) {
 	spSprite sprite = getChildT<Sprite>(name, oxygine::ep_ignore_error);
 	
 	if (!sprite) {

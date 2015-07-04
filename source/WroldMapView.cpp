@@ -169,7 +169,7 @@ void WroldMapView::showAsia() {
 	}
 }
 
-float WroldMapView::getMapScaleModifier(const string& name) {
+float WroldMapView::getMapScaleModifier(const std::string& name) {
 	if (name == "north_america") {
 		return 1.2f;
 	}

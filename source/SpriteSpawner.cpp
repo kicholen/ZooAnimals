@@ -106,7 +106,7 @@ VectorArray<SpriteModel*>* SpriteSpawner::ReadGroup(pugi::xml_node& child, float
 	float positionX = 0.0f;
 	float positionY = 0.0f;
 	int zPriority = 0;
-	string spriteName;
+	std::string spriteName;
 
 	int idx = 0;
 	// get real data here
@@ -207,7 +207,7 @@ unsigned int SpriteSpawner::ReadColor(pugi::xml_node& child)
 *	Loads all levels from file or mockuped
 *
 */
-void SpriteSpawner::readLevelsXml(const string &filePath, float stageWidth, float stageHeight) {
+void SpriteSpawner::readLevelsXml(const std::string &filePath, float stageWidth, float stageHeight) {
 	file::buffer fb;
 	file::read(filePath.c_str(), fb);
 

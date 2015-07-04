@@ -50,7 +50,7 @@ public:
 
 	// events/interaction
 	void win();
-	void moveEntityByBodyName(string bodyName);
+	void moveEntityByBodyName(std::string bodyName);
 	void slowMode(bool enable);
 	void showHideDebug();
 	void pauseWorld();

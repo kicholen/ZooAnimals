@@ -1,7 +1,7 @@
 #include "Player2d.h"
 #include "Box2dContainer.h"
 
-Player2d::Player2d(b2World* world, b2Body *body, string bodyName, float scale) {
+Player2d::Player2d(b2World* world, b2Body *body, std::string bodyName, float scale) {
 	m_body = body;
 	_scale = scale;
 	m_body->SetFixedRotation(true);
@@ -133,7 +133,7 @@ void Player2d::setBodyPosition() {
 
 void Player2d::startContact(b2Fixture *fixtureA, b2Fixture *fixtureB) {
 	Entity *entity = (Entity *)fixtureA->GetBody()->GetUserData();
-	string bodyName = entity->_bodyName;
+	std::string bodyName = entity->_bodyName;
 	if (bodyName == "smallerPower" && !fixtureA->IsSensor()) {
 		static_cast<Box2dContainer*>(_sprite->getParent())->addForRemoval(entity);
 		b2Fixture *fixture = m_body->GetFixtureList();

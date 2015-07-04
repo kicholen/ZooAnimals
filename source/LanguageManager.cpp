@@ -20,7 +20,7 @@ void LanguageManager::init(int type) {
 }
 
 // todo check performance, maybe load all to some vector 
-string LanguageManager::getText(int lockitNumber) {
+std::string LanguageManager::getText(int lockitNumber) {
 	return _lockit->getText(lockitNumber);
 }
 
@@ -33,8 +33,8 @@ void LanguageManager::setLanguage(int type) {
 	_lockit = LockitFactory::getInstance(getLanguageCode(type).c_str());
 }
 
-string LanguageManager::getLanguageCode(int type) {
-	string languageCode;
+std::string LanguageManager::getLanguageCode(int type) {
+	std::string languageCode;
 	if (type == lmEnglish) {
 		languageCode = "EN_en";
 	}

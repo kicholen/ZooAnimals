@@ -15,7 +15,7 @@ class ConnectDotElement : public Actor
 public:
 	ConnectDotElement();
 
-	void addText(string number);
+	void addText(std::string number);
 
 	void playAnimation();
 	void stopAnimation();

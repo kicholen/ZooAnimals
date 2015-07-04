@@ -18,7 +18,7 @@ MemoryField::MemoryField(Point numberOfFields) {
 }
 
 void MemoryField::fillField(bool isFirstTime) {
-	string *buffer = new string[_numberOfFields.x * _numberOfFields.y]; 
+	std::string *buffer = new std::string[_numberOfFields.x * _numberOfFields.y];
 	generateRandomCardsArrayByType(buffer);
 	random_shuffle(buffer, buffer + _numberOfFields.x * _numberOfFields.y);
 	int bufferIndex = 0;
@@ -46,12 +46,12 @@ void MemoryField::fillField(bool isFirstTime) {
  * Much optimistic, think that one group of animals can fill whole memory slots
 */
 
-void MemoryField::generateRandomCardsArrayByType(string *buffer) {
+void MemoryField::generateRandomCardsArrayByType(std::string *buffer) {
 	int maxLength = sizeof(ALL_ANIMALS)/sizeof(ALL_ANIMALS[0]);
 	int random = FlashUtils::CMath::random(0, maxLength - 1);
 	
 	for (int i = 0; i < _numberOfFields.x * _numberOfFields.y; i++) {
-		string copiedName(ALL_ANIMALS[random]);
+		std::string copiedName(ALL_ANIMALS[random]);
 		buffer[i] = copiedName;
 		i += 1;
 		buffer[i] = copiedName;

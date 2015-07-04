@@ -24,9 +24,9 @@ public:
 			CLICK_EVENT = makefourcc('F', 'B', 'C', 'E'),
 		};
 
-		FarmBasePanelEvent(EV ev, const string &name): Event(ev), _name(name) {}
+		FarmBasePanelEvent(EV ev, const std::string &name): Event(ev), _name(name) {}
 
-		const string _name;
+		const std::string _name;
 	};
 
 	FarmBasePanel(Vector2 size, StackContainerAlign alignType = scVertical);
@@ -34,7 +34,7 @@ public:
 	void updateScore(int score);
 private:
 	spTextActor createScoreTextField();
-	spTweenButton createTweenButton(const string& actionName, const string& buttonResAnim);
+	spTweenButton createTweenButton(const std::string& actionName, const std::string& buttonResAnim);
 	void handleClick(Event *event);
 
 	void setScore(int score);

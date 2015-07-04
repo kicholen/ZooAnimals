@@ -152,7 +152,7 @@ void AnimalFarmField::addAnimal(Event *event) {
 	}*/
 }
 
-spAnimalInFarmElement AnimalFarmField::createAnimal(const string& animalNumber, spAnimalModel model) {
+spAnimalInFarmElement AnimalFarmField::createAnimal(const std::string& animalNumber, spAnimalModel model) {
 	spAnimalInFarmElement animalElement = getChildT<AnimalInFarmElement>(animalNumber, oxygine::ep_ignore_error);
 	if (!animalElement) {
 		animalElement = new AnimalInFarmElement(model->animalName(), Vector2(getWidth() * 0.95f, getHeight() * 0.9f), model->jumpRange(), model->jumpHeight(), model->jumpTime(), model->jumpDelay(), model->isWaterAnimal());
@@ -175,7 +175,7 @@ void AnimalFarmField::removeLastAnimal() {
 	_count--;
 }
 
-spButton AnimalFarmField::createAnimalButton(const string& buttonName, Vector2 position) {
+spButton AnimalFarmField::createAnimalButton(const std::string& buttonName, Vector2 position) {
 	spButton btn = new Button;
 	btn->setResAnim(gameResources.getResAnim("button_yellow"));
 	btn->setAnchor(0.5f, 0.5f);

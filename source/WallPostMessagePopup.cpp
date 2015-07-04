@@ -46,7 +46,7 @@ void WallPostMessagePopup::_preShowing(Event *) {
 void WallPostMessagePopup::setData() {
 	_wallPostStatus = WPS_IDLE;
 	_isActionFB = Settings::instance.getValue("action_fb").as_bool();
-	string name;
+	std::string name;
 	if (_isActionFB) {
 		name = "more_permission";
 	}
@@ -162,7 +162,7 @@ void WallPostMessagePopup::_update(const UpdateState &us) {
 				FacebookManager::instance.addToGraphRequest("picture", "http://s24.postimg.org/6c3wle535/ic_launcher.png");
 
 				// The message to post
-				string wallMessage = "For all my friends with a toddler - check this game out :)";
+				std::string wallMessage = "For all my friends with a toddler - check this game out :)";
 				FacebookManager::instance.addToGraphRequest("message", wallMessage.c_str());
 
 				// Send it to Facebook
@@ -178,7 +178,7 @@ void WallPostMessagePopup::_update(const UpdateState &us) {
 
 				FacebookManager::instance.addToDialogRequest("picture", "http://s24.postimg.org/6c3wle535/ic_launcher.png");
 
-				string wallMessage = "For all my friends with a toddler - check this game out :)";
+				std::string wallMessage = "For all my friends with a toddler - check this game out :)";
 				FacebookManager::instance.addToDialogRequest("message", wallMessage.c_str());
 
 				FacebookManager::instance.finishDialogRequest();
@@ -207,7 +207,7 @@ void WallPostMessagePopup::_update(const UpdateState &us) {
 	}
 }
 
-void WallPostMessagePopup::showMessage(string message) {
+void WallPostMessagePopup::showMessage(std::string message) {
 	if (message == "FB_PostingToFacebook") {
 		_infoMessage->setText("Posting...");
 	}
@@ -224,7 +224,7 @@ void WallPostMessagePopup::showMessage(string message) {
 			// Send it to Facebook
 			FacebookManager::instance.finishGraphRequest();
 		}
-		string name;
+		std::string name;
 		if (_isActionFB) {
 			name = "more_permission";
 		}

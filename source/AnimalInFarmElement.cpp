@@ -4,7 +4,7 @@
 
 using namespace FlashUtils;
 
-AnimalInFarmElement::AnimalInFarmElement(const string& spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal) {
+AnimalInFarmElement::AnimalInFarmElement(const std::string& spriteName, const Vector2& size, float jumpRange, float jumpHeight, float jumpTime, const Vector2& delayRandom, bool isWaterAnimal) {
 	_state = aifCreating;
 	
 	_canUpdate = true;
@@ -39,7 +39,7 @@ AnimalInFarmElement::~AnimalInFarmElement() {
 
 }
 
-void AnimalInFarmElement::createAnimalSprite(const string& spriteName) {
+void AnimalInFarmElement::createAnimalSprite(const std::string& spriteName) {
 	_animalSprite = new Sprite();
 	_animalSprite->setPriority(0);
 	setAnimalSprite(spriteName);
@@ -63,7 +63,7 @@ void AnimalInFarmElement::createShadowSprite() {
 	setSpriteScaleBySize(_shadowSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f));
 }
 
-void AnimalInFarmElement::setAnimalSprite(const string& id) {
+void AnimalInFarmElement::setAnimalSprite(const std::string& id) {
 	_animalSprite->setResAnim(animalsResources.getResAnim(id));
 	setAlpha(255);
 	_animalSprite->setAnchor(0.5f, 0.5f);

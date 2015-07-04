@@ -17,7 +17,7 @@ public:
 
 	void removeSpectators();
 
-	spWalkingSpectator addSpectator(const VectorArray<Vector2>& trackPoints, const string &resAnim, float height);
+	spWalkingSpectator addSpectator(const VectorArray<Vector2>& trackPoints, const std::string &resAnim, float height);
 
 	int getSpectatorsInUseCount();
 private:

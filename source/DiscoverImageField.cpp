@@ -1,7 +1,7 @@
 #include "DiscoverImageField.h"
 #include "SharedResources.h"
 
-DiscoverImageField::DiscoverImageField(Vector2 size, const string& assetName, int numberOfElements) {
+DiscoverImageField::DiscoverImageField(Vector2 size, const std::string& assetName, int numberOfElements) {
 	setSize(size);
 	fillField(assetName);
 	reset(assetName, numberOfElements);
@@ -10,11 +10,11 @@ DiscoverImageField::DiscoverImageField(Vector2 size, const string& assetName, in
 DiscoverImageField::~DiscoverImageField() {
 }
 
-void DiscoverImageField::reset(const string& assetName, int numberOfElements) {
+void DiscoverImageField::reset(const std::string& assetName, int numberOfElements) {
 	_imageElement->reset(assetName, numberOfElements);
 }
 
-void DiscoverImageField::fillField(const string& assetName) {
+void DiscoverImageField::fillField(const std::string& assetName) {
 	if (!_imageElement) {
 		_imageElement = new DiscoverImageElement(getSize());
 	}

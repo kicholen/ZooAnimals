@@ -13,11 +13,11 @@ Content::~Content() {
 	_contentDocument.reset();
 }
 
-void Content::setPath(const string &path) {
+void Content::setPath(const std::string &path) {
 	_path = path;
 }
 
-void Content::init(const string &version) {
+void Content::init(const std::string &version) {
 	_version = version;
 	load();
 	s3eDebugOutputString("settings::init");
@@ -36,23 +36,23 @@ void Content::load() {
 	}
 }
 
-int Content::getParameterAsInt(const string &name) {
+int Content::getParameterAsInt(const std::string &name) {
 	return getParameterValue(name).as_int();
 }
 
-bool Content::getParameterAsBool(const string &name) {
+bool Content::getParameterAsBool(const std::string &name) {
 	return getParameterValue(name).as_bool();
 }
 
-float Content::getParameterAsFloat(const string &name) {
+float Content::getParameterAsFloat(const std::string &name) {
 	return getParameterValue(name).as_float();
 }
 
-string Content::getParameterAsString(const string &name) {
+std::string Content::getParameterAsString(const std::string &name) {
 	return getParameterValue(name).as_string();
 }
 
-pugi::xml_attribute Content::getParameterValue(const string &name) {
+pugi::xml_attribute Content::getParameterValue(const std::string &name) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node child = data.child("parameters");
@@ -85,7 +85,7 @@ pugi::xml_node Content::getMatchTwoLevelNode(uint number) {
 	return emptyNode;
 }
 
-int Content::getGameLevelsCount(const string &gameName) {
+int Content::getGameLevelsCount(const std::string &gameName) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node games = data.child("games");
@@ -102,7 +102,7 @@ int Content::getGameLevelsCount(const string &gameName) {
 	return counter;
 }
 
-pugi::xml_node Content::getAnimalJumpParametersNode(const string &name) {
+pugi::xml_node Content::getAnimalJumpParametersNode(const std::string &name) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node zoo = data.child("zoo");
@@ -123,7 +123,7 @@ pugi::xml_node Content::getAnimalJumpParametersNode(const string &name) {
 	return pugi::xml_node();
 }
 
-pugi::xml_node Content::getAnimalGamePreferenceNode(const string &name) {
+pugi::xml_node Content::getAnimalGamePreferenceNode(const std::string &name) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node zoo = data.child("zoo");
@@ -144,7 +144,7 @@ pugi::xml_node Content::getAnimalGamePreferenceNode(const string &name) {
 	return pugi::xml_node();
 }
 
-pugi::xml_node Content::getAnimalInfoNode(const string &name) {
+pugi::xml_node Content::getAnimalInfoNode(const std::string &name) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node zoo = data.child("zoo");
@@ -165,7 +165,7 @@ pugi::xml_node Content::getAnimalInfoNode(const string &name) {
 	return pugi::xml_node();
 }
 
-pugi::xml_node Content::getAnimalFarmParametersNode(const string &name) {
+pugi::xml_node Content::getAnimalFarmParametersNode(const std::string &name) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node zoo = data.child("zoo");
@@ -186,15 +186,15 @@ pugi::xml_node Content::getAnimalFarmParametersNode(const string &name) {
 	return pugi::xml_node();
 }
 
-pugi::xml_node Content::getAnimalFarmSortParametersNode(const string &name) {
+pugi::xml_node Content::getAnimalFarmSortParametersNode(const std::string &name) {
 	return getAnimalFarmParametersNode(name).child("sort");
 }
 
-pugi::xml_node Content::getAnimalFarmNoSortParametersNode(const string &name) {
+pugi::xml_node Content::getAnimalFarmNoSortParametersNode(const std::string &name) {
 	return getAnimalFarmParametersNode(name).child("no_sort");
 }
 
-pugi::xml_node Content::getShopFirstChildNode(const string& shopType) {
+pugi::xml_node Content::getShopFirstChildNode(const std::string& shopType) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
 	pugi::xml_node shop = data.child("shop");

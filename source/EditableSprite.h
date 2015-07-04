@@ -18,7 +18,7 @@ protected:
 	void onTouchEvent(Event *event);
 
 	void showAndCreateButtonsIfNecessary();
-	void addButton(const string &name, const string &text, Vector2 position, Vector2 anchor);
+	void addButton(const std::string &name, const std::string &text, Vector2 position, Vector2 anchor);
 	void createButtons(bool shouldShow);
 	void onButtonTouch(Event *event);
 	void showButtons();
@@ -33,7 +33,7 @@ private:
 	bool _areButtonsCreated;
 	bool _areButtonsShown;
 
-	string _state;
+	std::string _state;
 };
 
 #endif

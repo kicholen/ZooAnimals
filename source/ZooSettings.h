@@ -12,21 +12,21 @@ public:
 	ZooSettings();
 	~ZooSettings();
 
-	void init(const string& version);
+	void init(const std::string& version);
 	void reset();
 	void finishStartAnimalChoice();
 	void save();
 
-	pugi::xml_attribute addPlayerValue(const string &name);
-	pugi::xml_attribute getPlayerValue(const string &name);
+	pugi::xml_attribute addPlayerValue(const std::string &name);
+	pugi::xml_attribute getPlayerValue(const std::string &name);
 
-	pugi::xml_node getAnimal(const string& regionName, const string& animalName);
-	void setAnimal(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
+	pugi::xml_node getAnimal(const std::string& regionName, const std::string& animalName);
+	void setAnimal(const std::string& regionName, const std::string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
 
 	bool shouldShowChooseAnimalPopup() { return _shouldShowChooseAnimalPopup; }
 
 private:
-	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
+	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const std::string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
 
 	bool _shouldShowChooseAnimalPopup;
 };

@@ -19,7 +19,7 @@ SpectatorSpawner::~SpectatorSpawner() {
 	_resAnims._vector.resize(0);
 }
 
-void SpectatorSpawner::addResAnim(const string &resAnim, bool shouldClear) {
+void SpectatorSpawner::addResAnim(const std::string &resAnim, bool shouldClear) {
 	if (shouldClear) {
 		_resAnims._vector.resize(0);
 	}

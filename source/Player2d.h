@@ -14,7 +14,7 @@ public:
 	b2World* m_world;
 
 public:
-	Player2d(b2World* world, b2Body *body, string bodyName, float scale);
+	Player2d(b2World* world, b2Body *body, std::string bodyName, float scale);
 	~Player2d();
 
 	void update(float playerPosition);

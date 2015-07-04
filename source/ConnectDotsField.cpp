@@ -27,7 +27,7 @@ void ConnectDotsField::fillField(int levelNumber) {
 	for(int i = 0; i < groupArray->length(); i++) {
 		Group &g = *(*groupArray)[i];
 		if (g.spriteName == "quad_40") {
-			string name = FlashUtils::CMath::intToString(bufferIndex);
+			std::string name = FlashUtils::CMath::intToString(bufferIndex);
 
 			spConnectDotElement dot = getChildT<ConnectDotElement>(name, oxygine::ep_ignore_error);
 			if (!dot) {

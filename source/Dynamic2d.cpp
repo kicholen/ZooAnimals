@@ -1,7 +1,7 @@
 #include "Dynamic2d.h"
 
 
-Dynamic2d::Dynamic2d(b2World* world, b2Body *body, string bodyName) {
+Dynamic2d::Dynamic2d(b2World* world, b2Body *body, std::string bodyName) {
 	m_body = body;
 	m_world = world;
 	m_body->SetUserData(this);

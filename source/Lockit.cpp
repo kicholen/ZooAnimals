@@ -8,7 +8,7 @@ Lockit::~Lockit() {
 
 }
 
-string Lockit::getText(int id){
+std::string Lockit::getText(int id){
 	pugi::xml_node lockit = _doc.child("lockit");
 	OX_ASSERT(lockit);
 	pugi::xml_node child = lockit.first_child();

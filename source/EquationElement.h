@@ -19,19 +19,19 @@ public:
 
 		EquationElementEvent(EV ev):Event(ev) {}
 	};
-	EquationElement(Vector2 size, int a, const string& sign, int b);
+	EquationElement(Vector2 size, int a, const std::string& sign, int b);
 	~EquationElement();
 
-	void reset(int a, const string& sign, int b);
+	void reset(int a, const std::string& sign, int b);
 	void show();
-	void switchToAnotherView(const string& assetName = "");
+	void switchToAnotherView(const std::string& assetName = "");
 
 private:
-	void setData(int a, const string& sign, int b);
-	int getCorrectResult(int a, const string& sign, int b);
+	void setData(int a, const std::string& sign, int b);
+	int getCorrectResult(int a, const std::string& sign, int b);
 	int getDiffrentIntegerInRange(VectorArray<int>& integers, int min, int max);
 
-	spEquationFragment createEquationFragment(Vector2 size, int count, Vector2 position, const string& name, bool isSign = false, const string& sign = "");
+	spEquationFragment createEquationFragment(Vector2 size, int count, Vector2 position, const std::string& name, bool isSign = false, const std::string& sign = "");
 
 	void onCorrectAnswerTapped(Event *event);
 };

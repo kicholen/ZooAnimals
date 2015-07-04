@@ -59,7 +59,7 @@ void EditableSprite::createButtons(bool shouldShow) {
 	}
 }
 
-void EditableSprite::addButton(const string &name, const string &text, Vector2 position, Vector2 anchor) {
+void EditableSprite::addButton(const std::string &name, const std::string &text, Vector2 position, Vector2 anchor) {
 	spTweenButton button = new TweenButton();
 	button = createButton(name, text);
 	button->setAnchor(anchor);
@@ -69,7 +69,7 @@ void EditableSprite::addButton(const string &name, const string &text, Vector2 p
 }
 
 void EditableSprite::onButtonTouch(Event *event) {
-	string buttonName = event->currentTarget->getName();
+	std::string buttonName = event->currentTarget->getName();
 
 	if (buttonName == "PLUS") {
 		if (_state == "SCALE") {

@@ -40,7 +40,7 @@ void QueueTextAnimation::animateNext(Event *ev) {
 	}
 }
 
-void QueueTextAnimation::addTextToQueue(const string& text) {
+void QueueTextAnimation::addTextToQueue(const std::string& text) {
 	_textQueue.push_front(text);
 }
 

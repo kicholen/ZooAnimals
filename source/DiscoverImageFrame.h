@@ -13,7 +13,7 @@ DECLARE_SMART(DiscoverImageFrame, spDiscoverImageFrame);
 class DiscoverImageFrame : public CustomFrame
 {
 public:
-	DiscoverImageFrame(const string& difficulty);
+	DiscoverImageFrame(const std::string& difficulty);
 	~DiscoverImageFrame();
 
 	void selectTransitions();
@@ -34,7 +34,7 @@ private:
 	int _previousAnimal;
 	int _totalScore;
 
-	string _difficulty;
+	std::string _difficulty;
 };
 
 #endif

@@ -23,7 +23,7 @@ class MemoryCard : public Actor
 	bool _locked;
 
 public:
-	MemoryCard(string cardId);
+	MemoryCard(std::string cardId);
 
 	Point index;
 	MemoryCardState getState() {
@@ -33,7 +33,7 @@ public:
 		_state = new_state;
 	}
 	
-	string getId() {
+	std::string getId() {
 		return _animalSlot->getId();
 	}
 	
@@ -43,7 +43,7 @@ public:
 	bool isID(spMemoryCard spCard) {
 		return spCard->getId() == getId();
 	}
-	void set(string id);
+	void set(std::string id);
 
 	spTween playAnimation(bool show);
 	spTween dropTo(Vector2 pos);
@@ -53,7 +53,7 @@ private:
 	void createQuestionMark();
 	void createMask();
 	void createMaskedSprite();
-	void createAnimalSprite(string cardId);
+	void createAnimalSprite(std::string cardId);
 
 	spSprite _questionMark;
 	spMaskedSprite _masked;

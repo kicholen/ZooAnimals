@@ -9,7 +9,7 @@ DiscoverImageElement::~DiscoverImageElement() {
 
 }
 
-void DiscoverImageElement::reset(const string& assetName, int numberOfElements) {
+void DiscoverImageElement::reset(const std::string& assetName, int numberOfElements) {
 	setNumberOfElementsLeft(numberOfElements);
 	setNumberOfElements(numberOfElements);
 	setData(assetName);
@@ -29,7 +29,7 @@ bool DiscoverImageElement::isImageDiscovered() {
 	return getNumberOfElementsLeft() == 0;
 }
 
-void DiscoverImageElement::setData(const string& assetName) {
+void DiscoverImageElement::setData(const std::string& assetName) {
 	if (!_progressImage) {
 		_progressImage = createProgressBar();
 		_progressImage->setAnchor(0.5f, 0.5f);

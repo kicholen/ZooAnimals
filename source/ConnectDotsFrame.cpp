@@ -1,6 +1,6 @@
 #include "ConnectDotsFrame.h"
 
-ConnectDotsFrame::ConnectDotsFrame(const string& difficulty) {
+ConnectDotsFrame::ConnectDotsFrame(const std::string& difficulty) {
 	init("LandingPageFrame.xml", true);
 	_difficulty = difficulty;
 	selectTransitions();
@@ -50,7 +50,7 @@ void ConnectDotsFrame::onFinished(Event *event) {
 }
 
 void ConnectDotsFrame::onTimesUp(Event *event) {
-	const string &name = "result";
+	const std::string &name = "result";
 	generateAction(name);
 }
 

@@ -20,16 +20,16 @@ public:
 		DiscoverImageFieldEvent(EV ev):Event(ev) {}
 	};
 
-	DiscoverImageField(Vector2 size, const string& assetName, int numberOfElements = 4);
+	DiscoverImageField(Vector2 size, const std::string& assetName, int numberOfElements = 4);
 	~DiscoverImageField();
 
-	void reset(const string& assetName, int numberOfElements);
+	void reset(const std::string& assetName, int numberOfElements);
 	void discoverNextElement();
 private:
 	bool isImageDiscovered();
 	void animateNextElementDisappear();
 
-	void fillField(const string& assetName);
+	void fillField(const std::string& assetName);
 private:
 	spDiscoverImageElement _imageElement;
 };

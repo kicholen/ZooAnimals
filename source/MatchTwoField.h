@@ -46,7 +46,7 @@ private:
 	Vector2 getSlotSize();
 	void hidePreviousMatchesIfNecessary();
 
-	void createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale, string spriteName);
+	void createDraggableSprite(spMatchTwoSlot slot, std::string name, Vector2 slotScale, std::string spriteName);
 private:
 	MatchTwoFieldState _state;
 	uint _numberOfMatches;

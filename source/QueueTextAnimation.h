@@ -26,7 +26,7 @@ public:
 	~QueueTextAnimation();
 
 	void start(EventCallback onAnimationFinishedCallback, bool shouldCallOnPenultimate = true);
-	void addTextToQueue(const string& text);
+	void addTextToQueue(const std::string& text);
 	
 private:
 	void animateNext(Event *ev);
@@ -37,7 +37,7 @@ private:
 private:
 	EventCallback _onAnimationFinishedCallback;
 
-	deque<string> _textQueue;
+	std::deque<std::string> _textQueue;
 
 	bool _shouldCallOnPenultimate;
 };

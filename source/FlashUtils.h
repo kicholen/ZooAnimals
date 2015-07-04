@@ -190,13 +190,13 @@ namespace FlashUtils
 
 		static bool SweptCircleIntersect(CMath::SweptCircleIntersect_data &data, const Vector2 &p1, const Vector2 &v1, float r1, const Vector2 &p2, const Vector2 &v2, float r2);
 	
-		static string hexToString(int hexIn);
-		static int stringToHex(string str);
+		static std::string hexToString(int hexIn);
+		static int stringToHex(std::string str);
 
-		static string doubleToString(double x);
-		static string intToString(int x);
+		static std::string doubleToString(double x);
+		static std::string intToString(int x);
 		static double stringToDouble(const char *input);
-		static string stringFormat(const string fmt, ...);
+		static std::string stringFormat(const std::string fmt, ...);
 
 		static float calculateDistance(Vector2 from, Vector2 to);
 		static float calculateAngle(Vector2 to, Vector2 from);

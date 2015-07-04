@@ -12,7 +12,7 @@ ExpManager::~ExpManager() {
 	_expNeededForLevels.clear();
 }
 
-void ExpManager::init(const string& version) {
+void ExpManager::init(const std::string& version) {
 	_level = 0;
 	_exp = ZooSettings::instance.getPlayerValue("exp").as_int();
 	_expGainerMultiplier = Content::instance.getParameterValue("gain_multiplier_exp").as_double();

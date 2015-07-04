@@ -12,7 +12,7 @@ MoneyManager::~MoneyManager() {
 	_moneyGainer.clear();
 }
 
-void MoneyManager::init(const string& version) {
+void MoneyManager::init(const std::string& version) {
 	_money = ZooSettings::instance.getPlayerValue("money").as_int();
 	_secondMultiplier = Content::instance.getParameterValue("second_multi_cash").as_double();
 	_thirdMultiplier = Content::instance.getParameterValue("third_multi_cash").as_double();
@@ -22,7 +22,7 @@ void MoneyManager::init(const string& version) {
 	fillMoneyGainer();
 }
 
-void MoneyManager::increaseMoneyOnGameFinished(int zooLevel, int game, const string& difficulty) {
+void MoneyManager::increaseMoneyOnGameFinished(int zooLevel, int game, const std::string& difficulty) {
 	_money += getMoneyGained(zooLevel, game, difficulty);
 	dispatchMoneyCountEvent();
 }
@@ -41,7 +41,7 @@ int MoneyManager::getMoney() {
 ** game - top - 2 / medium - 1 / low - 0
 ** difficulty - easy / normal / hard
 */
-int MoneyManager::getMoneyGained(int zooLevel, int game, const string& difficulty) {
+int MoneyManager::getMoneyGained(int zooLevel, int game, const std::string& difficulty) {
 	int gameDifficulty = 0;
 	int gamesPerAnimal = 3;
 

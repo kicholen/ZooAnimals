@@ -11,7 +11,7 @@ using namespace FlashUtils;
 
 #define UPDATER_STEP_IN_SECONDS 10
 
-typedef map<string, spAnimalModel> animalMap;
+typedef std::map<std::string, spAnimalModel> animalMap;
 
 class AnimalsManager : public EventDispatcher
 {
@@ -35,25 +35,25 @@ public:
 	AnimalsManager();
 	~AnimalsManager();
 
-	void init(const string& version);
+	void init(const std::string& version);
 
 	void feedAnimalByModel(spAnimalModel _model);
-	void feedAnimalByName(const string& name);
+	void feedAnimalByName(const std::string& name);
 	bool canAnimalBeFedByModel(spAnimalModel model);
-	bool canAnimalBeFedByName(const string& name);
+	bool canAnimalBeFedByName(const std::string& name);
 
-	spAnimalModel getAnimalModel(const string& name);
-	spAnimalModel getAnimalModelByRegion(const string& region, const string& name);
-	const animalMap& getAnimalsByRegion(const string& region);
+	spAnimalModel getAnimalModel(const std::string& name);
+	spAnimalModel getAnimalModelByRegion(const std::string& region, const std::string& name);
+	const animalMap& getAnimalsByRegion(const std::string& region);
 
-	const animalMap& getPossesedAnimalsByRegion(const string& region);
-	const map<string, animalMap >& getPossesedAnimals();
+	const animalMap& getPossesedAnimalsByRegion(const std::string& region);
+	const std::map< std::string, animalMap >& getPossesedAnimals();
 
 	void increaseHappinessByPoints(spAnimalModel model, int points);
-	void increaseAnimalCount(const string& region, const string& name, int count);
+	void increaseAnimalCount(const std::string& region, const std::string& name, int count);
 	void increaseAnimalCount(spAnimalModel model, int count);
 
-	bool isRegionPopulated(const string& regionName);
+	bool isRegionPopulated(const std::string& regionName);
 
 	void store();
 private:
@@ -65,8 +65,8 @@ private:
 	void createAustraliaAnimals();
 	void createTimer();
 
-	void addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS, int level = -1);
-	const string& getAnimalRegion(spAnimalModel model);
+	void addAnimalModel(const std::string& regionName, const std::string& name, int happiness, int hunger, int count, int lastFeedS, int level = -1);
+	const std::string& getAnimalRegion(spAnimalModel model);
 
 	void updater(Event* event);
 
@@ -78,8 +78,8 @@ private:
 	int getCurrentTimeInSeconds();
 
 private:
-	map<string, animalMap > _animalsMap;
-	map<string, animalMap > _posessedAnimalMap;
+	std::map<std::string, animalMap > _animalsMap;
+	std::map<std::string, animalMap > _posessedAnimalMap;
 
 	int _speciesPossesedCount;
 

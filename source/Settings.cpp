@@ -14,7 +14,7 @@ namespace oxygine
 
 	}
 
-	void Settings::init(const string &version) {
+	void Settings::init(const std::string &version) {
 		_version = version;
 		load();
 		s3eDebugOutputString("settings::init");
@@ -31,7 +31,7 @@ namespace oxygine
 		root.append_attribute("version").set_value(_version.c_str());
 	}
 
-	pugi::xml_attribute Settings::addValue(const string &name) {
+	pugi::xml_attribute Settings::addValue(const std::string &name) {
 		s3eDebugOutputString(FlashUtils::CMath::stringFormat("settings::addValue : %s", name.c_str()).c_str());
 
 		pugi::xml_node root = _doc.child("options");
@@ -50,7 +50,7 @@ namespace oxygine
 		return attr;
 	}
 
-	pugi::xml_attribute Settings::getValue(const string &name) {
+	pugi::xml_attribute Settings::getValue(const std::string &name) {
 		s3eDebugOutputString(FlashUtils::CMath::stringFormat("settings::getValue : %s", name.c_str()).c_str());
 
 		pugi::xml_node root = _doc.child("options");

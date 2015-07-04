@@ -47,7 +47,7 @@ private:
 	CardNavigatorAlign _alignType;
 	CardNavigatorState _state;
 	float _offsetBetweenCards;
-	deque<spActor> _cards;
+	std::deque<spActor> _cards;
 };
 
 #endif

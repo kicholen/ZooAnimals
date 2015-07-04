@@ -47,7 +47,7 @@ void FarmServiceElement::createHappinessProgressBar(float happinessValue) {
 	_happinessProgressBar->setProgress(happinessValue);
 }
 
-void FarmServiceElement::createGameButtonByType(FarmServiceGameType type, const string& gameName) {
+void FarmServiceElement::createGameButtonByType(FarmServiceGameType type, const std::string& gameName) {
 	if (type == topGame) {
 		_topGameButton = createGameButton("back_button", gameName);
 		_topGameButton->setPosition(Vector2(getWidth() * 2 / 3, getHeight() / 4));
@@ -65,7 +65,7 @@ void FarmServiceElement::createGameButtonByType(FarmServiceGameType type, const 
 	}
 }
 
-spTweenButton FarmServiceElement::createGameButton(const string& resourceName, const string& buttonName) {
+spTweenButton FarmServiceElement::createGameButton(const std::string& resourceName, const std::string& buttonName) {
 	spTweenButton button = initActor(new TweenButton,
 		arg_resAnim = gameResources.getResAnim(resourceName),
 		arg_name = buttonName,
@@ -78,7 +78,7 @@ spTweenButton FarmServiceElement::createGameButton(const string& resourceName, c
 }
 
 void FarmServiceElement::onGameChosen(Event *event) {
-	const string &name = event->target->getName();
+	const std::string &name = event->target->getName();
 
 	FarmServiceElementEvent gameEvent(FarmServiceElementEvent::PLAY_GAMES, name);
 	dispatchEvent(&gameEvent);

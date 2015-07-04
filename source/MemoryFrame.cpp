@@ -1,7 +1,7 @@
 #include "MemoryFrame.h"
 #include "FlurryAnalytics.h"
 
-MemoryFrame::MemoryFrame(const string& whichLevel) {
+MemoryFrame::MemoryFrame(const std::string& whichLevel) {
 	init("LandingPageFrame.xml", true);
 	_whichLevel = whichLevel;
 	_size = getSize();
@@ -45,17 +45,17 @@ Action MemoryFrame::loop() {
 }
 
 void MemoryFrame::onGoBack(Event *event) {
-	const string &name = "close";
+	const std::string &name = "close";
 	generateAction(name);
 }
 
 void MemoryFrame::onShowSliderFrame(Event *event) {
-	const string &name = "slideFrame";
+	const std::string &name = "slideFrame";
 	generateAction(name);
 }
 
 void MemoryFrame::onTimesUp(Event *event) {
-	const string &name = "result";
+	const std::string &name = "result";
 	generateAction(name);
 }
 
@@ -113,7 +113,7 @@ Point MemoryFrame::getSize() {
 		return Point(6, 4);
 	}
 	else {
-		string error = "Not excepted parametr: " + _whichLevel;
+		std::string error = "Not excepted parametr: " + _whichLevel;
 		oxygine::log::error(error.c_str());
 
 		return Point(0, 0);

@@ -1,6 +1,5 @@
 #include "SlideFrame.h"
 
-
 SlideFrame::SlideFrame() {
 	init("SlideFrame.xml");
 
@@ -8,7 +7,7 @@ SlideFrame::SlideFrame() {
 }
 
 void SlideFrame::selectTransitions() {
-	spTransition transition = new TransitionSimpleBlende;
+	spTransition transition = new TransitionFade;// TransitionSimpleBlende;
 	setTransitionIn(transition);
 	setTransitionOut(transition);
 }

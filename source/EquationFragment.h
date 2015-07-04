@@ -12,21 +12,21 @@ typedef enum {efDisplayView, efNumericView} EquationFragmentState;
 class EquationFragment : public Actor
 {
 public:
-	EquationFragment(Vector2& size, int count, bool isSign = false, const string& sign = "");
+	EquationFragment(Vector2& size, int count, bool isSign = false, const std::string& sign = "");
 	~EquationFragment();
 
-	void reset(int count, const string& assetName = "");
+	void reset(int count, const std::string& assetName = "");
 	void show(bool shouldAnimate);
 	void hide(bool shouldAnimate);
-	void switchToAnotherView(const string& assetName);
+	void switchToAnotherView(const std::string& assetName);
 
 private:
 	void switchToNumericView();
-	void switchToDisplayView(const string& assetName = "");
+	void switchToDisplayView(const std::string& assetName = "");
 
 	void createBackground();
 	void createContainerIfDoesntExist();
-	spSprite createContainerElement(const string& assetName);
+	spSprite createContainerElement(const std::string& assetName);
 	void addNumberTextField(int count);
 
 	void setTextFieldAndBackgroundSize();
@@ -35,7 +35,7 @@ private:
 	void onBackgroundTweenEnded(Event *event);
 private:
 	int _count;
-	string _sign;
+	std::string _sign;
 	bool _isSign;
 	EquationFragmentState _state;
 	spAnimatableElementContainer _container;

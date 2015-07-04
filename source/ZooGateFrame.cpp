@@ -269,7 +269,7 @@ void ZooGateFrame::addAustraliaTrackToSpawner(float tileSize, float tilesToViewO
 	trackVector.clear();
 }
 
-void ZooGateFrame::addSignPost(float tileSize, const string& region, const Vector2& position) {
+void ZooGateFrame::addSignPost(float tileSize, const std::string& region, const Vector2& position) {
 	spButton button = new Button();
 	button->setName(region);
 	button->setResAnim(tilesResources.getResAnim("informationTable"));

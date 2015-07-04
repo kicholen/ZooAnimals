@@ -1,5 +1,4 @@
 #include "LevelChooserFrame.h"
-#include "RotatingContainer.h"
 #include "FlurryAnalytics.h"
 #include "FlurryAds.h"
 #include "GooglePlayInAppPurchaseManager.h"

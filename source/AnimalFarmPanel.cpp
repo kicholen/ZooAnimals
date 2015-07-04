@@ -28,8 +28,8 @@ void AnimalFarmPanel::setData(spAnimalModel model) {
 	_backgroundSprite->setVerticalMode(Box9Sprite::StretchMode(Box9Sprite::STRETCHING));
 	_backgroundSprite->setHorizontalMode(Box9Sprite::StretchMode(Box9Sprite::STRETCHING));
 
-	string animalNameUpperCase = model->animalName().c_str();
-	transform(animalNameUpperCase.begin(), animalNameUpperCase.end(), animalNameUpperCase.begin(), ::toupper);
+	std::string animalNameUpperCase = model->animalName().c_str();
+	std::transform(animalNameUpperCase.begin(), animalNameUpperCase.end(), animalNameUpperCase.begin(), ::toupper);
 	_animalNameTextfield = createTextfield(animalNameUpperCase, false, false);
 	_animalNameTextfield->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(100, 140, 50), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
 	_animalNameTextfield->setFontSize2Scale(7 * (int)getRoot()->getWidth() / 320);

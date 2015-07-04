@@ -13,7 +13,7 @@ DECLARE_SMART(PresentAnimalsFrame, spPresentAnimalsFrame);
 class PresentAnimalsFrame : public CustomFrame
 {
 public:
-	PresentAnimalsFrame(const string& region);
+	PresentAnimalsFrame(const std::string& region);
 	void selectTransitions();
 
 	Action loop();
@@ -27,7 +27,7 @@ protected:
 	void onSwipeRight(Event *ev);
 private:
 	spCardNavigator _cardNavigator;
-	string _region;
+	std::string _region;
 };
 
 #endif

@@ -23,6 +23,12 @@ files
 	StartGameConfig.cpp
 	StartGameConfig.h
 
+	[source/frame/basic]
+	Frame.cpp
+	Frame.h
+	Transition.cpp
+	Transition.h
+
     [source/model]
     SpriteModel.cpp
     SpriteModel.h
@@ -144,8 +150,6 @@ files
 	RegionAnimalsContainer.h
 
     [source/gui/base]
-    RotatingContainer.cpp
-    RotatingContainer.h
 	ShaderSprite.cpp
     ShaderSprite.h
     ShaderButton.cpp
@@ -385,5 +389,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=10
+	version-revision=11
 }

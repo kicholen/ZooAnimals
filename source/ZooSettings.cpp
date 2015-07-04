@@ -14,7 +14,7 @@ ZooSettings::ZooSettings() {
 ZooSettings::~ZooSettings() {
 }
 
-void ZooSettings::init(const string &version) {
+void ZooSettings::init(const std::string &version) {
 	_version = version;
 	load();
 
@@ -89,7 +89,7 @@ void ZooSettings::save() {
 	FileSaver::save();
 }
 
-pugi::xml_node ZooSettings::getAnimal(const string& regionName, const string& animalName) {
+pugi::xml_node ZooSettings::getAnimal(const std::string& regionName, const std::string& animalName) {
 	pugi::xml_node node = _doc.child("animals").child(regionName.c_str());
 	if (!node) {
 		return node;
@@ -99,7 +99,7 @@ pugi::xml_node ZooSettings::getAnimal(const string& regionName, const string& an
 	return node;
 }
 
-void ZooSettings::setAnimal(const string& regionName, const string& animalName, int happiness, int hunger, int count, int lastFeedMS, int level) {
+void ZooSettings::setAnimal(const std::string& regionName, const std::string& animalName, int happiness, int hunger, int count, int lastFeedMS, int level) {
 	pugi::xml_node mainNode = _doc.child("animals");
 	pugi::xml_node regionNode = mainNode.child(regionName.c_str());
 	if (!regionNode) {
@@ -109,7 +109,7 @@ void ZooSettings::setAnimal(const string& regionName, const string& animalName, 
 	setAnimalByRegionNode(regionNode, animalName, happiness, hunger, count, lastFeedMS, level);
 }
 
-pugi::xml_attribute ZooSettings::addPlayerValue(const string &name) {
+pugi::xml_attribute ZooSettings::addPlayerValue(const std::string &name) {
 	pugi::xml_node root = _doc.child("player");
 	if (!root)
 		root = _doc.append_child("player");
@@ -124,7 +124,7 @@ pugi::xml_attribute ZooSettings::addPlayerValue(const string &name) {
 	return attr;
 }
 
-pugi::xml_attribute ZooSettings::getPlayerValue(const string &name) {
+pugi::xml_attribute ZooSettings::getPlayerValue(const std::string &name) {
 	pugi::xml_node root = _doc.child("player");
 	OX_ASSERT(root);
 	pugi::xml_node child = root.child(name.c_str());
@@ -138,7 +138,7 @@ pugi::xml_attribute ZooSettings::getPlayerValue(const string &name) {
 /**
 *	Reminder. If u add anything here after release, check for attribute.
 **/
-pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, const string& name, int happiness, int hunger, int count, int lastFeedMS, int level) {
+pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, const std::string& name, int happiness, int hunger, int count, int lastFeedMS, int level) {
 	pugi::xml_node animalNode = regionNode.child(name.c_str());
 	if (!animalNode) {
 		animalNode = regionNode.append_child(name.c_str());

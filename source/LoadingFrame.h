@@ -34,7 +34,7 @@ private:
 	void loadedResource(Event *ev);
 	void loadNext();
 private:
-	string _version;
+	std::string _version;
 
 	spProgressBar _progressBar;
 

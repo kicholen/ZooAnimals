@@ -20,7 +20,7 @@ MatchTwoSlot::MatchTwoSlot() {
 	_state = mtsWaiting;
 }
 
-void MatchTwoSlot::setSprite(string spriteName) {
+void MatchTwoSlot::setSprite(std::string spriteName) {
 	_pairSprite->setResAnim(animalsResources.getResAnim(spriteName));
 }
 

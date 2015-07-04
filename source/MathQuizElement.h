@@ -15,10 +15,10 @@ public:
 	~MathQuizElement();
 
 	void setData();
-	void reset(int a, const string& sign, int b);
+	void reset(int a, const std::string& sign, int b);
 private:
 	void createBackground();
-	void createEquation(int a, const string& sign, int b);
+	void createEquation(int a, const std::string& sign, int b);
 	void createChangeViewSprite();
 
 	void onChangeView(Event  *event);

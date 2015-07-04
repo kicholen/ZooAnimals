@@ -11,8 +11,8 @@ AnimalsManager::AnimalsManager() {
 }
 
 AnimalsManager::~AnimalsManager() {
-	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
-		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
+	for (map<std::string, map<std::string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
+		for (map<std::string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
 			innerIterator->second->releaseRef();
 		}
 	}
@@ -22,7 +22,7 @@ AnimalsManager::~AnimalsManager() {
 	_timer->detach();
 }
 
-void AnimalsManager::init(const string& version) {
+void AnimalsManager::init(const std::string& version) {
 	ZooSettings::instance.init(version);
 
 	createFarmAnimals();
@@ -40,7 +40,7 @@ void AnimalsManager::feedAnimalByModel(spAnimalModel model) {
 	model->setLastFeedS(getCurrentTimeInSeconds());
 }
 
-void AnimalsManager::feedAnimalByName(const string& name) {
+void AnimalsManager::feedAnimalByName(const std::string& name) {
 	feedAnimalByModel(getAnimalModel(name));
 }
 
@@ -48,11 +48,11 @@ bool AnimalsManager::canAnimalBeFedByModel(spAnimalModel model) {
 	return model->lastFeedS() + FEED_INTERVAL_SECONDS >= getCurrentTimeInSeconds();
 }
 
-bool AnimalsManager::canAnimalBeFedByName(const string& name) {
+bool AnimalsManager::canAnimalBeFedByName(const std::string& name) {
 	return canAnimalBeFedByModel(getAnimalModel(name));
 }
 // time consuming, maps was made on purpose, and here it is removed
-spAnimalModel AnimalsManager::getAnimalModel(const string& name) {
+spAnimalModel AnimalsManager::getAnimalModel(const std::string& name) {
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
 		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
 			if (innerIterator->second->animalName() == name) {
@@ -65,23 +65,23 @@ spAnimalModel AnimalsManager::getAnimalModel(const string& name) {
 	return new AnimalModel("", 0, 0, 0, 0);
 }
 
-spAnimalModel AnimalsManager::getAnimalModelByRegion(const string& region, const string& name) {
+spAnimalModel AnimalsManager::getAnimalModelByRegion(const std::string& region, const std::string& name) {
 	return _animalsMap[region][name];
 }
 
-const animalMap& AnimalsManager::getAnimalsByRegion(const string& name) {
+const animalMap& AnimalsManager::getAnimalsByRegion(const std::string& name) {
 	return _animalsMap[name];
 }
 
-bool AnimalsManager::isRegionPopulated(const string& regionName) {
+bool AnimalsManager::isRegionPopulated(const std::string& regionName) {
 	return _posessedAnimalMap.count(regionName) != 0;
 }
 
-const animalMap& AnimalsManager::getPossesedAnimalsByRegion(const string& region) {
+const animalMap& AnimalsManager::getPossesedAnimalsByRegion(const std::string& region) {
 	return _posessedAnimalMap[region];
 }
 
-const map<string, animalMap >& AnimalsManager::getPossesedAnimals() {
+const map<std::string, animalMap >& AnimalsManager::getPossesedAnimals() {
 	return _posessedAnimalMap;
 }
 
@@ -94,7 +94,7 @@ void AnimalsManager::increaseHappinessByPoints(spAnimalModel model, int points) 
 	}
 }
 
-void AnimalsManager::increaseAnimalCount(const string& region, const string& name, int count) {
+void AnimalsManager::increaseAnimalCount(const std::string& region, const std::string& name, int count) {
 	spAnimalModel model = getAnimalModelByRegion(region, name);
 	model->setAnimalsCount(model->animalsCount() + count);
 
@@ -110,7 +110,7 @@ void AnimalsManager::increaseAnimalCount(const string& region, const string& nam
 
 void AnimalsManager::increaseAnimalCount(spAnimalModel model, int count) {
 	model->setAnimalsCount(model->animalsCount() + count);
-	const string& region = getAnimalRegion(model);
+	const std::string& region = getAnimalRegion(model);
 
 	if (_posessedAnimalMap[region].count(model->animalName()) == 0) {
 		_speciesPossesedCount += 1;
@@ -134,7 +134,7 @@ void AnimalsManager::store() {
 
 void AnimalsManager::createFarmAnimals() {
 	int sizeOfArray = sizeof(FARM) / sizeof(FARM[0]);
-	const string regionName = "farm";
+	const std::string regionName = "farm";
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, FARM[i]);
@@ -149,7 +149,7 @@ void AnimalsManager::createFarmAnimals() {
 
 void AnimalsManager::createWinterAnimals() {
 	int sizeOfArray = sizeof(WINTER) / sizeof(WINTER[0]);
-	const string regionName = "winter";
+	const std::string regionName = "winter";
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, WINTER[i]);
@@ -164,7 +164,7 @@ void AnimalsManager::createWinterAnimals() {
 
 void AnimalsManager::createUnderwaterAnimals() {
 	int sizeOfArray = sizeof(UNDERWATER) / sizeof(UNDERWATER[0]);
-	const string regionName = "underwater";
+	const std::string regionName = "underwater";
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, UNDERWATER[i]);
@@ -179,7 +179,7 @@ void AnimalsManager::createUnderwaterAnimals() {
 
 void AnimalsManager::createSteppeAnimals() {
 	int sizeOfArray = sizeof(STEPPE) / sizeof(STEPPE[0]);
-	const string regionName = "steppe";
+	const std::string regionName = "steppe";
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, STEPPE[i]);
@@ -194,7 +194,7 @@ void AnimalsManager::createSteppeAnimals() {
 
 void AnimalsManager::createAsiaAnimals() {
 	int sizeOfArray = sizeof(ASIA) / sizeof(ASIA[0]);
-	const string regionName = "asia";
+	const std::string regionName = "asia";
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, ASIA[i]);
@@ -209,7 +209,7 @@ void AnimalsManager::createAsiaAnimals() {
 
 void AnimalsManager::createAustraliaAnimals() {
 	int sizeOfArray = sizeof(AUSTRALIA) / sizeof(AUSTRALIA[0]);
-	const string regionName = "australia";
+	const std::string regionName = "australia";
 
 	for (int i = 0; i < sizeOfArray; i++) {
 		pugi::xml_node animalNode = ZooSettings::instance.getAnimal(regionName, AUSTRALIA[i]);
@@ -228,7 +228,7 @@ void AnimalsManager::createTimer() {
 	_timer->start();
 }
 
-void AnimalsManager::addAnimalModel(const string& regionName, const string& name, int happiness, int hunger, int count, int lastFeedS, int level) {
+void AnimalsManager::addAnimalModel(const std::string& regionName, const std::string& name, int happiness, int hunger, int count, int lastFeedS, int level) {
 	spAnimalModel model = new AnimalModel(name, happiness, hunger, count, lastFeedS);
 	model->setLevel(level);
 	model->fromContent();
@@ -240,7 +240,7 @@ void AnimalsManager::addAnimalModel(const string& regionName, const string& name
 	}
 }
 
-const string& AnimalsManager::getAnimalRegion(spAnimalModel model) {
+const std::string& AnimalsManager::getAnimalRegion(spAnimalModel model) {
 	for (map<string, animalMap >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
 		for (animalMap::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
 			if (innerIterator->second->animalName() == model->animalName()) {

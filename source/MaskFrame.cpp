@@ -48,11 +48,11 @@ Action MaskFrame::loop() {
 		}
 		else if (action.id == "SAVE") {
 			spActor child = _spritesHolder->getFirstChild();
-			string firstMessage[] = {"", "", "", "", "", "", "", ""};
+			std::string firstMessage[] = {"", "", "", "", "", "", "", ""};
 			int i = 0;
-			string bodyString = "<w><c>";
+			std::string bodyString = "<w><c>";
 			while(child) {
-				bodyString += "<g>";	
+				bodyString += "<g>";
 				bodyString += "<sX>" + FlashUtils::CMath::doubleToString(child->getDerivedWidth() / getRoot()->getWidth());
 				bodyString += "</sX>";
 				bodyString += "<sY>" + FlashUtils::CMath::doubleToString(child->getDerivedHeight() / getRoot()->getHeight());
@@ -81,7 +81,7 @@ Action MaskFrame::loop() {
 }
 
 void MaskFrame::onGoBack(Event *event) {
-	const string &name ="close";
+	const std::string &name ="close";
 	generateAction(name);
 }
 
@@ -90,7 +90,7 @@ void MaskFrame::onSpawnSprite(Event *event) {
 }
 
 void MaskFrame::onShowSliderFrame(Event *event) {
-	const string &name ="slideFrame";
+	const std::string &name ="slideFrame";
 	generateAction(name);
 }
 
@@ -148,7 +148,7 @@ void MaskFrame::setData() {
 	_inputTextfield->addEventListener(Event::COMPLETE, CLOSURE(this, &MaskFrame::onComplete));
 }
 
-void MaskFrame::addDraggableSprite(string spriteName, Vector2 anchorPoint, float scaleX, float scaleY, float positionX, float positionY, int priorityZ, bool fromEditResources = false) {
+void MaskFrame::addDraggableSprite(std::string spriteName, Vector2 anchorPoint, float scaleX, float scaleY, float positionX, float positionY, int priorityZ, bool fromEditResources = false) {
 	if (fromEditResources) {
 		spSprite sprite = new EditableSprite;
 		sprite->setResAnim(editResources.getResAnim(spriteName));

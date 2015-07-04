@@ -19,15 +19,15 @@ public:
 	TileField(Point numberOfFields, bool enableCullingOnTiles = false);
 	~TileField();
 
-	void setData(const string& animalName);
-	spSprite createTileSprite(string resourceName, Vector2 spriteSize, Point spritePosition, string spriteName, short priority = -1);
+	void setData(const std::string& animalName);
+	spSprite createTileSprite(std::string resourceName, Vector2 spriteSize, Point spritePosition, std::string spriteName, short priority = -1);
 private:
-	VectorArray<int> getFarmParameters(string& animalName);
+	VectorArray<int> getFarmParameters(std::string& animalName);
 	Point getCellIndex(Vector2 position);
 	Vector2	getCellPosition(int i, int j);
 	
 	Point _numberOfFields;
-	string _animalName;
+	std::string _animalName;
 	bool _enableCullingOnTiles;
 };
 

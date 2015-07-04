@@ -11,7 +11,7 @@ class ExpandedAnimalSlot : public AnimalSlot
 {
 public:
 	ExpandedAnimalSlot(spAnimalModel model);
-	ExpandedAnimalSlot(const string& id);
+	ExpandedAnimalSlot(const std::string& id);
 	~ExpandedAnimalSlot();
 
 	void switchAnimalModel(spAnimalModel model);

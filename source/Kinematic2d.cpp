@@ -1,7 +1,7 @@
 #include "Kinematic2d.h"
 
 
-Kinematic2d::Kinematic2d(b2World* world, b2Body *body, string bodyName) {
+Kinematic2d::Kinematic2d(b2World* world, b2Body *body, std::string bodyName) {
 	m_body = body;
 	m_world = world;
 	m_body->SetUserData(this);

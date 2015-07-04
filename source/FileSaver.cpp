@@ -23,11 +23,11 @@ namespace oxygine
 	
 	}
 
-	void FileSaver::setPath(const string &path) {
+	void FileSaver::setPath(const std::string &path) {
 		_path = path;
 	}
 	
-	void FileSaver::init(const string &version) {
+	void FileSaver::init(const std::string &version) {
 		_version = version;
 		reset();
 	}
@@ -48,7 +48,7 @@ namespace oxygine
 		}
 	}
 	
-	pugi::xml_node FileSaver::getFirstNodeByName(const string &nodeName) {
+	pugi::xml_node FileSaver::getFirstNodeByName(const std::string &nodeName) {
 		pugi::xml_node descendant = _doc.first_child();
 		pugi::xml_node descendantDesc;
 		while (descendant) {
@@ -71,15 +71,15 @@ namespace oxygine
 		return descendant;
 	}
 
-	pugi::xml_node FileSaver::addChild(pugi::xml_node parent, const string &childName) {
+	pugi::xml_node FileSaver::addChild(pugi::xml_node parent, const std::string &childName) {
 		return parent.append_child(childName.c_str());
 	}
 
-	pugi::xml_attribute FileSaver::addAttribute(pugi::xml_node child, const string &attributeName) {
+	pugi::xml_attribute FileSaver::addAttribute(pugi::xml_node child, const std::string &attributeName) {
 		return child.append_attribute(attributeName.c_str());
 	}
 
-	pugi::xml_attribute FileSaver::addValue(const string &name) {
+	pugi::xml_attribute FileSaver::addValue(const std::string &name) {
 		pugi::xml_node root = _doc.child("box2d");
 		if (!root)
 			root = _doc.append_child("box2d");

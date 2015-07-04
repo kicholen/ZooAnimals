@@ -103,7 +103,7 @@ spTweenTextField MoneyCounterElement::createMoneyTextfield(int money) {
 	return textField;
 }
 
-spSprite MoneyCounterElement::createMoneyIcon(const string& spriteName) {
+spSprite MoneyCounterElement::createMoneyIcon(const std::string& spriteName) {
 	spSprite moneySprite = new Sprite();
 	moneySprite->setAnchor(0.5f, 0.5f);
 	moneySprite->setResAnim(tilesResources.getResAnim(spriteName));

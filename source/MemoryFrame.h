@@ -11,7 +11,7 @@ DECLARE_SMART(MemoryFrame, spMemoryFrame);
 class MemoryFrame : public CustomFrame
 {
 public:
-	MemoryFrame(const string& whichLevel);
+	MemoryFrame(const std::string& whichLevel);
 	void selectTransitions();
 
 	Action loop();
@@ -26,7 +26,7 @@ protected:
 
 	void setData();
 
-	void stopPreviousAndPlayNewSound(string soundName);
+	void stopPreviousAndPlayNewSound(std::string soundName);
 	Point getSize();
 
 private:
@@ -40,7 +40,7 @@ private:
 	int _levelScoreMultiplier;
 	int _level;
 	//spSoundInstance _previousSoundInstance; 
-	string _whichLevel;
+	std::string _whichLevel;
 };
 
 #endif

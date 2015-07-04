@@ -4,14 +4,13 @@
 #include "CustomFrame.h"
 #include "FlashUtils.h"
 #include "AnimalFarmField.h"
-#include "RotatingContainer.h"
 
 DECLARE_SMART(ZooFrame, spZooFrame);
 
 class ZooFrame : public CustomFrame
 {
 public:
-	ZooFrame(const string& regionName);
+	ZooFrame(const std::string& regionName);
 	void selectTransitions();
 
 	Action loop();
@@ -27,9 +26,9 @@ protected:
 private:
 //	spAnimalFarmField _field;
 	VectorArray<spAnimalFarmField> _farmArray;
-	string _region;
+	std::string _region;
 
-	spRotatingContainer _rotatingContainer;
+	spSlidingActor _rotatingContainer;
 	bool _shouldRemoveTiles;
 };
 

@@ -18,7 +18,7 @@ CustomFrame::CustomFrame() {
 	this->selectTransitions();
 }
 
-spTweenButton CustomFrame::addButton(const string &name, const string &text, Vector2 position) {
+spTweenButton CustomFrame::addButton(const std::string &name, const std::string &text, Vector2 position) {
 	spTweenButton button = createButton(name, text);
 	button->setPosition(position);
 	button->attachTo(_view);
@@ -27,7 +27,7 @@ spTweenButton CustomFrame::addButton(const string &name, const string &text, Vec
 	return button;
 }
 
-spShaderTweenButton CustomFrame::addShaderButton(const string &name, const string &text, Vector2 position) {
+spShaderTweenButton CustomFrame::addShaderButton(const std::string &name, const std::string &text, Vector2 position) {
 	spShaderTweenButton button = createShaderButton(name, text);
 	button->setPosition(position);
 	button->attachTo(_view);
@@ -54,11 +54,11 @@ void CustomFrame::_postHiding(Event *) {
 	_resources.unload();
 }
 
-void CustomFrame::init(const string &xml) {
+void CustomFrame::init(const std::string &xml) {
 	init(xml, false);
 }
 
-void CustomFrame::init(const string &xml, bool shouldAddBackground) {
+void CustomFrame::init(const std::string &xml, bool shouldAddBackground) {
 	_resources.loadXML("xmls/" + xml, 0, false);
 	
 	_view->setSize(getRoot()->getSize());

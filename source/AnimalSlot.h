@@ -14,16 +14,16 @@ class AnimalSlot : public Actor
 {
 public:
 	AnimalSlot();
-	AnimalSlot(const string& id);
+	AnimalSlot(const std::string& id);
 
-	void switchAnimalSprite(const string& id);
-	string getId();
+	void switchAnimalSprite(const std::string& id);
+	std::string getId();
 
 protected:
 	void createAnimalSprite();
 	void createBackground();
 private:
-	string _id;
+	std::string _id;
 
 	spSprite _animalSprite;
 };

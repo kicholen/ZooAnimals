@@ -14,7 +14,7 @@ ChooseStartAnimalFrame::ChooseStartAnimalFrame() {
 void ChooseStartAnimalFrame::selectTransitions() {
 	spTransition transition = new TransitionScale;
 	setTransitionIn(transition);
-	spTransition transitionOut = new TransitionInstant();
+	spTransition transitionOut = new TransitionFade;// TransitionInstant();
 	setTransitionOut(transitionOut);
 }
 
@@ -87,7 +87,7 @@ void ChooseStartAnimalFrame::setData() {
 spSprite ChooseStartAnimalFrame::createRandomAnimalSprite() {
 	int drawnInt = 0;
 	int size;
-	string name;
+	std::string name;
 	while (isInPool(drawnInt)) {
 		drawnInt = CMath::random(0, 5);
 	}

@@ -10,7 +10,7 @@ DECLARE_SMART(PopObjectsFrame, spPopObjectsFrame);
 class PopObjectsFrame : public CustomFrame
 {
 public:
-	PopObjectsFrame(const string& difficulty);
+	PopObjectsFrame(const std::string& difficulty);
 	~PopObjectsFrame();
 	void selectTransitions();
 
@@ -30,7 +30,7 @@ private:
 	spSwipeTrailElement _swipeTrailElement;
 	spPopObjectsField _popField;
 
-	string _difficulty;
+	std::string _difficulty;
 };
 
 #endif

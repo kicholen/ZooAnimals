@@ -1,7 +1,7 @@
 #include "Static2d.h"
 
 
-Static2d::Static2d(b2World* world, b2Body *body, string bodyName, float scale) {
+Static2d::Static2d(b2World* world, b2Body *body, std::string bodyName, float scale) {
 	m_body = body;
 	m_world = world;
 	m_body->SetUserData(this);

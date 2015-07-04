@@ -51,13 +51,6 @@ namespace oxygine
 			{
 				event->phase = Event::phase_target;
 				event->target = this;
-				/*
-				if (event->target.get() != this)
-				{
-					spMouseEvent e = new MouseEvent(et_Click);
-					dispatchEvent(e.get());
-				}
-				*/
 			}
 			break;
 		case TouchEvent::OVER:
@@ -82,10 +75,7 @@ namespace oxygine
 			break;
 		case TouchEvent::TOUCH_DOWN:
 			{
-				//if (isDescendant(act))
-				//if (me->target.get() == this)
 				{
-					//event->stopImmediatePropagation();
 					if (!_btnPressed)
 					{
 						_btnPressed = me->index;
@@ -103,14 +93,6 @@ namespace oxygine
 					getRoot()->removeEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &ShaderButton::_mouseEvent));
 					_btnPressed = 0;
 				}
-
-				//if (isOn(me->localPosition))
-				//if (isDescendant(act))
-				if (_overed)
-				{
-					//spMouseEvent e = new MouseEvent(et_Click);
-					//dispatchEvent(e.get());
-				}
 			}
 			break;
 		}		
@@ -122,30 +104,16 @@ namespace oxygine
 		updateButtonState(_state);
 	}
 
-	/*
-	void Button::setAnimFrame(const ResAnim *resanim, int col, int row)
-	{
-		setResAnim(resanim);
-	}
-	*/
-
 	void ShaderButton::setRow(int row)
 	{
 		_row = row;
 		updateButtonState(_state);
 	}
-	/*
-	void Button::setCallbackClick(EventCallback cb)
-	{
-		_cbClick = cb;
-	}
-	*/
 
 	void ShaderButton::setState(state s)
 	{
 		if (s == _state)
 			return;
-		//printf("set state: %d\n", (int)s);
 		_state = s;
 		updateButtonState(s);
 	}

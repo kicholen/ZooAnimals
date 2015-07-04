@@ -28,7 +28,7 @@ public:
 
 	void startWallPost();
 	void updateWallPost();
-	void showMessage(string message);
+	void showMessage(std::string message);
 
 protected:
 	void selectTransitions();

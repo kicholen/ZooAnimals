@@ -16,7 +16,7 @@ public:
 	bool m_contacting;
 	int m_numContacts;
 public:
-	Kinematic2d(b2World* world, b2Body *body, string bodyName);
+	Kinematic2d(b2World* world, b2Body *body, std::string bodyName);
 	~Kinematic2d();
 	
 	void update(float playerPosition);

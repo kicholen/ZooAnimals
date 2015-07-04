@@ -9,7 +9,7 @@ public:
 	Lockit();
 	~Lockit();
 
-	string getText(int id);
+	std::string getText(int id);
 };
 
 #endif

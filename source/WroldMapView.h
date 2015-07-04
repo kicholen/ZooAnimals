@@ -17,9 +17,9 @@ public:
 			CONTINENT_SWITCHED = makefourcc('C', 'S', 'W', 'M')
 		};
 
-		WroldMapViewEvent(EV ev, const string &name):Event(ev), _name(name) {}
+		WroldMapViewEvent(EV ev, const std::string &name):Event(ev), _name(name) {}
 
-		const string _name;
+		const std::string _name;
 	};
 
 
@@ -43,7 +43,7 @@ private:
 
 	void animateSprite(spSprite sprite);
 
-	float getMapScaleModifier(const string& name);
+	float getMapScaleModifier(const std::string& name);
 private:
 	spSprite _northAmerica;
 	spSprite _southAmerica;

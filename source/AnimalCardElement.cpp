@@ -2,11 +2,11 @@
 #include "SharedResources.h"
 #include "LanguageManager.h"
 
-AnimalCardElement::AnimalCardElement(const Vector2& size, spAnimalModel model, ResAnim* thumbRes) {
+AnimalCardElement::AnimalCardElement(const Vector2& size, spAnimalModel model, ResAnim *thumbRes) {
 	setSize(size);
 	setAnchor(0.5f, 0.5f);
 	_thumbRes = thumbRes;
-	const string& resurceSufix = _thumbRes->getName() + ".xml";
+	const std::string& resurceSufix = _thumbRes->getName() + ".xml";
 	_realAnimalResource.loadXML("xmls/animals/" + resurceSufix, 0, false);
 	_state = acsUnzoomed;
 	_eventsCounter = 0;
@@ -43,7 +43,8 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	addChild(lifespanTextField);
 	*/
 	
-	const string& lifespanResult = LanguageManager::instance.getText(104) + ": " + FlashUtils::CMath::intToString(model->lifespan()) + LanguageManager::instance.getText(105);
+	// lifespan
+	const std::string& lifespanResult = LanguageManager::instance.getText(104) + ": " + FlashUtils::CMath::intToString(model->lifespan()) + " " + LanguageManager::instance.getText(105);
 	spTextField lifespanResultTextfield = createText(lifespanResult, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
 	int fontScale = lifespanResultTextfield->getFontSize2Scale();
 	lifespanResultTextfield->setY(nameTextField->getY() + nameTextField->getTextRect().getBottom() + offset);
@@ -51,8 +52,8 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	lifespanResultTextfield->setTouchEnabled(false);
 	addChild(lifespanResultTextfield);
 
-	// lifespan
-	const string& weightResult = LanguageManager::instance.getText(106) + ": " + FlashUtils::CMath::intToString(model->weight()) + LanguageManager::instance.getText(107);
+	// weight
+	const std::string& weightResult = LanguageManager::instance.getText(106) + ": " + FlashUtils::CMath::intToString(model->weight()) + " " + LanguageManager::instance.getText(107);
 	spTextField weightTextField = createText(weightResult, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
 	weightTextField->setFontSize2Scale(fontScale);
 	weightTextField->setY(lifespanResultTextfield->getY() + lifespanResultTextfield->getTextRect().getBottom() + offset);
@@ -61,7 +62,7 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	addChild(weightTextField);
 
 	// class
-	const string& classResult = LanguageManager::instance.getText(108) + ": " + LanguageManager::instance.getText(model->groupLockit());
+	const std::string& classResult = LanguageManager::instance.getText(108) + ": " + LanguageManager::instance.getText(model->groupLockit());
 	spTextField classTextField = createText(classResult, Vector2(getWidth() * 0.4f, getHeight() * 0.1f));
 	classTextField->setFontSize2Scale(fontScale);
 	classTextField->setY(weightTextField->getY() + weightTextField->getTextRect().getBottom() + offset);
@@ -95,7 +96,7 @@ void AnimalCardElement::setData(spAnimalModel model) {
 	addChild(_touchBlocker);
 }
 
-void AnimalCardElement::setAnimalSlot(const string& spriteName) {
+void AnimalCardElement::setAnimalSlot(const std::string& spriteName) {
 	if (!_animalSlot) {
 		_animalSlot = new AnimalSlot(spriteName);
 		_animalSlot->setPriority(0);
@@ -133,7 +134,7 @@ spTextField AnimalCardElement::createText(int lockitId, const Vector2& boundries
 	return createTextFieldInBoundries(LanguageManager::instance.getText(lockitId), boundries, style);
 }
 
-spTextField AnimalCardElement::createText(const string& text, const Vector2& boundries, bool multiline) {
+spTextField AnimalCardElement::createText(const std::string& text, const Vector2& boundries, bool multiline) {
 	TextStyle style;
 	style.font = gameResources.getResFont("nobile_bold")->getFont();
 	style.vAlign = TextStyle::VALIGN_MIDDLE;

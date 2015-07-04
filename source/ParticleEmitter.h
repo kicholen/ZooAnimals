@@ -13,7 +13,7 @@ DECLARE_SMART(ParticleEmitter, spParticleEmitter);
 class ParticleEmitter : public Actor
 {
 public:
-	ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 xVelocity, Vector2 yVelocity, Vector2 lifeTime, Vector2 particlesPerSecond, const string &resAnim);
+	ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 xVelocity, Vector2 yVelocity, Vector2 lifeTime, Vector2 particlesPerSecond, const std::string &resAnim);
 	~ParticleEmitter();
 	
 	void setFriction(float friction);
@@ -21,7 +21,7 @@ public:
 	void setLifetime(Vector2 lifetime);
 	void setRotation(Vector2 rotation);
 	void pushColor(unsigned int color, bool shouldClear = false);
-	void pushResAnim(const string &resAnim, bool shouldClear = false);
+	void pushResAnim(const std::string &resAnim, bool shouldClear = false);
 
 	void setDestroyParticleOnTouch(bool shouldDestroy) {_flags &= ~flag_destroyOnTouch; if (shouldDestroy) _flags |= flag_destroyOnTouch;}
 	void setDispatchEventOnParticleDeadByTouch(bool shouldDispatch) {_flags &= ~flag_dispatchOnDeadByTouch; if (shouldDispatch) _flags |= flag_dispatchOnDeadByTouch;}
@@ -54,7 +54,7 @@ private:
 	Vector2 _radius;
 	float _friction;
 	VectorArray<unsigned int> _colors;
-	VectorArray<string> _resAnims;
+	VectorArray<std::string> _resAnims;
 
 	float _frameTime;
 

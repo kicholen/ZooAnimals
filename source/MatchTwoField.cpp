@@ -30,7 +30,7 @@ void MatchTwoField::fillField(uint pairsFromContent) {
 	pugi::xml_node levelNode = Content::instance.getMatchTwoLevelNode(pairsFromContent).first_child();
 
 	for(uint i = 0; i < _numberOfMatches; i++) {
-		string name = FlashUtils::CMath::intToString(bufferIndex);
+		std::string name = FlashUtils::CMath::intToString(bufferIndex);
 		spMatchTwoSlot slot = getChildT<MatchTwoSlot>(name + "_basket", oxygine::ep_ignore_error);
 		if (!slot) {
 			slot = new MatchTwoSlot();
@@ -85,7 +85,7 @@ Vector2 MatchTwoField::getSlotSize() {
 	}
 }
 
-void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, string name, Vector2 slotScale, string spriteName) {
+void MatchTwoField::createDraggableSprite(spMatchTwoSlot slot, std::string name, Vector2 slotScale, std::string spriteName) {
 	spMatchTwoDraggable draggableSprite = getChildT<MatchTwoDraggable>(name, oxygine::ep_ignore_error);
 	
 	if (!draggableSprite) {
@@ -183,7 +183,7 @@ void MatchTwoField::onSlotFoundAnimationCompleted(Event *event) {
 void MatchTwoField::hidePreviousMatchesIfNecessary() {
 	if (_previousNumberOfMatches > _numberOfMatches) {
 		for (uint i = _numberOfMatches + 1; i <= _previousNumberOfMatches; i++) {
-			string name = FlashUtils::CMath::intToString(i);
+			std::string name = FlashUtils::CMath::intToString(i);
 			spMatchTwoDraggable draggableSprite = getChildT<MatchTwoDraggable>(name);
 			draggableSprite->setVisible(false);
 			spMatchTwoSlot slot = getChildT<MatchTwoSlot>(name + "_basket");

@@ -16,7 +16,7 @@ public:
 	bool m_contacting;
 	int m_numContacts;
 public:
-	Floor2d(b2World* world, b2Body *body, string bodyName, float scale);
+	Floor2d(b2World* world, b2Body *body, std::string bodyName, float scale);
 	~Floor2d();
 
 	void update(float playerPosition);

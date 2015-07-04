@@ -14,7 +14,7 @@ public:
 	RegionAnimalsContainer(const Vector2& size);
 	~RegionAnimalsContainer();
 
-	void setRegion(const string& regionName);
+	void setRegion(const std::string& regionName);
 
 private:
 	void reset();
@@ -22,7 +22,7 @@ private:
 
 private:
 	spStackContainer _stackContainer;
-	string _regionName;
+	std::string _regionName;
 	int _previousCount;
 };
 

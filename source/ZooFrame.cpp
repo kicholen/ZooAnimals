@@ -13,7 +13,7 @@
 #include "PopObjectsFrame.h"
 #include "DiscoverImageFrame.h"
 
-ZooFrame::ZooFrame(const string& regionName) {
+ZooFrame::ZooFrame(const std::string& regionName) {
 	_region = regionName;
 	init("LandingPageFrame.xml", true);
 	selectTransitions();
@@ -68,7 +68,7 @@ Action ZooFrame::loop() {
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
 
-			Action innerAction = transitionShowFrameAsDialog(chooserFrame, 0, 0, true);
+			Action innerAction = transitionShowFrameAsDialog(chooserFrame, 0, 0);
 
 			if (innerAction.id == "back" || innerAction.id == "_btn_back_") {
 				// do nothing
@@ -143,7 +143,7 @@ void ZooFrame::setData() {
 		_rotatingContainer->detach();
 		_rotatingContainer = 0;
 	}
-	_rotatingContainer = new RotatingContainer();
+	_rotatingContainer = new SlidingActor();
 	_rotatingContainer->setSize(_view->getWidth(), _view->getHeight());
 	_rotatingContainer->setPriority(-5);
 

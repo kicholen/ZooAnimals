@@ -17,7 +17,7 @@ void MathQuizElement::setData() {
 	reset(10, "+", 2);
 }
 
-void MathQuizElement::reset(int a, const string& sign, int b) {
+void MathQuizElement::reset(int a, const std::string& sign, int b) {
 	if (!_equation) {
 		createEquation(a, sign, b);
 	}
@@ -37,7 +37,7 @@ void MathQuizElement::createBackground() {
 	cardBackground->setPriority(-11);
 }
 
-void MathQuizElement::createEquation(int a, const string& sign, int b) {
+void MathQuizElement::createEquation(int a, const std::string& sign, int b) {
 	_equation = new EquationElement(getSize() * 0.8f, a, sign, b);
 	_equation->setPosition(getWidth() / 2 - _equation->getWidth() / 2, getHeight() / 2 - _equation->getHeight() / 2);
 	_equation->addEventListener(EquationElement::EquationElementEvent::CORRECT, CLOSURE(this, &MathQuizElement::onCorrectAnswer));

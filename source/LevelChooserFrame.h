@@ -4,7 +4,6 @@
 #include "Main.h"
 #include "CustomFrame.h"
 #include "PresentAnimalsFrame.h"
-#include "RotatingContainer.h"
 
 DECLARE_SMART(LevelChooserFrame, spLevelChooserFrame);
 
@@ -26,7 +25,7 @@ protected:
 
 	void addRotatingContainer();
 private:
-	spRotatingContainer _rotatingContainer;
+	spSlidingActor _rotatingContainer;
 	int _counter;
 };
 

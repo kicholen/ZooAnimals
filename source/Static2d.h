@@ -18,7 +18,7 @@ public:
 	bool m_contacting;
 	int m_numContacts;
 public:
-	Static2d(b2World* world, b2Body *body, string bodyName, float scale);
+	Static2d(b2World* world, b2Body *body, std::string bodyName, float scale);
 	~Static2d();
 
 	void update(float playerPosition);

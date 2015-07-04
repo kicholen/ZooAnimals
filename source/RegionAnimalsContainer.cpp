@@ -15,7 +15,7 @@ RegionAnimalsContainer::~RegionAnimalsContainer() {
 
 }
 
-void RegionAnimalsContainer::setRegion(const string& regionName) {
+void RegionAnimalsContainer::setRegion(const std::string& regionName) {
 	if (_regionName == regionName) {
 		return;
 	}
@@ -25,7 +25,7 @@ void RegionAnimalsContainer::setRegion(const string& regionName) {
 	int count = 0;
 	animalMap animalMap = AnimalsManager::instance.getAnimalsByRegion(regionName);
 	for (animalMap::iterator innerIterator = animalMap.begin(); innerIterator != animalMap.end(); ++innerIterator) {
-		string name = CMath::intToString(count);
+		std::string name = CMath::intToString(count);
 		spAnimalSlot animalSlot = _stackContainer->getChildT<AnimalSlot>(name, oxygine::ep_ignore_error);
 		if (!animalSlot) {
 			animalSlot = new AnimalSlot(innerIterator->first);

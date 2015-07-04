@@ -46,7 +46,7 @@ private:
 	int droped_count;
 	int animated_count;
 
-	void generateRandomCardsArrayByType(string *buffer);
+	void generateRandomCardsArrayByType(std::string *buffer);
 	int rotateCard(Point ind, bool show);
 
 	bool areSelectedCardsPair(spMemoryCard first, spMemoryCard second);

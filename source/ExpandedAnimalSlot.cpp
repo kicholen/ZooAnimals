@@ -6,7 +6,7 @@ ExpandedAnimalSlot::ExpandedAnimalSlot(spAnimalModel model) {
 	setAnimalCount();
 }
 
-ExpandedAnimalSlot::ExpandedAnimalSlot(const string& id) {
+ExpandedAnimalSlot::ExpandedAnimalSlot(const std::string& id) {
 
 }
 

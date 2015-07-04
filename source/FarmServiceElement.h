@@ -21,9 +21,9 @@ public:
 			PLAY_GAMES = makefourcc('F', 'C', 'P', 'G'),
 		};
 
-		FarmServiceElementEvent(EV ev, const string &name) :Event(ev), _name(name) {}
+		FarmServiceElementEvent(EV ev, const std::string &name) :Event(ev), _name(name) {}
 
-		const string _name;
+		const std::string _name;
 	};
 
 	FarmServiceElement(Vector2 size);
@@ -34,8 +34,8 @@ public:
 private:
 	void createAnimalSprite(spAnimalModel model);
 	void createHappinessProgressBar(float happinessValue);
-	void createGameButtonByType(FarmServiceGameType type, const string& gameName);
-	spTweenButton createGameButton(const string& resourceName, const string& buttonName);
+	void createGameButtonByType(FarmServiceGameType type, const std::string& gameName);
+	spTweenButton createGameButton(const std::string& resourceName, const std::string& buttonName);
 
 	void onGameChosen(Event *event);
 private:

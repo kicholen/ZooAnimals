@@ -24,9 +24,9 @@ public:
 			PLAY_GAMES = makefourcc('F', 'C', 'P', 'G'),
 		};
 
-		FarmControlPanelEvent(EV ev, const string &name):Event(ev), _name(name) {}
+		FarmControlPanelEvent(EV ev, const std::string &name):Event(ev), _name(name) {}
 
-		const string _name;
+		const std::string _name;
 	};
 
 	FarmControlPanel(Vector2 size, Vector2 protrudeSize);
@@ -48,7 +48,7 @@ private:
 
 	spBox9Sprite createBackground();
 	spFarmBasePanel createFarmBasePanel();
-	spTweenButton createButton(const string& actionName, const string& buttonResAnim);
+	spTweenButton createButton(const std::string& actionName, const std::string& buttonResAnim);
 	void createElementContainerIfNeeded();
 	spTweenButton createCloseButtonIfNeeded();
 

@@ -18,7 +18,7 @@ class MatchTwoSlot : public Actor
 public:
 	MatchTwoSlot();
 
-	void setSprite(string spriteName);
+	void setSprite(std::string spriteName);
 	void setDragBounds(Vector2 position, Vector2 size);
 	void fitToSlot(spSprite sprite);
 	Vector2 getBasketPosition();

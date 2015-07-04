@@ -1,6 +1,6 @@
 #include "ParticleEmitter.h"
 
-ParticleEmitter::ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 xVelocity, Vector2 yVelocity, Vector2 lifeTime, Vector2 particlesPerSecond, const string &resAnim) {
+ParticleEmitter::ParticleEmitter(Vector2 xPosition, Vector2 yPosition, Vector2 xVelocity, Vector2 yVelocity, Vector2 lifeTime, Vector2 particlesPerSecond, const std::string &resAnim) {
 	_xPosition = xPosition;
 	_yPosition = yPosition;
 	_yVelocity = yVelocity;
@@ -71,7 +71,7 @@ void ParticleEmitter::pushColor(unsigned int color, bool shouldClear) {
 	_colors.push(color);
 }
 
-void ParticleEmitter::pushResAnim(const string &resAnim, bool shouldClear) {
+void ParticleEmitter::pushResAnim(const std::string &resAnim, bool shouldClear) {
 	if (shouldClear) {
 		_resAnims._vector.resize(0);
 	}

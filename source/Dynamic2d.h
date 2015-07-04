@@ -16,7 +16,7 @@ public:
 	bool m_contacting;
 	int m_numContacts;
 public:
-	Dynamic2d(b2World* world, b2Body *body, string bodyName);
+	Dynamic2d(b2World* world, b2Body *body, std::string bodyName);
 	~Dynamic2d();
 	
 	void update();

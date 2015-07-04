@@ -26,19 +26,19 @@ public:
 		AnimalCardEvent(EV ev) : Event(PHOTO_CLICKED) {}
 	};
 
-	AnimalCardElement(const Vector2& size, spAnimalModel model, ResAnim* thumbRes);
+	AnimalCardElement(const Vector2& size, spAnimalModel model, ResAnim *thumbRes);
 	~AnimalCardElement();
 
 	void switchAnimalModel(spAnimalModel model);
 private:
 	void setData(spAnimalModel model);
 
-	void setAnimalSlot(const string& spriteName);
+	void setAnimalSlot(const std::string& spriteName);
 
 	void createBackground();
 
 	spTextField createText(int lockitId, const Vector2& boundries, bool multiline = false);
-	spTextField createText(const string& text, const Vector2& boundries, bool multiline = false);
+	spTextField createText(const std::string& text, const Vector2& boundries, bool multiline = false);
 
 	void onPhotoClicked(Event *ev);
 	void onZoomEnded(Event *ev);
@@ -60,7 +60,7 @@ private:
 
 	AnimalCardState _state;
 	int _eventsCounter;
-	ResAnim* _thumbRes;
+	ResAnim *_thumbRes;
 };
 
 #endif

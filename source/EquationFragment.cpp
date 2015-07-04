@@ -4,7 +4,7 @@
 int EquationFragment::_textSize = 0;
 Vector2 EquationFragment::_backgroundSize = Vector2(0.0f, 0.0f);
 
-EquationFragment::EquationFragment(Vector2& size, int count, bool isSign, const string& sign) {
+EquationFragment::EquationFragment(Vector2& size, int count, bool isSign, const std::string& sign) {
 	setSize(size);
 	_count = count;
 	_state = efNumericView;
@@ -22,7 +22,7 @@ EquationFragment::~EquationFragment() {
 	_sign.clear();
 }
 
-void EquationFragment::switchToAnotherView(const string& assetName) {
+void EquationFragment::switchToAnotherView(const std::string& assetName) {
 	if (_isSign) {
 		return;
 	}
@@ -35,7 +35,7 @@ void EquationFragment::switchToAnotherView(const string& assetName) {
 	}
 }
 
-void EquationFragment::switchToDisplayView(const string& assetName) {
+void EquationFragment::switchToDisplayView(const std::string& assetName) {
 	_state = efDisplayView;
 	reset(_count, assetName);
 }
@@ -45,7 +45,7 @@ void EquationFragment::switchToNumericView() {
 	reset(_count, "");
 }
 
-void EquationFragment::reset(int count, const string& assetName) {
+void EquationFragment::reset(int count, const std::string& assetName) {
 	removeChildren();
 	_count = count;
 	createBackground();
@@ -83,7 +83,7 @@ void EquationFragment::hide(bool shouldAnimate) {
 	setVisible(false);
 }
 
-spSprite EquationFragment::createContainerElement(const string& assetName) {
+spSprite EquationFragment::createContainerElement(const std::string& assetName) {
 	spSprite element = new Sprite();
 	element->setResAnim(gameResources.getResAnim(assetName));
 	return element;

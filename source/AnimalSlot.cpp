@@ -5,7 +5,7 @@ AnimalSlot::AnimalSlot() {
 
 }
 
-AnimalSlot::AnimalSlot(const string& id) {
+AnimalSlot::AnimalSlot(const std::string& id) {
 	_id = id;
 	setTouchEnabled(false);
 	setTouchChildrenEnabled(false);
@@ -16,7 +16,7 @@ AnimalSlot::AnimalSlot(const string& id) {
 	createBackground();
 }
 
-void AnimalSlot::switchAnimalSprite(const string& id) {
+void AnimalSlot::switchAnimalSprite(const std::string& id) {
 	_id = id;
 	_animalSprite->setResAnim(animalsResources.getResAnim(id));
 	setAlpha(255);
@@ -34,7 +34,7 @@ void AnimalSlot::switchAnimalSprite(const string& id) {
 	_animalSprite->setScale(animalScale);
 }
 
-string AnimalSlot::getId() {
+std::string AnimalSlot::getId() {
 	return _id;
 }
 

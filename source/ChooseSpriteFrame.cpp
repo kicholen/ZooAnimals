@@ -8,7 +8,7 @@ ChooseSpriteFrame::ChooseSpriteFrame() {
 }
 
 void ChooseSpriteFrame::selectTransitions() {
-	spTransition transition = new TransitionSimpleBlende;
+	spTransition transition = new TransitionFade;//TransitionSimpleBlende;
 	setTransitionIn(transition);
 	setTransitionOut(transition);
 }
@@ -56,7 +56,7 @@ void ChooseSpriteFrame::setData() {
 	int j = editResources.getCount() - 1;
 	for (int i = j; i > 0; --i) {
 		spButton button = new Button();
-		string resourceName = editResources.get(i)->getName();
+		std::string resourceName = editResources.get(i)->getName();
 		button->setResAnim(editResources.getResAnim(resourceName));
 		button->setY(positionY);
 		button->attachTo(rectangleContainer);

@@ -31,12 +31,12 @@ public:
 	MoneyManager();
 	~MoneyManager();
 
-	void init(const string& version);
+	void init(const std::string& version);
 
-	void increaseMoneyOnGameFinished(int zooLevel, int game, const string& difficulty);
+	void increaseMoneyOnGameFinished(int zooLevel, int game, const std::string& difficulty);
 	void decreaseMoneyOnItemBought(int money);
 	int getMoney();
-	int getMoneyGained(int zooLevel, int game, const string& difficulty);
+	int getMoneyGained(int zooLevel, int game, const std::string& difficulty);
 
 	void store();
 private:
@@ -49,7 +49,7 @@ private:
 	double _secondMultiplier;
 	double _thirdMultiplier;
 	int _zooCount;
-	vector<vector<int> > _moneyGainer;
+	std::vector<std::vector<int> > _moneyGainer;
 
 	int _money;
 };

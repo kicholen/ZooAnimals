@@ -30,9 +30,9 @@ public:
 			ITEM_CHOOSEN = makefourcc('I', 'P', 'E', 'C'),
 		};
 
-		ItemPickerElementEvent(EV ev, string itemName_) :Event(ev), itemName(itemName_) {}
+		ItemPickerElementEvent(EV ev, std::string itemName_) :Event(ev), itemName(itemName_) {}
 
-		string itemName;
+		std::string itemName;
 	};
 
 	ItemPickerElement(const Vector2& size);

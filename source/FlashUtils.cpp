@@ -179,14 +179,14 @@ namespace FlashUtils
 		return true;
 	}
 
-	string CMath::hexToString(int hexIn) {
+	std::string CMath::hexToString(int hexIn) {
 		char hexString[4*sizeof(int)+1];
 		// returns decimal value of hex
 		sprintf(hexString,"%i", hexIn); 
-		string input = string(hexString);
+		std::string input = string(hexString);
 		const char* hex_str = input.c_str();
 
-		string resultString;
+		std::string resultString;
 		unsigned int ch;
 		for(; std::sscanf( hex_str, "%2x", &ch ) == 1 ; hex_str += 2) {
 			resultString += ch ;
@@ -196,18 +196,18 @@ namespace FlashUtils
 		//return output;
 	}
 
-	int CMath::stringToHex(string str) {
+	int CMath::stringToHex(std::string str) {
 		int num = strtol(str.c_str(), NULL, 16);
 		return num;
 	}
 
-	string CMath::doubleToString(double x) {
+	std::string CMath::doubleToString(double x) {
 		stringstream ss (stringstream::in | stringstream::out);
 		ss << x;
 		return ss.str();
 	}
 
-	string CMath::intToString(int x) {
+	std::string CMath::intToString(int x) {
 		stringstream ss (stringstream::in | stringstream::out);
 		ss << x;
 		return ss.str();
@@ -233,9 +233,9 @@ namespace FlashUtils
 		return u.value;
 	}
 
-	string CMath::stringFormat(const string fmt, ...) {
+	std::string CMath::stringFormat(const std::string fmt, ...) {
 		int size = 100;
-		string str;
+		std::string str;
 		va_list ap;
 		while (1) {
 			str.resize(size);

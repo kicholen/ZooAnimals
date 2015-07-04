@@ -29,7 +29,7 @@ private:
 	void addPossibleSpritesToSpawner();
 	void addBaseTrackToSpawner(float tileSize);
 	void addFarmTrackToSpawner(float tileSize, float tilesToViewOffsetX);
-	void addSignPost(float tileSize, const string& region, const Vector2& position);
+	void addSignPost(float tileSize, const std::string& region, const Vector2& position);
 	void addWinterTrackToSpawner(float tileSize, float tilesToViewOffsetX);
 	void addUnderwaterTrackToSpawner(float tileSize, float tilesToViewOffsetX);
 	void addSteppeTrackToSpawner(float tileSize, float tilesToViewOffsetX);

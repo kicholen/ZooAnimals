@@ -26,7 +26,7 @@ void ParticlesContainer::thinkParticles(float dt) {
 	}
 }
 
-spParticle ParticlesContainer::addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const string &resAnim, float lifetime, float friction, float radius, bool shouldKillOnTouch) {
+spParticle ParticlesContainer::addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const std::string &resAnim, float lifetime, float friction, float radius, bool shouldKillOnTouch) {
 	spParticle particle = getParticle(position, velocity, angle, ncol);
 	particle->lifetime = lifetime;
 	particle->r = radius;

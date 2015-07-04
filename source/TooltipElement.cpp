@@ -5,7 +5,7 @@
 /*
 *	If lockitId != 0 text will be added, otherwise sprite
 */
-TooltipElement::TooltipElement(const Vector2& size, const string& background, const string& spriteName, int lockitId) {
+TooltipElement::TooltipElement(const Vector2& size, const std::string& background, const std::string& spriteName, int lockitId) {
 	setSize(size);
 	setAnchor(0.0f, 1.0f);
 	setData(background, spriteName, lockitId);
@@ -36,7 +36,7 @@ void TooltipElement::hide(bool shouldDetach, int delay) {
 	}
 }
 
-void TooltipElement::setData(const string& background, const string& spriteName, int lockitId) {
+void TooltipElement::setData(const std::string& background, const std::string& spriteName, int lockitId) {
 	createBackground(background);
 	bool wasTextFieldAdded = createTextfieldIfNeeded(lockitId);
 	
@@ -46,7 +46,7 @@ void TooltipElement::setData(const string& background, const string& spriteName,
 }
 
 // todo set it to box9sprite
-void TooltipElement::createBackground(const string& background) {
+void TooltipElement::createBackground(const std::string& background) {
 	_background = initActor(new Sprite,
 		arg_anchor = Vector2(0.5f, 0.5f),
 		arg_attachTo = this,
@@ -86,7 +86,7 @@ bool TooltipElement::createTextfieldIfNeeded(int lockitId) {
 	return true;
 }
 
-void TooltipElement::createSprite(const string& spriteName) {
+void TooltipElement::createSprite(const std::string& spriteName) {
 	_sprite = initActor(new Sprite,
 		arg_anchor = Vector2(0.5f, 0.5f),
 		arg_attachTo = this,

@@ -153,7 +153,7 @@ public:
 	static void Start();
 
 private:
-	static void readLevelsXml(const string &filePath, float stageWidth, float stageHeight );
+	static void readLevelsXml(const std::string &filePath, float stageWidth, float stageHeight );
 	static void readLevel(pugi::xml_node& child, float stageWidth, float stageHeight);
 	static WaveData* ReadWave(pugi::xml_node& child, float stageWidth, float stageHeight);
 	static VectorArray<SpriteModel*>* ReadGroup(pugi::xml_node& child, float stageWidth, float stageHeight);

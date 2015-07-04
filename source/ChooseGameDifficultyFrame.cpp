@@ -12,7 +12,7 @@ Action ChooseGameDifficultyFrame::loop() {
 			break;
 		}
 		else if (action.id == "easy" || action.id == "hard" || action.id == "normal") {
-			spTransition transitionOut = new TransitionInstant;
+			spTransition transitionOut = new TransitionFade;// TransitionInstant;
 			setTransitionOut(transitionOut);
 			break;
 		}

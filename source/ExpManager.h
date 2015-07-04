@@ -27,7 +27,7 @@ public:
 	ExpManager();
 	~ExpManager();
 
-	void init(const string& version);
+	void init(const std::string& version);
 
 	int getLevel();
 	void increaseExpByPoints(int points);
@@ -43,7 +43,7 @@ private:
 	double _expGainerMultiplier;
 	double _expGainPower;
 	int _levelCount;
-	vector<int> _expNeededForLevels;
+	std::vector<int> _expNeededForLevels;
 
 	int _exp;
 	int _level;

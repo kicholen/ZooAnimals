@@ -13,11 +13,11 @@ namespace oxygine
 		Settings();
 		~Settings();
 
-		void init(const string &version);
+		void init(const std::string &version);
 		void reset();
 
-		pugi::xml_attribute addValue(const string &name);
-		pugi::xml_attribute getValue(const string &name);
+		pugi::xml_attribute addValue(const std::string &name);
+		pugi::xml_attribute getValue(const std::string &name);
 
 	};
 

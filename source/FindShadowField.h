@@ -22,11 +22,11 @@ public:
 		FindShadowFieldEvent(EV ev):Event(ev) {}
 	};
 	
-	FindShadowField(Vector2 size, int numberOfShadows, string mainObjectName);
+	FindShadowField(Vector2 size, int numberOfShadows, std::string mainObjectName);
 
-	void restart(int numberOfShadows, string mainObjectName);
+	void restart(int numberOfShadows, std::string mainObjectName);
 private:
-	void fillField(int numberOfShadows, string mainObjectName);
+	void fillField(int numberOfShadows, std::string mainObjectName);
 	void animateField();
 	
 	void animateEndCallback(Event *event);
@@ -36,7 +36,7 @@ private:
 	void dispatchShadowFoundEvent(Event *event);
 
 	void createRotatingContainer();
-	spSprite createSprite(string name, string spriteName, bool isShadowSprite);
+	spSprite createSprite(std::string name, std::string spriteName, bool isShadowSprite);
 private:
 	FindShadowFieldState _state;
 	int _animatedCount;

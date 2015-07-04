@@ -43,7 +43,7 @@ void Box2dContainer::win() {
 	}
 }
 
-void Box2dContainer::moveEntityByBodyName(string bodyName) {
+void Box2dContainer::moveEntityByBodyName(std::string bodyName) {
 	_STL::vector<Entity*>::iterator it = _entities.begin();
 	_STL::vector<Entity*>::iterator end = _entities.end();
 	for (; it != end; ++it) {
