@@ -42,6 +42,40 @@ void AnimatableElementContainer::hideContainerElements(bool shouldAnimate) {
 	}
 }
 
+void AnimatableElementContainer::alterChildrenPositionToPoint(const Vector2& point, float amplitude) {
+	for (int i = _childrenArray.length() - 1; i >= 0; i--) {
+		const Vector2& pos = _childrenArray[i]->getPosition();
+		if (pos.x < point.x) {
+			_childrenArray[i]->setX(pos.x + (point.x - pos.x) * amplitude);
+		}
+		else {
+			_childrenArray[i]->setX(pos.x - (pos.x - point.x) * amplitude);
+		}
+	}
+
+	for (int i = _stackContainersArray.length() - 1; i >= 0; i--) {
+		const Vector2& pos = _stackContainersArray[i]->getPosition();
+		if (pos.y < point.y) {
+			_stackContainersArray[i]->setY(pos.y + (point.y - pos.y) * amplitude);
+		}
+		else {
+			_stackContainersArray[i]->setY(pos.y - (pos.y - point.y) * amplitude);
+		}
+	}
+}
+
+void AnimatableElementContainer::randomizeChildrenViewParams() {
+	for (int i = _childrenArray.length() - 1; i >= 0; i--) {
+		spActor actor = _childrenArray[i];
+		const Vector2& pos = actor->getPosition();
+		const Vector2& scale = actor->getScale();
+
+		actor->setPosition(pos.x * CMath::Rand(0.6f, 1), pos.y * CMath::Rand(0.3f, 1));
+		actor->setScale(scale.x * CMath::Rand(0.5f, 1.2f));
+		actor->setRotationDegrees(CMath::Rand(0, 360));
+	}
+}
+
 void AnimatableElementContainer::addChildren(VectorArray<spActor>& children) {
 	for (int i = children.length() - 1; i >= 0; i--) {
 		_childrenArray.push(children[i]);
@@ -71,8 +105,9 @@ void AnimatableElementContainer::updateChildren() {
 		int childCounterPerStack = 0;
 		spStackContainer stackContainer = new StackContainer(Vector2(getWidth(), getHeight() / yDimension - _offsetPercent / 100.0f * getHeight()), 1);
 		stackContainer->setAnchor(0.0f, 0.0f);
-		stackContainer->setPosition(Vector2(0.0f, getHeight() / yDimension * i + getHeight() * _offsetPercent / 100.0f / 2));// * (i + 1)));
-		
+		stackContainer->setPosition(Vector2(0.0f, getHeight() / yDimension * i + getHeight() * _offsetPercent / 100.0f / 2.0f));
+		stackContainer->setTouchEnabled(false);
+
 		_stackContainersArray.push(stackContainer);
 		stackContainer->attachTo(this);
 
@@ -121,14 +156,14 @@ void AnimatableElementContainer::addAnimationTween(spActor actor, bool show) {
 				break;
 			case aecMove: {
 				setAlphaToActor(actor, true);
-				Vector2 actorPosition = actor->getPosition();
+				const Vector2& actorPosition = actor->getPosition();
 				actor->setPosition(Vector2(0.0f, 0.0f));
 				actor->addTween(Actor::TweenPosition(actorPosition), TWEEN_DURATION, 1, false, CMath::random(TWEEN_TIME_MIN, TWEEN_TIME_MAX), Tween::ease_inOutBack);
 				break;
 			}
 			case aecScale: {
 				setAlphaToActor(actor, true);
-				Vector2 actorScale = Vector2(actor->getScaleX(), actor->getScaleY());
+				const Vector2& actorScale = Vector2(actor->getScaleX(), actor->getScaleY());
 				actor->setScale(Vector2(0.0f, 0.0f));
 				actor->addTween(Actor::TweenScale(actorScale), TWEEN_DURATION, 1, false, CMath::random(TWEEN_TIME_MIN, TWEEN_TIME_MAX), Tween::ease_inOutBack);
 				break;

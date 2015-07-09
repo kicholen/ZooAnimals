@@ -27,6 +27,9 @@ public:
 
 	void removeChildren();
 	void addChildren(VectorArray<spActor>& children);
+	void alterChildrenPositionToPoint(const Vector2& point, float amplitude);
+	void randomizeChildrenViewParams();
+
 private:
 	void clearStackContainers();
 	void updateChildren();

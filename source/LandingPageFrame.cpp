@@ -13,6 +13,7 @@
 #include "ChooseStartAnimalFrame.h"
 #include "ZooSettings.h"
 #include "JumpOverFrame.h"
+#include "FindShadowFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -78,6 +79,10 @@ Action LandingPageFrame::loop(){
 			//spMaskFrame maskFrame = new MaskFrame();
 			//transitionShowFrame(maskFrame);
 		}
+		else if (action.id == "test") {
+			spFindShadowFrame findShadow = new FindShadowFrame("hard");
+			transitionShowFrame(findShadow);
+		}
 		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			DatabaseManager::instance.save(0);
 			break;
@@ -99,6 +104,8 @@ void LandingPageFrame::setData() {
 	text->setColor(Color(35, 145, 245));
 	text->attachTo(_view);
 	addButton("edit", "edit", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 3 + 30));
+
+	addButton("test", "test", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 4 + 30));
 
 	spSwipeTrailElement swipe = new SwipeTrailElement(20);
 	swipe->setSize(_view->getSize());

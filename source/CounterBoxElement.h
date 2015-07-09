@@ -29,12 +29,16 @@ public:
 
 	void updateScore(int score);
 	void updateLevel(int level);
+	int getScore() const { return _score; };
+	int getLevel() const { return _level; };
 
+	void animateTimeLoss(int loss);
+	void animateTimeGain(int gain);
 private:
+	void animateProgressBar(float ratio);
 	void updateTime(int time);
 
 	void setScore(int score);
-	int getScore() const;
 
 	void setTime(int time);
 	int getTime() const;
@@ -59,6 +63,7 @@ private:
 
 	timeMS _timerMs;
 	int _timeLeft;
+	int _timeMax;
 	int _score;
 	int _level;
 };

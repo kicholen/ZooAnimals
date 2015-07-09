@@ -26,6 +26,7 @@ public:
 	pugi::xml_attribute getParameterValue(const std::string &name);
 
 	pugi::xml_node getMatchTwoLevelNode(uint number);
+	pugi::xml_node getGameNode(const std::string &gameName);
 
 	pugi::xml_node getAnimalJumpParametersNode(const std::string &name);
 	pugi::xml_node getAnimalGamePreferenceNode(const std::string &name);

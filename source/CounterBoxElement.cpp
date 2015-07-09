@@ -7,6 +7,7 @@ CounterBoxElement::CounterBoxElement(Vector2 size, int time) : _score(0), _level
 	setAnchor(0.5f, 0.5f);
 	setSize(size.x, size.y);
 	_timeLeft = time;
+	_timeMax = time;
 
 	setPosition(getRoot()->getWidth() / 2, -getHeight() / 2);
 
@@ -40,6 +41,24 @@ void CounterBoxElement::updateLevel(int level) {
 void CounterBoxElement::updateScore(int score) {
 	removeTweensByName("score_tween");
 	addTween(CounterBoxElement::TweenScore(score), 200)->setName("score_tween");
+}
+
+void CounterBoxElement::animateTimeLoss(int loss) {
+	_timeLeft = std::max(_timeLeft - loss, 1);
+	animateProgressBar((float)_timeLeft / (float)_timeMax);
+	updateTime(0);
+}
+
+void CounterBoxElement::animateTimeGain(int gain) {
+	_timeLeft = std::min(_timeLeft + gain, _timeMax);
+	animateProgressBar((float)_timeLeft / (float)_timeMax);
+	updateTime(0);
+}
+
+void CounterBoxElement::animateProgressBar(float ratio) {
+	_progressBar->setProgress(ratio);
+	_progressBar->removeTweens();
+	_progressBar->addTween(ProgressBarBox9::Tween9Progress(0.0f), _timeLeft * 1000, 1, false, 1000);
 }
 
 void CounterBoxElement::updateTime(int time) {
@@ -122,10 +141,6 @@ void CounterBoxElement::setScore(int score) {
 
 	_score = score;
 	_scoreTextfield->setText("Score: " + FlashUtils::CMath::intToString(_score));
-}
-
-int CounterBoxElement::getScore() const {
-	return _score;
 }
 
 int CounterBoxElement::getTime() const {

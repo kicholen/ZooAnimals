@@ -4,6 +4,8 @@
 #include "CustomFrame.h"
 #include "FlashUtils.h"
 #include "FindShadowField.h"
+#include "FindShadowFieldHard.h"
+#include "CounterBoxElement.h"
 
 DECLARE_SMART(FindShadowFrame, spFindShadowFrame);
 
@@ -20,10 +22,16 @@ protected:
 	void _preShowing(Event *);
 
 	void onFinished(Event *event);
+	void onTimesUp(Event *ev);
+	void onGoodShadowClicked(Event *ev);
+	void onWrongShadowClicked(Event *ev);
 
 	void setData();
 private:
 	spFindShadowField _field;
+	spFindShadowFieldHard _fieldHard;
+	spCounterBoxElement _counterBox;
+
 	std::string _difficulty;
 };
 

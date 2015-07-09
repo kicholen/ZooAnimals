@@ -85,6 +85,17 @@ pugi::xml_node Content::getMatchTwoLevelNode(uint number) {
 	return emptyNode;
 }
 
+pugi::xml_node Content::getGameNode(const std::string &gameName) {
+	pugi::xml_node data = _contentDocument.child("data");
+	OX_ASSERT(data);
+	pugi::xml_node games = data.child("games");
+	OX_ASSERT(games);
+	pugi::xml_node game = games.child(gameName.c_str());
+	OX_ASSERT(game);
+
+	return game;
+}
+
 int Content::getGameLevelsCount(const std::string &gameName) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);
