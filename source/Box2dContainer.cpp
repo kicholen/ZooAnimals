@@ -104,13 +104,10 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 		}
 	
 		float playerPosition = _previousFrameX + getRoot()->getWidth() * 0.2f;
-		//_floor->setX(_previousFrameX);
 
 		setX(playerPosition);
 		playerPosition = convert(_player->getBody()->GetPosition()).x;
 		
-		//float playerPosition = convert(_player->getBody()->GetPosition()).x;
-
 		b2Body *body = _world->GetBodyList();
 
 		while(body) {
@@ -132,12 +129,10 @@ void Box2dContainer::doUpdate(const UpdateState &us) {
 		}
 	
 		float playerPosition = _previousFrameX + getRoot()->getWidth() * 0.2f;
-		//_floor->setX(_previousFrameX);
 
 		setX(playerPosition);
 		playerPosition = convert(_player->getBody()->GetPosition()).x;
 		
-		//float playerPosition = convert(_player->getBody()->GetPosition()).x;
 		b2Body *body = _world->GetBodyList();
 		
 		while(body) {

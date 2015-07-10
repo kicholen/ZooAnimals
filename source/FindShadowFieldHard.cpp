@@ -11,7 +11,8 @@ FindShadowFieldHard::FindShadowFieldHard(Vector2 size, int difficulty) {
 }
 
 FindShadowFieldHard::~FindShadowFieldHard() {
-
+	_rolledNamesVector.clear();
+	_rolledNamesMap.clear();
 }
 
 void FindShadowFieldHard::restart() {

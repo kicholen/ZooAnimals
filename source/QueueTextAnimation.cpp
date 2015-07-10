@@ -2,7 +2,8 @@
 #include "SharedResources.h"
 
 QueueTextAnimation::QueueTextAnimation() {
-	
+	setInputChildrenEnabled(false);
+	setInputEnabled(false);
 }
 
 QueueTextAnimation::~QueueTextAnimation() {

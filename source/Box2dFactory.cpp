@@ -14,18 +14,18 @@ Box2dFactory::Box2dFactory(b2World *world, spActor oxyWorld, float scale) {
 	SCALE = scale;
 }
 
-Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyType, bool bullet) {
+Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyType, bool bullet, const std::string& resAnim) {
 	b2Body* body = createBody(position, bodyType, bullet);
 
 	if (type == player2d) {
-		ResAnim* resource = animalsResources.getResAnim("bee");
+		ResAnim* resource = animalsResources.getResAnim(resAnim);
 		spSprite sprite = createSprite(resource, Vector2(0, 0), false);
 		float ratio = sprite->getWidth() / sprite->getHeight();
 		
 		attachFixture(body, Vector2(20.0f, 20.0f * ratio));
 		Player2d* player = new Player2d(_world, body, "player", SCALE);
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 playerSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& playerSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 		
 		sprite->setScale(playerSize.x / sprite->getWidth(), playerSize.y / sprite->getHeight());
 		player->_sprite = sprite;
@@ -40,8 +40,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 
 		Static2d* staticObject = new Static2d(_world, body, "static", SCALE);
 
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 staticSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& staticSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		staticObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), staticSize);
 
@@ -54,8 +54,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 	else if (type == kinematic2d) {
 		Kinematic2d* kinematicObject = new Kinematic2d(_world, body, "kinematic");
 
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 size = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& size = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		kinematicObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), size);
 
@@ -68,8 +68,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 		attachFixture(body, Vector2(500.0f, 20.0f));
 
 		Floor2d* floorObject = new Floor2d(_world, body, "floor", SCALE);
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 staticSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& staticSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		floorObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), staticSize);
 
@@ -82,8 +82,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 		attachFixture(body, Vector2(50.0f, 20.0f));
 
 		RandomObstacle2d* obstacle = new RandomObstacle2d(_world, body, "obstacle", SCALE);
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 staticSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& staticSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		obstacle->_sprite = createSprite(gameResources.getResAnim("quad_40"), staticSize);
 
@@ -95,8 +95,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 	else  {
 		Dynamic2d* dynamicObject = new Dynamic2d(_world, body, "dynamic");
 
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 size = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& size = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		dynamicObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), size);
 
@@ -108,20 +108,20 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 	}
 }
 
-Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyType, bool bullet, const Vector2& size) {
+Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyType, bool bullet, const Vector2& size, const std::string& resAnim) {
 	b2Body* body = createBody(position, bodyType, bullet);
 
 	if (type == player2d) {
-		ResAnim* resource = animalsResources.getResAnim("bee");
+		ResAnim* resource = animalsResources.getResAnim(resAnim);
 		spSprite sprite = createSprite(resource, Vector2(0, 0), false);
-		float ratio = sprite->getWidth() / sprite->getHeight();
+		float ratio = sprite->getDerivedWidth() / sprite->getDerivedHeight();
 
 		attachFixture(body, size);
 		Player2d* player = new Player2d(_world, body, "player", SCALE);
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 playerSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& playerSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
-		sprite->setScale(playerSize.x / sprite->getWidth(), playerSize.y / sprite->getHeight());
+		sprite->setScale(playerSize.x / sprite->getDerivedWidth(), playerSize.y / sprite->getDerivedHeight());
 		player->_sprite = sprite;
 
 		player->_sprite->attachTo(_oxyWorld);
@@ -134,8 +134,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 
 		Static2d* staticObject = new Static2d(_world, body, "static", SCALE);
 
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 staticSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& staticSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		staticObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), staticSize);
 
@@ -148,8 +148,8 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 	else if (type == kinematic2d) {
 		Kinematic2d* kinematicObject = new Kinematic2d(_world, body, "kinematic");
 
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 size = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& size = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		kinematicObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), size);
 
@@ -162,23 +162,21 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 		attachFixture(body, size);
 
 		Floor2d* floorObject = new Floor2d(_world, body, "floor", SCALE);
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 staticSize = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& staticSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		floorObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), staticSize);
 
-		//floorObject->addPlatformSprite();
 		floorObject->_sprite->attachTo(_oxyWorld);
 		floorObject->_sprite->setUserData(body);
-		//floorObject->addPlatformSprite();
 
 		return floorObject;
 	}
 	else  {
 		Dynamic2d* dynamicObject = new Dynamic2d(_world, body, "dynamic");
 
-		b2AABB aaBb = body->GetFixtureList()->GetAABB(0);
-		Vector2 size = convert(b2Vec2(aaBb.upperBound.x - aaBb.lowerBound.x, abs(aaBb.upperBound.y - aaBb.lowerBound.y)));
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& size = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
 
 		dynamicObject->_sprite = createSprite(gameResources.getResAnim("quad_40"), size);
 
@@ -196,7 +194,7 @@ spSprite Box2dFactory::createSprite(ResAnim* res, const Vector2& size, bool shou
 //	sprite->setColor(Color(25, 25, 112, 100));
 	sprite->setResAnim(res);
 	if (shouldScale) {
-		sprite->setScale(size.x / sprite->getWidth(), size.y / sprite->getHeight());
+		sprite->setScale(size.x / sprite->getDerivedWidth(), size.y / sprite->getDerivedHeight());
 	}
 	
 	return sprite;

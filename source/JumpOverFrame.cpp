@@ -3,8 +3,9 @@
 #include "QueueTextAnimation.h"
 #include "SharedResources.h"
 
-JumpOverFrame::JumpOverFrame() {
+JumpOverFrame::JumpOverFrame(std::string difficulty) {
 	init("LandingPageFrame.xml", false);
+	_difficulty = difficulty;
 	selectTransitions();
 	spColorRectSprite bg = new ColorRectSprite;
 	bg->setName("_background");
@@ -97,6 +98,8 @@ void JumpOverFrame::setData() {
 	addButton("back", "BACK", Vector2(_view->getWidth() * 0.3f, _view->getHeight() * 0.9f));
 	addButton("pause", "PAUSE", Vector2(_view->getWidth() * 0.6f, _view->getHeight() * 0.9f));
 	addButton("debug", "DEBUG", Vector2(_view->getWidth() * 0.9f, _view->getHeight() * 0.9f));
+
+	factory->releaseRef();
 }
 
 

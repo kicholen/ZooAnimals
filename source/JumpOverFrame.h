@@ -9,7 +9,7 @@ DECLARE_SMART(JumpOverFrame, spJumpOverFrame);
 class JumpOverFrame : public CustomFrame
 {
 public:
-	JumpOverFrame();
+	JumpOverFrame(std::string difficulty);
 	void selectTransitions();
 
 	Action loop();
@@ -29,6 +29,7 @@ protected:
 
 private:
 	spBox2dContainer _world;
+	std::string _difficulty;
 };
 
 #endif

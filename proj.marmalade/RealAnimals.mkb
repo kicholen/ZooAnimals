@@ -391,5 +391,5 @@ deployments
 	provider='JellyApps'
 	version-major=0
 	version-minor=2
-	version-revision=12
+	version-revision=13
 }

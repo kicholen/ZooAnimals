@@ -48,12 +48,8 @@ void FindShadowFrame::onFinished(Event *event) {
 	_counterBox->updateLevel(_counterBox->getLevel() + 1);
 	_counterBox->animateTimeGain(10);
 
-	if (_difficulty == "hard") {
+	if (_difficulty == "hard" || _difficulty == "normal") {
 		_fieldHard->restart();
-	}
-	else {
-		int random = int(FlashUtils::CMath::Rand(2, 4));
-		_field->restart(random, "dog");
 	}
 }
 
@@ -64,6 +60,11 @@ void FindShadowFrame::onTimesUp(Event *ev) {
 
 void FindShadowFrame::onGoodShadowClicked(Event *event) {
 	_counterBox->updateScore(_counterBox->getScore() + 1);
+
+	if (_difficulty == "easy") {
+		int random = int(FlashUtils::CMath::Rand(2, 4));
+		_field->restart(random, "dog");
+	}
 }
 
 void FindShadowFrame::onWrongShadowClicked(Event *event) {
@@ -83,8 +84,8 @@ void FindShadowFrame::setData() {
 	_counterBox->show(true);
 	_view->addChild(_counterBox);
 
-	if (_difficulty == "hard") {
-		_fieldHard = new FindShadowFieldHard(Vector2(_view->getWidth() * 0.9f, _view->getHeight() - _counterBox->getDerivedHeight()));
+	if (_difficulty == "hard" || _difficulty == "normal") {
+		_fieldHard = new FindShadowFieldHard(Vector2(_view->getWidth() * 0.9f, _view->getHeight() - _counterBox->getDerivedHeight()), _difficulty == "hard" ? 1 : 2);
 		_fieldHard->setPosition(getRoot()->getSize().x / 2 - _fieldHard->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _fieldHard->getDerivedHeight() / 2);
 		_fieldHard->addEventListener(FindShadowFieldHard::FindShadowFieldHardEvent::LEVEL_ENDED, CLOSURE(this, &FindShadowFrame::onFinished));
 		_fieldHard->addEventListener(FindShadowFieldHard::FindShadowFieldHardEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onGoodShadowClicked));
@@ -94,7 +95,8 @@ void FindShadowFrame::setData() {
 	else {
 		_field = new FindShadowField(Vector2(_view->getWidth() * 0.9f, _view->getHeight() - _counterBox->getDerivedHeight()), 3, "cat");
 		_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _field->getDerivedHeight() / 2);
-		_field->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onFinished));
+		_field->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onGoodShadowClicked));
+		_field->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_WRONG, CLOSURE(this, &FindShadowFrame::onWrongShadowClicked));
 		_view->addChild(_field);
 	}
 

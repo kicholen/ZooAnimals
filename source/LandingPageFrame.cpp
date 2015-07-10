@@ -14,6 +14,7 @@
 #include "ZooSettings.h"
 #include "JumpOverFrame.h"
 #include "FindShadowFrame.h"
+#include "ChooseGameDifficultyFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -73,15 +74,50 @@ Action LandingPageFrame::loop(){
 		/*else if (action.id == "test") {
 			transitionShowFrame(maskFrame);
 		}*/
-		else if (action.id == "edit") {
-			spJumpOverFrame jumpFrame = new JumpOverFrame();
-			transitionShowFrame(jumpFrame);
+		//else if (action.id == "edit") {
+			
 			//spMaskFrame maskFrame = new MaskFrame();
 			//transitionShowFrame(maskFrame);
-		}
-		else if (action.id == "test") {
-			spFindShadowFrame findShadow = new FindShadowFrame("hard");
-			transitionShowFrame(findShadow);
+		//}
+		else if (action.id == "test" || action.id == "edit") {
+			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
+
+			Action innerAction = transitionShowFrameAsDialog(chooserFrame, 0, 0);
+
+			if (innerAction.id == "back" || innerAction.id == "_btn_back_") {
+				// do nothing
+				int asd = 10;
+			}
+			else {
+				/*if (action.id == "memory") {
+					spMemoryFrame memoryFrame = new MemoryFrame(innerAction.id);
+					transitionShowFrame(memoryFrame);
+				}
+				else if (action.id == "dots") {
+					spConnectDotsFrame connectFrame = new ConnectDotsFrame(innerAction.id);
+					transitionShowFrame(connectFrame);
+				}
+				else */if (action.id == "test") {
+					spFindShadowFrame findShadow = new FindShadowFrame(innerAction.id);
+					transitionShowFrame(findShadow);
+				}
+				else if (action.id == "edit") {
+					spJumpOverFrame jumpFrame = new JumpOverFrame(innerAction.id);
+					transitionShowFrame(jumpFrame);
+				}/*
+				else if (action.id == "match") {
+					spMatchTwoFrame matchTwo = new MatchTwoFrame(innerAction.id);
+					transitionShowFrame(matchTwo);
+				}
+				else if (action.id == "pop") {
+					spPopObjectsFrame pop = new PopObjectsFrame(innerAction.id);
+					transitionShowFrame(pop);
+				}
+				else if (action.id == "discover") {
+					spDiscoverImageFrame disc = new DiscoverImageFrame(innerAction.id);
+					transitionShowFrame(disc);
+				}*/
+			}
 		}
 		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			DatabaseManager::instance.save(0);

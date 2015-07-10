@@ -16,7 +16,8 @@ public:
 	class FindShadowFieldEvent : public Event {
 	public:
 		enum EV {
-			SHADOW_FOUND = makefourcc('F', 'S', 'F', 'C')
+			SHADOW_FOUND = makefourcc('F', 'S', 'F', 'C'),
+			SHADOW_WRONG = makefourcc('F', 'S', 'W', 'C'),
 		};
 
 		FindShadowFieldEvent(EV ev):Event(ev) {}
@@ -34,6 +35,7 @@ private:
 
 	void animateProperShadowFound(spActor actor);
 	void dispatchShadowFoundEvent(Event *event);
+	void dispatchShadowWrongEvent();
 
 	void createRotatingContainer();
 	spSprite createSprite(std::string name, std::string spriteName, bool isShadowSprite);

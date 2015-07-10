@@ -54,6 +54,9 @@ void FindShadowField::onShadowTap(Event *event) {
 	if (actor->getName() == "1") {
 		animateProperShadowFound(actor);
 	}
+	else {
+		dispatchShadowWrongEvent();
+	}
 }
 
 void FindShadowField::animateProperShadowFound(spActor actor) {
@@ -66,6 +69,11 @@ void FindShadowField::animateProperShadowFound(spActor actor) {
 
 void FindShadowField::dispatchShadowFoundEvent(Event *event) {
 	FindShadowFieldEvent findEvent(FindShadowFieldEvent::SHADOW_FOUND);
+	dispatchEvent(&findEvent);
+}
+
+void FindShadowField::dispatchShadowWrongEvent() {
+	FindShadowFieldEvent findEvent(FindShadowFieldEvent::SHADOW_WRONG);
 	dispatchEvent(&findEvent);
 }
 

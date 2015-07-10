@@ -20,8 +20,8 @@ class Box2dFactory : public Object
 public:
 	Box2dFactory(b2World *world, spActor oxyWorld, float scale);
 
-	Entity* createEntity(int type, const Vector2& position, int bodyType, bool bullet);
-	Entity* createEntity(int type, const Vector2& position, int bodyType, bool bullet, const Vector2& size);
+	Entity* createEntity(int type, const Vector2& position, int bodyType, bool bullet, const std::string& resAnim = "bee");
+	Entity* createEntity(int type, const Vector2& position, int bodyType, bool bullet, const Vector2& size, const std::string& resAnim = "bee");
 
 protected:
 	void getPlayer();
