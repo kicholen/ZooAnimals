@@ -69,11 +69,23 @@ void JumpOverFrame::setData() {
 	spBox2dFactory factory = new Box2dFactory(_world->_world, _world, P2M_RATIO);
 
 	_world->addPlayer(safeCast<Player2d*>(factory->createEntity(0, Vector2(getRoot()->getWidth() * 0.2f, getRoot()->getHeight() * 0.2f), 2, false)));
+	Entity* entity = factory->createEntity(4, Vector2(getRoot()->getWidth() * 0.2f, _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f));
+	_world->addEntity(entity);
+	_world->addEntity(factory->createEntity(4, Vector2(getRoot()->getWidth() * 0.2f + entity->_sprite->getDerivedWidth(), _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
 	
-	_world->addEntity(factory->createEntity(4, Vector2(0.0f, _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
-	_world->addEntity(factory->createEntity(4, Vector2(_view->getWidth(), _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
-	
-	_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth(), _view->getHeight() * 0.2f), 0, false));
+	if (_difficulty == "hard") {
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.4f, _view->getHeight() * 0.2f), 0, false));
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.8f, _view->getHeight() * 0.2f), 0, false));
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.9f, _view->getHeight() * 0.3f), 0, false));
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 2.0f, _view->getHeight() * 0.4f), 0, false));
+	}
+	else if (_difficulty == "normal") {
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.4f, _view->getHeight() * 0.2f), 0, false));
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.8f, _view->getHeight() * 0.2f), 0, false));
+	}
+	else {
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth(), _view->getHeight() * 0.2f), 0, false));
+	}
 
 	_world->pauseWorldAfter(2);
 

@@ -42,6 +42,7 @@ private:
 	b2FixtureDef* createFixture(double density = 1.0f, double friction = 1.0f, bool isSensor = false);
 
 	spSprite createSprite(ResAnim* res, const Vector2& size, bool shouldScale = true);
+	spSprite createFittedActor(ResAnim* res, const Vector2& size);
 
 	b2Vec2 convertBody(const Vector2 &pos);
 	Vector2 convertBody(const b2Vec2 &pos);

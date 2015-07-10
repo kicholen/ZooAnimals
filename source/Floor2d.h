@@ -33,7 +33,7 @@ private:
 	bool _wasStartPositionSet;
 
 	Vector2 _startPosition;
-	Vector2 _savedStartPosition;
+	Vector2 _size;
 };
 
 #endif

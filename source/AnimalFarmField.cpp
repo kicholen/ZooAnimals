@@ -245,7 +245,7 @@ Point AnimalFarmField::getNumberOfTiles() {
 
 spTooltipElement AnimalFarmField::createTooltipElement() {
 	if (!_tooltip) {
-		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getWidth(), ANIMAL_PERCENT_SIZE / 100.0f * getHeight()), "circle_border", "", 10);
+		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getWidth(), ANIMAL_PERCENT_SIZE / 100.0f * getHeight()), "circle_border", "", CMath::random(10, 40));
 	}
 	return _tooltip;
 }

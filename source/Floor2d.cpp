@@ -25,8 +25,8 @@ void Floor2d::update(float playerPosition) {
 		_wasStartPositionSet = true;
 	}
 
-	if (playerPosition - 300.0f > entityPosition.x) {
-		m_body->SetTransform(b2Vec2((entityPosition.x + _sprite->getDerivedWidth()) / _scale, entityPosition.y / _scale), 0);
+	if (playerPosition - _sprite->getDerivedWidth() > entityPosition.x) {
+		m_body->SetTransform(b2Vec2((entityPosition.x + _sprite->getDerivedWidth() * 2.0f) / _scale, pos.y), 0);
 	}
 
 	_sprite->setPosition(entityPosition);
