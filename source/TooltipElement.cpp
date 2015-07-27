@@ -36,6 +36,10 @@ void TooltipElement::hide(bool shouldDetach, int delay) {
 	}
 }
 
+void TooltipElement::setText(int lockit) {
+	createTextfieldIfNeeded(lockit);
+}
+
 void TooltipElement::setData(const std::string& background, const std::string& spriteName, int lockitId) {
 	createBackground(background);
 	bool wasTextFieldAdded = createTextfieldIfNeeded(lockitId);
@@ -62,24 +66,29 @@ bool TooltipElement::createTextfieldIfNeeded(int lockitId) {
 		return false;
 	}
 
-	TextStyle style;
-	style.font = gameResources.getResFont("nobile_bold")->getFont();
-	style.vAlign = TextStyle::VALIGN_MIDDLE;
-	style.hAlign = TextStyle::HALIGN_CENTER;
-	style.multiline = true;
-	style.color = Color(35, 145, 245);
+	if (!_textField) {
+		TextStyle style;
+		style.font = gameResources.getResFont("nobile_bold")->getFont();
+		style.vAlign = TextStyle::VALIGN_MIDDLE;
+		style.hAlign = TextStyle::HALIGN_CENTER;
+		style.multiline = true;
+		style.color = Color(35, 145, 245);
 	
 
-	_textField = initActor(new TextField,
-		arg_style = style,
-		arg_hAlign = TextStyle::HALIGN_MIDDLE,
-		arg_vAlign = TextStyle::VALIGN_MIDDLE,
-		arg_attachTo = this,
-		arg_width = _background->getDerivedWidth(),
-		arg_height = _background->getDerivedHeight(),
-		arg_input = false,
-		arg_priority = 20,
-		arg_text = LanguageManager::instance.getText(lockitId));
+		_textField = initActor(new TextField,
+			arg_style = style,
+			arg_hAlign = TextStyle::HALIGN_MIDDLE,
+			arg_vAlign = TextStyle::VALIGN_MIDDLE,
+			arg_attachTo = this,
+			arg_width = _background->getDerivedWidth(),
+			arg_height = _background->getDerivedHeight(),
+			arg_input = false,
+			arg_priority = 20,
+			arg_text = LanguageManager::instance.getText(lockitId));
+	}
+	else {
+		_textField->setText(LanguageManager::instance.getText(lockitId));
+	}
 
 	setTextFieldRectToSize(_textField, _background->getDerivedSize());
 

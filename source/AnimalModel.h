@@ -27,6 +27,7 @@ public:
 	int happinessValue() const { return _happinessValue; }
 	int happinessNeededForNextAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness() + 1.0f, 1.0f / 0.55f)); }
 	int happinessNeededForCurrentAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness(), 1.0f / 0.55f)); }
+	const Vector2& lockitIdsRange() const { return _lockitIdsRange; }
 
 	void setHappiness(int value) { _happinessValue = value; }
 	/* Inviolable count, use totalAnimalsCount */
@@ -78,7 +79,8 @@ private:
 	int _jumpTime;
 	Vector2 _jumpDelay;
 	bool _isWaterAnimal;
-	
+	Vector2 _lockitIdsRange;
+
 	int _count;
 	int _hungerValue;
 	int _happinessValue;

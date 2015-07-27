@@ -60,6 +60,7 @@ private:
 	void setAnimalsPriorityByY();
 
 	spTooltipElement createTooltipElement();
+	int getLockitId();
 
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);

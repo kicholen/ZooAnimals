@@ -245,7 +245,19 @@ Point AnimalFarmField::getNumberOfTiles() {
 
 spTooltipElement AnimalFarmField::createTooltipElement() {
 	if (!_tooltip) {
-		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getWidth(), ANIMAL_PERCENT_SIZE / 100.0f * getHeight()), "circle_border", "", CMath::random(10, 40));
+		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getWidth(), ANIMAL_PERCENT_SIZE / 100.0f * getHeight()), "circle_border", "", getLockitId());
+	}
+	else {
+		_tooltip->setText(getLockitId());
 	}
 	return _tooltip;
+}
+
+int AnimalFarmField::getLockitId() {
+	if (_model->lockitIdsRange().x == _model->lockitIdsRange().y){
+		return _model->lockitIdsRange().x;
+	}
+	else {
+		return CMath::random(_model->lockitIdsRange().x, _model->lockitIdsRange().y);
+	}
 }

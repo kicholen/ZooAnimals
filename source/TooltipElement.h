@@ -16,6 +16,7 @@ public:
 	void showForTime(int ms);
 	void show();
 	void hide(bool shouldDetach, int delay = 0);
+	void setText(int lockit);
 
 private:
 	void setData(const std::string& background, const std::string& spriteName, int lockitId);

@@ -83,6 +83,12 @@ void AnimalModel::fromContent() {
 		else if (!strcmp(name, "l_name")) {
 			_nameLockit = attribute.as_int();
 		}
+		else if (!strcmp(name, "l_min")) {
+			_lockitIdsRange.x = attribute.as_int();
+		}
+		else if (!strcmp(name, "l_max")) {
+			_lockitIdsRange.y = attribute.as_int();
+		}
 		attribute = attribute.next_attribute();
 	}
 }
