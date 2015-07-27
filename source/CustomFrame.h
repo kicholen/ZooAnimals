@@ -9,6 +9,7 @@
 #include "ShaderTweenButton.h"
 #include "Transition.h"
 #include "MoneyCounterElement.h"
+#include "CloseFrameElement.h"
 
 using namespace oxygine;
 
@@ -16,13 +17,15 @@ class CustomFrame : public Frame
 {
 public:
 	CustomFrame();
+	~CustomFrame();
 	
 	spTweenButton addButton(const std::string &name, const std::string &text, Vector2 position);
 	spShaderTweenButton addShaderButton(const std::string &name, const std::string &text, Vector2 position);
 
 protected:
 	static spMoneyCounterElement _moneyCounter;
-
+	static spCloseFrameElement _closeButton;
+	
 	virtual void selectTransitions();
 
 	virtual void _preShowing(Event *);
@@ -38,6 +41,11 @@ protected:
 	spActor _content;
 
 	Resources _resources;
+
+private:
+	void addCloseFrameListener();
+
+	void onCloseClicked(Event *ev);
 };
 
 #endif

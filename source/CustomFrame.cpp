@@ -6,6 +6,7 @@
 #include "SharedResources.h"
 
 spMoneyCounterElement CustomFrame::_moneyCounter = 0;
+spCloseFrameElement CustomFrame::_closeButton = 0;
 
 CustomFrame::CustomFrame() {
 	_content = new Actor;
@@ -16,6 +17,10 @@ CustomFrame::CustomFrame() {
 	addEventListener(Frame::EVENT_PRESHOWING, CLOSURE(this, &CustomFrame::_preShowing));
 	addEventListener(Frame::EVENT_POSTHIDING, CLOSURE(this, &CustomFrame::_postHiding));
 	this->selectTransitions();
+}
+
+CustomFrame::~CustomFrame() {
+	removeEventListener(CloseFrameElement::CloseFrameEvent::CLOSE, CLOSURE(this, &CustomFrame::onCloseClicked));
 }
 
 spTweenButton CustomFrame::addButton(const std::string &name, const std::string &text, Vector2 position) {
@@ -60,7 +65,8 @@ void CustomFrame::init(const std::string &xml) {
 
 void CustomFrame::init(const std::string &xml, bool shouldAddBackground) {
 	_resources.loadXML("xmls/" + xml, 0, false);
-	
+	addCloseFrameListener();
+
 	_view->setSize(getRoot()->getSize());
 	_content->setSize(getRoot()->getSize());
 	if (shouldAddBackground) {
@@ -71,4 +77,14 @@ void CustomFrame::init(const std::string &xml, bool shouldAddBackground) {
 		bg->attachTo(_content);
 		bg->setPriority(10);
 	}
+}
+
+void CustomFrame::addCloseFrameListener() {
+	if (_closeButton) {
+		_closeButton->addEventListener(CloseFrameElement::CloseFrameEvent::CLOSE, CLOSURE(this, &CustomFrame::onCloseClicked));
+	}
+}
+
+void CustomFrame::onCloseClicked(Event *ev) {
+	generateAction("back");
 }

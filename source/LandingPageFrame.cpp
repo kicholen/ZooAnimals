@@ -15,6 +15,7 @@
 #include "JumpOverFrame.h"
 #include "FindShadowFrame.h"
 #include "ChooseGameDifficultyFrame.h"
+#include "CloseFrameElement.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -178,5 +179,11 @@ void LandingPageFrame::createGlobalElementsIfDoesntExist() {
 		_moneyCounter->setName("money_counter");
 		_moneyCounter->setPriority(1000);
 		getRoot()->addChild(_moneyCounter);
+	}
+	if (!_closeButton) {
+		_closeButton = new CloseFrameElement();
+		_closeButton->show();
+		_closeButton->setPriority(1000);
+		getRoot()->addChild(_closeButton);
 	}
 }
