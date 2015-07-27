@@ -359,4 +359,19 @@ namespace oxygine
 	{
 
 	}
+
+	void TransitionInstant::setup(spFrame frame, bool back)
+	{
+		_duration = 50;
+	}
+
+	void TransitionInstant::blockingPhase(spFrame frame, bool back)
+	{
+		spTween tween = frame->getHolder()->addTween(createTween(TweenDummy(), _duration, 1, false, 0));
+		blocking::waitTween(tween);
+	}
+
+	void TransitionInstant::reset(spFrame frame, bool back)
+	{
+	}
 }

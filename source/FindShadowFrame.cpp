@@ -86,7 +86,7 @@ void FindShadowFrame::setData() {
 
 	if (_difficulty == "hard" || _difficulty == "normal") {
 		_fieldHard = new FindShadowFieldHard(Vector2(_view->getWidth() * 0.9f, _view->getHeight() - _counterBox->getDerivedHeight()), _difficulty == "hard" ? 1 : 2);
-		_fieldHard->setPosition(getRoot()->getSize().x / 2 - _fieldHard->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _fieldHard->getDerivedHeight() / 2);
+		_fieldHard->setPosition(getRoot()->getSize().x / 2 - _fieldHard->getDerivedWidth() / 2.0f, getRoot()->getSize().y / 2.0f - _fieldHard->getDerivedHeight() / 2.0f);
 		_fieldHard->addEventListener(FindShadowFieldHard::FindShadowFieldHardEvent::LEVEL_ENDED, CLOSURE(this, &FindShadowFrame::onFinished));
 		_fieldHard->addEventListener(FindShadowFieldHard::FindShadowFieldHardEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onGoodShadowClicked));
 		_fieldHard->addEventListener(FindShadowFieldHard::FindShadowFieldHardEvent::SHADOW_WRONG, CLOSURE(this, &FindShadowFrame::onWrongShadowClicked));
@@ -94,7 +94,7 @@ void FindShadowFrame::setData() {
 	}
 	else {
 		_field = new FindShadowField(Vector2(_view->getWidth() * 0.9f, _view->getHeight() - _counterBox->getDerivedHeight()), 3, "cat");
-		_field->setPosition(getRoot()->getSize().x / 2 - _field->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _field->getDerivedHeight() / 2);
+		_field->setPosition(getRoot()->getSize().x / 2.0f - _field->getDerivedWidth() / 2.0f, getRoot()->getSize().y / 2.0f - _field->getDerivedHeight() / 2.0f);
 		_field->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &FindShadowFrame::onGoodShadowClicked));
 		_field->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_WRONG, CLOSURE(this, &FindShadowFrame::onWrongShadowClicked));
 		_view->addChild(_field);

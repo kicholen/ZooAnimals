@@ -122,4 +122,13 @@ namespace oxygine
 		void blockingPhase(spFrame frame, bool back);
 		void reset(spFrame frame, bool back);
 	};
+
+	DECLARE_SMART(TransitionInstant, spTransitionInstant);
+	class TransitionInstant : public TransitionSimple
+	{
+	protected:
+		void setup(spFrame frame, bool back);
+		void blockingPhase(spFrame frame, bool back);
+		void reset(spFrame frame, bool back);
+	};
 }

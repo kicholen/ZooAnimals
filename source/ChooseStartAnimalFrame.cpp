@@ -14,7 +14,7 @@ ChooseStartAnimalFrame::ChooseStartAnimalFrame() {
 void ChooseStartAnimalFrame::selectTransitions() {
 	spTransition transition = new TransitionScale;
 	setTransitionIn(transition);
-	spTransition transitionOut = new TransitionFade;// TransitionInstant();
+	spTransition transitionOut = new TransitionInstant;
 	setTransitionOut(transitionOut);
 }
 

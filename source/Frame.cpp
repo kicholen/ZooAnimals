@@ -256,8 +256,8 @@ namespace oxygine
 		if (!tIn)
 			tIn = next->getTransitionIn();
 		
-		if (!tOut)
-			tOut = next->getTransitionOut();
+		//if (!tOut)
+		//	tOut = next->getTransitionOut();
 
 		if (!tIn)
 			tIn = Transition::defaultTransition;
@@ -270,6 +270,9 @@ namespace oxygine
 		tIn->start(prev, next, true, false);
 		Frame::currentTransition = tIn;
 		Action a = next->frameloop();
+
+		tOut = next->getTransitionOut();
+
 		tOut->start(next, prev, true, true);
 		Frame::currentTransition = prevT;
 		Frame::currentFrame = prev;
