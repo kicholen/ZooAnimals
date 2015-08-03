@@ -1,5 +1,5 @@
 #include "Particle.h"
-
+// todo getTimeMS is probably costly, check it and maybe get it from dt
 Particle::Particle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, uint number) {
 	revive(position, velocity, angle, ncol);
 	_number = number;
@@ -55,15 +55,18 @@ float Particle::age() {
 void Particle::dieByTouch(Event *ev) {
 	die(true);
 	removeEventListener(TouchEvent::OVER, CLOSURE(this, &Particle::dieByTouch));
+	ev->stopImmediatePropagation();
 }
 
-void Particle::die(bool wasTouched) {
+void Particle::die(bool wasTouched, bool shouldDispatch) {
 	if(!_dead) {
 		detach();
 		_dead = true;
 		
-		ParticleEvent particleEvent(this, wasTouched);
-		dispatchEvent(&particleEvent);
+		if (shouldDispatch) {
+			ParticleEvent particleEvent(this, wasTouched);
+			dispatchEvent(&particleEvent);
+		}
 	}
 }
 

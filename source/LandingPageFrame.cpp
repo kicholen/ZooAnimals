@@ -16,6 +16,7 @@
 #include "FindShadowFrame.h"
 #include "ChooseGameDifficultyFrame.h"
 #include "CloseFrameElement.h"
+#include "PopObjectsFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -99,8 +100,10 @@ Action LandingPageFrame::loop(){
 					transitionShowFrame(connectFrame);
 				}
 				else */if (action.id == "test") {
-					spFindShadowFrame findShadow = new FindShadowFrame(innerAction.id);
-					transitionShowFrame(findShadow);
+					spPopObjectsFrame popFrame = new PopObjectsFrame(innerAction.id);
+					transitionShowFrame(popFrame);
+					//spFindShadowFrame findShadow = new FindShadowFrame(innerAction.id);
+					//transitionShowFrame(findShadow);
 				}
 				else if (action.id == "edit") {
 					spJumpOverFrame jumpFrame = new JumpOverFrame(innerAction.id);

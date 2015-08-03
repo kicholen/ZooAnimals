@@ -98,6 +98,8 @@ files
 	[source/game/popobjects]
 	PopObjectsField.cpp
 	PopObjectsField.h
+	PopObjectsContainer.cpp
+	PopObjectsContainer.h
 
 	[source/game/discover]
 	DiscoverImageField.cpp

@@ -24,13 +24,11 @@ private:
 	void switchToNumericView();
 	void switchToDisplayView(const std::string& assetName = "");
 
-	void createBackground();
 	void createContainerIfDoesntExist();
 	spSprite createContainerElement(const std::string& assetName);
 	void addNumberTextField(int count);
 
-	void setTextFieldAndBackgroundSize();
-	void setBackgroundSize(int width, int height);
+	void setTextfieldSize();
 
 	void onBackgroundTweenEnded(Event *event);
 private:
@@ -39,10 +37,8 @@ private:
 	bool _isSign;
 	EquationFragmentState _state;
 	spAnimatableElementContainer _container;
-	spColorRectSprite _cardBackground;
 
 	static int _textSize;
-	static Vector2 _backgroundSize;
 };
 
 #endif

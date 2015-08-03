@@ -37,6 +37,13 @@ Action PopObjectsFrame::loop() {
 		else if(action.id == "close") {
 			break;
 		}
+		else if (action.id == "reroll") {
+			// if time..
+			_popField->reset();
+		}
+		else if (action.id == "check") {
+			_popField->isCorrect();
+		}
 	}
 
 	return _lastAction;
@@ -56,13 +63,17 @@ void PopObjectsFrame::setData() {
 	addSwipeTrail();
 	addPopField();
 
+
+	addButton("check", "check", Vector2(getRoot()->getWidth() * 0.6f, getRoot()->getHeight() * 0.9f));
+	addButton("reroll", "reroll", Vector2(getRoot()->getWidth() * 0.2f, getRoot()->getHeight() * 0.9f));
 	addButton("back", "BACK", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f));
 }
 
 void PopObjectsFrame::addPopField() {
-	_popField = new PopObjectsField();
+	_popField = new PopObjectsField(Vector2(_view->getDerivedWidth() * 0.9f, _view->getDerivedHeight() * 0.8f), _difficulty);
 	_popField->setPosition(getRoot()->getSize().x / 2 - _popField->getDerivedWidth() / 2, getRoot()->getSize().y / 2 - _popField->getDerivedHeight() / 2);
 	//_popField->addEventListener(FindShadowField::FindShadowFieldEvent::SHADOW_FOUND, CLOSURE(this, &PopObjectsFrame::onFinished));
+
 	_view->addChild(_popField);
 }
 

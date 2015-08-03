@@ -165,11 +165,11 @@ void ConnectDotsField::setLineDimensionsAndRotation(spColorRectSprite line, Vect
 }
 
 float ConnectDotsField::calculateDistance(Vector2 from, Vector2 to) {
-	return sqrt((to.x - from.x) * (to.x - from.x) + (to.y - from.y) * (to.y - from.y));
+	return sqrtf((to.x - from.x) * (to.x - from.x) + (to.y - from.y) * (to.y - from.y));
 }
 
 float ConnectDotsField::calculateAngle(Vector2 to, Vector2 from) {
-	return atan2(from.y - to.y, from.x - to.x);
+	return atan2f(from.y - to.y, from.x - to.x);
 }
 
 void ConnectDotsField::dispatchFinishedEvent(Event *event) {

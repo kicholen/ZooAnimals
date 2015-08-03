@@ -25,9 +25,9 @@ public:
 	const bool isWaterAnimal() const { return _isWaterAnimal; }
 	int hungerValue() const { return _hungerValue; }
 	int happinessValue() const { return _happinessValue; }
-	int happinessNeededForNextAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness() + 1.0f, 1.0f / 0.55f)); }
-	int happinessNeededForCurrentAnimal() const { return (int)ceilf(pow((float)getAnimalsCountFromHappiness(), 1.0f / 0.55f)); }
-	const Vector2& lockitIdsRange() const { return _lockitIdsRange; }
+	int happinessNeededForNextAnimal() const { return (int)ceil(pow((double)getAnimalsCountFromHappiness() + 1.0f, int(1.0f / 0.55f))); }
+	int happinessNeededForCurrentAnimal() const { return (int)ceil(pow((double)getAnimalsCountFromHappiness(), int(1.0f / 0.55f))); }
+	const Point& lockitIdsRange() const { return _lockitIdsRange; }
 
 	void setHappiness(int value) { _happinessValue = value; }
 	/* Inviolable count, use totalAnimalsCount */
@@ -79,7 +79,7 @@ private:
 	int _jumpTime;
 	Vector2 _jumpDelay;
 	bool _isWaterAnimal;
-	Vector2 _lockitIdsRange;
+	Point _lockitIdsRange;
 
 	int _count;
 	int _hungerValue;

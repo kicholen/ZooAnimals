@@ -1,8 +1,11 @@
 #include "EquationElement.h"
 #include "FlashUtils.h"
+#include "SharedResources.h"
 
-EquationElement::EquationElement(Vector2 size, int a, const std::string& sign, int b) {
+EquationElement::EquationElement(Vector2 size, int a, const std::string& sign, int b, bool shouldDisplayAnswers) {
 	setSize(size);
+	_shouldDisplayAnswers = shouldDisplayAnswers;
+	createBackground();
 	setData(a, sign, b);
 }
 
@@ -12,6 +15,7 @@ EquationElement::~EquationElement() {
 
 void EquationElement::reset(int a, const std::string& sign, int b) {
 	removeChildren();
+	createBackground(); // todo: fix
 	setData(a, sign, b);
 }
 
@@ -34,35 +38,38 @@ void EquationElement::switchToAnotherView(const std::string& assetName) {
 }
 
 void EquationElement::setData(int a, const std::string& sign, int b) {
-	createEquationFragment(Vector2(getWidth() / 4.0f, getHeight() * 0.8f), a, Vector2(getWidth() / 8.0f, getHeight() / 2.0f), "first")->attachTo(this);
-	createEquationFragment(Vector2(getWidth() / 10.0f, getHeight() * 0.8f), 0, Vector2(getWidth() / 4.0f + getWidth() / 20.0f, getHeight() / 2.0f), "sign", true, sign)->attachTo(this);
-	createEquationFragment(Vector2(getWidth() / 4.0f, getHeight() * 0.8f), b, Vector2(getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 8.0f, getHeight() / 2), "second")->attachTo(this);
-	createEquationFragment(Vector2(getWidth() / 10.0f, getHeight() * 0.8f), 0, Vector2(getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 4.0f + getWidth() / 20.0f, getHeight() / 2), "sign", true, "=")->attachTo(this);
+	float offset = _shouldDisplayAnswers ? 0.0f : getWidth() / 10.0f;
+	createEquationFragment(Vector2(getWidth() / 4.0f, getHeight() * 0.8f), a, Vector2(getWidth() / 8.0f + offset, getHeight() / 2.0f), "first")->attachTo(this);
+	createEquationFragment(Vector2(getWidth() / 10.0f, getHeight() * 0.8f), 0, Vector2(getWidth() / 4.0f + getWidth() / 20.0f + offset, getHeight() / 2.0f), "sign", true, sign)->attachTo(this);
+	createEquationFragment(Vector2(getWidth() / 4.0f, getHeight() * 0.8f), b, Vector2(getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 8.0f + offset, getHeight() / 2), "second")->attachTo(this);
+	createEquationFragment(Vector2(getWidth() / 10.0f, getHeight() * 0.8f), 0, Vector2(getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 4.0f + getWidth() / 20.0f + offset, getHeight() / 2), "sign", true, "=")->attachTo(this);
 	
-	int result = getCorrectResult(a, sign, b);
-	VectorArray<int> checkingVector;
-	checkingVector.push(result);
-	int firstFalseResult = getDiffrentIntegerInRange(checkingVector, 0, 9);
-	checkingVector.push(firstFalseResult);
-	int secondFalseResult = getDiffrentIntegerInRange(checkingVector, 0, 9); 
-	checkingVector.clear();
+	_result = getCorrectResult(a, sign, b);
+	if (_shouldDisplayAnswers) {
+		VectorArray<int> checkingVector;
+		checkingVector.push(_result);
+		int firstFalseResult = getDiffrentIntegerInRange(checkingVector, 0, 9);
+		checkingVector.push(firstFalseResult);
+		int secondFalseResult = getDiffrentIntegerInRange(checkingVector, 0, 9);
+		checkingVector.clear();
 
-	VectorArray<Vector2> positionVector;
-	positionVector.ensureCapacity(3);
-	float yPosition = getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 4.0f + getWidth() / 10.0f + getWidth() * 0.15f;
-	positionVector.push(Vector2(yPosition, getHeight() / 6.0f));
-	positionVector.push(Vector2(yPosition, getHeight() / 6.0f + getHeight() / 3.0f));
-	positionVector.push(Vector2(yPosition, getHeight() / 6.0f + getHeight() / 3.0f * 2.0f));
-	int randomPosition = CMath::random(0, positionVector.length());
-	Vector2 answerSize = Vector2(getWidth() * 0.3f, getHeight() * 0.8f / 3.0f);
-	spEquationFragment correctAnswerFragment = createEquationFragment(answerSize, result, positionVector[randomPosition], "first_answer");
-	correctAnswerFragment->attachTo(this);
-	correctAnswerFragment->addEventListener(TouchEvent::CLICK, CLOSURE(this, &EquationElement::onCorrectAnswerTapped));
-	positionVector.splice(randomPosition);
+		VectorArray<Vector2> positionVector;
+		positionVector.ensureCapacity(3);
+		float yPosition = getWidth() / 4.0f + getWidth() / 10.0f + getWidth() / 4.0f + getWidth() / 10.0f + getWidth() * 0.15f;
+		positionVector.push(Vector2(yPosition, getHeight() / 6.0f));
+		positionVector.push(Vector2(yPosition, getHeight() / 6.0f + getHeight() / 3.0f));
+		positionVector.push(Vector2(yPosition, getHeight() / 6.0f + getHeight() / 3.0f * 2.0f));
+		int randomPosition = CMath::random(0, positionVector.length());
+		Vector2 answerSize = Vector2(getWidth() * 0.3f, getHeight() * 0.8f / 3.0f);
+		spEquationFragment correctAnswerFragment = createEquationFragment(answerSize, _result, positionVector[randomPosition], "first_answer");
+		correctAnswerFragment->attachTo(this);
+		correctAnswerFragment->addEventListener(TouchEvent::CLICK, CLOSURE(this, &EquationElement::onCorrectAnswerTapped));
+		positionVector.splice(randomPosition);
 
-	createEquationFragment(answerSize, firstFalseResult, positionVector[0], "second_answer")->attachTo(this);
-	createEquationFragment(answerSize, secondFalseResult, positionVector[1], "third_answer")->attachTo(this);
-	positionVector.clear();
+		createEquationFragment(answerSize, firstFalseResult, positionVector[0], "second_answer")->attachTo(this);
+		createEquationFragment(answerSize, secondFalseResult, positionVector[1], "third_answer")->attachTo(this);
+		positionVector.clear();
+	}
 }
 
 int EquationElement::getCorrectResult(int a, const std::string& sign, int b) {
@@ -118,4 +125,17 @@ spEquationFragment EquationElement::createEquationFragment(Vector2 size, int cou
 void EquationElement::onCorrectAnswerTapped(Event *event) {
 	EquationElementEvent correctAnswerEvent(EquationElementEvent::CORRECT);
 	dispatchEvent(&correctAnswerEvent);
+}
+
+void EquationElement::createBackground() {
+	spBox9Sprite background = new Box9Sprite;
+	background->setTouchEnabled(false);
+	background->setHorizontalMode(Box9Sprite::STRETCHING);
+	background->setVerticalMode(Box9Sprite::STRETCHING);
+	background->setAnchor(0.0f, 0.0f);
+	background->setResAnim(gameResources.getResAnim("greyBox9"));
+	background->setSize(getSize());
+	background->setGuides(9, 20, 9, 15);
+	background->attachTo(this);
+	background->setPriority(-1);
 }

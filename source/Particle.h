@@ -57,7 +57,7 @@ private:
 public:
 	float age();
 
-	void die(bool wasTouched = false);
+	void die(bool wasTouched = false, bool shouldDispatch = true);
 	void revive(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 };
 

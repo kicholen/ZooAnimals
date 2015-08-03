@@ -2,7 +2,6 @@
 #include "SharedResources.h"
 
 int EquationFragment::_textSize = 0;
-Vector2 EquationFragment::_backgroundSize = Vector2(0.0f, 0.0f);
 
 EquationFragment::EquationFragment(Vector2& size, int count, bool isSign, const std::string& sign) {
 	setSize(size);
@@ -12,13 +11,12 @@ EquationFragment::EquationFragment(Vector2& size, int count, bool isSign, const 
 	if (isSign) {
 		_sign = sign;
 	}
-	setTextFieldAndBackgroundSize();
+	setTextfieldSize();
 	
 	reset(count, "");
 }
 
 EquationFragment::~EquationFragment() {
-	_cardBackground->releaseRef();
 	_sign.clear();
 }
 
@@ -48,13 +46,8 @@ void EquationFragment::switchToNumericView() {
 void EquationFragment::reset(int count, const std::string& assetName) {
 	removeChildren();
 	_count = count;
-	createBackground();
 	if (_state == efNumericView) {
 		addNumberTextField(count);
-		if (_cardBackground->getScaleX() != _backgroundSize.x / _cardBackground->getWidth()) {
-			_cardBackground->addTween(TweenScaleX(_backgroundSize.x / _cardBackground->getWidth()), 500, 1, false, 0, Tween::ease_inBack);
-			_cardBackground->addTween(TweenScaleY(_backgroundSize.y / _cardBackground->getHeight()), 500, 1, false, 0, Tween::ease_inBack);
-		}
 	}
 	else {
 		createContainerIfDoesntExist();
@@ -66,8 +59,6 @@ void EquationFragment::reset(int count, const std::string& assetName) {
 		}
 		_container->addChildren(dupaArray);
 		_container->hideContainerElements();
-		_cardBackground->addTween(TweenScaleX(getWidth() / _cardBackground->getWidth()), 500, 1, false, 0, Tween::ease_inBack);
-		_cardBackground->addTween(TweenScaleY(getHeight() / _cardBackground->getHeight()), 500, 1, false, 0, Tween::ease_inBack)->setDoneCallback(CLOSURE(this, &EquationFragment::onBackgroundTweenEnded));
 	}
 }
 
@@ -109,20 +100,7 @@ void EquationFragment::addNumberTextField(int count) {
 	textfield->attachTo(this);
 }
 
-void EquationFragment::createBackground() {
-	if (!_cardBackground) {
-		_cardBackground = new ColorRectSprite;
-		_cardBackground->setAnchor(0.5f, 0.5f);
-		_cardBackground->setColor(Color(200, 120, 200));
-		_cardBackground->setSize(EquationFragment::_backgroundSize);
-		_cardBackground->setPosition(getWidth() / 2, getHeight() / 2);
-		_cardBackground->setPriority(-11);
-		_cardBackground->addRef();
-	}
-	_cardBackground->attachTo(this);
-}
-
-void EquationFragment::setTextFieldAndBackgroundSize() {
+void EquationFragment::setTextfieldSize() {
 	if (EquationFragment::_textSize == 0) {
 		spTextActor textfield = createTextfield("99", true, false);
 		TextStyle style = createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(144, 217, 88), true, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE);
@@ -136,11 +114,5 @@ void EquationFragment::setTextFieldAndBackgroundSize() {
 			EquationFragment::_textSize = int(getSize().y * 0.3f / textfield->getTextRect().getHeight() * textfield->getFontSize2Scale());
 		}
 		textfield->setFontSize2Scale(EquationFragment::_textSize);
-		setBackgroundSize(textfield->getTextRect().getWidth(), textfield->getTextRect().getHeight());
 	}
-}
-
-void EquationFragment::setBackgroundSize(int width, int height) {
-	EquationFragment::_backgroundSize.x = width * 1.2f;
-	EquationFragment::_backgroundSize.y = height * 1.2f;
 }

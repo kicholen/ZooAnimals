@@ -20,6 +20,13 @@ void ParticlesContainer::removeParticles() {
 	_particlesInPool.clear();
 }
 
+void ParticlesContainer::clear() {
+	for (int i = _particlesArray.length() - 1; i >= 0; i--) {
+		_particlesArray[i]->die(false, false);
+		_particlesInPool.push(_particlesArray[i]->getNumber());
+	}
+}
+
 void ParticlesContainer::thinkParticles(float dt) {
 	for(int i = _particlesArray.length() - 1; i >= 0; i--) {
 		_particlesArray[i]->think(dt);

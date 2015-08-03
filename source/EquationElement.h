@@ -19,12 +19,14 @@ public:
 
 		EquationElementEvent(EV ev):Event(ev) {}
 	};
-	EquationElement(Vector2 size, int a, const std::string& sign, int b);
+	EquationElement(Vector2 size, int a, const std::string& sign, int b, bool shouldDisplayAnswers = false);
 	~EquationElement();
 
 	void reset(int a, const std::string& sign, int b);
 	void show();
 	void switchToAnotherView(const std::string& assetName = "");
+
+	int getResult() const { return _result; }
 
 private:
 	void setData(int a, const std::string& sign, int b);
@@ -32,8 +34,13 @@ private:
 	int getDiffrentIntegerInRange(VectorArray<int>& integers, int min, int max);
 
 	spEquationFragment createEquationFragment(Vector2 size, int count, Vector2 position, const std::string& name, bool isSign = false, const std::string& sign = "");
+	void createBackground();
 
 	void onCorrectAnswerTapped(Event *event);
+
+private:
+	bool _shouldDisplayAnswers;
+	int _result;
 };
 
 #endif

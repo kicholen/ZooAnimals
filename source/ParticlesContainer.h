@@ -16,9 +16,14 @@ public:
 
 	void thinkParticles(float dt);
 	void removeParticles();
-	
+	virtual void clear();
+
 	spParticle addParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol, const std::string &resAnim, float lifetime, float friction, float radius, bool shouldKillOnTouch);
 
+protected:
+	virtual  void onParticleDie(Event *event);
+
+	VectorArray<spParticle> _particlesArray;
 private:
 	spParticle createParticle(Vector2 position, Vector2 velocity, float angle, unsigned int ncol);
 
@@ -27,9 +32,7 @@ private:
 	void addEventListenersToParticle(spParticle particle);
 
 	void onParticleEvent(Event *event);
-	void onParticleDie(Event *event);
 
-	VectorArray<spParticle> _particlesArray;
 	VectorArray<uint> _particlesInPool;
 };
 

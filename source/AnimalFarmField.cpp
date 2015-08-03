@@ -91,7 +91,7 @@ void AnimalFarmField::createSortElements(spTileField tileField) {
 void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
 	Point tilesNumber = getNumberOfTiles();
 	int j = tilesNumber.y;
-	int gatePosition = (int)FlashUtils::CMath::Rand(3, tilesNumber.x - 2);
+	int gatePosition = FlashUtils::CMath::random(3, tilesNumber.x - 2);
 	
 	for (int i = 0; i < tilesNumber.x; i++) {
 		spSprite tileSprite;
@@ -155,7 +155,7 @@ void AnimalFarmField::addAnimal(Event *event) {
 spAnimalInFarmElement AnimalFarmField::createAnimal(const std::string& animalNumber, spAnimalModel model) {
 	spAnimalInFarmElement animalElement = getChildT<AnimalInFarmElement>(animalNumber, oxygine::ep_ignore_error);
 	if (!animalElement) {
-		animalElement = new AnimalInFarmElement(model->animalName(), Vector2(getWidth() * 0.95f, getHeight() * 0.9f), model->jumpRange(), model->jumpHeight(), model->jumpTime(), model->jumpDelay(), model->isWaterAnimal());
+		animalElement = new AnimalInFarmElement(model->animalName(), Vector2(getWidth() * 0.95f, getHeight() * 0.9f), (float)model->jumpRange(), (float)model->jumpHeight(), (float)model->jumpTime(), model->jumpDelay(), model->isWaterAnimal());
 		_count += 1;
 		animalElement->setPosition(getWidth() * 0.025f, getHeight() * 0.05f);
 		addChild(animalElement);

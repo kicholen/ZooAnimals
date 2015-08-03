@@ -3,6 +3,7 @@
 
 MathQuizElement::MathQuizElement(Vector2 size) {
 	setSize(size);
+	setTouchEnabled(false);
 	//setAnchor(0.5f, 0.5f);
 	setData();
 }
@@ -41,7 +42,7 @@ void MathQuizElement::createEquation(int a, const std::string& sign, int b) {
 	_equation = new EquationElement(getSize() * 0.8f, a, sign, b);
 	_equation->setPosition(getWidth() / 2 - _equation->getWidth() / 2, getHeight() / 2 - _equation->getHeight() / 2);
 	_equation->addEventListener(EquationElement::EquationElementEvent::CORRECT, CLOSURE(this, &MathQuizElement::onCorrectAnswer));
-	_equation->attachTo(this);
+	_equation->attachTo(this); 
 	//_equation->animate();
 }
 
