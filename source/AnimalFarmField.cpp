@@ -86,6 +86,7 @@ void AnimalFarmField::createSortElements(spTileField tileField) {
 	createFenceAtBottom(tileField);
 	createFenceAtLeft(tileField);
 	createInformationTable(tileField);
+	createFeeder();
 }
 
 void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
@@ -135,7 +136,13 @@ void AnimalFarmField::createInformationTable(spTileField tileField) {
 	_animalPanel->attachTo(this);
 	_animalPanel->setPriority(30000);
 	_animalPanel->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &AnimalFarmField::onGameChosen));
+}
 
+void AnimalFarmField::createFeeder() {
+	_feederElement = new FeederElement(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_X / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f), 400, 4000);
+	_feederElement->setAnchor(0.0f, 1.0f);
+	_feederElement->setPosition(0.0f, getHeight());
+	_feederElement->attachTo(this);
 }
 
 void AnimalFarmField::playNextAnimalsAnimation(Event *event) {

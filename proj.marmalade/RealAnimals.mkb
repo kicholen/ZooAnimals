@@ -124,6 +124,8 @@ files
 	MemoryCard.h
 
 	[source/element/farm]
+	AnimalCardElement.cpp
+	AnimalCardElement.h
 	AnimalFarmField.h
 	AnimalFarmField.cpp
 	AnimalInFarmElement.cpp
@@ -136,6 +138,8 @@ files
 	AnimalFarmPanel.h
 	FarmServiceElement.cpp
 	FarmServiceElement.h
+	FeederElement.cpp
+	FeederElement.h
 	SpectatorsContainer.cpp
 	SpectatorsContainer.h
 	WalkingSpectator.cpp
@@ -144,8 +148,6 @@ files
 	SpectatorSpawner.h
 	TooltipElement.cpp
 	TooltipElement.h
-	AnimalCardElement.cpp
-	AnimalCardElement.h
 
 	[source/element/world]
 	WroldMapView.cpp

@@ -10,6 +10,7 @@
 #include "AnimalModel.h"
 #include "AnimalFarmPanel.h"
 #include "TooltipElement.h"
+#include "FeederElement.h"
 
 #define BASE_SIZE_IN_PERCENT_X 20
 #define BASE_SIZE_IN_PERCENT_Y 8
@@ -52,6 +53,8 @@ private:
 	void createFenceAtBottom(spTileField tileField);
 	void createFenceAtLeft(spTileField tileField);
 	void createInformationTable(spTileField tileField);
+	void createFeeder();
+
 	spAnimalInFarmElement createAnimal(const std::string& animalNumber, spAnimalModel model);
 	void removeLastAnimal();
 	spButton createAnimalButton(const std::string& buttonName, Vector2 position);
@@ -69,6 +72,7 @@ private:
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;
 	spAnimalFarmPanel _animalPanel;
+	spFeederElement _feederElement;
 
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;
