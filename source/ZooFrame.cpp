@@ -5,6 +5,8 @@
 #include "PresentAnimalsFrame.h"
 #include "MoneyManager.h"
 #include "ExpManager.h"
+#include "ProcessMaster.h"
+#include "FeedAnimationProcess.h"
 
 #include "MemoryFrame.h"
 #include "MatchTwoFrame.h"
@@ -27,6 +29,7 @@ void ZooFrame::selectTransitions() {
 
 void ZooFrame::_postHiding(Event *) {
 	//FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
+	AnimalsManager::instance.removeEventListener(AnimalsManager::AnimalEvent::ANIMAL_FED, CLOSURE(this, &ZooFrame::onAnimalFed));
 	_view->removeChildren();
 	_resources.unload();
 	_farmArray._vector.resize(0);
@@ -34,6 +37,7 @@ void ZooFrame::_postHiding(Event *) {
 
 void ZooFrame::_preShowing(Event *) {
 	//FlurryAnalytics::instance.onLevelEnterEvent(_whichLevel.c_str());
+	AnimalsManager::instance.addEventListener(AnimalsManager::AnimalEvent::ANIMAL_FED, CLOSURE(this, &ZooFrame::onAnimalFed));
 	selectTransitions();
 	_resources.load();
 	setData();
@@ -108,6 +112,15 @@ Action ZooFrame::loop() {
 	}
 
 	return _lastAction;
+}
+
+void ZooFrame::onAnimalFed(Event *event) {
+	AnimalsManager::AnimalEvent *animalEvent = safeCast<AnimalsManager::AnimalEvent*>(event);
+
+	spProcessMaster master = new ProcessMaster();
+	master->addRef();
+	master->addProcess(new FeedAnimationProcess(getFarmFieldByModel(animalEvent->model), createSpectator(50)));
+	master->start();
 }
 
 void ZooFrame::onFinished(Event *event) {
@@ -199,6 +212,7 @@ void ZooFrame::setData() {
 	_rotatingContainer->setContent(rectangleContainer);
 	_rotatingContainer->setPosition(_view->getSize() / 2 - _rotatingContainer->getSize() / 2);
 	_rotatingContainer->attachTo(_view);
+
 	/*
 	spFarmControlPanel controlPanel = new FarmControlPanel(_view->getSize(), Vector2(getRoot()->getWidth() * 0.10f, getRoot()->getHeight() * 0.95f));
 	_view->addChild(controlPanel);
@@ -209,4 +223,25 @@ void ZooFrame::setData() {
 	addButton("present", "present", Vector2(getRoot()->getWidth() * 0.9f, getRoot()->getHeight() * 0.9f - button->getDerivedWidth()));
 
 	addButton("store", "store", Vector2(getRoot()->getWidth() * 0.6f, getRoot()->getHeight() * 0.9f));
+}
+
+spWalkingSpectator ZooFrame::createSpectator(float spectatorsHeight) {
+	spWalkingSpectator spectator = new WalkingSpectator();
+
+	spectator->setResAnim(tilesResources.getResAnim("human_1"));
+	float scale = spectatorsHeight / spectator->getHeight();
+	spectator->setScale(spectator->getScaleX() * scale, scale);
+	_view->addChild(spectator);
+
+	return spectator;
+}
+
+spAnimalFarmField ZooFrame::getFarmFieldByModel(spAnimalModel model) {
+	for (int i = 0; i < _farmArray.length() - 1; i++) {
+		if (_farmArray[i]->getModel()->getName() == model->getName()) {
+			return _farmArray[i];
+		}
+	}
+
+	return 0;
 }

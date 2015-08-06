@@ -38,6 +38,7 @@ void AnimalsManager::init(const std::string& version) {
 
 void AnimalsManager::feedAnimalByModel(spAnimalModel model, int feedTime) {
 	model->setLastFeedS(feedTime == 0 ? getCurrentTimeInSeconds() : feedTime);
+	dispatchAnimalFedEvent(model);
 }
 
 void AnimalsManager::feedAnimalByName(const std::string& name) {
@@ -259,9 +260,9 @@ void AnimalsManager::updater(Event* event) {
 
 	for (map<string, animalMap >::iterator outerIterator = _posessedAnimalMap.begin(); outerIterator != _posessedAnimalMap.end(); ++outerIterator) {
 		for (animalMap::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-			if (canAnimalBeFedByModel(innerIterator->second)) {
-				dispatchAnimalCanBeFedEvent(innerIterator->second);
-			}
+			/*if (canAnimalBeFedByModel(innerIterator->second)) {
+				dispatchAnimalCanBeFedEvent(innerIterator->second); // do not need it, this event can be dispatched too often
+			}*/
 			
 			if (innerIterator->second->lastFeedS() + HUNGER_BARRIER_TIME_SECONDS < currentTime) {
 				decreaseHappinessByPercent(innerIterator->second, HUNGER_HAPPINES_DECREASE_PERCENT);
@@ -287,6 +288,11 @@ void AnimalsManager::dispatchAnimalCountChangedEvent(spAnimalModel model) {
 
 void AnimalsManager::dispatchAnimalCanBeFedEvent(spAnimalModel model) {
 	AnimalEvent ev(AnimalEvent::CAN_FEED, model);
+	dispatchEvent(&ev);
+}
+
+void AnimalsManager::dispatchAnimalFedEvent(spAnimalModel model) {
+	AnimalEvent ev(AnimalEvent::ANIMAL_FED, model);
 	dispatchEvent(&ev);
 }
 

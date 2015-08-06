@@ -4,11 +4,22 @@ WalkingSpectator::WalkingSpectator(const VectorArray<Vector2>& trackPoints, uint
 	_velocity = Vector2(CMath::Rand(0.2f, 0.5f), CMath::Rand(0.2f, 0.5f));
 	setTouchEnabled(false);
 	setTouchChildrenEnabled(false);
-	_number = number;
 	_state = wsWaiting;
 	_isProperX = false;
 	_isProperY = false;
+	setAnchor(Vector2(0.5f, 0.5f));
+	_number = number;
 	revive(trackPoints);
+}
+
+WalkingSpectator::WalkingSpectator() {
+	_velocity = Vector2(CMath::Rand(0.2f, 0.5f), CMath::Rand(0.2f, 0.5f));
+	setTouchEnabled(false);
+	setTouchChildrenEnabled(false);
+	_state = wsDead;
+	_isProperX = false;
+	_isProperY = false;
+	_number = 0;
 	setAnchor(Vector2(0.5f, 0.5f));
 }
 

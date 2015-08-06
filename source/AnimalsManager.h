@@ -23,6 +23,7 @@ public:
 		{
 			COUNT_CHANGED = makefourcc('A', 'M', 'C', 'C'),
 			CAN_FEED = makefourcc('A', 'M', 'C', 'F'),
+			ANIMAL_FED = makefourcc('A', 'M', 'C', 'F')
 		};
 
 		AnimalEvent(EV ev, spAnimalModel model_) : Event(ev), model(model_) {}
@@ -74,7 +75,8 @@ private:
 
 	void dispatchAnimalCountChangedEvent(spAnimalModel model);
 	void dispatchAnimalCanBeFedEvent(spAnimalModel model);
-
+	void dispatchAnimalFedEvent(spAnimalModel model);
+	
 	int getCurrentTimeInSeconds();
 
 private:

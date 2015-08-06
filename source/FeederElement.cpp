@@ -88,7 +88,7 @@ int FeederElement::getCooldown() const {
 	return _cooldownLeft;
 }
 
-void FeederElement::setCooldown(int cooldown) { // update this only sometimes?
+void FeederElement::setCooldown(int cooldown) {
 	if (_cooldownLeft == cooldown) {
 		return;
 	}

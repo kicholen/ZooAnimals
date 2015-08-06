@@ -151,6 +151,11 @@ void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
 	_animalsFarmAnimation->playAnimalsAnimation(_animationType);
 }
 
+void AnimalFarmField::playAnimalsAnimation(int animationType) {
+	_animationType = static_cast<AnimalsFarmAnimationType>(animationType);
+	_animalsFarmAnimation->playAnimalsAnimation(_animationType);
+}
+
 void AnimalFarmField::addAnimal(Event *event) {
 	/*int x = 10;
 	_model->setAnimalsCount(_model->animalsCount() + x);

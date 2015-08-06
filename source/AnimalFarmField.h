@@ -39,6 +39,7 @@ public:
 	void addAnimal(Event *event);
 	spTileField createTileField();
 	void playNextAnimalsAnimation(Event *event);
+	void playAnimalsAnimation(int animationType);
 
 	spAnimalModel getModel() {
 		return _model;
@@ -68,7 +69,8 @@ private:
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
 	void onAnimalCountChanged(Event *ev);
-
+	void onAnimalFed(Event *ev);
+	
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;
 	spAnimalFarmPanel _animalPanel;

@@ -26,6 +26,7 @@ public:
 	};
 
 	WalkingSpectator(const VectorArray<Vector2>& trackPoints, uint number);
+	WalkingSpectator();
 	~WalkingSpectator();
 
 

@@ -307,6 +307,16 @@ files
 	Timer.cpp
 	Timer.h
 
+	[source/process]
+	ProcessMaster.cpp
+	ProcessMaster.h
+	ProcessSlave.cpp
+	ProcessSlave.h
+
+	[source/process/feed]
+	FeedAnimationProcess.cpp
+	FeedAnimationProcess.h
+
 	[source/manager]
 	FacebookManager.cpp
 	FacebookManager.h
