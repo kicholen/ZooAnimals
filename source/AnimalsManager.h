@@ -37,7 +37,7 @@ public:
 
 	void init(const std::string& version);
 
-	void feedAnimalByModel(spAnimalModel _model);
+	void feedAnimalByModel(spAnimalModel _model, int feedTime = 0);
 	void feedAnimalByName(const std::string& name);
 	bool canAnimalBeFedByModel(spAnimalModel model);
 	bool canAnimalBeFedByName(const std::string& name);

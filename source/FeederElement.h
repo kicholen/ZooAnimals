@@ -3,6 +3,7 @@
 
 #include "oxygine-framework.h"
 #include "TweenButton.h"
+#include "AnimalModel.h"
 
 using namespace oxygine;
 
@@ -11,7 +12,7 @@ DECLARE_SMART(FeederElement, spFeederElement);
 class FeederElement : public Actor 
 {
 public:
-	FeederElement(const Vector2& size, int cooldownLeft, int cooldownMax);
+	FeederElement(const Vector2& size, spAnimalModel model);
 	~FeederElement();
 
 private:
@@ -32,6 +33,8 @@ private:
 	spProgressBar _progressBar;
 	spTweenButton _button;
 	spTextField _cooldown;
+
+	spAnimalModel _model;
 
 	int _cooldownLeft;
 	int _cooldownMax;

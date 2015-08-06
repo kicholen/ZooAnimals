@@ -1,36 +1,45 @@
 #include "FeederElement.h"
 #include "SharedResources.h"
 #include "FlashUtils.h"
-// todo: it's in 1/10 s just convert it to sec and invert = all done
-FeederElement::FeederElement(const Vector2& size, int cooldownLeft, int cooldownMax) {
-	setTouchEnabled(false);
+#include "StartGameConfig.h"
+#include "s3eTimer.h"
+#include "AnimalsManager.h"
+
+FeederElement::FeederElement(const Vector2& size, spAnimalModel model) {
 	setSize(size);
-	_cooldownLeft = cooldownLeft;
-	_cooldownMax = cooldownMax;
+	_model = model;
+	_cooldownMax = FEED_INTERVAL_SECONDS;
 
 	revalidate();
 }
-
 
 FeederElement::~FeederElement()
 {
 }
 
 void FeederElement::revalidate() {
+	_cooldownLeft = FEED_INTERVAL_SECONDS - ((int)(s3eTimerGetUTC() / 1000) - _model->lastFeedS());
+	
 	createButton();
 
 	if (_cooldownLeft <= 0) {
 		_button->setAlpha(255);
 		_button->setTouchEnabled(true);
+		_button->setTouchChildrenEnabled(true);
+		if (_cooldown) {
+			_cooldown->setVisible(false);
+		}
 	}
 	else {
+		_button->setTouchChildrenEnabled(false);
+		_button->setTouchEnabled(false);
 		_button->setAlpha(150);
 		createProgressbar();
-		_progressBar->addTween(ProgressBar::TweenProgress(1.0f), 900);
 		_progressBar->addTween(ProgressBar::TweenProgress(0.0f), _cooldownLeft * 1000, 1, false, 1000);
 
 		createCooldownTextfield();
-		spTween tween = addTween(FeederElement::TweenCooldown(_cooldownMax), _cooldownLeft * 1000);
+		_cooldown->setVisible(true);
+		spTween tween = addTween(FeederElement::TweenCooldown(0), _cooldownLeft * 1000);
 		tween->setName("score_tween");
 		tween->setDoneCallback(CLOSURE(this, &FeederElement::onTimePassed));
 	}
@@ -39,13 +48,12 @@ void FeederElement::revalidate() {
 void FeederElement::createButton() {
 	if (!_button) {
 		_button = new TweenButton();
-		_button->setResAnim(gameResources.getResAnim("redButton"));
+		_button->setResAnim(gameResources.getResAnim("circle_border"));
 		_button->setAnchor(Vector2(0.5f, 0.5f));
-		_button->setTouchChildrenEnabled(false);
-		_button->setTouchEnabled(false);
-		_button->setTouchChildrenEnabled(false);
+		_button->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
+		_button->setBaseScale(getWidth() / _button->getWidth());
 		_button->addEventListener(TouchEvent::CLICK, CLOSURE(this, &FeederElement::onFeedClicked));
-		_button->setBaseScale((getHeight() * 0.8f) / _button->getHeight());
+		addChild(_button);
 	}
 }
 
@@ -59,6 +67,8 @@ void FeederElement::createProgressbar() {
 		_progressBar->setDirection(_progressBar->dir_radial_cw);
 		_progressBar->setScale(getWidth() / _progressBar->getWidth());
 		_progressBar->setProgress((float)_cooldownLeft / (float)_cooldownMax);
+		_progressBar->setTouchEnabled(false);
+		_progressBar->setTouchChildrenEnabled(false);
 	}
 }
 
@@ -67,6 +77,8 @@ void FeederElement::createCooldownTextfield() {
 		_cooldown = new TextField();
 		_cooldown->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(0, 0, 0, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
 		_cooldown->setSize(getSize()); // todo probably set this to wtf
+		_cooldown->setTouchEnabled(false);
+		_cooldown->setTouchChildrenEnabled(false);
 		addChild(_cooldown);
 	}
 }
@@ -99,10 +111,8 @@ void FeederElement::setCooldown(int cooldown) { // update this only sometimes?
 }
 
 void FeederElement::onFeedClicked(Event *ev) {
-	// send fed event to update feed time
-	//if () {
-
-	//}
+	AnimalsManager::instance.feedAnimalByModel(_model);
+	revalidate();
 }
 
 void FeederElement::onTimePassed(Event *ev) {

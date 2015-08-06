@@ -139,9 +139,10 @@ void AnimalFarmField::createInformationTable(spTileField tileField) {
 }
 
 void AnimalFarmField::createFeeder() {
-	_feederElement = new FeederElement(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_X / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f), 400, 4000);
+	_feederElement = new FeederElement(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f), _model);
 	_feederElement->setAnchor(0.0f, 1.0f);
 	_feederElement->setPosition(0.0f, getHeight());
+	_feederElement->setPriority(30000);
 	_feederElement->attachTo(this);
 }
 

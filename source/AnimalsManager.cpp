@@ -36,8 +36,8 @@ void AnimalsManager::init(const std::string& version) {
 	addRef();
 }
 
-void AnimalsManager::feedAnimalByModel(spAnimalModel model) {
-	model->setLastFeedS(getCurrentTimeInSeconds());
+void AnimalsManager::feedAnimalByModel(spAnimalModel model, int feedTime) {
+	model->setLastFeedS(feedTime == 0 ? getCurrentTimeInSeconds() : feedTime);
 }
 
 void AnimalsManager::feedAnimalByName(const std::string& name) {
@@ -265,7 +265,7 @@ void AnimalsManager::updater(Event* event) {
 			
 			if (innerIterator->second->lastFeedS() + HUNGER_BARRIER_TIME_SECONDS < currentTime) {
 				decreaseHappinessByPercent(innerIterator->second, HUNGER_HAPPINES_DECREASE_PERCENT);
-				feedAnimalByModel(innerIterator->second);
+				feedAnimalByModel(innerIterator->second, getCurrentTimeInSeconds() - FEED_INTERVAL_SECONDS);
 			}
 		}
 	}
