@@ -119,7 +119,7 @@ void ZooFrame::onAnimalFed(Event *event) {
 
 	spProcessMaster master = new ProcessMaster();
 	master->addRef();
-	master->addProcess(new FeedAnimationProcess(getFarmFieldByModel(animalEvent->model), createSpectator(50)));
+	master->addProcess(new FeedAnimationProcess(getFarmFieldByModel(animalEvent->model), _rotatingContainer));
 	master->start();
 }
 
@@ -225,20 +225,9 @@ void ZooFrame::setData() {
 	addButton("store", "store", Vector2(getRoot()->getWidth() * 0.6f, getRoot()->getHeight() * 0.9f));
 }
 
-spWalkingSpectator ZooFrame::createSpectator(float spectatorsHeight) {
-	spWalkingSpectator spectator = new WalkingSpectator();
-
-	spectator->setResAnim(tilesResources.getResAnim("human_1"));
-	float scale = spectatorsHeight / spectator->getHeight();
-	spectator->setScale(spectator->getScaleX() * scale, scale);
-	_view->addChild(spectator);
-
-	return spectator;
-}
-
 spAnimalFarmField ZooFrame::getFarmFieldByModel(spAnimalModel model) {
-	for (int i = 0; i < _farmArray.length() - 1; i++) {
-		if (_farmArray[i]->getModel()->getName() == model->getName()) {
+	for (int i = 0; i < _farmArray.length(); i++) {
+		if (_farmArray[i]->getModel() == model) {
 			return _farmArray[i];
 		}
 	}

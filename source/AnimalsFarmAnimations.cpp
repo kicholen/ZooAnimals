@@ -29,6 +29,10 @@ int AnimalsFarmAnimations::getAnimalsCount() {
 	return _animalsArray.length();
 }
 
+spAnimalInFarmElement AnimalsFarmAnimations::getAnimalByNumber(int value) {
+	return _animalsArray[value];
+}
+
 void AnimalsFarmAnimations::animateAnimalsJump(Vector2 position) {
 	for (int i = _animalsArray.length() - 1; i >= 0; i -= 1) {
 		_animalsArray[i]->animateJump(position);

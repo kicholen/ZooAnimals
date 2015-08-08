@@ -47,6 +47,10 @@ public:
 
 	Point getNumberOfTiles();
 
+	spAnimalsFarmAnimations getAnimation() {
+		return _animalsFarmAnimation;
+	}
+
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:

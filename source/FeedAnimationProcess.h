@@ -8,15 +8,22 @@
 class FeedAnimationProcess : public ProcessSlave
 {
 public:
-	FeedAnimationProcess(spAnimalFarmField farm, spWalkingSpectator spectator);
+	FeedAnimationProcess(spAnimalFarmField farm, spSlidingActor container);
 	~FeedAnimationProcess();
 
 	virtual void process();
 	virtual bool completed();
 
 private:
+	void createFeederMan(float spectatorsHeight);
+
+	void moveToNextPart(Event *event);
+private:
 	spAnimalFarmField _farm;
-	spWalkingSpectator _spectator;
+	spSlidingActor _container;
+	
+	int _animalNumber;
+	spWalkingSpectator _feederMan;
 };
 
 #endif

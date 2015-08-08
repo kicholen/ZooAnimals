@@ -41,8 +41,8 @@ void ProcessMaster::updater(Event* event) {
 		if (slave->completed()) {
 			removeLastProcess();
 		}
-		else {
-			_slaves[_slaves.length() - 1]->process();
+		else if (slave->canProcess()) {
+			slave->process();
 		}
 	}
 }

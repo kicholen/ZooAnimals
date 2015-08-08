@@ -29,6 +29,7 @@ public:
 	void attachElementToRandomAnimal(spActor actor);
 
 	int getAnimalsCount();
+	spAnimalInFarmElement getAnimalByNumber(int value);
 private:
 	Vector2 getPositionFromCenter(float angle, Vector2 center, float distanceFromCenter);
 	void setAnimalsPriorityByY();

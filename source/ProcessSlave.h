@@ -15,8 +15,11 @@ public:
 
 	virtual void process();
 	virtual bool completed();
+	virtual bool canProcess();
 protected:
+	bool _canProcess;
 	bool _completed;
+	int _part;
 };
 
 #endif
