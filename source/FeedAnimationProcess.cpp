@@ -3,27 +3,35 @@
 FeedAnimationProcess::FeedAnimationProcess(spAnimalFarmField farm, spSlidingActor container) {
 	_farm = farm;
 	_container = container;
-	createFeederMan(50);
+	createFeederMan(50); // todo remove this magical num
 	_canProcess = true;
 	_animalNumber = 0;
 }
 
 FeedAnimationProcess::~FeedAnimationProcess() {
-	
+	_feederMan = 0;
 }
 
 void FeedAnimationProcess::process() {
 	if (_part == 0) {
+		for (int i = 0; i < _farm->getAnimation()->getAnimalsCount(); i++) {
+			_farm->getAnimation()->getAnimalsArray()[i]->setJumpSpeedFactor(0.4f);
+		}
 		_farm->playAnimalsAnimation(1);
-		_feederMan->setPosition(Vector2(-_container->getContent()->getX() - _feederMan->getDerivedWidth(), getStage()->getHeight() - (getStage()->getHeight() - _farm->getDerivedHeight()) / 2.0f));
-		_feederMan->addTween(Actor::TweenPosition(Vector2(_farm->getX(), _farm->getY() + _farm->getDerivedHeight() / 2.0f)), 1000)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
+		
+		Vector2 startPosition = std::rand() > RAND_MAX / 2 
+			? Vector2(-_container->getContent()->getX() - _feederMan->getDerivedWidth(), getStage()->getHeight() - (getStage()->getHeight() - _farm->getDerivedHeight()) / 2.0f)
+			: Vector2(-_container->getContent()->getX() + getStage()->getWidth() + _feederMan->getDerivedWidth(), getStage()->getHeight() - (getStage()->getHeight() - _farm->getDerivedHeight()) / 2.0f);
+
+		_feederMan->setPosition(startPosition);
+		_feederMan->addTween(Actor::TweenPosition(Vector2(_farm->getX() - _farm->getDerivedWidth() / 2.0f + _farm->getGateSprite()->getX() + _farm->getGateSprite()->getDerivedWidth() / 2.0f, _farm->getY() + _farm->getDerivedHeight() / 2.0f)), 2000)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
 		_canProcess = false;
 	}
 	else if (_part == 1) {
-		// assume that animals are in good position ? speed them up anyway, it's taking too long
-		// open gate
-		_feederMan->addTween(Actor::TweenY(_feederMan->getY() - 100), 500)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
-		// close gate
+		spSprite gateSprite = _farm->getGateSprite();
+		gateSprite->addTween(Actor::TweenX(gateSprite->getX() - gateSprite->getDerivedWidth()), 500);
+		_feederMan->addTween(Actor::TweenY(_feederMan->getY() - 100), 500, 1, false, 500)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
+		gateSprite->addTween(Actor::TweenX(gateSprite->getX()), 500, 1, false, 1000);
 		_canProcess = false;
 	}
 	else if (_part == 2) {
@@ -38,14 +46,17 @@ void FeedAnimationProcess::process() {
 		}
 	}
 	else if (_part == 3) {
-		// add feed animal animation
+		// todo add feed animal animation, food based on model or universal animation
 		_part--;
 	}
 	else if (_part == 10) {
-		_feederMan->addTween(Actor::TweenY(0), 1000)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
+		_feederMan->addTween(Actor::TweenY(-200), 1500)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
 		_canProcess = false;
 	}
 	else {
+		for (int i = 0; i < _farm->getAnimation()->getAnimalsCount(); i++) {
+			_farm->getAnimation()->getAnimalsArray()[i]->setJumpSpeedFactor(1.0f);
+		}
 		_farm->playAnimalsAnimation(0);
 		_feederMan->detach();
 		_feederMan = 0;

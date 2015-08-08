@@ -1,7 +1,9 @@
 #include "Timer.h"
 
-Timer::Timer(int delayMS, int repeatCount = -1, bool detachUponCompletion = true) {
-	attachTo(getRoot());
+Timer::Timer(int delayMS, int repeatCount, bool detachUponCompletion, bool shouldAttachToRoot) {
+	if (shouldAttachToRoot) {
+		attachTo(getRoot());
+	}
 	setVisible(false);
 	_paused = false;
 	_currentCount = 1;

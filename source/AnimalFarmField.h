@@ -51,6 +51,10 @@ public:
 		return _animalsFarmAnimation;
 	}
 
+	spSprite getGateSprite() {
+		return _gateSprite;
+	}
+
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
@@ -75,6 +79,8 @@ private:
 	void onAnimalCountChanged(Event *ev);
 	void onAnimalFed(Event *ev);
 	
+	spSprite _gateSprite;
+
 	VectorArray<spSprite> _zSortElements;
 	AnimalFarmState _state;
 	spAnimalFarmPanel _animalPanel;

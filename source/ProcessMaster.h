@@ -11,17 +11,20 @@ using namespace FlashUtils;
 
 DECLARE_SMART(ProcessMaster, spProcessMaster);
 
-class ProcessMaster : public Object
+class ProcessMaster : public Timer
 {
 public:
 	ProcessMaster();
 	~ProcessMaster();
 
 	void addProcess(spProcessSlave slave);
-	void start();
+	void start(spActor parent);
 	void clear();
 
 protected:
+	virtual void updateTimer(const UpdateState &us);
+	virtual void complete();
+
 	void removeLastProcess();
 
 	void updater(Event* event);

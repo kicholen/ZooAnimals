@@ -29,6 +29,9 @@ public:
 	void attachElementToRandomAnimal(spActor actor);
 
 	int getAnimalsCount();
+	VectorArray<spAnimalInFarmElement> getAnimalsArray() {
+		return _animalsArray;
+	}
 	spAnimalInFarmElement getAnimalByNumber(int value);
 private:
 	Vector2 getPositionFromCenter(float angle, Vector2 center, float distanceFromCenter);

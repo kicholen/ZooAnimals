@@ -118,9 +118,8 @@ void ZooFrame::onAnimalFed(Event *event) {
 	AnimalsManager::AnimalEvent *animalEvent = safeCast<AnimalsManager::AnimalEvent*>(event);
 
 	spProcessMaster master = new ProcessMaster();
-	master->addRef();
 	master->addProcess(new FeedAnimationProcess(getFarmFieldByModel(animalEvent->model), _rotatingContainer));
-	master->start();
+	master->start(_view);
 }
 
 void ZooFrame::onFinished(Event *event) {

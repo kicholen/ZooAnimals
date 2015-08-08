@@ -19,6 +19,9 @@ public:
 
 	void setAnimalSprite(const std::string& spriteName);
 	void animateJump(const Vector2& position, bool isRandom = false);
+	void setJumpSpeedFactor(float value) {
+		_jumpSpeedFactor = value;
+	}
 	float getShadowY();
 	float getShadowX();
 	float getJumpTime();
@@ -67,6 +70,8 @@ private:
 
 	Vector2 _exactPosition;
 	bool _isJumpingExact;
+
+	float _jumpSpeedFactor;
 public:
 	bool _canUpdate;
 };

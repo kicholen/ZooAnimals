@@ -17,6 +17,7 @@ AnimalInFarmElement::AnimalInFarmElement(const std::string& spriteName, const Ve
 		setSize(size);
 	}
 
+	_jumpSpeedFactor = 1.0f;
 	_jumpHeight = jumpHeight * getRoot()->getWidth() / 480; // todo hack, set it by percent in content, not this stupid way ^^ 
 	_jumpTime = jumpTime;
 	_jumpRange = jumpRange * getRoot()->getWidth() / 480;
@@ -238,17 +239,17 @@ void AnimalInFarmElement::jumpToPosition(const Vector2& position) {
 	// shadow tween position
 	_state = aifJumping;
 	spTweenQueue queueTween = new TweenQueue();
-	queueTween->add(TweenPosition(_animalSprite->getPosition() + (position - _animalSprite->getPosition()) / 2 - Vector2(0.0f, _jumpHeight)), (int)_jumpTime / 2);	
-	queueTween->add(TweenPosition(Vector2(position.x, position.y - _animalSprite->getDerivedHeight() / 2)), (int)_jumpTime / 2);
+	queueTween->add(TweenPosition(_animalSprite->getPosition() + (position - _animalSprite->getPosition()) / 2 - Vector2(0.0f, _jumpHeight)), (int)_jumpTime / 2 * _jumpSpeedFactor);
+	queueTween->add(TweenPosition(Vector2(position.x, position.y - _animalSprite->getDerivedHeight() / 2)), (int)_jumpTime / 2 * _jumpSpeedFactor);
 	
 	spTweenQueue queueTweenShadow = new TweenQueue();
-	queueTweenShadow->add(TweenPosition(_shadowSprite->getPosition() + (position - _shadowSprite->getPosition()) / 2), (int)_jumpTime / 2);	
-	queueTweenShadow->add(TweenPosition((position)), (int)_jumpTime / 2);
+	queueTweenShadow->add(TweenPosition(_shadowSprite->getPosition() + (position - _shadowSprite->getPosition()) / 2), (int)_jumpTime / 2 * _jumpSpeedFactor);
+	queueTweenShadow->add(TweenPosition((position)), (int)_jumpTime / 2 * _jumpSpeedFactor);
 
 	_shadowSprite->addTween(queueTweenShadow);
 	_animalSprite->addTween(queueTween)->setDoneCallback(CLOSURE(this, &AnimalInFarmElement::onJumpEnded));
 	if (_isWaterAnimal) {
-		_animalSprite->addTween(Sprite::TweenColor(Color()), (int)_jumpTime, 1, true);
+		_animalSprite->addTween(Sprite::TweenColor(Color()), (int)_jumpTime * _jumpSpeedFactor, 1, true);
 	}
 }
 

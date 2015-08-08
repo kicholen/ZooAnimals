@@ -25,7 +25,7 @@ public:
 		const UpdateState *us;
 	};
 
-	Timer(int delayMS, int repeatCount, bool detachUponCompletion);
+	Timer(int delayMS, int repeatCount = -1, bool detachUponCompletion = true, bool shouldAttachToRoot = true);
 	~Timer();
 
 	bool isRunning();
@@ -36,19 +36,20 @@ public:
 	void setCompleteCallback(EventCallback cb);
 	void setTimerCallback(EventCallback cb);
 
-private:
-	void updateTimer(const UpdateState &us);
-	void complete();
+protected:
+	virtual void updateTimer(const UpdateState &us);
+	virtual void complete();
 	void interval();
+
+protected:
+	timeMS _timePassed;
+	int _delay;
+	bool _detachUponCompletion;
 
 private:
 	int _currentCount;
 	int _repeatCount;
-	int _delay;
 	bool _paused;
-	bool _detachUponCompletion;
-	
-	timeMS _timePassed;
 
 	EventCallback _cbComplete;
 	EventCallback _cbTimer;

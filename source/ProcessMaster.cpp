@@ -1,30 +1,24 @@
 #include "ProcessMaster.h"
 
-ProcessMaster::ProcessMaster() {
-
+ProcessMaster::ProcessMaster() : Timer(PROCESS_DELAY, -1, true, false) {
+	
 }
 
 ProcessMaster::~ProcessMaster() {
 	_slaves.clear();
-	if (_timer) {
-		_timer->detach();
-	}
 }
 
 void ProcessMaster::addProcess(spProcessSlave slave) {
 	_slaves.push(slave);
 }
 
-void ProcessMaster::start() {
-	if (!_timer) {
-		_timer = new Timer(PROCESS_DELAY, -1, false);
-		_timer->setTimerCallback(CLOSURE(this, &ProcessMaster::updater));
-		_timer->start();
-	}
-}
-
 void ProcessMaster::clear() {
 	_slaves.clear();
+}
+
+void ProcessMaster::start(spActor parent) {
+	Timer::start();
+	attachTo(parent);
 }
 
 void ProcessMaster::removeLastProcess() {
@@ -32,17 +26,29 @@ void ProcessMaster::removeLastProcess() {
 	_slaves._vector.pop_back();
 }
 
-void ProcessMaster::updater(Event* event) {
-	if (_slaves.length() == 0) {
-		// dispatch event, stop timer
+void ProcessMaster::updateTimer(const UpdateState &us) {
+	_timePassed += us.dt;
+
+	if (_timePassed >= _delay) {
+		_timePassed = 0;
+
+		if (_slaves.length() == 0) {
+			complete();
+		}
+		else {
+			spProcessSlave slave = _slaves[_slaves.length() - 1];
+			if (slave->completed()) {
+				removeLastProcess();
+			}
+			else if (slave->canProcess()) {
+				slave->process();
+			}
+		}
 	}
-	else {
-		spProcessSlave slave = _slaves[_slaves.length() - 1];
-		if (slave->completed()) {
-			removeLastProcess();
-		}
-		else if (slave->canProcess()) {
-			slave->process();
-		}
+}
+
+void ProcessMaster::complete() {
+	if (_detachUponCompletion) {
+		detach();
 	}
 }
