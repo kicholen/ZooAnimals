@@ -20,7 +20,8 @@ public:
 	~TileField();
 
 	void setData(const std::string& animalName);
-	spSprite createTileSprite(std::string resourceName, Vector2 spriteSize, Point spritePosition, std::string spriteName, short priority = -1);
+	spSprite createTileSprite(const std::string& resourceName, Vector2 spriteSize, Point spritePosition, short priority = -1);
+	spActor createTileActor(Vector2 spriteSize, Point spritePosition, short priority = -1);
 private:
 	VectorArray<int> getFarmParameters(std::string& animalName);
 	Point getCellIndex(Vector2 position);

@@ -55,20 +55,6 @@ Action ZooFrame::loop() {
 		else if (action.id == "result") {
 			break;
 		}
-		else if (action.id == "tiles") {
-			if (_shouldRemoveTiles) {
-				for (int i = _farmArray.length() - 1; i >= 0; i -= 1) {
-					_farmArray[i]->getChildT<TileField>("tajle", oxygine::ep_ignore_error)->detach();
-				}
-			}
-			else {
-				for (int i = _farmArray.length() - 1; i >= 0; i -= 1) {
-					_farmArray[i]->createTileField();
-				}
-			}
-			_shouldRemoveTiles = !_shouldRemoveTiles;
-			break;
-		}
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
 
@@ -140,7 +126,6 @@ void ZooFrame::onGameChosen(Event *event) {
 }
 
 void ZooFrame::setData() {
-	_shouldRemoveTiles = true;
 	_farmArray._vector.resize(0);
 	_farmArray._vector.reserve(10);
 

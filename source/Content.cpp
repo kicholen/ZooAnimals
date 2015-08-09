@@ -197,14 +197,6 @@ pugi::xml_node Content::getAnimalFarmParametersNode(const std::string &name) {
 	return pugi::xml_node();
 }
 
-pugi::xml_node Content::getAnimalFarmSortParametersNode(const std::string &name) {
-	return getAnimalFarmParametersNode(name).child("sort");
-}
-
-pugi::xml_node Content::getAnimalFarmNoSortParametersNode(const std::string &name) {
-	return getAnimalFarmParametersNode(name).child("no_sort");
-}
-
 pugi::xml_node Content::getShopFirstChildNode(const std::string& shopType) {
 	pugi::xml_node data = _contentDocument.child("data");
 	OX_ASSERT(data);

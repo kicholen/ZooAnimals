@@ -33,8 +33,6 @@ public:
 	pugi::xml_node getAnimalInfoNode(const std::string &name);
 
 	pugi::xml_node getAnimalFarmParametersNode(const std::string &name);
-	pugi::xml_node getAnimalFarmSortParametersNode(const std::string &name);
-	pugi::xml_node getAnimalFarmNoSortParametersNode(const std::string &name);
 	pugi::xml_node getShopFirstChildNode(const std::string& shopType);
 	
 	int getGameLevelsCount(const std::string &gameName);

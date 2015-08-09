@@ -31,7 +31,6 @@ private:
 	std::string _region;
 
 	spSlidingActor _rotatingContainer;
-	bool _shouldRemoveTiles;
 };
 
 #endif

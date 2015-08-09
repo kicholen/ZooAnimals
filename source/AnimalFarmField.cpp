@@ -2,6 +2,7 @@
 #include "Content.h"
 #include "AnimalsManager.h"
 #include <limits>
+#include "TileBuilder.h"
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setTouchEnabled(false);
@@ -46,47 +47,24 @@ void AnimalFarmField::setData(spAnimalModel model) {
 
 	//createAnimalButton("add", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.1f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::addAnimal));
 	//createAnimalButton("animate", Vector2(this->getWidth() * 0.9f, this->getHeight() * 0.4f))->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::playNextAnimalsAnimation));
+	
+	spTileBuilder builder = new TileBuilder();
 
-	spTileField tileField = createTileField();
-	createSortElements(tileField);
+	spTileField tileField = builder->build(this, _model, _zSortElements);
+	createFencesAndGui(tileField);
 	for (int i = _zSortElements.length() - 1; i >= 0; i -= 1) {
 		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));
 	}
 
+	createFeeder();
+
 	_state = afWaiting;
 }
 
-spTileField AnimalFarmField::createTileField() {
-	spTileField tileField = new TileField(getNumberOfTiles());
-	tileField->setData(_model->animalName());
-	tileField->setScale(getHeight() / tileField->getHeight());
-	tileField->setName("tajle");
-	tileField->setAnchor(0.0f, 0.0f);
-	tileField->setPosition(0.0f, 0.0f);
-	tileField->setPriority(-500);
-	addChild(tileField);
-	return tileField;
-}
-
-void AnimalFarmField::createSortElements(spTileField tileField) {
-	/*pugi::xml_node animalParameters = Content::instance.getAnimalFarmSortParametersNode(_model->animalName());
-	pugi::xml_node parameter = animalParameters.first_child();
-	
-	while (parameter) {
-		int i = parameter.first_attribute().as_int();
-		int j = parameter.first_attribute().next_attribute().as_int();
-		spSprite tileSprite = tileField->createTileSprite(parameter.name(), Vector2(TILE_SIZE_X, TILE_SIZE_Y), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 1);
-		tileSprite->setAnchor(0.0f, 1.0f);
-		tileSprite->setY(tileSprite->getY() + TILE_SIZE_Y);
-		_zSortElements.push(tileSprite);
-		addChild(tileSprite);
-		parameter = parameter.next_sibling();
-	}
-	*/
+void AnimalFarmField::createFencesAndGui(spTileField tileField) {
 	createFenceAtBottom(tileField);
 	createFenceAtLeft(tileField);
 	createInformationTable(tileField);
-	createFeeder();
 }
 
 void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
@@ -97,18 +75,18 @@ void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
 	for (int i = 0; i < tilesNumber.x; i++) {
 		spSprite tileSprite;
 		if (i == 0) {
-			tileSprite = tileField->createTileSprite("fenceFrontSide", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+			tileSprite = tileField->createTileSprite("fenceFrontSide", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 3000);
 		}
 		else if (i == tilesNumber.x - 1) {
-			tileSprite = tileField->createTileSprite("fenceFrontSide", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+			tileSprite = tileField->createTileSprite("fenceFrontSide", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 3000);
 			tileSprite->setScaleX(-tileSprite->getScaleX());
 		}
 		else if (gatePosition == i) {
-			tileSprite = tileField->createTileSprite("fenceFrontGate", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+			tileSprite = tileField->createTileSprite("fenceFrontGate", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 3000);
 			_gateSprite = tileSprite;
 		}
 		else {
-			tileSprite = tileField->createTileSprite("fenceFrontCenter", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 3000);
+			tileSprite = tileField->createTileSprite("fenceFrontCenter", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 3000);
 		}
 		tileSprite->setAnchor(0.0f, 1.0f);
 		tileSprite->setPosition(tileSprite->getScaleX() > 0 ? tileSprite->getX() * tileField->getScaleX() : tileSprite->getX() * tileField->getScaleX() - tileSprite->getDerivedWidth(), tileSprite->getY() * tileField->getScaleY() + 2.0f);
@@ -120,7 +98,7 @@ void AnimalFarmField::createFenceAtLeft(spTileField tileField) {
 	Point tilesNumber = getNumberOfTiles();
 	int i = tilesNumber.x;
 	for (int j = 0; j < tilesNumber.y; j++) {
-		spSprite tileSprite = tileField->createTileSprite("fenceTop", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j) + "_tile", 2900);
+		spSprite tileSprite = tileField->createTileSprite("fenceTop", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 2900);
 		tileSprite->setAnchor(0.0f, 0.0f);
 		tileSprite->setPosition(- tileSprite->getDerivedWidth() / 2, tileSprite->getY() * tileField->getScaleY());
 		tileSprite->setPriority(3000);

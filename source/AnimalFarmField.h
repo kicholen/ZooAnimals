@@ -37,7 +37,6 @@ public:
 
 	void setData(spAnimalModel model);
 	void addAnimal(Event *event);
-	spTileField createTileField();
 	void playNextAnimalsAnimation(Event *event);
 	void playAnimalsAnimation(int animationType);
 
@@ -58,7 +57,7 @@ public:
 protected:
 	virtual void doUpdate(const UpdateState &us);
 private:
-	void createSortElements(spTileField tileField);
+	void createFencesAndGui(spTileField tileField);
 	void createFenceAtBottom(spTileField tileField);
 	void createFenceAtLeft(spTileField tileField);
 	void createInformationTable(spTileField tileField);
@@ -81,7 +80,7 @@ private:
 	
 	spSprite _gateSprite;
 
-	VectorArray<spSprite> _zSortElements;
+	VectorArray<spActor> _zSortElements;
 	AnimalFarmState _state;
 	spAnimalFarmPanel _animalPanel;
 	spFeederElement _feederElement;

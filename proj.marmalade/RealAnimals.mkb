@@ -69,6 +69,12 @@ files
 	TouchBlock.cpp
 	TouchBlock.h
 
+	[source/elements/base/tiles]
+	TileField.cpp
+	TileField.h
+	TileBuilder.cpp
+	TileBuilder.h
+
 	[source/element/swipe]
 	SwipeTrailElement.cpp
 	SwipeTrailElement.h

@@ -15,14 +15,27 @@ TileField::~TileField() {
 
 void TileField::setData(const std::string& animalName) {
 	_animalName = animalName;
-	pugi::xml_node animalParameters = Content::instance.getAnimalFarmParametersNode(animalName);
-	std::string baseTile = animalParameters.first_attribute().as_string();
-	pugi::xml_node parameter = Content::instance.getAnimalFarmNoSortParametersNode(animalName).first_child();
+	pugi::xml_node animalFarmParameters = Content::instance.getAnimalFarmParametersNode(animalName);
+	std::string baseTile = animalFarmParameters.first_attribute().as_string();
+	pugi::xml_node parameter = animalFarmParameters.child("no_sort").first_child();
 	
 	while (parameter) {
 		int i = parameter.first_attribute().as_int();
 		int j = parameter.first_attribute().next_attribute().as_int();
-		addChild(createTileSprite(parameter.name(), Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j), 1));
+		addChild(createTileSprite(parameter.name(), Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j), 1));
+
+		parameter = parameter.next_sibling();
+	}
+
+	pugi::xml_node pathNode = animalFarmParameters.child("path");
+
+	parameter = pathNode.first_child();
+	const std::string& resAnim = pathNode.first_attribute().as_string();
+
+	while (parameter) {
+		int i = parameter.first_attribute().as_int();
+		int j = parameter.first_attribute().next_attribute().as_int();
+		addChild(createTileSprite("roadLeftRight", Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j), 1));
 
 		parameter = parameter.next_sibling();
 	}
@@ -30,19 +43,30 @@ void TileField::setData(const std::string& animalName) {
 	if (baseTile != "none") {
 		for (int i = 0; i < _numberOfFields.x; i++) {
 			for (int j = _numberOfFields.y - 1; j >= 0; j--) {
-				addChild(createTileSprite(baseTile, Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j), FlashUtils::CMath::intToString(i) + FlashUtils::CMath::intToString(j)));
+				addChild(createTileSprite(baseTile, Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j)));
 			}
 		}
 	}
 }
 
-spSprite TileField::createTileSprite(std::string resourceName, Vector2 spriteSize, Point spritePosition, std::string spriteName, short priority) {
+spSprite TileField::createTileSprite(const std::string& resourceName, Vector2 spriteSize, Point spritePosition, short priority) {
 	spSprite sprite = new Sprite();
 	sprite->setAnchor(0.0f, 0.0f);
 	sprite->setResAnim(tilesResources.getResAnim(resourceName));
 	sprite->setPosition(getCellPosition(spritePosition.x, spritePosition.y));
 	setSpriteScaleBySize(sprite, spriteSize);
-	sprite->setName(spriteName);
+	sprite->setPriority(priority);
+	if (_enableCullingOnTiles) {
+		sprite->setCull(true);
+	}
+	return sprite;
+}
+
+spActor TileField::createTileActor(Vector2 spriteSize, Point spritePosition, short priority) {
+	spActor sprite = new Actor();
+	sprite->setAnchor(0.0f, 0.0f);
+	sprite->setPosition(getCellPosition(spritePosition.x, spritePosition.y));
+	setActorScaleBySize(sprite, spriteSize);
 	sprite->setPriority(priority);
 	if (_enableCullingOnTiles) {
 		sprite->setCull(true);
