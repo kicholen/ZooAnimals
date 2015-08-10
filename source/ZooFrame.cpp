@@ -7,6 +7,8 @@
 #include "ExpManager.h"
 #include "ProcessMaster.h"
 #include "FeedAnimationProcess.h"
+#include "SpectatorsArea.h"
+#include "FarmManager.h"
 
 #include "MemoryFrame.h"
 #include "MatchTwoFrame.h"
@@ -155,7 +157,7 @@ void ZooFrame::setData() {
 	float positionX = 0.0f;
 	float offset = 0.0f;
 	float lastFieldWidth = 0.0f;
-	
+
 	animalMap animaMap = AnimalsManager::instance.getPossesedAnimalsByRegion(_region);
 	for (animalMap::iterator innerIterator = animaMap.begin(); innerIterator != animaMap.end(); ++innerIterator) {
 		spAnimalFarmField field = new AnimalFarmField(fieldSize);
@@ -167,7 +169,7 @@ void ZooFrame::setData() {
 		field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
 			
 		spTileField tileField = new TileField(Point(field->getNumberOfTiles().x, 3));
-		tileField->setData("pavement");
+		tileField->setData("pavement", "first");
 		tileField->setScale(fieldSize.x / tileField->getWidth());
 		tileField->setName("tajlee");
 		tileField->setAnchor(0.5f, 0.0f);
@@ -191,6 +193,12 @@ void ZooFrame::setData() {
 		rectangleContainer->addChild(field);
 		lastFieldWidth = field->getDerivedWidth();
 	}
+
+	spSpectatorsArea area = new SpectatorsArea();
+	area->setSize(positionX - lastFieldWidth / 2, bottomEmptySpace);
+	area->setY(fieldSize.y);
+	area->init(FarmManager::instance.getFarmHumanCount());
+	rectangleContainer->addChild(area);
 
 	rectangleContainer->setSize(positionX - lastFieldWidth / 2, _rotatingContainer->getHeight());
 	_rotatingContainer->setContent(rectangleContainer);

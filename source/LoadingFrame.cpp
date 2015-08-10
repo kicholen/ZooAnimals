@@ -13,6 +13,7 @@
 #include "SharedResources.h"
 #include "LandingPageFrame.h"
 #include "Multithreading.h"
+#include "FarmManager.h"
 
 LoadingFrame::LoadingFrame() {
 	init("LoadingFrame.xml", false);
@@ -113,6 +114,7 @@ void LoadingFrame::initManagers(Event *ev) {
 	ExpManager::instance.init(_version);
 	ShopManager::instance.init(_version);
 	LanguageManager::instance.init(0);
+	FarmManager::instance.init();
 
 	_progressBar->addTween(ProgressBar::TweenProgress(0.5f), 100)->setDoneCallback(CLOSURE(this, &LoadingFrame::initSoundPlayer));
 }

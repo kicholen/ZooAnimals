@@ -19,9 +19,9 @@ public:
 	TileField(Point numberOfFields, bool enableCullingOnTiles = false);
 	~TileField();
 
-	void setData(const std::string& animalName);
-	spSprite createTileSprite(const std::string& resourceName, Vector2 spriteSize, Point spritePosition, short priority = -1);
-	spActor createTileActor(Vector2 spriteSize, Point spritePosition, short priority = -1);
+	void setData(const std::string& animalName, const std::string& level);
+	spSprite createTileSprite(const std::string& resourceName, const Vector2& spriteSize, const Point& spritePosition, short priority = -1);
+	spActor createTileActor(const Vector2& actorSize, const Point& actorPosition, short priority = -1);
 private:
 	VectorArray<int> getFarmParameters(std::string& animalName);
 	Point getCellIndex(Vector2 position);

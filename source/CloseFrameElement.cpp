@@ -2,7 +2,7 @@
 #include "SharedResources.h"
 
 CloseFrameElement::CloseFrameElement() {
-	_state = cfeHidden;
+	_state = cfeShown;
 	_displayState = cfeLeft;
 	setAnchor(0.0f, 0.0f);
 	create();
@@ -22,22 +22,27 @@ void CloseFrameElement::show() {
 	addTween(Sprite::TweenPosition(_showPosition), 300, 1, false, 0, Tween::ease_outBack);
 }
 
-void CloseFrameElement::hide() {
+void CloseFrameElement::hide(bool shouldAnimate) {
 	if (_state != cfeShown) {
 		return;
 	}
 
-	addTween(Sprite::TweenPosition(_hidePosition), 300, 1, false, 0, Tween::ease_outBack);
+	if (shouldAnimate) {
+		addTween(Sprite::TweenPosition(_hidePosition), 300, 1, false, 0, Tween::ease_outBack);
+	}
+	else {
+		setPosition(_hidePosition);
+	}
 }
 
 void CloseFrameElement::setDisplayState() {
 	if (_displayState == cfeLeft) {
 		_showPosition = Vector2(0.0f, 0.0f);
-		_hidePosition = _showPosition + Vector2(0.0f, -getHeight());
+		_hidePosition = _showPosition + Vector2(0.0f, - _button->getDerivedHeight());
 	}
 	else if (_displayState == cfeRght) {
-		_showPosition = Vector2(getRoot()->getWidth() - getDerivedWidth(), 0.0f);
-		_hidePosition = _showPosition + Vector2(0.0f, -getHeight());
+		_showPosition = Vector2(getRoot()->getWidth() - _button->getDerivedWidth(), 0.0f);
+		_hidePosition = _showPosition + Vector2(0.0f, - _button->getHeight());
 	}
 	else {
 		log::error("CloseFrameElement::setDisplayState state not available.");

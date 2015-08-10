@@ -49,6 +49,12 @@ void WalkingSpectator::revive(const VectorArray<Vector2>& trackPoints) {
 	checkPositionsByNextPoint();
 }
 
+void WalkingSpectator::animateMoveToPosition(const Vector2& position) {
+	setFaceAccordingToMovement(position.x);
+	addTween(TweenPosition(position), 1000)->addDoneCallback(CLOSURE(this, &WalkingSpectator::onAnimationEnded));
+	addTween(TweenRotationDegrees(10), 200, 5, true);
+}
+
 void WalkingSpectator::doUpdate(const UpdateState &us) {
 	if (_state == wsDead) {
 		return;
@@ -152,4 +158,8 @@ void WalkingSpectator::checkPositionsByNextPoint() {
 	if (!_isProperY && getY() == _trackPoints._vector.back().y) {
 		_isProperY = true;
 	}
+}
+
+void WalkingSpectator::onAnimationEnded(Event *event) {
+	_number = CMath::random(2, 6);
 }

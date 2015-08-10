@@ -60,8 +60,6 @@ files
 	MatchTwoSlot.h
 	MatchTwoDraggable.cpp
 	MatchTwoDraggable.h
-	TileField.cpp
-	TileField.h
 	MoneyCounterElement.cpp
 	MoneyCounterElement.h
 	CloseFrameElement.cpp
@@ -69,7 +67,7 @@ files
 	TouchBlock.cpp
 	TouchBlock.h
 
-	[source/elements/base/tiles]
+	[source/element/base/tile]
 	TileField.cpp
 	TileField.h
 	TileBuilder.cpp
@@ -152,6 +150,8 @@ files
 	WalkingSpectator.h
 	SpectatorSpawner.cpp
 	SpectatorSpawner.h
+	SpectatorsArea.cpp
+	SpectatorsArea.h
 	TooltipElement.cpp
 	TooltipElement.h
 
@@ -338,6 +338,8 @@ files
 	ShopManager.h
 	LanguageManager.cpp
 	LanguageManager.h
+	FarmManager.cpp
+	FarmManager.h
 
 	[source/factory]
 	LockitFactory.cpp

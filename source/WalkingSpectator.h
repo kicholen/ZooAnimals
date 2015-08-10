@@ -29,8 +29,18 @@ public:
 	WalkingSpectator();
 	~WalkingSpectator();
 
-
 	void revive(const VectorArray<Vector2>& trackPoints);
+	void setFaceAccordingToMovement(float destX);
+	void animateMoveToPosition(const Vector2& position);
+
+	uint getNumber() {
+		return _number;
+	}
+
+	void setNumber(uint value) {
+		_number = value;
+	}
+
 protected:
 	void doUpdate(const UpdateState &us);
 	void doVelocity(float dt, const Vector2& destPosition);
@@ -39,11 +49,10 @@ private:
 	void die();
 	void tryToAnimateToNextPosition();
 	Vector2 getNextTrackPoint();
-	void setFaceAccordingToMovement(float destX);
 	void setVelocityByNextPoint();
 	void checkPositionsByNextPoint();
 
-	void onTweenEnded(Event *ev);
+	void onAnimationEnded(Event *ev);
 
 private:
 	WalkingSpectatorState _state;

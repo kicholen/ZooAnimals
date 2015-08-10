@@ -185,7 +185,7 @@ void LandingPageFrame::createGlobalElementsIfDoesntExist() {
 	}
 	if (!_closeButton) {
 		_closeButton = new CloseFrameElement();
-		_closeButton->show();
+		_closeButton->hide(false);
 		_closeButton->setPriority(1000);
 		getRoot()->addChild(_closeButton);
 	}

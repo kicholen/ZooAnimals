@@ -26,7 +26,7 @@ public:
 	~CloseFrameElement();
 
 	void show();
-	void hide();
+	void hide(bool shouldAnimate = true);
 
 private:
 	void setDisplayState();

@@ -3,6 +3,7 @@
 #include "AnimalsManager.h"
 #include <limits>
 #include "TileBuilder.h"
+#include "FarmManager.h"
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setTouchEnabled(false);
@@ -50,7 +51,8 @@ void AnimalFarmField::setData(spAnimalModel model) {
 	
 	spTileBuilder builder = new TileBuilder();
 
-	spTileField tileField = builder->build(this, _model, _zSortElements);
+	const std::string& level = FarmManager::instance.getFarmLevelByModel(model);
+	spTileField tileField = builder->build(this, _model, _zSortElements, level);
 	createFencesAndGui(tileField);
 	for (int i = _zSortElements.length() - 1; i >= 0; i -= 1) {
 		_zSortElements[i]->setPriority(int(_zSortElements[i]->getY()));

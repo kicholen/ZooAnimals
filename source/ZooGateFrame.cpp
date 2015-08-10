@@ -3,6 +3,8 @@
 #include "FlashUtils.h"
 #include "AnimalsManager.h"
 #include "ZooFrame.h"
+#include "StartGameConfig.h"
+#include "FarmManager.h"
 
 using namespace FlashUtils;
 
@@ -55,11 +57,11 @@ void ZooGateFrame::onZooSectionChosen(Event *event) {
 }
 
 void ZooGateFrame::setData() {
-	float tileSize = _view->getHeight() / 15;
+	float tileSize = _view->getHeight() / 15.0f;
 
 	spTileField tileField = new TileField(Point(27, 15), true);
 	float scale = _view->getHeight() / tileField->getHeight();
-	tileField->setData("zoo_first_ground");
+	tileField->setData("zoo_first_ground", "first");
 	tileField->setScale(scale);
 	tileField->setName("ground_tiles");
 	tileField->setAnchor(0.5f, 1.0f);
@@ -68,10 +70,10 @@ void ZooGateFrame::setData() {
 	tileField->setPriority(-51);
 	tileField->attachTo(_view);
 
-	float tilesToViewOffsetX = (tileField->getDerivedWidth() - _view->getWidth()) / 2;
+	float tilesToViewOffsetX = (tileField->getDerivedWidth() - _view->getWidth()) / 2.0f;
 
 	spTileField tileFieldObjects = new TileField(Point(27, 15), true);
-	tileFieldObjects->setData("zoo_first_objects");
+	tileFieldObjects->setData("zoo_first_objects", "first");
 	tileFieldObjects->setScale(scale);
 	tileFieldObjects->setName("object_tiles");
 	tileFieldObjects->setAnchor(0.5f, 1.0f);
@@ -80,7 +82,7 @@ void ZooGateFrame::setData() {
 	tileFieldObjects->setPriority(-50);
 	tileFieldObjects->attachTo(_view);
 
-	_spawner = new SpectatorSpawner(25, tileSize * 0.8f);
+	_spawner = new SpectatorSpawner(FarmManager::instance.getGateHumanCount(), tileSize * 0.8f);
 	_spawner->setTouchChildrenEnabled(false);
 	_spawner->setTouchEnabled(false);
 	_spawner->setSize(_view->getSize());
@@ -287,13 +289,9 @@ void ZooGateFrame::addSignPost(float tileSize, const std::string& region, const 
 }
 
 void ZooGateFrame::addPossibleSpritesToSpawner() {
-	_spawner->addResAnim("human_1");
-	_spawner->addResAnim("human_2");
-	_spawner->addResAnim("human_3");
-	_spawner->addResAnim("human_4");
-	_spawner->addResAnim("human_5");
-	_spawner->addResAnim("human_6");
-	_spawner->addResAnim("human_7");
+	for (int i = 1; i <= HUMAN_CHARS_COUNT; i++) {
+		_spawner->addResAnim("human_" + CMath::intToString(i));
+	}
 }
 
 float ZooGateFrame::getXOnTilesToView(float x) {
