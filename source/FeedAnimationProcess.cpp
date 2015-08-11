@@ -3,7 +3,7 @@
 FeedAnimationProcess::FeedAnimationProcess(spAnimalFarmField farm, spSlidingActor container) {
 	_farm = farm;
 	_container = container;
-	createFeederMan(50); // todo remove this magical num
+	createFeederMan(getRoot()->getHeight() * 0.07f); // todo remove this magical num
 	_canProcess = true;
 	_animalNumber = 0;
 }

@@ -34,6 +34,8 @@ public:
 
 	pugi::xml_node getAnimalFarmParametersNode(const std::string &name);
 	pugi::xml_node getShopFirstChildNode(const std::string& shopType);
+
+	pugi::xml_node getHatsNode();
 	
 	int getGameLevelsCount(const std::string &gameName);
 private:

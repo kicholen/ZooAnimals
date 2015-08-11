@@ -340,6 +340,8 @@ files
 	LanguageManager.h
 	FarmManager.cpp
 	FarmManager.h
+	HatManager.cpp
+	HatManager.h
 
 	[source/factory]
 	LockitFactory.cpp
