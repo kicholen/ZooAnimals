@@ -3,6 +3,7 @@
 
 #include "oxygine-framework.h"
 #include "FlashUtils.h"
+#include "AnimalModel.h"
 
 using namespace FlashUtils;
 using namespace oxygine;
@@ -23,7 +24,8 @@ public:
 	void init();
 
 	bool canPlaceHat();
-	std::string getRandomHatResource();
+	std::string getRandomHatResource(spAnimalModel model);
+	void getHatParametersForAnimal(const std::string hat, spAnimalModel model);
 
 private:
 	void createHatList();

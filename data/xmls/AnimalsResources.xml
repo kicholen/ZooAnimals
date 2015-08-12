@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/farm/" />
+		<set hit_test="true" />
+			<image id="bee" file="bee.png"/>
+			<image id="cat" file="cat.png"/>
+			<image id="cow" file="cow.png"/>
+			<image id="dog" file="dog.png"/>
+			<image id="duck" file="duck.png"/>
+			<image id="goat" file="goat.png"/>
+			<image id="horse" file="horse.png"/>
+			<image id="sheep" file="sheep.png"/>
+			<image id="snail" file="snail.png"/>
+			<image id="squirell" file="squirell.png"/>
+			<image id="owl" file="owl.png"/>
+			<image id="mouse" file="mouse.png"/>
+			
+			<set path = "images/winter/" />
+			<image id="fox" file="fox.png"/>
+			<image id="penguin" file="penguin.png"/>
+			<image id="penguin_2" file="penguin_2.png"/>
+			<image id="polarbear" file="polarbear.png"/>
+			<image id="walrus" file="walrus.png"/>
+			<image id="wolf" file="wolf.png"/>
+			<image id="owl_winter" file="owl_winter.png"/>
+			<image id="young_seal" file="young_seal.png"/>
+			
+			<set path = "images/underwater/" />		
+			<image id="dolphin" file="dolphin.png"/>
+			<image id="octopus" file="octopus.png"/>
+			<image id="fish_1" file="fish_1.png"/>
+			<image id="whale" file="whale.png"/>
+			<image id="shark" file="shark.png"/>
+			
+			<set path = "images/steppe/" />	
+			<image id="elephant" file="elephant.png"/>
+			<image id="girafee" file="girafee.png"/>
+			<image id="gnu" file="gnu.png"/>
+			<image id="leopard" file="leopard.png"/>
+			<image id="rhino" file="rhino.png"/>
+			<image id="zebra" file="zebra.png"/>
+			<image id="lion" file="lion.png"/>
+			
+			<set path = "images/asia/" />	
+			<image id="yak" file="yak.png"/>
+			<image id="tiger" file="tiger.png"/>
+			<image id="snake" file="snake.png"/>
+			<image id="peacock" file="peackock_no_taill_2x1.png" cols = "2" /> <!-- 'id' is optional -->
+			<image id="panda" file="panda.png"/>
+			<image id="monkey_2" file="monkey_2.png"/>
+			<image id="parrot" file="parrot.png"/>
+			<image id="elephant" file="elephant.png"/>
+			
+			<set path = "images/australia/" />
+			<image id="crocodile" file="crocodile.png"/>
+			<image id="kangaroo" file="kangaroo.png"/>
+			<image id="kiwi" file="kiwi.png"/>
+			<image id="koala" file="koala.png"/>
+			<image id="ostrich" file="ostrich.png"/>
+			<image id="tealplatypus" file="tealplatypus.png"/>
+			<image id="turtle" file="turtle.png"/>
+			<image id="dingo" file="dingo.png"/>
+		<set hit_test="false" />
+		
+		<set path = "images/" />
+		<image id="shadow_animal" file="shadow_animal.png" />
+		
+	</atlas>
+</resources>

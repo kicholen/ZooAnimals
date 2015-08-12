@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "photos/" />
+		<image id="young_seal" file="young_seal_real.png"/>
+	</atlas>
+</resources>

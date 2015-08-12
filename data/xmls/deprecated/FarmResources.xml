@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/farm/" />
+		<image id="bee" file="bee.png"/>
+		<image id="cat" file="cat.png"/>
+		<image id="cow" file="cow.png"/>
+		<image id="dog" file="dog.png"/>
+		<image id="duck" file="duck.png"/>
+		<image id="goat" file="goat.png"/>
+		<image id="horse" file="horse.png"/>
+		<image id="sheep" file="sheep.png"/>
+		<image id="snail" file="snail.png"/>
+		<image id="squirell" file="squirell.png"/>
+		<image id="owl" file="owl.png"/>
+		<image id="mouse" file="mouse.png"/>
+	</atlas>
+</resources>

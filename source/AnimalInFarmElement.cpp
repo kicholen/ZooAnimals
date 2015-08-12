@@ -1,6 +1,7 @@
 #include "AnimalInFarmElement.h"
 #include "SharedResources.h"
 #include "FlashUtils.h"
+#include "HatManager.h"
 
 using namespace FlashUtils;
 
@@ -44,6 +45,9 @@ void AnimalInFarmElement::createAnimalSprite(const std::string& spriteName) {
 	_animalSprite = new Sprite();
 	_animalSprite->setPriority(0);
 	setAnimalSprite(spriteName);
+	if (true) {
+		attachWearable();
+	}
 	if (_isWaterAnimal) {
 		Color dupa = _animalSprite->getColor();
 		_animalSprite->setColor(Color(145, 226, 236, 180));
@@ -62,6 +66,15 @@ void AnimalInFarmElement::createShadowSprite() {
 	_shadowSprite->setVisible(_isWaterAnimal ? false : true);
 	addChild(_shadowSprite);
 	setSpriteScaleBySize(_shadowSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f));
+}
+
+void AnimalInFarmElement::attachWearable() {
+	spSprite hat = new Sprite();
+	hat->setAnchor(0.5f, 1.0f);
+	hat->setResAnim(gameResources.getResAnim(HatManager::instance.getRandomHatResource()));
+	hat->setScale((_animalSprite->getWidth() / 2.0f) / hat->getDerivedWidth());
+	hat->setX(_animalSprite->getWidth() / 2.0f);
+	hat->attachTo(_animalSprite);
 }
 
 void AnimalInFarmElement::setAnimalSprite(const std::string& id) {

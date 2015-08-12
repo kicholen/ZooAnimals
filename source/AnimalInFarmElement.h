@@ -38,6 +38,7 @@ protected:
 private:
 	void createAnimalSprite(const std::string& spriteName);
 	void createShadowSprite();
+	void attachWearable();
 
 	void animateAppear();
 	void animateDisappear();

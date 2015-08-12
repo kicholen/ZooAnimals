@@ -336,7 +336,7 @@ files
 	ExpManager.h
 	ShopManager.cpp
 	ShopManager.h
-	LanguageManager.cpp
+	LanguageManager.cpp 
 	LanguageManager.h
 	FarmManager.cpp
 	FarmManager.h

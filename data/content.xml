@@ -1,0 +1,2516 @@
+<?xml version="1.0"?>
+<data version="1">
+	<parameters>
+		<sounds value="60" />
+		<second_multi_cash value="1.5" />
+		<third_multi_cash value="2.0" />
+		<gain_multiplier_cash value="1.3" />
+		<gain_power_cash value="1.0" />
+		<zoo_count value="46" />
+		<gain_multiplier_exp value="100.0" />
+		<gain_power_exp value="1.5" />
+		<level_count value="30" />
+	</parameters>
+	<zoo>
+		<tiger>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="50" height="40" time="1500" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="pop" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="33" lifespan="26" weight="388" l_group="52" l_info="53" l_min="110" l_max="110" />
+		</tiger>
+		<monkey_2>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="60" height="30" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="pop" top_value="3" mid="dots" mid_value="2" low="discover" low_value="1" />
+			<info l_name="37"  lifespan="20" weight="30" l_group="59" l_info="59" l_min="110" l_max="110" />
+		</monkey_2>
+		<snake>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="10" height="5" time="500" delay_min="300" delay_max="500" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="34" lifespan="20" weight="6" l_group="54" l_info="60" l_min="110" l_max="110" />
+		</snake>
+		<elephant>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="60" height="30" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="25" lifespan="33" weight="6400" l_group="52" l_info="61" l_min="110" l_max="110" />
+		</elephant>
+		<peacock>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="500" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="35" lifespan="20" weight="6" l_group="52" l_info="63" l_min="110" l_max="110" />
+		</peacock>
+		<parrot>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="38" lifespan="20" weight="0.028" l_group="55" l_info="64" l_min="110" l_max="110" />
+		</parrot>
+		<panda>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="36" lifespan="20" weight="115" l_group="52" l_info="65" l_min="110" l_max="110" />
+		</panda>
+		<yak>
+			<farm base_tile="jungleCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="32" lifespan="20" weight="1000" l_group="52" l_info="66" l_min="110" l_max="110" />
+		</yak>
+		<koala>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="42" lifespan="18" weight="15" l_group="52" l_info="67" l_min="110" l_max="110" />
+		</koala>
+		<ostrich>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="43" lifespan="19" weight="60" l_group="55" l_info="68" l_min="110" l_max="110" />
+		</ostrich>
+		<kangaroo>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="20" height="10" time="300" delay_min="200" delay_max="500" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="40" lifespan="23" weight="90" l_group="52" l_info="69" l_min="110" l_max="110" />
+		</kangaroo>
+		<kiwi>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="41" lifespan="40" weight="3.3" l_group="55" l_info="70" l_min="110" l_max="110" />
+		</kiwi>
+		<tealplatypus>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="44" lifespan="17" weight="2.4" l_group="52" l_info="71" l_min="110" l_max="110" />
+		</tealplatypus>
+		<turtle>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="45" lifespan="80" weight="300" l_group="54" l_info="72" l_min="110" l_max="110" />
+		</turtle>
+		<dingo>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="46" lifespan="13" weight="35" l_group="52" l_info="73" l_min="110" l_max="110" />
+		</dingo>
+		<crocodile>
+			<farm base_tile="australiaCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="39" lifespan="70" weight="1000" l_group="52" l_info="74" l_min="110" l_max="110" />
+		</crocodile>
+		<goat>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="6" lifespan="18" weight="60" l_group="52" l_info="75" l_min="110" l_max="110" />
+		</goat>
+		<bee>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="1" lifespan="1" weight="300" l_group="56" l_info="76" l_min="110" l_max="110" />
+		</bee>
+		<dog>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="4" lifespan="12" weight="40" l_group="52" l_info="77" l_min="110" l_max="110" />
+		</dog>
+		<snail>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="9" lifespan="35" weight="0.050 " l_group="57" l_info="78" l_min="110" l_max="110" />
+		</snail>
+		<squirell>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="10" lifespan="18" weight="0.350" l_group="52" l_info="79" l_min="110" l_max="110" />
+		</squirell>
+		<cow>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="3" height="15" weight="1100" l_group="52" l_info="80" l_min="110" l_max="110" />
+		</cow>
+		<mouse>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="12" lifespan="4" weight="0.025" l_group="52" l_info="81" l_min="110" l_max="110" />
+		</mouse>
+		<sheep>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="8" lifespan="12" weight="160" l_group="52" l_info="82" l_min="110" l_max="110" />
+		</sheep>
+		<horse>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="7" lifespan="30" weight="1000" l_group="52" l_info="83" l_min="110" l_max="110" />
+		</horse>
+		<duck>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="5" lifespan="20" weight="1.58" l_group="55" l_info="84" l_min="110" l_max="110" />
+		</duck>
+		<cat>
+			<farm base_tile="farmCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="2" lifespan="15" weight="2.9" l_group="52" l_info="85" l_min="110" l_max="110" />
+		</cat>
+		<lion>
+			<farm base_tile="steppeCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="31" lifespan="14" weight="250" l_group="52" l_info="86" l_min="110" l_max="110" />
+		</lion>
+		<zebra>
+			<farm base_tile="steppeCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="30" lifespan="35" weight="400" l_group="52" l_info="87" l_min="110" l_max="110" />
+		</zebra>
+		<rhino>
+			<farm base_tile="steppeCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="29" lifespan="50" weight="1400" l_group="52" l_info="88" l_min="110" l_max="110" />
+		</rhino>
+		<leopard>
+			<farm base_tile="steppeCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="28" lifespan="17" weight="90" l_group="52" l_info="89" l_min="110" l_max="110" />
+		</leopard>
+		<gnu>
+			<farm base_tile="steppeCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="27" lifespan="20" weight="270" l_group="52" l_info="90" l_min="110" l_max="110" />
+		</gnu>
+		<girafee>
+			<farm base_tile="steppeCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="26" lifespan="25" weight="1600" l_group="52" l_info="91" l_min="110" l_max="110" />
+		</girafee>
+		<octopus>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<waterLily x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="21" lifespan="5" weight="15" l_group="57" l_info="92" l_min="110" l_max="110" />
+		</octopus>
+		<dolphin>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="20" lifespan="40" weight="300" l_group="52" l_info="93" l_min="110" l_max="110" />
+		</dolphin>
+		<crab>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="23" lifespan="100" weight="40000" l_group="52" l_info="53" l_min="110" l_max="110" />
+		</crab>
+		<whale>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="23" lifespan="100" weight="40000" l_group="52" l_info="94" l_min="110" l_max="110" />
+		</whale>
+		<shark>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="24" lifespan="70" weight="3300" l_group="58" l_info="95" l_min="110" l_max="110" />
+		</shark>
+		<fish_3>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="22" lifespan="0" weight="0" l_group="58" l_info="96" l_min="110" l_max="110" />
+		</fish_3>
+		<fish_1>
+			<farm base_tile="waterCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="1" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="22" height="0" weight="0" l_group="58" l_info="96" l_min="110" l_max="110" />
+		</fish_1>
+		<penguin>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="14" height="12" weight="38" l_group="55" l_info="97" l_min="110" l_max="110" />
+		</penguin>
+		<polarbear>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="15" lifespan="18" weight="450" l_group="52" l_info="98" l_min="110" l_max="110" />
+		</polarbear>
+		<wolf>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="17" lifespan="13" weight="50" l_group="52" l_info="99" l_min="110" l_max="110" />
+		</wolf>
+		<owl_winter>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="19" lifespan="9" weight="3" l_group="55" l_info="100" l_min="110" l_max="110" />
+		</owl_winter>
+		<fox>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="25" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="13" lifespan="5" weight="14" l_group="52" l_info="101" l_min="110" l_max="110" />
+		</fox>
+		<walrus>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="16" lifespan="30" weight="2000" l_group="52" l_info="102" l_min="110" l_max="110" />
+		</walrus>
+		<young_seal>
+			<farm base_tile="snowCenter">
+				<first>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+					</sort>
+				</first>
+				<second>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</second>
+				<third>
+					<no_sort>
+						<dirtPath x="0" y="1" />
+						<dirtPath x="3" y="2" />
+						<dirtPath x="7" y="5" />
+						<dirtPath x="9" y="5" />
+					</no_sort>
+					<sort>
+						<rock x="5" y="1" />
+						<treeGreen x="6" y="5" />
+						<blade x="3" y="4" />
+						<coniferGreen x="4" y="4" />
+						<cactus x="5" y="4" />
+						<treeGreen x="8" y="4" />
+					</sort>
+				</third>
+			</farm>
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+			<game_preference top="memory" top_value="3" mid="shadow" mid_value="2" low="match" low_value="1" />
+			<info l_name="18"  lifespan="26" weight="168" l_group="52" l_info="103" l_min="110" l_max="110" />
+		</young_seal>
+		<human_1>
+			<farm base_tile="pavementCenter" />
+			<jump_parameters range="30" height="20" time="2000" delay_min="500" delay_max="1000" isWater="0" />
+		</human_1>
+		<pavement>
+			<farm base_tile="pavementCenter" />
+		</pavement>
+		<zoo_first_ground>
+			<farm base_tile="farmCenter" >
+				<first>
+					<no_sort>
+						<roadLeftRight x="0" y="14" />
+						<roadLeftRight x="1" y="14" />
+						<roadLeftRight x="2" y="14" />
+						<roadLeftRight x="2" y="14" />
+						<roadLeftRight x="3" y="14" />
+						<roadLeftRight x="4" y="14" />
+						<roadLeftRight x="5" y="14" />
+						<roadLeftRight x="6" y="14" />
+						<roadLeftRight x="7" y="14" />
+						<roadLeftRight x="8" y="14" />
+						<roadLeftRight x="9" y="14" />
+						<roadLeftRight x="10" y="14" />
+						<roadLeftRight x="11" y="14" />
+						<roadLeftRight x="12" y="14" />
+						<roadLeftRight x="13" y="14" />
+						<roadCrossLeftRigtTop x="14" y="14" />
+						<roadLeftRight x="15" y="14" />
+						<roadLeftRight x="16" y="14" />
+						<roadLeftRight x="17" y="14" />
+						<roadLeftRight x="18" y="14" />
+						<roadLeftRight x="19" y="14" />
+						<roadLeftRight x="20" y="14" />
+						<roadLeftRight x="21" y="14" />
+						<roadLeftRight x="22" y="14" />
+						<roadLeftRight x="23" y="14" />
+						<roadLeftRight x="24" y="14" />
+						<roadLeftRight x="25" y="14" />
+						<roadLeftRight x="26" y="14" />
+						<roadLeftRight x="27" y="14" />
+						<roadBottomTop x="14" y="13" />
+						<roadCrossBottomTopRight x="14" y="12" />
+						<roadLeftRight x="15" y="12" />
+						<roadLeftRight x="16" y="12" />
+						<roadTurnLeftTop x="17" y="12" />
+						<roadBottomTop x="17" y="11" />
+						<roadBottomTop x="17" y="10" />
+						<roadBottomTop x="14" y="11" />
+						<roadTurnBottomLeft x="14" y="10" />
+						<roadLeftRight x="0" y="10" />
+						<roadLeftRight x="1" y="10" />
+						<roadLeftRight x="2" y="10" />
+						<roadLeftRight x="2" y="10" />
+						<roadLeftRight x="3" y="10" />
+						<roadLeftRight x="4" y="10" />
+						<roadLeftRight x="5" y="10" />
+						<roadLeftRight x="6" y="10" />
+						<roadLeftRight x="7" y="10" />
+						<roadLeftRight x="8" y="10" />
+						<roadLeftRight x="9" y="10" />
+						<roadLeftRight x="10" y="10" />
+						<roadLeftRight x="11" y="10" />
+						<roadLeftRight x="12" y="10" />
+						<roadLeftRight x="13" y="10" />
+						<parkingBottomLeftCorner x="18" y="13" />
+						<parkingBottomSide x="19" y="13" />
+						<parkingBottomSide x="20" y="13" />
+						<parkingBottomSide x="21" y="13" />
+						<parkingBottomRightCorner x="22" y="13" />
+						<parkingLeftSide x="18" y="12" />
+						<parkingCenter x="19" y="12" />
+						<parkingCenter x="20" y="12" />
+						<parkingCenter x="21" y="12" />
+						<parkingRightSide x="22" y="12" />
+						<parkingLeftSide x="18" y="11" />
+						<parkingCenter x="19" y="11" />
+						<parkingCenter x="20" y="11" />
+						<parkingCenter x="21" y="11" />
+						<parkingRightSide x="22" y="11" />
+						<parkingTopLeftCorner x="18" y="10" />
+						<parkingTopSide x="19" y="10" />
+						<parkingTopSide x="20" y="10" />
+						<parkingTopSide x="21" y="10" />
+						<parkingTopRightCorner x="22" y="10" />
+						<grassLeftSide x="10" y="0" />
+						<grassCenter x="11" y="0" />
+						<grassCenter x="12" y="0" />
+						<grassCenter x="13" y="0" />
+						<grassCenter x="14" y="0" />
+						<grassRightSide x="15" y="0" />
+						<grassLeftSide x="10" y="1" />
+						<grassCenter x="11" y="1" />
+						<grassCenter x="12" y="1" />
+						<grassCenter x="13" y="1" />
+						<grassCenter x="14" y="1" />
+						<grassRightSide x="15" y="1" />
+						<grassBottomLeftCorner x="10" y="2" />
+						<grassBottomSide x="11" y="2" />
+						<grassBottomSide x="12" y="2" />
+						<grassBottomSide x="13" y="2" />
+						<grassBottomSide x="14" y="2" />
+						<grassBottomRightCorner x="15" y="2" />
+						<waterLeftSide x="20" y="0" />
+						<waterCenter x="21" y="0" />
+						<waterCenter x="22" y="0" />
+						<waterCenter x="23" y="0" />
+						<waterCenter x="24" y="0" />
+						<waterCenter x="25" y="0" />
+						<waterCenter x="26" y="0" />
+						<waterCenter x="27" y="0" />
+						<waterLeftSide x="20" y="1" />
+						<waterCenter x="21" y="1" />
+						<waterCenter x="22" y="1" />
+						<waterCenter x="23" y="1" />
+						<waterCenter x="24" y="1" />
+						<waterCenter x="25" y="1" />
+						<waterCenter x="26" y="1" />
+						<waterCenter x="27" y="1" />
+						<waterBottomLeftCorner x="20" y="2" />
+						<waterBottomSide x="21" y="2" />
+						<waterBottomSide x="22" y="2" />
+						<waterBottomSide x="23" y="2" />
+						<waterBottomSide x="24" y="2" />
+						<waterBottomSide x="25" y="2" />
+						<waterBottomSide x="26" y="2" />
+						<waterBottomSide x="27" y="2" />
+						<australiaTopLeftCorner x="20" y="3" />
+						<australiaTopSide x="21" y="3" />
+						<australiaTopSide x="22" y="3" />
+						<australiaTopSide x="23" y="3" />
+						<australiaTopSide x="24" y="3" />
+						<australiaTopSide x="25" y="3" />
+						<australiaTopSide x="26" y="3" />
+						<australiaTopSide x="27" y="3" />
+						<australiaLeftSide x="20" y="4" />
+						<australiaCenter x="21" y="4" />
+						<australiaCenter x="22" y="4" />
+						<australiaCenter x="23" y="4" />
+						<australiaCenter x="24" y="4" />
+						<australiaCenter x="25" y="4" />
+						<australiaCenter x="26" y="4" />
+						<australiaCenter x="27" y="4" />
+						<australiaLeftSide x="20" y="5" />
+						<australiaCenter x="21" y="5" />
+						<australiaCenter x="22" y="5" />
+						<australiaCenter x="23" y="5" />
+						<australiaCenter x="24" y="5" />
+						<australiaCenter x="25" y="5" />
+						<australiaCenter x="26" y="5" />
+						<australiaCenter x="27" y="5" />
+						<australiaBottomLeftCorner x="20" y="6" />
+						<australiaBottomSide x="21" y="6" />
+						<australiaCenter x="22" y="6" />
+						<australiaCenter x="23" y="6" />
+						<australiaCenter x="24" y="6" />
+						<australiaCenter x="25" y="6" />
+						<australiaCenter x="26" y="6" />
+						<australiaCenter x="27" y="6" />
+						<australiaBottomLeftCorner x="22" y="7" />
+						<australiaBottomSide x="23" y="7" />
+						<australiaBottomSide x="24" y="7" />
+						<australiaBottomSide x="25" y="7" />
+						<australiaBottomSide x="26" y="7" />
+						<australiaBottomSide x="27" y="7" />
+						<snowCenter x="0" y="0" />
+						<snowCenter x="1" y="0" />
+						<snowCenter x="2" y="0" />
+						<snowCenter x="3" y="0" />
+						<snowCenter x="4" y="0" />
+						<snowCenter x="5" y="0" />
+						<snowCenter x="6" y="0" />
+						<snowCenter x="7" y="0" />
+						<snowRightSide x="8" y="0" />
+						<snowCenter x="0" y="1" />
+						<snowCenter x="1" y="1" />
+						<snowCenter x="2" y="1" />
+						<snowCenter x="3" y="1" />
+						<snowCenter x="4" y="1" />
+						<snowCenter x="5" y="1" />
+						<snowCenter x="6" y="1" />
+						<snowCenter x="7" y="1" />
+						<snowRightSide x="8" y="1" />
+						<snowBottomSide x="0" y="2" />
+						<snowBottomSide x="1" y="2" />
+						<snowBottomSide x="2" y="2" />
+						<snowBottomSide x="3" y="2" />
+						<snowBottomSide x="4" y="2" />
+						<snowBottomSide x="5" y="2" />
+						<snowBottomSide x="6" y="2" />
+						<snowBottomSide x="7" y="2" />
+						<snowBottomRightCorner x="8" y="2" />
+						<steppeTopSide x="0" y="4" />
+						<steppeTopSide x="1" y="4" />
+						<steppeTopSide x="2" y="4" />
+						<steppeTopSide x="3" y="4" />
+						<steppeTopSide x="4" y="4" />
+						<steppeTopSide x="5" y="4" />
+						<steppeTopSide x="6" y="4" />
+						<steppeTopRightCorner x="7" y="4" />
+						<steppeCenter x="0" y="5" />
+						<steppeCenter x="1" y="5" />
+						<steppeCenter x="2" y="5" />
+						<steppeCenter x="3" y="5" />
+						<steppeCenter x="4" y="5" />
+						<steppeCenter x="5" y="5" />
+						<steppeCenter x="6" y="5" />
+						<steppeRightSide x="7" y="5" />
+						<steppeCenter x="0" y="6" />
+						<steppeCenter x="1" y="6" />
+						<steppeCenter x="2" y="6" />
+						<steppeCenter x="3" y="6" />
+						<steppeCenter x="4" y="6" />
+						<steppeBottomSide x="5" y="6" />
+						<steppeBottomSide x="6" y="6" />
+						<steppeBottomRightCorner x="7" y="6" />
+						<steppeBottomSide x="0" y="7" />
+						<steppeBottomSide x="1" y="7" />
+						<steppeBottomSide x="2" y="7" />
+						<steppeBottomSide x="3" y="7" />
+						<steppeBottomRightCorner x="4" y="7" />
+					</no_sort>
+				</first>
+			</farm>
+		</zoo_first_ground>
+		<zoo_first_objects>
+			<farm base_tile="none" >
+				<first>
+					<no_sort>
+						<fenceFrontSide x="0" y="13" />
+						<fenceFrontCenter x="1" y="13" />
+						<fenceFrontCenter x="2" y="13" />
+						<fenceFrontCenter x="2" y="13" />
+						<fenceFrontCenter x="3" y="13" />
+						<fenceFrontCenter x="4" y="13" />
+						<fenceFrontCenter x="5" y="13" />
+						<fenceFrontCenter x="6" y="13" />
+						<fenceFrontCenter x="7" y="13" />
+						<fenceFrontCenter x="8" y="13" />
+						<fenceFrontCenter x="9" y="13" />
+						<fenceFrontCenter x="10" y="13" />
+						<fenceFrontCenter x="11" y="13" />
+						<safeLeft x="12" y="13" />
+						<safeRight x="13" y="13" />
+						<fenceFrontSide x="15" y="13" />
+						<fenceFrontCenter x="16" y="13" />
+						<fenceFrontCenter x="17" y="13" />
+						<fenceFrontCenter x="18" y="13" />
+						<fenceFrontCenter x="19" y="13" />
+						<fenceFrontCenter x="20" y="13" />
+						<fenceFrontCenter x="21" y="13" />
+						<fenceFrontCenter x="22" y="13" />
+						<fenceFrontCenter x="23" y="13" />
+						<fenceFrontCenter x="24" y="13" />
+						<fenceFrontCenter x="25" y="13" />
+						<fenceFrontCenter x="26" y="13" />
+						<fenceFrontCenter x="27" y="13" />
+						<treeLightGreenBottom x="5" y="12" />
+						<safeGreenTopLeft x="12" y="12" />
+						<safeGreenTopRight x="13" y="12" />
+						<treeRedBottom x="27" y="12" />
+						<bushLightGreenSmall x="0" y="11" />
+						<blade x="1" y="11" />
+						<treeLightGreenTop x="5" y="11" />
+						<treeRedTop x="27" y="11" />
+						<bushLightGreenSmall x="0" y="9" />
+						<bushLightGreenSmall x="7" y="9" />
+						<whiteHouseLeftSide x="16" y="8" />
+						<whiteHouseRightSide x="17" y="8" />
+						<whiteHouseLeftCorner x="16" y="9" />
+						<whiteHouseRightCorner x="17" y="9" />
+						<doors x="17" y="9" />
+						<support x="18" y="9" />
+						<roofFrontLeft x="16" y="8" />
+						<roofFrontRight x="17" y="8" />
+						<roofSideLeft x="16" y="7" />
+						<roofSideRight x="17" y="7" />
+						<roofBackLeft x="16" y="6" />
+						<roofBackRight x="17" y="6" />
+						<chimney x="17" y="6" />
+						<roofSmall x="18" y="8" />
+						<safeWithBottleLeft x="19" y="9" />
+						<safeWithChickenRight x="20" y="9" />
+						<treeNoLeafs2 x="22" y="9" />
+						<treeGreenBottom x="3" y="8" />
+						<rock x="5" y="8" />
+						<coniferLightGreenBottom x="12" y="8" />
+						<safeTopLeft x="19" y="8" />
+						<safeTopRight x="20" y="8" />
+						<treeGreenTop x="3" y="7" />
+						<coniferLightGreenBottom x="8" y="7" />
+						<blade x="10" y="7" />
+						<coniferLightGreenTop x="12" y="7" />
+						<coniferGreenBottom x="2" y="6" />
+						<blade x="6" y="6" />
+						<coniferLightGreenTop x="8" y="6" />
+						<rock2 x="14" y="6" />
+						<treeNoLeafs x="24" y="6" />
+						<blade x="1" y="5" />
+						<coniferGreenTop x="2" y="5" />
+						<coniferRedBottom x="18" y="5" />
+						<cactusWithYellow x="20" y="5" />
+						<cactusWithOrange x="23" y="5" />
+						<treeLightGreenBottom x="0" y="4" />
+						<rockGreen x="4" y="4" />
+						<bushGreenSmall x="11" y="4" />
+						<coniferLightGreenBottom x="13" y="4" />
+						<coniferRedTop x="18" y="4" />
+						<cactusWithYellow x="25" y="4" />
+						<treeLightGreenTop x="0" y="3" />
+						<bushGreenBig x="7" y="3" />
+						<coniferLightGreenTop x="13" y="3" />
+						<rockGreen2 x="17" y="3" />
+						<cactus x="22" y="3" />
+						<blade x="1" y="2" />
+						<bushLightGreenSmall x="3" y="2" />
+						<blade x="6" y="2" />
+						<treeGreenBottom x="15" y="2" />
+						<rockGreen2 x="1" y="1" />
+						<trunk x="9" y="1" />
+						<coniferGreenBottom x="11" y="1" />
+						<treeGreenTop x="15" y="1" />
+						<bushGreenBig x="17" y="1" />
+						<waterLily x="20" y="1" />
+						<waterRock2 x="26" y="1" />
+						<blade x="2" y="0" />
+						<bushGreenBig x="5" y="0" />
+						<coniferGreenTop x="11" y="0" />
+						<waterRock x="21" y="0" />
+						<waterLily x="24" y="0" />
+					</no_sort>
+				</first>
+			</farm>
+		</zoo_first_objects>
+	</zoo>
+	<games>
+		<match_two>
+			<first>
+				<first name="cat" />
+				<second name="dog" />
+				<first name="lion" />
+				<second name="zebra" />
+				<first name="panda" />
+				<second name="monkey_2" />
+			</first>
+			<second>
+				<first name="penguin" />
+				<second name="polarbear" />
+				<first name="young_seal" />
+				<second name="walrus" />
+				<first name="girafee" />
+				<second name="gnu" />
+			</second>
+			<third>
+				<first name="kangaroo" />
+				<second name="kiwi" />
+				<first name="shark" />
+				<second name="whale" />
+				<first name="dolphin" />
+				<second name="octopus" />
+			</third>
+		</match_two>
+		<shadow_match>
+			<first name="bee" />
+			<first name="cat" />
+			<first name="cow" />
+			<first name="dog" />
+			<first name="duck" />
+			<first name="horse" />
+			<first name="goat" />
+			<first name="sheep" />
+			<first name="snail" />
+			<first name="squirell" />
+			<first name="owl_winter" />
+			<first name="mouse" />
+			<first name="penguin" />
+			<first name="polarbear" />
+			<first name="walrus" />
+			<first name="wolf" />
+			<first name="young_seal" />
+			<first name="dolphin" />
+			<first name="zebra" />
+			<first name="peacock" />
+			<first name="monkey_2" />
+		</shadow_match>
+		<shadow_match_medium min="3" max="5" />
+		<shadow_match_hard min="6" max="8" />
+	</games>
+	<shop>
+		<animals>
+			<farm>
+				<element index="1" lockit="1" resource="bee" price="100"/>
+				<element index="2" lockit="2" resource="cat" price="100"/>
+				<element index="3" lockit="3" resource="cow" price="100"/>
+				<element index="4" lockit="4" resource="dog" price="100"/>
+				<element index="5" lockit="5" resource="duck" price="100"/>
+				<element index="6" lockit="6" resource="goat" price="100"/>
+				<element index="7" lockit="7" resource="horse" price="100"/>
+				<element index="8" lockit="8" resource="sheep" price="100"/>
+				<element index="9" lockit="9" resource="snail" price="100"/>
+				<element index="10" lockit="10" resource="squirell" price="100"/>
+				<element index="12" lockit="12" resource="mouse" price="100"/>
+			</farm>
+			<winter>
+				<element index="13" lockit="13" resource="fox" price="100"/>
+				<element index="14" lockit="14" resource="penguin" price="100"/>
+				<element index="15" lockit="15" resource="polarbear" price="100"/>
+				<element index="16" lockit="16" resource="walrus" price="100"/>
+				<element index="17" lockit="17" resource="wolf" price="100"/>
+				<element index="18" lockit="18" resource="young_seal" price="100"/>
+				<element index="19" lockit="19" resource="owl_winter" price="100"/>
+			</winter>
+			<underwater>
+				<element index="20" lockit="20" resource="dolphin" price="100"/>
+				<element index="21" lockit="21" resource="octopus" price="100"/>
+				<element index="22" lockit="22" resource="fish_1" price="100"/>
+				<element index="23" lockit="23" resource="whale" price="100"/>
+				<element index="24" lockit="24" resource="shark" price="100"/>
+			</underwater>
+			<steppe>
+				<element index="25" lockit="25" resource="elephant" price="100"/>
+				<element index="26" lockit="26" resource="girafee" price="100"/>
+				<element index="27" lockit="27" resource="gnu" price="100"/>
+				<element index="28" lockit="28" resource="leopard" price="100"/>
+				<element index="29" lockit="29" resource="rhino" price="100"/>
+				<element index="30" lockit="30" resource="zebra" price="100"/>
+				<element index="31" lockit="31" resource="lion" price="100"/>
+			</steppe>
+			<asia>
+				<element index="32" lockit="32" resource="yak" price="100"/>
+				<element index="33" lockit="33" resource="tiger" price="100"/>
+				<element index="34" lockit="34" resource="snake" price="100"/>
+				<element index="35" lockit="35" resource="peacock" price="100"/>
+				<element index="36" lockit="36" resource="panda" price="100"/>
+				<element index="37" lockit="37" resource="monkey_2" price="100"/>
+				<element index="38" lockit="38" resource="parrot" price="100"/>
+			</asia>
+			<australia>
+				<element index="39" lockit="39" resource="crocodile" price="100"/>
+				<element index="40" lockit="40" resource="kangaroo" price="100"/>
+				<element index="41" lockit="41" resource="kiwi" price="100"/>
+				<element index="42" lockit="42" resource="koala" price="100"/>
+				<element index="43" lockit="43" resource="ostrich" price="100"/>
+				<element index="44" lockit="44" resource="tealplatypus" price="100"/>
+				<element index="45" lockit="45" resource="turtle" price="100"/>
+				<element index="46" lockit="46" resource="dingo" price="100"/>
+			</australia>
+		</animals>
+	</shop>
+	<hats>
+		<first name="chef_hat">
+			<tiger scale="1" x="1" y="1"/>
+			<monkey_2 scale="1" x="1" y="1"/>
+			<snake scale="1" x="1" y="1"/>
+			<elephant scale="1" x="1" y="1"/>
+			<peacock scale="1" x="1" y="1"/>
+			<parrot scale="1" x="1" y="1"/>
+			<panda scale="1" x="1" y=""/>
+			<yak scale="1" x="1" y="1"/>
+			<koala scale="1" x="1" y="1"/>
+			<ostrich scale="1" x="1" y="1"/>
+			<kangaroo scale="1" x="1" y="1"/>
+			<kiwi scale="1" x="1" y="1"/>
+			<tealplatypus scale="1" x="1" y="1"/>
+			<turtle scale="1" x="1" y="1"/>
+			<dingo scale="1" x="1" y="1"/>
+			<crocodile scale="1" x="1" y="1"/>
+			<goat scale="1" x="1" y="1"/>
+			<bee scale="1" x="1" y="1"/>
+			<dog scale="1" x="1" y="1"/>
+			<snail scale="1" x="1" y="1"/>
+			<squirell scale="1" x="1" y="1"/>
+			<cow scale="1" x="1" y="1"/>
+			<mouse scale="1" x="1" y="1"/>
+			<sheep scale="1" x="1" y="1"/>
+			<horse scale="1" x="1" y="1"/>
+			<duck scale="1" x="1" y="1"/>
+			<cat scale="1" x="1" y="1"/>
+			<lion scale="1" x="1" y="1"/>
+			<zebra scale="1" x="1" y="1"/>
+			<rhino scale="1" x="1" y="1"/>
+			<leopard scale="1" x="1" y="1"/>
+			<gnu scale="1" x="1" y="1"/>
+			<girafee scale="1" x="1" y="1"/>
+			<octopus scale="1" x="1" y="1"/>
+			<dolphin scale="1" x="1" y="1"/>
+			<crab scale="1" x="1" y="1"/>
+			<whale scale="1" x="1" y="1"/>
+			<shark scale="1" x="1" y="1"/>
+			<fish_3 scale="1" x="1" y="1"/>
+			<fish_1 scale="1" x="1" y="1"/>
+			<penguin scale="1" x="1" y="1"/>
+			<polarbear scale="1" x="1" y="1"/>
+			<wolf scale="1" x="1" y="1"/>
+			<owl_winter scale="1" x="1" y="1"/>
+			<fox scale="1" x="1" y="1"/>
+			<walrus scale="1" x="1" y="1"/>
+			<young_seal scale="1" x="1" y="1"/>
+		</first>
+		<first name="detective_hat" />
+		<first name="easter_ears" />
+		<first name="farmer_hat" />
+		<first name="fedora_hat" />
+		<first name="garden_hat" />
+		<first name="garden_hat" />
+		<first name="girl_hat" />
+		<first name="medieval_hat" />
+		<first name="okulary" />
+		<first name="oriental_hat" />
+		<first name="painter_hat" />
+		<first name="party_hat" />
+		<first name="pirate_hat" />
+		<first name="sailor_hat" />
+		<first name="santa_hat" />
+		<first name="top_hat" />
+		<first name="wizard_hat" />
+	</hats>
+	<sounds value="60" />
+	<music value="100" />
+	<level_1 value="1" />
+	<level_2 value="1" />
+	<level_3 value="1" />
+	<level_4 value="0" />
+	<level_5 value="0" />
+	<level_6 value="0" />
+	<unblock_ads value="0" />
+	<action_fb value="true" />
+	<level_enter value="1" />
+</data>

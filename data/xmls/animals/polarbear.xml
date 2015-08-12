@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "photos/" />
+		<image id="polarbear" file="polarbear_real.png"/>
+	</atlas>
+</resources>

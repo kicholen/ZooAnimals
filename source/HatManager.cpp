@@ -20,7 +20,7 @@ bool HatManager::canPlaceHat() {
 	return true;
 }
 
-std::string HatManager::getRandomHatResource() {
+std::string HatManager::getRandomHatResource(spAnimalModel model) {
 	return _hatList[CMath::random(0, _hatList.length())];
 }
 
@@ -42,4 +42,15 @@ void HatManager::createHatList() {
 
 		hatNode = hatNode.next_sibling();
 	}
+}
+
+void HatManager::getHatParametersForAnimal(const std::string hat, spAnimalModel model) {
+	pugi::xml_node hatNode = Content::instance.getHatsNode().child(hat.c_str()).child(model->animalName().c_str()); // todo must optimize !!!
+	pugi::xml_attribute attribute = hatNode.first_attribute();
+	
+	float scale = attribute.as_float();
+	attribute = attribute.next_attribute();
+	float offsetX = attribute.as_float();
+	attribute = attribute.next_attribute();
+	float offsetY = attribute.as_float();
 }

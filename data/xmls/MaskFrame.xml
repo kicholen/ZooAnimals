@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/"/>
+		<image id="back_button" file="back_button.png"/>
+		<set path = "images/australia/" />		
+		<image id="back" file="background.png"/>
+	</atlas>
+</resources>

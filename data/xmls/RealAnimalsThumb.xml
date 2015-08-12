@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<resources>
+  <atlas>
+    <set path = "photos/" />  
+    <image id="bee" file="bee_real.png"/>
+    <image id="cat" file="cat_real.png"/>
+    <image id="cow" file="cow_real.png"/>
+    <image id="crocodile" file="crocodile_real.png"/>
+    <image id="dingo" file="dingo_real.png"/>
+    <image id="dog" file="dog_real.png"/>
+    <image id="dolphin" file="dolphin_real.png"/>
+    <image id="duck" file="duck_real.png"/>
+    <image id="elephant" file="elephant_real.png"/>
+    <image id="fish_1" file="fish_real.png"/>
+    <image id="fox" file="fox_real.png"/>
+    <image id="girafee" file="girafee_real.png"/>
+    <image id="gnu" file="gnu_real.png"/>
+    <image id="goat" file="goat_real.png"/>
+    <image id="horse" file="horse_real.png"/>
+    <image id="kangaroo" file="kangaroo_real.png"/>
+    <image id="kiwi" file="kiwi_real.png"/>
+    <image id="koala" file="koala_real.png"/>
+    <image id="leopard" file="leopard_real.png"/>
+    <image id="lion" file="lion_real.png"/>
+    <image id="monkey_2" file="monkey_2_real.png"/>
+    <image id="mouse" file="mouse_real.png"/>
+    <image id="octopus" file="octopus_real.png"/>
+	<image id="ostrich" file="ostrich_real.png"/>
+    <image id="owl" file="owl_real.png"/>
+    <image id="owl_winter" file="owl_winter_real.png"/>
+    <image id="panda" file="panda_real.png"/>
+    <image id="parrot" file="parrot_real.png"/>
+    <image id="peacock" file="peacock_real.png"/>
+    <image id="penguin" file="penguin_real.png"/>
+    <image id="polarbear" file="polarbear_real.png"/>
+    <image id="rhino" file="rhino_real.png"/>
+    <image id="shark" file="shark_real.png"/>
+    <image id="sheep" file="sheep_real.png"/>
+    <image id="snail" file="snail_real.png"/>
+    <image id="snake" file="snake_real.png"/>
+    <image id="squirell" file="squirell_real.png"/>
+    <image id="tealplatypus" file="tealplatypus_real.png"/>
+    <image id="tiger" file="tiger_real.png"/>
+    <image id="turtle" file="turtle_real.png"/>
+    <image id="walrus" file="walrus_real.png"/>
+    <image id="whale" file="whale_real.png"/>
+    <image id="wolf" file="wolf_real.png"/>
+    <image id="yak" file="yak_real.png"/>
+    <image id="young_seal" file="young_seal_real.png"/>
+    <image id="zebra" file="zebra_real.png"/>
+  </atlas>
+</resources>

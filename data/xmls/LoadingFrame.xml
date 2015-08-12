@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/" />	
+		<image id="jellyappslogo" file="jellyappslogo.png"/>
+	</atlas>
+</resources>
+
+	

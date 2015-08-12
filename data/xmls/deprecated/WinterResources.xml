@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/winter/" />
+		<image id="fox" file="fox.png"/>
+		<image id="penguin" file="penguin.png"/>
+		<image id="penguin_2" file="penguin_2.png"/>
+		<image id="polarbear" file="polarbear.png"/>
+		<image id="walrus" file="walrus.png"/>
+		<image id="wolf" file="wolf.png"/>
+		<image id="owl_winter" file="owl_winter.png"/>
+		<image id="young_seal" file="young_seal.png"/>
+	</atlas>
+</resources>

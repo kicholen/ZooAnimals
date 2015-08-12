@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/australia/" />
+		<image id="crocodile" file="crocodile.png"/>
+		<image id="kangaroo" file="kangaroo.png"/>
+		<image id="kiwi" file="kiwi.png"/>
+		<image id="koala" file="koala.png"/>
+		<image id="ostrich" file="ostrich.png"/>
+		<image id="tealplatypus" file="tealplatypus.png"/>
+		<image id="turtle" file="turtle.png"/>
+		<image id="dingo" file="dingo.png"/>
+	</atlas>
+</resources>

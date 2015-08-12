@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<options version="1">
+	<sounds value="100" />
+	<music value="100" />
+	<level_1 value="1" />
+	<level_2 value="1" />
+	<level_3 value="1" />
+	<level_4 value="0" />
+	<level_5 value="0" />
+	<level_6 value="0" />
+	<unblock_ads value="0" />
+	<action_fb value="false" />
+	<level_enter value="1" />
+</options>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/asia/" />	
+		<image id="yak" file="yak.png"/>
+		<image id="tiger" file="tiger.png"/>
+		<image id="snake" file="snake.png"/>
+		<image id="peacock" file="peackock_no_taill_2x1.png" cols = "2" /> <!-- 'id' is optional -->
+		<image id="panda" file="panda.png"/>
+		<image id="monkey_2" file="monkey_2.png"/>
+		<image id="parrot" file="parrot.png"/>
+		<image id="elephant" file="elephant.png"/>
+	</atlas>
+</resources>

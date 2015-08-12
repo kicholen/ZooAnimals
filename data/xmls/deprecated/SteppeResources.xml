@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/steppe/" />	
+		<image id="elephant" file="elephant.png"/>
+		<image id="girafee" file="girafee.png"/>
+		<image id="gnu" file="gnu.png"/>
+		<image id="leopard" file="leopard.png"/>
+		<image id="rhino" file="rhino.png"/>
+		<image id="zebra" file="zebra.png"/>
+		<image id="lion" file="lion.png"/>
+	</atlas>
+</resources>

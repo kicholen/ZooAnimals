@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "photos/" />
+		<image id="shark" file="shark_real.png"/>
+	</atlas>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<resources>
+	<atlas>
+		<set path = "images/underwater/" />		
+		<image id="dolphin" file="dolphin.png"/>
+		<image id="octopus" file="octopus.png"/>
+		<image id="fish_1" file="fish_1.png"/>
+		<image id="whale" file="whale.png"/>
+		<image id="shark" file="shark.png"/>
+	</atlas>
+</resources>
