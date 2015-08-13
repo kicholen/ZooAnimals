@@ -20,37 +20,30 @@ bool HatManager::canPlaceHat() {
 	return true;
 }
 
-std::string HatManager::getRandomHatResource(spAnimalModel model) {
+std::string HatManager::getRandomHatResource(const std::string spriteName) {
 	return _hatList[CMath::random(0, _hatList.length())];
 }
 
 void HatManager::createHatList() {
-	pugi::xml_node hatNode = Content::instance.getHatsNode();
+	pugi::xml_node hatNode = Content::instance.getHatsNode().first_child();
 
 	while (!hatNode.empty()) {
-		pugi::xml_attribute attribute = hatNode.first_attribute();
-
-		while (!attribute.empty()) {
-			const char *name = attribute.name();
-
-			if (!strcmp(name, "name")) {
-				_hatList.push(attribute.as_string());
-			}
-
-			attribute = attribute.next_attribute();
-		}
-
+		_hatList.push(hatNode.name());
 		hatNode = hatNode.next_sibling();
 	}
 }
 
-void HatManager::getHatParametersForAnimal(const std::string hat, spAnimalModel model) {
-	pugi::xml_node hatNode = Content::instance.getHatsNode().child(hat.c_str()).child(model->animalName().c_str()); // todo must optimize !!!
-	pugi::xml_attribute attribute = hatNode.first_attribute();
+HatManager::hatParams* HatManager::getHatParametersForAnimal(const std::string hat, const std::string spriteName) {
+	pugi::xml_node hatNode = Content::instance.getHatsNode().child(hat.c_str()); // todo must optimize !!!
+	pugi::xml_node eeNode = hatNode.child(spriteName.c_str());
+	pugi::xml_attribute attribute = eeNode.first_attribute();
 	
-	float scale = attribute.as_float();
+	hatParams *params = new hatParams;
+	params->scale = attribute.as_int();
 	attribute = attribute.next_attribute();
-	float offsetX = attribute.as_float();
+	params->offsetY = attribute.as_int();
 	attribute = attribute.next_attribute();
-	float offsetY = attribute.as_float();
+	params->offsetX = attribute.as_int();
+
+	return params;
 }

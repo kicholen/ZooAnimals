@@ -215,5 +215,5 @@ pugi::xml_node Content::getHatsNode() {
 	pugi::xml_node hats = data.child("hats");
 	OX_ASSERT(hats);
 	
-	return hats.first_child();
+	return hats;
 }

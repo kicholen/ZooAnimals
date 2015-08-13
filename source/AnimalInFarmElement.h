@@ -3,7 +3,7 @@
 
 #include "oxygine-framework.h"
 
-#define ANIMAL_PERCENT_SIZE 5.0f
+#define ANIMAL_PERCENT_SIZE 15.0f
 
 using namespace oxygine;
 
@@ -38,7 +38,7 @@ protected:
 private:
 	void createAnimalSprite(const std::string& spriteName);
 	void createShadowSprite();
-	void attachWearable();
+	void attachWearable(const std::string spriteName);
 
 	void animateAppear();
 	void animateDisappear();
