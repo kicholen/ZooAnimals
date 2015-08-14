@@ -19,6 +19,7 @@ public:
 
 	void setAnimalSprite(const std::string& spriteName);
 	void animateJump(const Vector2& position, bool isRandom = false);
+	void attachWearable(const std::string& hatName, const std::string& animalName);
 	void setJumpSpeedFactor(float value) {
 		_jumpSpeedFactor = value;
 	}
@@ -38,7 +39,6 @@ protected:
 private:
 	void createAnimalSprite(const std::string& spriteName);
 	void createShadowSprite();
-	void attachWearable(const std::string spriteName);
 
 	void animateAppear();
 	void animateDisappear();

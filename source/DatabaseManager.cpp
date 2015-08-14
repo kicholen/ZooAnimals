@@ -4,6 +4,7 @@
 #include "ExpManager.h"
 #include "ZooSettings.h"
 #include "Settings.h"
+#include "HatManager.h"
 
 DatabaseManager DatabaseManager::instance;
 
@@ -25,6 +26,8 @@ void DatabaseManager::save(Event *ev) {
 	AnimalsManager::instance.store();
 	MoneyManager::instance.store();
 	ExpManager::instance.store();
+	HatManager::instance.store();
+
 	ZooSettings::instance.save();
 	Settings::instance.save();
 }

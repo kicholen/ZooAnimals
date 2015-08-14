@@ -4,6 +4,7 @@
 #include <limits>
 #include "TileBuilder.h"
 #include "FarmManager.h"
+#include "HatManager.h"
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setTouchEnabled(false);
@@ -11,7 +12,8 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setSize(fieldSize);
 	_state = afCreating;
 	_count = 0;
-	
+	_wearableIndex = 0;
+
 	spColorRectSprite bg = new ColorRectSprite();
 	bg->setColor(Color(222, 100, 100));
 	bg->setSize(getSize());
@@ -41,6 +43,7 @@ AnimalFarmField::~AnimalFarmField() {
 
 void AnimalFarmField::setData(spAnimalModel model) {
 	_model = model;
+	_wearablesCount = HatManager::instance.getHatsCountPerAnimal(_model->animalName());
 
 	for (int i = 0; i < _model->totalAnimalsCount(); i++) {
 		_animalsFarmAnimation->addAnimal(createAnimal(CMath::intToString(i), _model));
@@ -157,6 +160,9 @@ spAnimalInFarmElement AnimalFarmField::createAnimal(const std::string& animalNum
 	else {
 		animalElement->setAnimalSprite(model->getName());
 	}
+	if (shouldAttachWearable()) {
+		animalElement->attachWearable(HatManager::instance.getWearable(model->animalName(), _wearableIndex++), model->animalName());
+	}
 	animalElement->setName(animalNumber);
 
 	return animalElement;
@@ -254,4 +260,8 @@ int AnimalFarmField::getLockitId() {
 	else {
 		return CMath::random(_model->lockitIdsRange().x, _model->lockitIdsRange().y);
 	}
+}
+
+bool AnimalFarmField::shouldAttachWearable() {
+	return _wearableIndex < _wearablesCount;
 }

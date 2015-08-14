@@ -45,9 +45,6 @@ void AnimalInFarmElement::createAnimalSprite(const std::string& spriteName) {
 	_animalSprite = new Sprite();
 	_animalSprite->setPriority(0);
 	setAnimalSprite(spriteName);
-	if (true) {
-		attachWearable(spriteName);
-	}
 	if (_isWaterAnimal) {
 		Color dupa = _animalSprite->getColor();
 		_animalSprite->setColor(Color(145, 226, 236, 180));
@@ -68,13 +65,12 @@ void AnimalInFarmElement::createShadowSprite() {
 	setSpriteScaleBySize(_shadowSprite, Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f, ANIMAL_PERCENT_SIZE / 100.0f * getSize().x / 2.0f));
 }
 
-void AnimalInFarmElement::attachWearable(const std::string spriteName) {
+void AnimalInFarmElement::attachWearable(const std::string& spriteName, const std::string& animalName) {
 	spSprite hat = new Sprite();
 	hat->setAnchor(0.5f, 1.0f);
-	std::string hatName = "chef_hat";// HatManager::instance.getRandomHatResource(spriteName);
-	HatManager::hatParams *param = HatManager::instance.getHatParametersForAnimal(hatName, spriteName);
+	HatManager::hatParams *param = HatManager::instance.getHatParametersForAnimal(spriteName, animalName);
 
-	hat->setResAnim(gameResources.getResAnim(hatName));
+	hat->setResAnim(gameResources.getResAnim(spriteName));
 	hat->setScale((_animalSprite->getWidth() / 2.0f) / hat->getDerivedWidth() + _animalSprite->getScaleX() * (float)param->scale / 100.0f);
 	hat->setX(_animalSprite->getHeight() * (float)param->offsetX / 100.0f);
 	hat->setY(_animalSprite->getHeight() * (float)param->offsetY / 100.0f);

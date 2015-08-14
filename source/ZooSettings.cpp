@@ -109,6 +109,54 @@ void ZooSettings::setAnimal(const std::string& regionName, const std::string& an
 	setAnimalByRegionNode(regionNode, animalName, happiness, hunger, count, lastFeedMS, level);
 }
 
+pugi::xml_node ZooSettings::getHatsNode() {
+	pugi::xml_node hatsNode = _doc.child("hats");
+
+	return hatsNode;
+}
+
+pugi::xml_node ZooSettings::getHatByAnimalName(const std::string& animalName) {
+	pugi::xml_node node = _doc.child("hats").child(animalName.c_str());
+	if (!node) {
+		return node;
+	}
+
+	node = node.child(animalName.c_str());
+
+	return node;
+}
+
+void ZooSettings::setHat(const std::string& animalName, const std::string& hatName, int count) {
+	pugi::xml_node hatsNode = _doc.child("hats");
+	if (hatsNode.empty()) {
+		hatsNode = _doc.append_child("hats");
+	}
+	pugi::xml_node animalNode = hatsNode.child(animalName.c_str());
+
+	if (animalNode.empty()) {
+		animalNode = hatsNode.append_child(animalName.c_str());
+	}
+
+	const pugi::char_t* pugiName = hatName.c_str();
+	
+	pugi::xml_attribute animalAttribute = animalNode.first_attribute();
+	bool doesHatAttributeExists = false;
+
+	while (!animalAttribute.empty()) {
+		if (!strcmp(animalAttribute.name(), pugiName)) {
+			animalAttribute.set_value(count);
+			doesHatAttributeExists = true;
+			break;
+		}
+
+		animalAttribute = animalAttribute.next_attribute();
+	}
+
+	if (!doesHatAttributeExists) {
+		animalNode.append_attribute(pugiName).set_value(count);
+	}
+}
+
 pugi::xml_attribute ZooSettings::addPlayerValue(const std::string &name) {
 	pugi::xml_node root = _doc.child("player");
 	if (!root)

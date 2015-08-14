@@ -73,6 +73,8 @@ private:
 	spTooltipElement createTooltipElement();
 	int getLockitId();
 
+	bool shouldAttachWearable();
+
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
 	void onAnimalCountChanged(Event *ev);
@@ -91,6 +93,8 @@ private:
 	spTooltipElement _tooltip;
 
 	int _count;
+	int _wearableIndex;
+	int _wearablesCount;
 	float _lastTooltipShowTime;
 };
 
