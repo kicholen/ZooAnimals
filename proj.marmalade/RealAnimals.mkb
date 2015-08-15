@@ -36,12 +36,18 @@ files
 	AnimalModel.h
 	ShopItemModel.cpp
 	ShopItemModel.h
+	RewardModel.cpp
+	RewardModel.h
 
 	[source/animation]
 	AnimalsFarmAnimations.cpp
 	AnimalsFarmAnimations.h
 	QueueTextAnimation.cpp
 	QueueTextAnimation.h
+
+	[source/element/levelUp]
+	LevelUpItem.cpp
+	LevelUpItem.h
 
 	[source/element/shop]
 	ShopContainer.cpp
@@ -287,6 +293,10 @@ files
     MaskFrame.cpp
     MaskFrame.h
 
+	[source/frame/levelUp]
+	LevelRewardsFrame.cpp
+	LevelRewardsFrame.h
+	
     [source/worldLoader]
     World.cpp
     World.h

@@ -2502,6 +2502,43 @@
 		<top_hat/>
 		<wizard_hat/>
 	</hats>
+	<level_rewards>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+		<_asd>
+			<hat name="chef_hat" count="1"/>
+			<animal name="penguin" count="1"/>
+			<gold name="gold" count="500"/>
+		</_asd>
+	</level_rewards>
 	<sounds value="60" />
 	<music value="100" />
 	<level_1 value="1" />

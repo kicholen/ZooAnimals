@@ -17,6 +17,7 @@
 #include "ChooseGameDifficultyFrame.h"
 #include "CloseFrameElement.h"
 #include "PopObjectsFrame.h"
+#include "LevelRewardsFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -66,8 +67,10 @@ Action LandingPageFrame::loop(){
 			transitionShowFrame(worldFrame);
 		}
 		else if (action.id == "facebook") {
-			spShopFrame shopFrame = new ShopFrame();
-			transitionShowFrame(shopFrame);
+			spLevelRewardsFrame rewardFrame = new LevelRewardsFrame();
+			transitionShowFrame(rewardFrame);
+			//spShopFrame shopFrame = new ShopFrame();
+			//transitionShowFrame(shopFrame);
 			//s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);
 		}
 		else if (action.id == "rate") {

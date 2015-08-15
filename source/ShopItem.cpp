@@ -5,7 +5,6 @@ ShopItem::ShopItem(const Vector2& size, spShopItemModel model) {
 	setTouchEnabled(false);
 	setAnchor(0.5f, 0.5f);
 	setSize(size);
-	setTouchEnabled(false);
 	createBackground();
 	createItemSprite(model);
 	createBuyButton();

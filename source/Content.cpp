@@ -217,3 +217,10 @@ pugi::xml_node Content::getHatsNode() {
 	
 	return hats;
 }
+
+pugi::xml_node Content::getLevelRewardsNode() {
+	pugi::xml_node data = _contentDocument.child("data");
+	pugi::xml_node rewards = data.child("level_rewards");
+
+	return rewards;
+}

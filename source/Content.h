@@ -36,6 +36,7 @@ public:
 	pugi::xml_node getShopFirstChildNode(const std::string& shopType);
 
 	pugi::xml_node getHatsNode();
+	pugi::xml_node getLevelRewardsNode();
 	
 	int getGameLevelsCount(const std::string &gameName);
 private:
