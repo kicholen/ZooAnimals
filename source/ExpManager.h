@@ -35,6 +35,7 @@ public:
 
 	int getLevel();
 	const VectorArray<spRewardModel>& getRewardsForLevel(int level);
+	VectorArray<spRewardModel> getRewardsForCurrentLevel();
 	const VectorArray< VectorArray<spRewardModel> >& getAllRewards();
 
 	void increaseExpByPoints(int points);

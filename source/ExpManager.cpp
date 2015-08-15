@@ -40,6 +40,10 @@ const VectorArray<spRewardModel>& ExpManager::getRewardsForLevel(int level) {
 	return _rewardsForLevels[level];
 }
 
+VectorArray<spRewardModel> ExpManager::getRewardsForCurrentLevel() {
+	return _rewardsForLevels[_level];
+}
+
 const VectorArray< VectorArray<spRewardModel> >& ExpManager::getAllRewards() {
 	return _rewardsForLevels;
 }

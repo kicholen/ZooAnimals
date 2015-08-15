@@ -14,7 +14,7 @@ DECLARE_SMART(LevelUpItem, spLevelUpItem);
 class LevelUpItem : public Actor // todo change name of this
 {
 public:
-	LevelUpItem(const Vector2& size, int requiredLevel);
+	LevelUpItem(const Vector2& size, int requiredLevel, bool shouldAddStuff = true);
 	~LevelUpItem();
 
 	void addReward(spRewardModel model);

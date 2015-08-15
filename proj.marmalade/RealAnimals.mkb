@@ -258,7 +258,9 @@ files
 	ItemBoughtPopup.h
 	OutOfMoneyPopup.cpp
 	OutOfMoneyPopup.h
-	
+	LevelUpPopup.cpp
+	LevelUpPopup.h
+
 	[source/frame/shop]
 	ShopFrame.cpp
 	ShopFrame.h

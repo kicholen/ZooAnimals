@@ -2504,14 +2504,12 @@
 	</hats>
 	<level_rewards>
 		<_asd>
-			<hat name="chef_hat" count="1"/>
+			<hat name="oriental_hat" count="1"/>
 			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
 		</_asd>
 		<_asd>
-			<hat name="chef_hat" count="1"/>
+			<hat name="santa_hat" count="1"/>
 			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
 		</_asd>
 		<_asd>
 			<hat name="chef_hat" count="1"/>

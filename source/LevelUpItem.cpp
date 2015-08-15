@@ -2,13 +2,15 @@
 #include "SharedResources.h"
 #include "LanguageManager.h"
 
-LevelUpItem::LevelUpItem(const Vector2& size, int requiredLevel) {
+LevelUpItem::LevelUpItem(const Vector2& size, int requiredLevel, bool shouldAddStuff) {
 	setTouchEnabled(false);
 	setTouchChildrenEnabled(false);
 	setAnchor(0.5f, 0.5f);
 	setSize(size);
-	createBackground();
-	createMainTextfield(requiredLevel);
+	if (shouldAddStuff) {
+		createBackground();
+		createMainTextfield(requiredLevel);
+	}
 	createStackContainer();
 	_countTextfieldSize = Vector2(size.x * 0.2f, size.y * 0.2f);
 }
