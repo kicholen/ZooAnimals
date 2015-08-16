@@ -86,6 +86,7 @@ void ExpManager::parseRewards() {
 	std::string name = "";
 	int count = 0;
 	int level = 0;
+	int lockitId = 0;
 
 	while (!rewardLevel.empty()) {
 		pugi::xml_node reward = rewardLevel.first_child();
@@ -106,8 +107,10 @@ void ExpManager::parseRewards() {
 			name = attribute.as_string();
 			attribute = attribute.next_attribute();
 			count = attribute.as_int();
+			attribute = attribute.next_attribute();
+			lockitId = attribute.as_int();
 
-			innerVector.push(new RewardModel(type, count, name));
+			innerVector.push(new RewardModel(type, count, name, lockitId));
 			reward = reward.next_sibling();
 		}
 

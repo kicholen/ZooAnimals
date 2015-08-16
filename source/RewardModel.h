@@ -12,7 +12,7 @@ typedef enum {rmHat, rmAnimal, rmGold} RewardType;
 class RewardModel :	public Object
 {
 public:
-	RewardModel(int type, int count, const std::string& name);
+	RewardModel(int type, int count, const std::string& resourceName, int lockitId);
 	~RewardModel();
 
 	RewardType getType() const {
@@ -23,12 +23,17 @@ public:
 		return _count;
 	}
 
-	const std::string& getName() { return _name; }
+	const std::string& getName() { return _resourceName; }
+
+	int getLockit() const {
+		return _lockitId;
+	}
 
 private:
 	RewardType _type;
 	int _count;
-	std::string _name;
+	std::string _resourceName;
+	int _lockitId;
 };
 
 #endif

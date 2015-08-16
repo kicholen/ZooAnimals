@@ -3,22 +3,15 @@
 #include "s3eOSExec.h"
 #include "GooglePlayInAppPurchaseManager.h"
 #include "SwipeTrailElement.h"
-#include "WorldMapFrame.h"
 #include "ZooFrame.h"
 #include "ZooGateFrame.h"
 #include "DatabaseManager.h"
 #include "AnimalsManager.h"
 #include "MoneyCounterElement.h"
-#include "ShopFrame.h"
 #include "ChooseStartAnimalFrame.h"
 #include "ZooSettings.h"
-#include "JumpOverFrame.h"
-#include "FindShadowFrame.h"
-#include "ChooseGameDifficultyFrame.h"
 #include "CloseFrameElement.h"
-#include "PopObjectsFrame.h"
-#include "LevelRewardsFrame.h"
-#include "LevelUpPopup.h"
+#include "TestFrame.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -63,71 +56,15 @@ Action LandingPageFrame::loop(){
 				transitionShowFrame(zooGateFrame);
 			}
 		}
-		else if (action.id == "map") {
-			spWorldMapFrame worldFrame = new WorldMapFrame();
-			transitionShowFrame(worldFrame);
-		}
 		else if (action.id == "facebook") {
-			spLevelUpPopup levelUpPopup = new LevelUpPopup();
-			transitionShowFrameAsDialog(levelUpPopup);
-			//spLevelRewardsFrame rewardFrame = new LevelRewardsFrame();
-			//transitionShowFrame(rewardFrame);
-			//spShopFrame shopFrame = new ShopFrame();
-			//transitionShowFrame(shopFrame);
-			//s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);
+			s3eOSExecExecute("https://www.facebook.com/JellyBeanApps", false);
 		}
 		else if (action.id == "rate") {
 			s3eOSExecExecute("https://play.google.com/store/apps/details?id=com.Zelek.ToddlersAnimals", false);
 		}
-		/*else if (action.id == "test") {
-			transitionShowFrame(maskFrame);
-		}*/
-		//else if (action.id == "edit") {
-			
-			//spMaskFrame maskFrame = new MaskFrame();
-			//transitionShowFrame(maskFrame);
-		//}
 		else if (action.id == "test" || action.id == "edit") {
-			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
-
-			Action innerAction = transitionShowFrameAsDialog(chooserFrame, 0, 0);
-
-			if (innerAction.id == "back" || innerAction.id == "_btn_back_") {
-				// do nothing
-				int asd = 10;
-			}
-			else {
-				/*if (action.id == "memory") {
-					spMemoryFrame memoryFrame = new MemoryFrame(innerAction.id);
-					transitionShowFrame(memoryFrame);
-				}
-				else if (action.id == "dots") {
-					spConnectDotsFrame connectFrame = new ConnectDotsFrame(innerAction.id);
-					transitionShowFrame(connectFrame);
-				}
-				else */if (action.id == "test") {
-					spPopObjectsFrame popFrame = new PopObjectsFrame(innerAction.id);
-					transitionShowFrame(popFrame);
-					//spFindShadowFrame findShadow = new FindShadowFrame(innerAction.id);
-					//transitionShowFrame(findShadow);
-				}
-				else if (action.id == "edit") {
-					spJumpOverFrame jumpFrame = new JumpOverFrame(innerAction.id);
-					transitionShowFrame(jumpFrame);
-				}/*
-				else if (action.id == "match") {
-					spMatchTwoFrame matchTwo = new MatchTwoFrame(innerAction.id);
-					transitionShowFrame(matchTwo);
-				}
-				else if (action.id == "pop") {
-					spPopObjectsFrame pop = new PopObjectsFrame(innerAction.id);
-					transitionShowFrame(pop);
-				}
-				else if (action.id == "discover") {
-					spDiscoverImageFrame disc = new DiscoverImageFrame(innerAction.id);
-					transitionShowFrame(disc);
-				}*/
-			}
+			spTestFrame testFrame = new TestFrame();
+			transitionShowFrame(testFrame);
 		}
 		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			DatabaseManager::instance.save(0);
@@ -141,7 +78,6 @@ Action LandingPageFrame::loop(){
 void LandingPageFrame::setData() {
 	spTweenButton button = addButton("play", "PLAY", Vector2(_view->getWidth() / 2, _view->getHeight() / 2));
 	addButton("facebook", "", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 2 + 20));
-	addButton("map", "MAP", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() + 10));
 	
 	spTextActor text = createTextfield("Loveable animals cannot wait to play with you! :)", true, true);
 	text->setFontSize2Scale(40 * (int)_view->getWidth() / 640);
@@ -149,7 +85,6 @@ void LandingPageFrame::setData() {
 	text->setPosition(_view->getWidth() / 2, _view->getHeight() * 0.2f);
 	text->setColor(Color(35, 145, 245));
 	text->attachTo(_view);
-	addButton("edit", "edit", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 3 + 30));
 
 	addButton("test", "test", Vector2(_view->getWidth() / 2, _view->getHeight() / 2 + button->getDerivedHeight() * 4 + 30));
 

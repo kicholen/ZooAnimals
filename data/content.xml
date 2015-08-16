@@ -2503,39 +2503,39 @@
 		<wizard_hat/>
 	</hats>
 	<level_rewards>
-		<_asd>
-			<hat name="oriental_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-		</_asd>
-		<_asd>
-			<hat name="santa_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-		</_asd>
-		<_asd>
-			<hat name="chef_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
-		</_asd>
-		<_asd>
-			<hat name="chef_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
-		</_asd>
-		<_asd>
-			<hat name="chef_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
-		</_asd>
-		<_asd>
-			<hat name="chef_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
-		</_asd>
-		<_asd>
-			<hat name="chef_hat" count="1"/>
-			<animal name="penguin" count="1"/>
-			<gold name="gold" count="500"/>
-		</_asd>
+		<first>
+			<hat name="oriental_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+		</first>
+		<second>
+			<hat name="santa_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+		</second>
+		<third>
+			<hat name="chef_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+			<gold name="gold" count="500" lockit="10"/>
+		</third>
+		<fourth>
+			<hat name="chef_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+			<gold name="gold" count="500" lockit="10"/>
+		</fourth>
+		<fifth>
+			<hat name="chef_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+			<gold name="gold" count="500" lockit="10"/>
+		</fifth>
+		<sixth>
+			<hat name="chef_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+			<gold name="gold" count="500" lockit="10"/>
+		</sixth>
+		<seventh>
+			<hat name="chef_hat" count="1" lockit="10"/>
+			<animal name="penguin" count="1" lockit="10"/>
+			<gold name="gold" count="500" lockit="10"/>
+		</seventh>
 	</level_rewards>
 	<sounds value="60" />
 	<music value="100" />

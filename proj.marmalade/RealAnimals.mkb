@@ -72,6 +72,8 @@ files
 	CloseFrameElement.h
 	TouchBlock.cpp
 	TouchBlock.h
+	TestFrame.cpp
+	TestFrame.h
 
 	[source/element/base/tile]
 	TileField.cpp

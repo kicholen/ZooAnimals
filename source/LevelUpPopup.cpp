@@ -48,6 +48,7 @@ void LevelUpPopup::setData() {
 	createPopupBackground();
 	createTitleTextfield();
 	createRewards();
+	addButton("back", "OK", Vector2(_view->getWidth() / 2.0f, _view->getHeight() / 2.0f + _view->getHeight() / 4.0f));
 }
 
 void LevelUpPopup::createPopupBackground() {

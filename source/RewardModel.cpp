@@ -1,10 +1,11 @@
 #include "RewardModel.h"
 
-RewardModel::RewardModel(int type, int count, const std::string& name)
+RewardModel::RewardModel(int type, int count, const std::string& resourceName, int lockitId)
 {
 	_type = static_cast<RewardType>(type);
 	_count = count;
-	_name = name;
+	_resourceName = resourceName;
+	_lockitId = lockitId;
 }
 
 
