@@ -74,7 +74,7 @@ void LevelRewardsFrame::setData() {
 	
 	rectangleContainer->setSize(_rotatingContainer->getWidth(), positionY - itemHeight / 2.0f);
 	_rotatingContainer->setContent(rectangleContainer);
-	_rotatingContainer->setPosition(_view->getSize() / 2 - _rotatingContainer->getSize() / 2);
+	_rotatingContainer->setPosition(_view->getSize() / 2.0f - _rotatingContainer->getSize() / 2.0f);
 	_rotatingContainer->attachTo(_view);
 
 	/*

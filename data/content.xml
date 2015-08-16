@@ -2503,39 +2503,96 @@
 	</hats>
 	<level_rewards>
 		<first>
-			<hat name="oriental_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
+			<ori_hat/>
+			<peng/>
 		</first>
 		<second>
-			<hat name="santa_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
+			<san_hat/>
+			<peng/>
 		</second>
 		<third>
-			<hat name="chef_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
-			<gold name="gold" count="500" lockit="10"/>
+			<chef_hat/>
+			<peng/>
+			<gold_small/>
 		</third>
 		<fourth>
-			<hat name="chef_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
-			<gold name="gold" count="500" lockit="10"/>
+			<chef_hat/>
+			<peng/>
+			<gold_small/>
 		</fourth>
 		<fifth>
-			<hat name="chef_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
-			<gold name="gold" count="500" lockit="10"/>
+			<chef_hat/>
+			<peng/>
+			<gold_small/>
 		</fifth>
 		<sixth>
-			<hat name="chef_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
-			<gold name="gold" count="500" lockit="10"/>
+			<chef_hat/>
+			<peng/>
+			<gold_small/>
 		</sixth>
 		<seventh>
-			<hat name="chef_hat" count="1" lockit="10"/>
-			<animal name="penguin" count="1" lockit="10"/>
-			<gold name="gold" count="500" lockit="10"/>
+			<chef_hat/>
+			<peng/>
+			<gold_small/>
 		</seventh>
 	</level_rewards>
+	<achievements>
+		<first resource="quad" title="100" description="101" state="feed">
+			<part_1 progress="50">
+				<gold_small/>
+			</part_1>
+			<part_2 progress="100">
+				<gold_small/>
+			</part_2>
+		</first>
+		<second resource="quad" title="100" description="101" state="collect">
+			<part_1 progress="50"> <!-- progress adds up -->
+				<gold_small/>
+			</part_1>
+			<part_2 progress="100">
+				<gold_small/>
+			</part_2>
+		</second>
+		<third resource="quad" title="100" description="101" state="play">
+			<part_1 progress="50">
+				<gold_small/>
+			</part_1>
+			<part_2 progress="100">
+				<gold_small/>
+			</part_2>
+		</third>
+		<fourth resource="quad" title="100" description="101" state="zoo">
+			<part_1 progress="50">
+				<gold_small/>
+			</part_1>
+			<part_2 progress="100">
+				<gold_small/>
+			</part_2>
+		</fourth>
+		<fifth resource="quad" title="100" description="101" state="protect">
+			<part_1 progress="50">
+				<gold_small/>
+			</part_1>
+			<part_2 progress="100">
+				<gold_small/>
+			</part_2>
+		</fifth>
+		<sixth resource="quad" title="100" description="101" state="clean">
+			<part_1 progress="50">
+				<gold_small/>
+			</part_1>
+			<part_2 progress="100">
+				<gold_small/>
+			</part_2>
+		</sixth>
+	</achievements>
+	<rewards>
+		<ori_hat type="hat" name="oriental_hat" count="1" lockit="10" />
+		<peng type="animal" name="penguin" count="1" lockit="10"/>
+		<san_hat type="hat" name="santa_hat" count="1" lockit="10"/>
+		<chef_hat type="hat" name="chef_hat" count="1" lockit="10"/>
+		<gold_small type="gold" name="gold" count="500" lockit="10"/>
+	</rewards>
 	<sounds value="60" />
 	<music value="100" />
 	<level_1 value="1" />

@@ -38,6 +38,10 @@ files
 	ShopItemModel.h
 	RewardModel.cpp
 	RewardModel.h
+	MessageModel.cpp
+	MessageModel.h
+	AchievementModel.cpp
+	AchievementModel.h
 
 	[source/animation]
 	AnimalsFarmAnimations.cpp
@@ -48,6 +52,10 @@ files
 	[source/element/levelUp]
 	LevelUpItem.cpp
 	LevelUpItem.h
+
+	[source/element/achievement]
+	AchievementItem.cpp
+	AchievementItem.h
 
 	[source/element/shop]
 	ShopContainer.cpp
@@ -380,6 +388,8 @@ files
 	HatManager.h
 	AchievementManager.cpp
 	AchievementManager.h
+	MessageCenterManager.cpp
+	MessageCenterManager.h
 
 	[source/factory]
 	LockitFactory.cpp

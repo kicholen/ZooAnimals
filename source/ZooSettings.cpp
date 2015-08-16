@@ -10,7 +10,6 @@ ZooSettings::ZooSettings() {
 	_shouldShowChooseAnimalPopup = false;
 }
 
-
 ZooSettings::~ZooSettings() {
 }
 
@@ -182,6 +181,62 @@ void ZooSettings::setFreeHate(const std::string& hatName, int count) {
 	}
 	else {
 		hatAttribute.set_value(count);
+	}
+}
+
+pugi::xml_node ZooSettings::getAchievementsNode() {
+	return _doc.child("achievements");
+}
+
+void ZooSettings::setAchievement(const std::string& achievementName, int progress) {
+	pugi::xml_node node = getAchievementsNode();
+
+	if (node.empty()) {
+		node = _doc.append_child("achievements");
+	}
+
+	pugi::xml_node achievement = node.child(achievementName.c_str());
+
+	if (achievement.empty()) {
+		_doc.append_child(achievementName.c_str()).append_attribute("progress").set_value(progress);
+	}
+	else {
+		achievement.first_attribute().set_value(progress);
+	}
+}
+
+pugi::xml_node ZooSettings::getMessagesNode() {
+	return _doc.child("messages");
+}
+
+void ZooSettings::clearMessagesNode() {
+	pugi::xml_node mainNode = getMessagesNode();
+	pugi::xml_node node = mainNode.first_child();
+	
+	while (!node.empty()) {
+		mainNode.remove_child(node);
+
+		node = mainNode.first_child();
+	}
+}
+
+void ZooSettings::setMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS, const std::vector<int>& rewards) {
+	pugi::xml_node node = getMessagesNode();
+
+	if (node.empty()) {
+		node = _doc.append_child("messages");
+	}
+
+	pugi::xml_node messageNode = node.append_child("asd");
+
+	messageNode.append_attribute("ty").set_value(type); // do not change order!!!
+	messageNode.append_attribute("ti").set_value(lockitTitle);
+	messageNode.append_attribute("de").set_value(lockitDesc);
+	messageNode.append_attribute("re").set_value(resourceName.c_str());
+	messageNode.append_attribute("da").set_value(dateMS);
+
+	for (int i = 0; i < rewards.size(); i++) {
+		messageNode.append_attribute("re").set_value(rewards[i]);
 	}
 }
 

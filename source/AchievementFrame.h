@@ -1,10 +1,31 @@
-#pragma once
+#ifndef _ACHIEVEMENTFRAME_
+#define _ACHIEVEMENTFRAME_
+
+#define OFFSET_ACHIEVEMENT 20
+
 #include "CustomFrame.h"
-class AchievementFrame :
-	public CustomFrame
+
+DECLARE_SMART(AchievementFrame, spAchievementFrame);
+
+class AchievementFrame : public CustomFrame
 {
 public:
 	AchievementFrame();
 	~AchievementFrame();
+	void selectTransitions();
+
+	Action loop();
+
+protected:
+	void _postHiding(Event *);
+	void _preShowing(Event *);
+
+private:
+	void setData();
+
+	void createTitleTextfield();
+	void createPopupBackground();
+	void createAchievementsList();
 };
 
+#endif

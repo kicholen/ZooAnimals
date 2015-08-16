@@ -218,6 +218,15 @@ pugi::xml_node Content::getHatsNode() {
 	return hats;
 }
 
+pugi::xml_node Content::getAchievementNode() {
+	pugi::xml_node data = _contentDocument.child("data");
+	OX_ASSERT(data);
+	pugi::xml_node achievements = data.child("achievements");
+	OX_ASSERT(achievements);
+
+	return achievements;
+}
+
 pugi::xml_node Content::getLevelRewardsNode() {
 	pugi::xml_node data = _contentDocument.child("data");
 	pugi::xml_node rewards = data.child("level_rewards");

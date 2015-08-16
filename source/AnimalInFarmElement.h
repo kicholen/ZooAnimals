@@ -3,7 +3,7 @@
 
 #include "oxygine-framework.h"
 
-#define ANIMAL_PERCENT_SIZE 15.0f
+#define ANIMAL_PERCENT_SIZE 7.0f
 
 using namespace oxygine;
 

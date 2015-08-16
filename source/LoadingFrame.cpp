@@ -15,6 +15,7 @@
 #include "Multithreading.h"
 #include "FarmManager.h"
 #include "HatManager.h"
+#include "AchievementManager.h"
 
 LoadingFrame::LoadingFrame() {
 	init("LoadingFrame.xml", false);
@@ -107,6 +108,7 @@ void LoadingFrame::initManagers(Event *ev) {
 	Point *ad = new Point((int)getRoot()->getWidth(), (int)getRoot()->getHeight());
 	SpriteSpawner::Initialize(*ad);
 
+	//pass used managers as reference, no static
 	GooglePlayInAppPurchaseManager::instance.init();
 	FacebookManager::instance.init();
 	AnimalsManager::instance.init(_version);
@@ -117,6 +119,7 @@ void LoadingFrame::initManagers(Event *ev) {
 	LanguageManager::instance.init(0);
 	FarmManager::instance.init();
 	HatManager::instance.init();
+	AchievementManager::instance.init();
 
 	_progressBar->addTween(ProgressBar::TweenProgress(0.5f), 100)->setDoneCallback(CLOSURE(this, &LoadingFrame::initSoundPlayer));
 }

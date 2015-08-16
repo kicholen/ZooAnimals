@@ -7,12 +7,6 @@
 using namespace FlashUtils;
 using namespace oxygine;
 
-// typedef std::map<std::string, spHatModel> hatMap; any sense of creating hat model? 
-// what is needed? list of all hats
-// every animal farm will have special 
-// maybe hats in use? maybe not
-// save as ints in saving file !
-
 typedef std::map<std::string, int > hatsMap;
 
 class HatManager : public EventDispatcher
