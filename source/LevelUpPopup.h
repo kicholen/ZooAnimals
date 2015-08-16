@@ -2,6 +2,10 @@
 #define _LEVELUPPOPUP_
 
 #include "CustomFrame.h"
+#include "RewardModel.h"
+#include "FlashUtils.h"
+
+using namespace FlashUtils;
 
 DECLARE_SMART(LevelUpPopup, spLevelUpPopup);
 
@@ -26,7 +30,7 @@ private:
 	void createRewards();
 
 private:
-	spSprite _rewardList;
+	VectorArray<spRewardModel> _rewardsArray;
 };
 
 #endif

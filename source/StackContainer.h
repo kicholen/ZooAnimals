@@ -25,6 +25,10 @@ public:
 	void removeChild(spActor actor);
 	void removeChildren();
 
+	const int childrenCount() const {
+		return _childrenCount;
+	}
+
 private:
 	void updateChildren();
 	void setChildPositionAndScale(spActor actor, int count);

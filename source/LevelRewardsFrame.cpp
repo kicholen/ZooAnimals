@@ -12,7 +12,7 @@ LevelRewardsFrame::LevelRewardsFrame() {
 }
 
 LevelRewardsFrame::~LevelRewardsFrame() {
-
+	int asd = 10;
 }
 
 void LevelRewardsFrame::selectTransitions() {
@@ -40,12 +40,6 @@ Action LevelRewardsFrame::loop() {
 		Action action = waitAction();
 		if (action.id == "back" || action.id == "_btn_back_") {
 			break;
-		}
-		else if (action.id == "close") {
-			break;
-		}
-		else if (action.id == "result") {
-			break; // todo
 		}
 	}
 

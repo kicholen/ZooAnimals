@@ -12,6 +12,7 @@
 #include "ZooSettings.h"
 #include "CloseFrameElement.h"
 #include "TestFrame.h"
+#include "EndGameAction.h"
 
 LandingPageFrame::LandingPageFrame() {
 	init("LandingPageFrame.xml", true);
@@ -67,7 +68,7 @@ Action LandingPageFrame::loop(){
 			transitionShowFrame(testFrame);
 		}
 		else if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
-			DatabaseManager::instance.save(0);
+			_view->addChild(new EndGameAction());
 			break;
 		}
 	}

@@ -22,6 +22,11 @@ void MoneyManager::init(const std::string& version) {
 	fillMoneyGainer();
 }
 
+void MoneyManager::addMoney(int count) {
+	_money += count;
+	dispatchMoneyCountEvent();
+}
+
 void MoneyManager::increaseMoneyOnGameFinished(int zooLevel, int game, const std::string& difficulty) {
 	_money += getMoneyGained(zooLevel, game, difficulty);
 	dispatchMoneyCountEvent();

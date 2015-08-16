@@ -33,6 +33,7 @@ public:
 
 	void init(const std::string& version);
 
+	void addMoney(int count);
 	void increaseMoneyOnGameFinished(int zooLevel, int game, const std::string& difficulty);
 	void decreaseMoneyOnItemBought(int money);
 	int getMoney();

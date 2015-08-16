@@ -9,7 +9,6 @@
 #include "oxygine-framework.h"
 #include "core/STDFileSystem.h"
 
-#include "FlurryAnalytics.h"
 #include "LoadingFrame.h"
 #include "SharedResources.h"
 
@@ -71,7 +70,6 @@ void main_update() {
 void main_destroy() {
 	//sPlayer.stop();
 	//SoundSystem::instance->stop();
-	FlurryAnalytics::instance.onSessionEnded();
 	//delete &FlurryAnalytics::instance;
 	//delete &FlurryAds::instance;
 	//delete &GooglePlayInAppPurchaseManager::instance;

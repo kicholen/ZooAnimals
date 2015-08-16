@@ -11,7 +11,7 @@ ShopManager::ShopManager() {
 
 ShopManager::~ShopManager() {
 	for (std::map<int, spShopItemModel>::iterator innerIterator = _animalItemMap.begin(); innerIterator != _animalItemMap.end(); ++innerIterator) {
-		innerIterator->second->releaseRef();
+		innerIterator->second = 0;
 	}
 	_animalItemMap.clear();
 }

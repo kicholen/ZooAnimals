@@ -3,6 +3,8 @@
 #include "LevelUpItem.h"
 #include "SharedResources.h"
 #include "LanguageManager.h"
+#include "ProcessMaster.h"
+#include "AddRewardsProcess.h"
 
 LevelUpPopup::LevelUpPopup()
 {
@@ -23,6 +25,7 @@ void LevelUpPopup::selectTransitions() {
 void LevelUpPopup::_postHiding(Event *) {
 	//FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
 	_view->removeChildren();
+	_rewardsArray.clear();
 	_resources.unload();
 }
 
@@ -37,6 +40,9 @@ Action LevelUpPopup::loop() {
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
+			spProcessMaster master = new ProcessMaster();
+			master->addProcess(new AddRewardsProcess(_rewardsArray));
+			master->start(getRoot());
 			break;
 		}
 	}
@@ -79,12 +85,12 @@ void LevelUpPopup::createTitleTextfield() {
 }
 
 void LevelUpPopup::createRewards() {
-	VectorArray<spRewardModel> rewardsArray = ExpManager::instance.getRewardsForCurrentLevel();
+	_rewardsArray = ExpManager::instance.getRewardsForCurrentLevel();
 	spLevelUpItem item = new LevelUpItem(Vector2(_view->getWidth() / 2.0f, _view->getHeight() * 0.3f), 10, false);
 	item->setPosition(_view->getSize() / 2.0f);
 
-	for (int i = 0; i < rewardsArray._vector.size(); i++) {
-		item->addReward(rewardsArray._vector[i]);
+	for (int i = 0; i < _rewardsArray._vector.size(); i++) {
+		item->addReward(_rewardsArray._vector[i]);
 	}
 	_view->addChild(item);
 }

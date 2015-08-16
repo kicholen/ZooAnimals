@@ -13,7 +13,7 @@ AnimalsManager::AnimalsManager() {
 AnimalsManager::~AnimalsManager() {
 	for (map<std::string, map<std::string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
 		for (map<std::string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
-			innerIterator->second->releaseRef();
+			innerIterator->second = 0;
 		}
 	}
 	_animalsMap.clear();
@@ -70,7 +70,7 @@ spAnimalModel AnimalsManager::getAnimalModelByRegion(const std::string& region, 
 	return _animalsMap[region][name];
 }
 
-const animalMap& AnimalsManager::getAnimalsByRegion(const std::string& name) {
+const animalMap& AnimalsManager::getAnimalsByRegion(const std::string& name){
 	return _animalsMap[name];
 }
 
@@ -82,7 +82,7 @@ const animalMap& AnimalsManager::getPossesedAnimalsByRegion(const std::string& r
 	return _posessedAnimalMap[region];
 }
 
-const map<std::string, animalMap >& AnimalsManager::getPossesedAnimals() {
+const map<std::string, animalMap >& AnimalsManager::getPossesedAnimals() const {
 	return _posessedAnimalMap;
 }
 

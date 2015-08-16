@@ -6,17 +6,19 @@ HatManager HatManager::instance;
 
 HatManager::HatManager()
 {
+	_freeHatsCount = 0;
 }
 
 HatManager::~HatManager()
 {
 	_hatList._vector.clear();
 	_hatsMap.clear();
+	_freeHats.clear();
 }
 
 void HatManager::init() {
 	createHatList();
-	parseSettings();
+	parseSavedState();
 }
 
 int HatManager::getHatsCountPerAnimal(const std::string& animalName) {
@@ -34,9 +36,24 @@ int HatManager::getHatsCountPerAnimal(const std::string& animalName) {
 	}
 }
 
+const std::map<std::string, int >& HatManager::getFreeHats() {
+	return _freeHats;
+}
+
 void HatManager::addWearableToAnimal(const std::string& animalName, const std::string& wearableName) {
+	removeHatFromFreeList(wearableName);
 	_hatsMap[animalName][wearableName] += 1;
 }
+
+void HatManager::addWearableToFreeHats(const std::string& wearableName, int count) {
+	if (_freeHats.count(wearableName) > 0) {
+		_freeHats[wearableName] += count;
+	}
+	else {
+		_freeHats[wearableName] = count;
+	}
+}
+
 
 std::string HatManager::getWearable(const std::string& animalName, int hatIndex) {
 	int value = 0;
@@ -81,7 +98,18 @@ HatManager::hatParams* HatManager::getHatParametersForAnimal(const std::string& 
 	return params;
 }
 
-void HatManager::parseSettings() {
+void HatManager::removeHatFromFreeList(const std::string& hatName) {
+	if (_freeHats.count(hatName) > 0) {
+		_freeHats[hatName] -= 1;
+		_freeHatsCount -= 1;
+
+		if (_freeHats[hatName] == 0) {
+			_freeHats.erase(hatName);
+		}
+	}
+}
+
+void HatManager::parseSavedState() {
 	pugi::xml_node hatsNode = ZooSettings::instance.getHatsNode();
 
 	if (hatsNode) {
@@ -97,6 +125,23 @@ void HatManager::parseSettings() {
 			animalNode = animalNode.next_sibling();
 		}
 	}
+
+	pugi::xml_node freeHatsNode = ZooSettings::instance.getFreeHatsNode();
+
+	if (freeHatsNode) {
+		pugi::xml_node freeHat = freeHatsNode.first_child();
+
+		while (!freeHat.empty()) {
+			pugi::xml_attribute hatAttribute = freeHat.first_attribute();
+			if (!hatAttribute.empty()) {
+				int freeHatCount = hatAttribute.as_int();
+				_freeHats[freeHat.name()] = freeHatCount;
+				_freeHatsCount += freeHatCount;
+			}
+
+			freeHat = freeHat.next_sibling();
+		}
+	}
 }
 
 void HatManager::store() {
@@ -104,5 +149,9 @@ void HatManager::store() {
 		for (hatsMap::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
 			ZooSettings::instance.setHat(outerIterator->first, innerIterator->first, innerIterator->second);
 		}
+	}
+
+	for (map<string, int >::iterator innerIterator = _freeHats.begin(); innerIterator != _freeHats.end(); ++innerIterator) {
+		ZooSettings::instance.setFreeHate(innerIterator->first, innerIterator->second);
 	}
 }

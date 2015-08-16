@@ -247,6 +247,14 @@ files
 	JumpOverFrame.cpp
 	JumpOverFrame.h
 
+	[source/frame/settings]
+	SettingsFrame.cpp
+	SettingsFrame.h
+
+	[source/frame/achievement]
+	AchievementFrame.cpp
+	AchievementFrame.h
+
 	[source/frame/utils]
     BuyItemPopup.cpp
     BuyItemPopup.h
@@ -262,6 +270,8 @@ files
 	OutOfMoneyPopup.h
 	LevelUpPopup.cpp
 	LevelUpPopup.h
+	AttachHatToAnimalFrame.cpp
+	AttachHatToAnimalFrame.h
 
 	[source/frame/shop]
 	ShopFrame.cpp
@@ -337,6 +347,18 @@ files
 	FeedAnimationProcess.cpp
 	FeedAnimationProcess.h
 
+	[source/process/reward]
+	AddRewardsProcess.cpp
+	AddRewardsProcess.h
+
+	[source/action]
+	IAction.cpp
+	IAction.h
+
+	[source/action/endGame]
+	EndGameAction.cpp
+	EndgameAction.h
+
 	[source/manager]
 	FacebookManager.cpp
 	FacebookManager.h
@@ -356,6 +378,8 @@ files
 	FarmManager.h
 	HatManager.cpp
 	HatManager.h
+	AchievementManager.cpp
+	AchievementManager.h
 
 	[source/factory]
 	LockitFactory.cpp

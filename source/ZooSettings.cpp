@@ -115,6 +115,12 @@ pugi::xml_node ZooSettings::getHatsNode() {
 	return hatsNode;
 }
 
+pugi::xml_node ZooSettings::getFreeHatsNode() {
+	pugi::xml_node freeHatsNode = _doc.child("free_hats");
+
+	return freeHatsNode;
+}
+
 pugi::xml_node ZooSettings::getHatByAnimalName(const std::string& animalName) {
 	pugi::xml_node node = _doc.child("hats").child(animalName.c_str());
 	if (!node) {
@@ -154,6 +160,28 @@ void ZooSettings::setHat(const std::string& animalName, const std::string& hatNa
 
 	if (!doesHatAttributeExists) {
 		animalNode.append_attribute(pugiName).set_value(count);
+	}
+}
+
+void ZooSettings::setFreeHate(const std::string& hatName, int count) {
+	pugi::xml_node hatsNode = _doc.child("free_hats");
+	if (hatsNode.empty()) {
+		hatsNode = _doc.append_child("free_hats");
+	}
+
+	pugi::xml_node freeHatNode = hatsNode.child(hatName.c_str());
+
+	if (freeHatNode.empty()) {
+		freeHatNode = hatsNode.append_child(hatName.c_str());
+	}
+
+	pugi::xml_attribute hatAttribute = freeHatNode.first_attribute();
+
+	if (hatAttribute.empty()) {
+		freeHatNode.append_attribute("count").set_value(count);
+	}
+	else {
+		hatAttribute.set_value(count);
 	}
 }
 

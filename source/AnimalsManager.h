@@ -48,7 +48,7 @@ public:
 	const animalMap& getAnimalsByRegion(const std::string& region);
 
 	const animalMap& getPossesedAnimalsByRegion(const std::string& region);
-	const std::map< std::string, animalMap >& getPossesedAnimals();
+	const std::map< std::string, animalMap >& getPossesedAnimals() const;
 
 	void increaseHappinessByPoints(spAnimalModel model, int points);
 	void increaseAnimalCount(const std::string& region, const std::string& name, int count);

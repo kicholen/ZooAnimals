@@ -13,6 +13,7 @@
 #include "LevelRewardsFrame.h"
 #include "LevelUpPopup.h"
 #include "ShopFrame.h"
+#include "AttachHatToAnimalFrame.h"
 
 #include "ChooseStartAnimalFrame.h"
 #include "WorldMapFrame.h"
@@ -40,7 +41,6 @@ void TestFrame::_postHiding(Event *) {
 }
 
 void TestFrame::_preShowing(Event *) {
-	//GooglePlayInAppPurchaseManager::instance.restorePurchases();
 	selectTransitions();
 	setData();
 	_resources.load();
@@ -67,6 +67,10 @@ Action TestFrame::loop(){
 		else if (action.id == "shop") {
 			spShopFrame shopFrame = new ShopFrame();
 			transitionShowFrame(shopFrame);
+		}
+		else if (action.id == "attach_hat") {
+			spAttachHatToAnimalFrame attachFrame = new AttachHatToAnimalFrame("bee");
+			transitionShowFrameAsDialog(attachFrame);
 		}
 		else if (action.id == "choose_start") {
 			spChooseStartAnimalFrame chooseAnimal = new ChooseStartAnimalFrame();
@@ -136,6 +140,7 @@ void TestFrame::setData() {
 	dupaArray.push(createButtonWithListener("show_rewards", "show_rewards"));
 	dupaArray.push(createButtonWithListener("level_up", "level_up"));
 	dupaArray.push(createButtonWithListener("map", "map"));
+	dupaArray.push(createButtonWithListener("attach_hat", "attach_hat"));
 	
 	spAnimatableElementContainer gameContainer = new AnimatableElementContainer(Vector2(_view->getWidth(), _view->getHeight()));
 	gameContainer->addChildren(dupaArray);
