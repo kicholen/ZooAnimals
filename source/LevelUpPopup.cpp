@@ -5,6 +5,7 @@
 #include "LanguageManager.h"
 #include "ProcessMaster.h"
 #include "AddRewardsProcess.h"
+#include "RewardsManager.h"
 
 LevelUpPopup::LevelUpPopup()
 {
@@ -90,7 +91,7 @@ void LevelUpPopup::createRewards() {
 	item->setPosition(_view->getSize() / 2.0f);
 
 	for (int i = 0; i < _rewardsArray._vector.size(); i++) {
-		item->addReward(_rewardsArray._vector[i]);
+		item->addReward(RewardsManager::instance.getReward(_rewardsArray._vector[i]));
 	}
 	_view->addChild(item);
 }

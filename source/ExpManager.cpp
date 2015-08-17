@@ -36,15 +36,15 @@ int ExpManager::getLevel() {
 	return _level;
 }
 
-const VectorArray<spRewardModel>& ExpManager::getRewardsForLevel(int level) {
+const VectorArray<std::string>& ExpManager::getRewardsForLevel(int level) {
 	return _rewardsForLevels[level];
 }
 
-VectorArray<spRewardModel> ExpManager::getRewardsForCurrentLevel() {
+VectorArray<std::string> ExpManager::getRewardsForCurrentLevel() {
 	return _rewardsForLevels[_level];
 }
 
-const VectorArray< VectorArray<spRewardModel> >& ExpManager::getAllRewards() {
+const VectorArray< VectorArray<std::string> >& ExpManager::getAllRewards() {
 	return _rewardsForLevels;
 }
 
@@ -82,40 +82,18 @@ void ExpManager::dispatchLevelUpEvent() {
 void ExpManager::parseRewards() {
 	pugi::xml_node rewards = Content::instance.getLevelRewardsNode();
 	pugi::xml_node rewardLevel = rewards.first_child();
-	int type = 0;
-	std::string name = "";
-	int count = 0;
-	int level = 0;
-	int lockitId = 0;
 
 	while (!rewardLevel.empty()) {
 		pugi::xml_node reward = rewardLevel.first_child();
-		VectorArray<spRewardModel> innerVector;
+		VectorArray<std::string> rewardsVector;
 
 		while (!reward.empty()) {
-			if (!strcmp(reward.name(), "hat")) {
-				type = 0;
-			}
-			else if (!strcmp(reward.name(), "animal")) {
-				type = 1;
-			}
-			else if (!strcmp(reward.name(), "gold")) {
-				type = 2;
-			}
-			
-			pugi::xml_attribute attribute = reward.first_attribute();
-			name = attribute.as_string();
-			attribute = attribute.next_attribute();
-			count = attribute.as_int();
-			attribute = attribute.next_attribute();
-			lockitId = attribute.as_int();
+			rewardsVector.push(reward.name());
 
-			innerVector.push(new RewardModel(type, count, name, lockitId));
 			reward = reward.next_sibling();
 		}
 
-		_rewardsForLevels.push(innerVector);
-		level += 1;
+		_rewardsForLevels.push(rewardsVector);
 		rewardLevel = rewardLevel.next_sibling();
 	}
 }

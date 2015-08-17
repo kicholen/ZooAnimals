@@ -16,6 +16,7 @@
 #include "FarmManager.h"
 #include "HatManager.h"
 #include "AchievementManager.h"
+#include "RewardsManager.h"
 
 LoadingFrame::LoadingFrame() {
 	init("LoadingFrame.xml", false);
@@ -120,6 +121,7 @@ void LoadingFrame::initManagers(Event *ev) {
 	FarmManager::instance.init();
 	HatManager::instance.init();
 	AchievementManager::instance.init();
+	RewardsManager::instance.init();
 
 	_progressBar->addTween(ProgressBar::TweenProgress(0.5f), 100)->setDoneCallback(CLOSURE(this, &LoadingFrame::initSoundPlayer));
 }

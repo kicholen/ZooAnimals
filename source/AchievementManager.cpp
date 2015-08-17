@@ -20,7 +20,7 @@ void AchievementManager::init() {
 
 void AchievementManager::store() {
 	for (map<string, spAchievementModel >::iterator outerIterator = _achievementMap.begin(); outerIterator != _achievementMap.end(); ++outerIterator) {
-		ZooSettings::instance.setAchievement(outerIterator->first, outerIterator->second);
+		ZooSettings::instance.setAchievement(outerIterator->first, outerIterator->second->getProgress());
 	}
 }
 
@@ -90,11 +90,8 @@ void AchievementManager::parseSavedState() {
 		pugi::xml_attribute attribute = achievement.first_attribute();
 		spAchievementModel model = _achievementMap[achievement.name()];
 
-		while (!attribute.empty()) {
-			model->addPart(attribute.as_int());
+		model->setProgress(attribute.as_int());
 
-			attribute = attribute.next_attribute();
-		}
 		model->revalidate();
 	}
 }

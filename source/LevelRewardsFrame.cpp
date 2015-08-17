@@ -3,6 +3,7 @@
 #include "FlashUtils.h"
 #include "RewardModel.h"
 #include "LevelUpItem.h"
+#include "RewardsManager.h"
 
 using namespace FlashUtils;
 
@@ -57,7 +58,7 @@ void LevelRewardsFrame::setData() {
 
 	float positionY = _rotatingContainer->getHeight() * 0.3f / 2.0f + OFFSET;
 	float itemHeight = 0.0f;
-	const VectorArray< VectorArray<spRewardModel> >& rewardsArray = ExpManager::instance.getAllRewards();
+	const VectorArray< VectorArray<std::string> >& rewardsArray = ExpManager::instance.getAllRewards();
 	const Vector2& size = Vector2(_rotatingContainer->getWidth() * 0.9f, _rotatingContainer->getHeight() * 0.3f);
 	
 	for (int i = 0; i < rewardsArray._vector.size(); i++) {
@@ -68,7 +69,7 @@ void LevelRewardsFrame::setData() {
 		rectangleContainer->addChild(item);
 		
 		for (int j = 0; j < rewardsArray._vector[i]._vector.size(); j++) {
-			item->addReward(rewardsArray._vector[i]._vector[j]);
+			item->addReward(RewardsManager::instance.getReward(rewardsArray._vector[i]._vector[j]));
 		}
 	}
 	

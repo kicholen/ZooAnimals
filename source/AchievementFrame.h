@@ -23,9 +23,9 @@ protected:
 private:
 	void setData();
 
-	void createTitleTextfield();
+	spTextField createTitleTextfield();
 	void createPopupBackground();
-	void createAchievementsList();
+	void createAchievementsList(spTextField title);
 };
 
 #endif

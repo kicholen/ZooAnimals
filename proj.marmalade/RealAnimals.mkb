@@ -57,6 +57,10 @@ files
 	AchievementItem.cpp
 	AchievementItem.h
 
+	[source/element/message]
+	MessageItem.cpp
+	MessageItem.h
+
 	[source/element/shop]
 	ShopContainer.cpp
 	ShopContainer.h
@@ -285,6 +289,10 @@ files
 	ShopFrame.cpp
 	ShopFrame.h
 
+	[source/frame/message]
+	MessageCenterFrame.cpp
+	MessageCenterFrame.h
+
     [source/frame/levels]
     PresentAnimalsFrame.cpp
     PresentAnimalsFrame.h
@@ -390,6 +398,8 @@ files
 	AchievementManager.h
 	MessageCenterManager.cpp
 	MessageCenterManager.h
+	RewardsManager.cpp
+	RewardsManager.h
 
 	[source/factory]
 	LockitFactory.cpp

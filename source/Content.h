@@ -40,6 +40,8 @@ public:
 	
 	pugi::xml_node getAchievementNode();
 
+	pugi::xml_node getRewardsNode();
+
 	int getGameLevelsCount(const std::string &gameName);
 private:
 	void setPath(const std::string &path);

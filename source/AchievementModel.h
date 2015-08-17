@@ -16,6 +16,7 @@ public:
 	bool increaseProgress();
 	
 	void addPart(int progress);
+	void setProgress(int progress);
 	void revalidate();
 
 	const std::string& getResourceName() const {

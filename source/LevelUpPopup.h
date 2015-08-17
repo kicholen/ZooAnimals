@@ -30,7 +30,7 @@ private:
 	void createRewards();
 
 private:
-	VectorArray<spRewardModel> _rewardsArray;
+	VectorArray<std::string> _rewardsArray;
 };
 
 #endif

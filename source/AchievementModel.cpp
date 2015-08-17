@@ -5,6 +5,7 @@ AchievementModel::AchievementModel(const std::string& resourceName, int lockitTi
 	_lockitTitle = lockitTitle;
 	_lockitDescription = lockitDescription;
 	_state = state;	
+	_progress = 0;
 	_currentPart = 0;
 }
 
@@ -14,6 +15,10 @@ AchievementModel::~AchievementModel() {
 
 void AchievementModel::addPart(int progress) {
 	_parts.push_back(progress);
+}
+
+void AchievementModel::setProgress(int progress) {
+	_progress = progress;
 }
 
 const int AchievementModel::getProgressNeededByPart(int part) const {

@@ -45,8 +45,8 @@ Action AchievementFrame::loop() {
 
 void AchievementFrame::setData() {
 	//createPopupBackground();
-	createTitleTextfield();
-	createAchievementsList();
+	spTextField titleTextfield = createTitleTextfield();
+	createAchievementsList(titleTextfield);
 }
 
 void AchievementFrame::createPopupBackground() {
@@ -62,7 +62,7 @@ void AchievementFrame::createPopupBackground() {
 	cardBackground->setPriority(-1);
 }
 
-void AchievementFrame::createTitleTextfield() {
+spTextField AchievementFrame::createTitleTextfield() {
 	TextStyle style;
 	style.font = gameResources.getResFont("nobile_bold")->getFont();
 	style.vAlign = TextStyle::VALIGN_MIDDLE;
@@ -74,17 +74,19 @@ void AchievementFrame::createTitleTextfield() {
 	textField->setAnchorX(0.5f);
 	textField->setX(_view->getWidth() / 2.0f);
 	_view->addChild(textField);
+
+	return textField;
 }
 
-void AchievementFrame::createAchievementsList() {
+void AchievementFrame::createAchievementsList(spTextField title) {
 	spSlidingActor slidingActor = new SlidingActor();
-	slidingActor->setSize(_view->getWidth(), _view->getHeight());
+	slidingActor->setSize(_view->getWidth(), _view->getHeight() - title->getDerivedHeight());
 
 	spColorRectSprite rectangleContainer = new ColorRectSprite();
 	rectangleContainer->setSize(slidingActor->getWidth(), slidingActor->getHeight());
 	rectangleContainer->setColor(Color(0, 0, 0, 0));
 
-	float positionY = slidingActor->getHeight() * 0.3f / 2.0f + OFFSET_ACHIEVEMENT;
+	float positionY = slidingActor->getHeight() * 0.3f / 2.0f;
 	float itemHeight = 0.0f;
 
 	const std::vector<spAchievementModel>& achievements = AchievementManager::instance.getAchievements();
@@ -102,6 +104,6 @@ void AchievementFrame::createAchievementsList() {
 
 	rectangleContainer->setSize(slidingActor->getWidth(), positionY - itemHeight / 2.0f);
 	slidingActor->setContent(rectangleContainer);
-	slidingActor->setPosition(_view->getSize() / 2.0f - slidingActor->getSize() / 2.0f);
+	slidingActor->setPosition((_view->getWidth() - slidingActor->getWidth()) / 2.0f, (_view->getHeight() - slidingActor->getHeight() + title->getDerivedHeight()) / 2.0f);
 	slidingActor->attachTo(_view);
 }

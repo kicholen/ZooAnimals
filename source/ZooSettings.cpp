@@ -198,7 +198,7 @@ void ZooSettings::setAchievement(const std::string& achievementName, int progres
 	pugi::xml_node achievement = node.child(achievementName.c_str());
 
 	if (achievement.empty()) {
-		_doc.append_child(achievementName.c_str()).append_attribute("progress").set_value(progress);
+		node.append_child(achievementName.c_str()).append_attribute("progress").set_value(progress);
 	}
 	else {
 		achievement.first_attribute().set_value(progress);
@@ -235,7 +235,7 @@ void ZooSettings::setMessage(int type, int lockitTitle, int lockitDesc, const st
 	messageNode.append_attribute("re").set_value(resourceName.c_str());
 	messageNode.append_attribute("da").set_value(dateMS);
 
-	for (int i = 0; i < rewards.size(); i++) {
+	for (uint i = 0; i < rewards.size(); i++) {
 		messageNode.append_attribute("re").set_value(rewards[i]);
 	}
 }

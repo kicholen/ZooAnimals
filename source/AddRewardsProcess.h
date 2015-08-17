@@ -9,7 +9,7 @@ using namespace FlashUtils;
 class AddRewardsProcess : public ProcessSlave
 {
 public:
-	AddRewardsProcess(VectorArray<spRewardModel> rewards);
+	AddRewardsProcess(const VectorArray<std::string>&  rewards);
 	~AddRewardsProcess();
 
 	virtual void process();
@@ -18,7 +18,7 @@ public:
 private:
 	void parse(spRewardModel model);
 
-	VectorArray<spRewardModel> _rewards;
+	VectorArray<std::string> _rewards;
 };
 
 #endif

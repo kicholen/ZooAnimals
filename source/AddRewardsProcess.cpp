@@ -2,8 +2,9 @@
 #include "HatManager.h"
 #include "AnimalsManager.h"
 #include "MoneyManager.h"
+#include "RewardsManager.h"
 
-AddRewardsProcess::AddRewardsProcess(VectorArray<spRewardModel> rewards)
+AddRewardsProcess::AddRewardsProcess(const VectorArray<std::string>& rewards)
 {
 	_rewards = rewards;
 	_canProcess = true;
@@ -17,7 +18,7 @@ AddRewardsProcess::~AddRewardsProcess()
 void AddRewardsProcess::process() {
 	if (_part == 0) {
 		for (int i = 0; i < _rewards.length(); i++) {
-			parse(_rewards[i]);
+			parse(RewardsManager::instance.getReward(_rewards[i]));
 		}
 
 		_completed = true;

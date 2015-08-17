@@ -34,9 +34,9 @@ public:
 	void init(const std::string& version);
 
 	int getLevel();
-	const VectorArray<spRewardModel>& getRewardsForLevel(int level);
-	VectorArray<spRewardModel> getRewardsForCurrentLevel();
-	const VectorArray< VectorArray<spRewardModel> >& getAllRewards();
+	const VectorArray<std::string>& getRewardsForLevel(int level);
+	VectorArray<std::string> getRewardsForCurrentLevel();
+	const VectorArray< VectorArray<std::string> >& getAllRewards();
 
 	void increaseExpByPoints(int points);
 
@@ -54,7 +54,7 @@ private:
 	double _expGainPower;
 	int _levelCount;
 	std::vector<int> _expNeededForLevels;
-	VectorArray< VectorArray<spRewardModel> > _rewardsForLevels;
+	VectorArray< VectorArray<std::string> > _rewardsForLevels;
 
 	int _exp;
 	int _level;
