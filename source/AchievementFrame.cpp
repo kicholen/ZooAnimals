@@ -93,7 +93,7 @@ void AchievementFrame::createAchievementsList(spTextField title) {
 
 	const Vector2& size = Vector2(slidingActor->getWidth() * 0.9f, slidingActor->getHeight() * 0.2f);
 	
-	for (int i = 0; i < achievements.size(); i++) {
+	for (uint i = 0; i < achievements.size(); i++) {
 		spAchievementItem item = new AchievementItem(size);
 		item->setData(achievements[i]);
 		item->setPosition(slidingActor->getWidth() / 2.0f, positionY);

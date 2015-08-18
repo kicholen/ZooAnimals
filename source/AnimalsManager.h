@@ -84,6 +84,7 @@ private:
 	std::map<std::string, animalMap > _posessedAnimalMap;
 
 	int _speciesPossesedCount;
+	int _animalsPossesedCount;
 
 	spTimer _timer;
 };

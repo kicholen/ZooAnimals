@@ -18,6 +18,7 @@ public:
 	void addPart(int progress);
 	void setProgress(int progress);
 	void revalidate();
+	bool isCompleted();
 
 	const std::string& getResourceName() const {
 		return _resourceName;

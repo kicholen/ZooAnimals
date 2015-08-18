@@ -2546,7 +2546,7 @@
 			</part_2>
 		</first>
 		<second resource="quad" title="100" description="101" state="collect">
-			<part_1 progress="50"> <!-- progress adds up -->
+			<part_1 progress="50"> <!-- progress adds up, order of achievements is much importanto !! -->
 				<gold_small/>
 			</part_1>
 			<part_2 progress="100">
@@ -2568,6 +2568,15 @@
 			<part_2 progress="100">
 				<gold_small/>
 			</part_2>
+			<part_2 progress="200">
+				<gold_small/>
+			</part_2>
+			<part_2 progress="400">
+				<gold_small/>
+			</part_2>
+			<part_2 progress="1000">
+				<gold_small/>
+			</part_2>
 		</fourth>
 		<fifth resource="quad" title="100" description="101" state="protect">
 			<part_1 progress="50">
@@ -2584,6 +2593,36 @@
 			<part_2 progress="100">
 				<gold_small/>
 			</part_2>
+		</sixth>
+		<sixth resource="quad" title="100" description="101" state="collectFarm"><!-- progress all species -->
+			<part_1 progress="11">
+				<gold_small/>
+			</part_1>
+		</sixth>
+		<sixth resource="quad" title="100" description="101" state="collectSteppe">
+			<part_1 progress="7">
+				<gold_small/>
+			</part_1>
+		</sixth>
+		<sixth resource="quad" title="100" description="101" state="collectWinter">
+			<part_1 progress="7">
+				<gold_small/>
+			</part_1>
+		</sixth>
+		<sixth resource="quad" title="100" description="101" state="collectAsia">
+			<part_1 progress="7">
+				<gold_small/>
+			</part_1>
+		</sixth>
+		<sixth resource="quad" title="100" description="101" state="collectUnder">
+			<part_1 progress="5">
+				<gold_small/>
+			</part_1>
+		</sixth>
+		<sixth resource="quad" title="100" description="101" state="collectAustralia">
+			<part_1 progress="8">
+				<gold_small/>
+			</part_1>
 		</sixth>
 	</achievements>
 	<rewards>

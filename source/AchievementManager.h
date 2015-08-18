@@ -8,7 +8,7 @@
 using namespace FlashUtils;
 using namespace oxygine;
 
-typedef enum {amFeed, amCollect, amPlay, amZoo, amProtect, amClean} AchievementState;
+typedef enum { amFeed, amCollect, amPlay, amZoo, amProtect, amClean, amCollectFarm, amCollectSteppe, amCollectWinter, amCollectAsia, amCollectUnder, amCollectAustralia } AchievementType;
 
 class AchievementManager : public EventDispatcher
 {
@@ -34,12 +34,17 @@ public:
 	void init();
 	void store();
 
-	void increaseProgress(AchievementState state);
+	void increaseProgress(AchievementType type);
+	void increaseSpeciesPossesed(const std::string& region);
+
+	bool isCompleted(AchievementType type);
 
 	const std::vector<spAchievementModel>& getAchievements() const;
 private:
 	void parseContent();
 	void parseSavedState();
+	AchievementType getAchievementTypeByRegion(const std::string& region);
+
 
 	void dispatchAchievementGainedEvent(spAchievementModel model);
 

@@ -3,11 +3,13 @@
 #include "SharedResources.h"
 #include "Timer.h"
 #include "StartGameConfig.h"
+#include "AchievementManager.h"
 
 AnimalsManager AnimalsManager::instance;
 
 AnimalsManager::AnimalsManager() {
 	_speciesPossesedCount = 0;
+	_animalsPossesedCount = 0;
 }
 
 AnimalsManager::~AnimalsManager() {
@@ -52,7 +54,8 @@ bool AnimalsManager::canAnimalBeFedByModel(spAnimalModel model) {
 bool AnimalsManager::canAnimalBeFedByName(const std::string& name) {
 	return canAnimalBeFedByModel(getAnimalModel(name));
 }
-// time consuming, maps was made on purpose, and here it is removed
+
+// time consuming, maps were made on purpose, and here it is removed
 spAnimalModel AnimalsManager::getAnimalModel(const std::string& name) {
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {
 		for (map<string, spAnimalModel>::iterator innerIterator = outerIterator->second.begin(); innerIterator != outerIterator->second.end(); ++innerIterator) {
@@ -104,6 +107,7 @@ void AnimalsManager::increaseAnimalCount(const std::string& region, const std::s
 		model->setLevel(_speciesPossesedCount);
 		model->setLastFeedS(getCurrentTimeInSeconds());
 		_posessedAnimalMap[region].insert(make_pair(name, model));
+		AchievementManager::instance.increaseSpeciesPossesed(region);
 	}
 
 	dispatchAnimalCountChangedEvent(model);
@@ -118,11 +122,10 @@ void AnimalsManager::increaseAnimalCount(spAnimalModel model, int count) {
 		model->setLevel(_speciesPossesedCount);
 		model->setLastFeedS(getCurrentTimeInSeconds());
 		_posessedAnimalMap[region].insert(make_pair(model->animalName(), model));
+		AchievementManager::instance.increaseSpeciesPossesed(region);
 	}
 
 	dispatchAnimalCountChangedEvent(model);
-	
-
 }
 
 void AnimalsManager::store() {

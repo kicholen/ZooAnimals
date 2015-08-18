@@ -18,8 +18,8 @@ void AchievementItem::setData(spAchievementModel model) {
 	setIcon(model->getResourceName());
 	createBackground();
 
-	float previousProgress = (float)model->getProgressNeededByPart(std::min(0, model->getCurrentPart() - 1));
-	float neededProgress = (float)model->getProgressNeededByPart(std::max(model->getAllPartsCount() - 1, model->getCurrentPart() + 1));
+	float previousProgress = model->getCurrentPart() - 1 < 0 ? 0 : (float)model->getProgressNeededByPart(model->getCurrentPart() - 1);
+	float neededProgress = (float)model->getProgressNeededByPart(std::min(model->getAllPartsCount() - 1, model->getCurrentPart() + 1));
 	float currentProgress = (float)model->getProgress();
 	spProgressBarBox9 progressBar = createProgressBar((currentProgress - previousProgress) / (neededProgress - previousProgress));
 	spTextField partTextfield = setPartTextField(model->getCurrentPart(), model->getAllPartsCount());

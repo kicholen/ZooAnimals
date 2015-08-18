@@ -4,6 +4,8 @@
 #include "CustomFrame.h"
 #include "MessageItem.h"
 
+#define OFFSET_MESSAGES 20
+
 DECLARE_SMART(MessageCenterFrame, spMessageCenterFrame);
 
 class MessageCenterFrame : public CustomFrame
@@ -21,7 +23,7 @@ protected:
 
 	void setData();
 
-	spMessageItem createMessageItem(spMessageModel model);
+	spMessageItem createMessageItem(const Vector2& size, spMessageModel model);
 };
 
 #endif

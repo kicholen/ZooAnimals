@@ -15,6 +15,7 @@ MessageCenterManager::~MessageCenterManager() {
 void MessageCenterManager::init() {
 	parseSavedState();
 	ZooSettings::instance.clearMessagesNode();
+	addEventListeners();
 }
 
 void MessageCenterManager::store() {
@@ -28,7 +29,7 @@ const std::vector<spMessageModel>& MessageCenterManager::getMessages() {
 }
 
 void MessageCenterManager::removeMessageByNumber(int number) {
-	for (int i = 0; i < _messages.size(); i++) {
+	for (uint i = 0; i < _messages.size(); i++) {
 		_messages.erase(_messages.begin() + i); // todo
 	}
 }
@@ -86,7 +87,7 @@ void MessageCenterManager::onAchievementsGained(Event *event) {
 
 	spAchievementModel model = achievementEvent->model;
 
-	addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), getTimeUTCMS());
+	addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), (int)getTimeUTCMS());
 	dispatchNewMessageEvent();
 }
 

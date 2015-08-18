@@ -24,12 +24,25 @@ void AchievementManager::store() {
 	}
 }
 
-void AchievementManager::increaseProgress(AchievementState state) {
-	spAchievementModel model = _achievementList[state];
+void AchievementManager::increaseProgress(AchievementType type) {
+	spAchievementModel model = _achievementList[type];
+	
+	if (model->isCompleted()) {
+		oxygine::log::messageln("Achievement already completed");
+		return;
+	}
 	if (model->increaseProgress()) {
 		dispatchAchievementGainedEvent(model);
 		model->revalidate();
 	}
+}
+
+void AchievementManager::increaseSpeciesPossesed(const std::string& region) {
+	increaseProgress(static_cast<AchievementType>(getAchievementTypeByRegion(region)));
+}
+
+bool AchievementManager::isCompleted(AchievementType type) {
+	return _achievementList[type]->isCompleted();
 }
 
 const std::vector<spAchievementModel>& AchievementManager::getAchievements() const {
@@ -77,6 +90,7 @@ void AchievementManager::parseContent() {
 
 		_achievementList.push(model);
 		_achievementMap[achievement.name()] = model;
+		model->revalidate();
 
 		achievement = achievement.next_sibling();
 	}
@@ -93,6 +107,27 @@ void AchievementManager::parseSavedState() {
 		model->setProgress(attribute.as_int());
 
 		model->revalidate();
+	}
+}
+
+AchievementType AchievementManager::getAchievementTypeByRegion(const std::string& region) {
+	if (region == "farm") {
+		return amCollectFarm;
+	}
+	else if (region == "winter") {
+		return amCollectWinter;
+	}
+	else if (region == "underwater") {
+		return amCollectUnder;
+	}
+	else if (region == "steppe") {
+		return amCollectSteppe;
+	}
+	else if (region == "asia") {
+		return amCollectAsia;
+	}
+	else { //if (region == "australia")
+		return amCollectAustralia;
 	}
 }
 
