@@ -30,6 +30,7 @@ void MessageItem::setData(spMessageModel model) {
 	button->setAnchor(1.0f, 1.0f);
 	button->setPosition(getSize());
 	addChild(button);
+	_model = model;
 }
 
 void MessageItem::createDateTextfield(int dateMS) { // todo set proper textfieldPositions

@@ -23,6 +23,7 @@ private:
 	void setData();
 	float getXOnTilesToView(float x);
 	void onButtonClicked(Event *ev);
+	void onMessageCountChanged(Event *event);
 
 	void onZooSectionChosen(Event *event);
 
@@ -35,9 +36,11 @@ private:
 	void addSteppeTrackToSpawner(float tileSize, float tilesToViewOffsetX);
 	void addAsiaTrackToSpawner(float tileSize, float tilesToViewOffsetX);
 	void addAustraliaTrackToSpawner(float tileSize, float tilesToViewOffsetX);
+	void addMailBox(float tileSize, const Vector2& position);
 
 private:
 	spSpectatorSpawner _spawner;
+	spButton _mailBoxButton;
 };
 
 #endif

@@ -11,7 +11,7 @@ MessageCenterFrame::~MessageCenterFrame() {
 }
 
 void MessageCenterFrame::selectTransitions() {
-	spTransition transition = new TransitionFade;
+	spTransition transition = new TransitionMove;
 	setTransitionIn(transition);
 	setTransitionOut(transition);
 }
@@ -72,6 +72,23 @@ void MessageCenterFrame::setData() {
 
 spMessageItem MessageCenterFrame::createMessageItem(const Vector2& size, spMessageModel model) {
 	spMessageItem item = new MessageItem(size, model);
-
+	item->addEventListener(MessageItem::MessageItemEvent::REWARDS_CLAIMED, CLOSURE(this, &MessageCenterFrame::onRewardClaimed));
+	item->addEventListener(MessageItem::MessageItemEvent::MESSAGE_DELETED, CLOSURE(this, &MessageCenterFrame::onMessageDeleted));
 	return item;
+}
+
+void MessageCenterFrame::onRewardClaimed(Event *event) {
+	MessageItem::MessageItemEvent *messageEvent = safeCast<MessageItem::MessageItemEvent*>(event);
+	spMessageItem item = safeSpCast<MessageItem>(event->currentTarget);
+	item->detach();
+
+	//todo
+	//messageEvent->model->getRewards();
+	MessageCenterManager::instance.removeMessage(messageEvent->model);
+}
+
+void MessageCenterFrame::onMessageDeleted(Event *event) {
+	MessageItem::MessageItemEvent *messageEvent = safeCast<MessageItem::MessageItemEvent*>(event);
+	spMessageItem item = safeSpCast<MessageItem>(event->currentTarget);
+	item->detach();
 }

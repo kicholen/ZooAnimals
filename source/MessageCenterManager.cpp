@@ -15,6 +15,7 @@ MessageCenterManager::~MessageCenterManager() {
 void MessageCenterManager::init() {
 	parseSavedState();
 	ZooSettings::instance.clearMessagesNode();
+	addRef();
 }
 
 void MessageCenterManager::store() {
@@ -27,10 +28,13 @@ const std::vector<spMessageModel>& MessageCenterManager::getMessages() {
 	return _messages;
 }
 
-void MessageCenterManager::removeMessageByNumber(int number) {
+void MessageCenterManager::removeMessage(spMessageModel model) {
 	for (uint i = 0; i < _messages.size(); i++) {
-		_messages.erase(_messages.begin() + i); // todo
+		if (model == _messages[i]) {
+			_messages.erase(_messages.begin() + i);
+		}
 	}
+	dispatchMessageCountChangedEvent();
 }
 
 void MessageCenterManager::parseSavedState() {
@@ -81,10 +85,10 @@ spMessageModel MessageCenterManager::addMessage(int type, int lockitTitle, int l
 
 void MessageCenterManager::onAchievementsGained(spAchievementModel model) {
 	addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), (int)getTimeUTCMS());
-	dispatchNewMessageEvent();
+	dispatchMessageCountChangedEvent();
 }
 
-void MessageCenterManager::dispatchNewMessageEvent() {
-	MessageEvent ev(MessageEvent::NEW_MESSAGE);
+void MessageCenterManager::dispatchMessageCountChangedEvent() {
+	MessageEvent ev(MessageEvent::MESSAGE_COUNT_CHANGE, _messages.size());
 	dispatchEvent(&ev);
 }

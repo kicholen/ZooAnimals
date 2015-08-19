@@ -15,10 +15,12 @@ public:
 	public:
 		enum EV
 		{
-			NEW_MESSAGE = makefourcc('M', 'C', 'N', 'M')
+			MESSAGE_COUNT_CHANGE = makefourcc('M', 'C', 'M', 'C')
 		};
 
-		MessageEvent(EV ev) : Event(ev) {}
+		MessageEvent(EV ev, int count_) : Event(ev), _count(count_) {}
+
+		int _count;
 	};
 
 	static MessageCenterManager instance;
@@ -33,13 +35,13 @@ public:
 		return _messages.size();
 	};
 	const std::vector<spMessageModel>& getMessages();
-	void removeMessageByNumber(int number);
+	void removeMessage(spMessageModel model);
 
 	void onAchievementsGained(spAchievementModel model);
 private:
 	void parseSavedState();
 
-	void dispatchNewMessageEvent();
+	void dispatchMessageCountChangedEvent();
 
 	spMessageModel addMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS);
 

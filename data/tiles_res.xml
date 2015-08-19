@@ -144,5 +144,8 @@
 		<image file="human_5.png"/>
 		<image file="human_6.png"/>
 		<image file="human_7.png"/>
+		
+		<image id="mailbox_anim" file="mailbox_3x1.png" cols = "3" />
+		<image id="mailbox" file="mailbox.png"/>
 	</atlas>
 </resources>

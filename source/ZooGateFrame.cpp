@@ -5,6 +5,8 @@
 #include "ZooFrame.h"
 #include "StartGameConfig.h"
 #include "FarmManager.h"
+#include "MessageCenterFrame.h"
+#include "MessageCenterManager.h"
 
 using namespace FlashUtils;
 
@@ -21,6 +23,7 @@ void ZooGateFrame::selectTransitions() {
 
 void ZooGateFrame::_postHiding(Event *) {
 	//FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
+	MessageCenterManager::instance.removeEventListener(MessageCenterManager::MessageEvent::MESSAGE_COUNT_CHANGE, CLOSURE(this, &ZooGateFrame::onMessageCountChanged));
 	_view->removeChildren();
 	_resources.unload();
 }
@@ -44,6 +47,10 @@ Action ZooGateFrame::loop() {
 		else if (action.id == "farm" || action.id == "winter" || action.id == "underwater" || action.id == "steppe" || action.id == "asia" || action.id == "australia") {
 			spZooFrame zooFrame = new ZooFrame(action.id);
 			transitionShowFrame(zooFrame);
+		}
+		else if (action.id == "mailbox") {
+			spMessageCenterFrame messageFrame = new MessageCenterFrame();
+			transitionShowFrameAsDialog(messageFrame);
 		}
 	}
 
@@ -87,7 +94,7 @@ void ZooGateFrame::setData() {
 	_spawner->setTouchEnabled(false);
 	_spawner->setSize(_view->getSize());
 	_view->addChild(_spawner);
-	
+	addMailBox(tileSize, Vector2(tileSize / 2.0f + tileSize * 13.0f, tileSize * 10.0f - tileSize / 2.0f));
 	addBaseTrackToSpawner(tileSize);
 
 	if (AnimalsManager::instance.isRegionPopulated("farm")) {
@@ -288,6 +295,22 @@ void ZooGateFrame::addSignPost(float tileSize, const std::string& region, const 
 	button->addEventListener(TouchEvent::CLICK, CLOSURE(this, &ZooGateFrame::onButtonClicked));
 }
 
+void ZooGateFrame::addMailBox(float tileSize, const Vector2& position) {
+	_mailBoxButton = new Button();
+	_mailBoxButton->setName("mailbox");
+	_mailBoxButton->setResAnim(tilesResources.getResAnim("mailbox"));
+	_mailBoxButton->setAnchor(Vector2(0.5, 0.5));
+	_mailBoxButton->setTouchChildrenEnabled(false);
+	setSpriteScaleBySize(_mailBoxButton, Vector2(tileSize, tileSize));
+	_mailBoxButton->attachTo(_view);
+	_mailBoxButton->setPosition(position);
+	_mailBoxButton->addEventListener(TouchEvent::CLICK, CLOSURE(this, &ZooGateFrame::onButtonClicked));
+	if (MessageCenterManager::instance.getMessagesCount() > 0) {
+		_mailBoxButton->addTween(TweenAnim(tilesResources.getResAnim("mailbox_anim")), 500, -1);
+	}
+	MessageCenterManager::instance.addEventListener(MessageCenterManager::MessageEvent::MESSAGE_COUNT_CHANGE, CLOSURE(this, &ZooGateFrame::onMessageCountChanged));
+}
+
 void ZooGateFrame::addPossibleSpritesToSpawner() {
 	for (int i = 1; i <= HUMAN_CHARS_COUNT; i++) {
 		_spawner->addResAnim("human_" + CMath::intToString(i));
@@ -300,4 +323,15 @@ float ZooGateFrame::getXOnTilesToView(float x) {
 
 void ZooGateFrame::onButtonClicked(Event *ev) {
 	generateAction(ev->target->getName());
+}
+
+void ZooGateFrame::onMessageCountChanged(Event *event) {
+	MessageCenterManager::MessageEvent *messageEvent = safeCast<MessageCenterManager::MessageEvent*>(event);
+	if (messageEvent->_count > 0) {
+		_mailBoxButton->addTween(TweenAnim(tilesResources.getResAnim("mailbox_anim")), 500, -1);
+	}
+	else {
+		_mailBoxButton->removeTweens();
+		_mailBoxButton->setResAnim(tilesResources.getResAnim("mailbox"));
+	}
 }
