@@ -172,6 +172,20 @@ Entity* Box2dFactory::createEntity(int type, const Vector2& position, int bodyTy
 
 		return floorObject;
 	}
+	else if (type == randomObstacle2d) {
+		attachFixture(body, size);
+
+		RandomObstacle2d* obstacle = new RandomObstacle2d(_world, body, "obstacle", SCALE);
+		const b2AABB& aaBb = body->GetFixtureList()->GetAABB(0);
+		const Vector2& staticSize = Vector2(aaBb.upperBound.x * SCALE - aaBb.lowerBound.x * SCALE, abs(aaBb.upperBound.y * SCALE - aaBb.lowerBound.y * SCALE));
+
+		obstacle->_sprite = createSprite(tilesResources.getResAnim("steppeTopSide"), staticSize);
+
+		obstacle->_sprite->attachTo(_oxyWorld);
+		obstacle->_sprite->setUserData(body);
+
+		return obstacle;
+	}
 	else  {
 		Dynamic2d* dynamicObject = new Dynamic2d(_world, body, "dynamic");
 

@@ -28,12 +28,14 @@ void RandomObstacle2d::update(float playerPosition) {
 		_wasStartPositionSet = true;
 	}
 
-	if (playerPosition - getRoot()->getWidth() * 0.2f > entityPosition.x) {
-		m_body->SetTransform(b2Vec2((entityPosition.x + getRoot()->getWidth() + _sprite->getDerivedWidth()) / _scale, entityPosition.y / _scale), 0);
+	if (playerPosition - getRoot()->getWidth() * 0.2f > _sprite->getX() + _sprite->getDerivedWidth() / 2.0f) {
+		m_body->SetTransform(b2Vec2((entityPosition.x + getRoot()->getWidth() + _sprite->getDerivedWidth()/* + randomize here */) / _scale, entityPosition.y / _scale), 0);
 		shouldAddTween = true;
 	}
 	
 	if (shouldAddTween) {
+		const b2Vec2& pos = m_body->GetPosition();
+		const Vector2& entityPosition = convert(pos);
 		_sprite->setY(0.0f);
 		_sprite->setAlpha(0);
 		unsigned char alpha = 255;

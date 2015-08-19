@@ -75,9 +75,9 @@ void FindShadowFieldHard::setParametersFromContent(int difficulty) {
 
 void FindShadowFieldHard::createElementsInCanvasContainer() {
 	if (!_elementsInCanvasContainer) {
-		_elementsInCanvasContainer = new AnimatableElementContainer(Vector2(getWidth() * 0.5f, getHeight()));
+		_elementsInCanvasContainer = new AnimatableElementContainer(Vector2(getWidth() * 0.6f, getHeight() * 0.9f));
 		_elementsInCanvasContainer->setAnchor(0.5f, 0.5f);
-		_elementsInCanvasContainer->setPosition(getWidth() / 2.0f + _elementsInCanvasContainer->getWidth() / 2.0f, getRoot()->getHeight() / 2.0f);
+		_elementsInCanvasContainer->setPosition(getWidth() * 0.4f + _elementsInCanvasContainer->getWidth() / 2.0f, getRoot()->getHeight() / 2.0f);
 		_elementsInCanvasContainer->attachTo(this);
 	}
 	_elementsInCanvasContainer->setAnimationType(aecScale);
@@ -101,7 +101,7 @@ void FindShadowFieldHard::createSpriteToBeFoundIfDoesntExist(const std::string n
 		_spriteToBeFound = initActor(new Sprite,
 			arg_anchor = Vector2(0.5, 0.5f),
 			arg_attachTo = this);
-		_spriteToBeFound->setPosition(getWidth() / 4.0f, getHeight() / 2.0f);
+		_spriteToBeFound->setPosition(getWidth() * 0.2f, getHeight() / 2.0f);
 	}
 	_spriteToBeFound->setName(name);
 	_spriteToBeFound->setResAnim(animalsResources.getResAnim(name));

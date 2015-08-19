@@ -70,9 +70,30 @@ void AnimatableElementContainer::randomizeChildrenViewParams() {
 		const Vector2& pos = actor->getPosition();
 		const Vector2& scale = actor->getScale();
 
-		actor->setPosition(pos.x * CMath::Rand(0.6f, 1), pos.y * CMath::Rand(0.3f, 1));
-		actor->setScale(scale.x * CMath::Rand(0.5f, 1.2f));
+		actor->setPosition(pos.x * CMath::Rand(0.6f, 1.2f), pos.y * CMath::Rand(0.2f, 1.2f));
+		actor->setScale(scale.x * CMath::Rand(0.5f, 1.3f));
 		actor->setRotationDegrees(CMath::Rand(0, 360));
+		preventActorOffContainerBounds(actor);
+	}
+}
+
+void AnimatableElementContainer::preventActorOffContainerBounds(spActor actor) {
+	float left = actor->getX() - actor->getDerivedWidth() / 2.0f;
+	float right = actor->getX() + actor->getDerivedWidth() / 2.0f;
+	if (left < 0.0f) {
+		actor->setX(actor->getX() - left);
+	}
+	else if (right > getDerivedWidth()) {
+		actor->setX(actor->getX() - (right - getDerivedWidth()));
+	}
+
+	float top = actor->getY() - actor->getDerivedHeight() / 2.0f;
+	float bottom = actor->getY() + actor->getDerivedHeight() / 2.0f;
+	if (top < 0.0f) {
+		actor->setY(actor->getY() - top);
+	}
+	else if (bottom > getDerivedHeight()) {
+		actor->setY(actor->getY() - (bottom - getDerivedHeight()));
 	}
 }
 

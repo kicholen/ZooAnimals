@@ -94,7 +94,7 @@ void ZooGateFrame::setData() {
 	_spawner->setTouchEnabled(false);
 	_spawner->setSize(_view->getSize());
 	_view->addChild(_spawner);
-	addMailBox(tileSize, Vector2(tileSize / 2.0f + tileSize * 13.0f, tileSize * 10.0f - tileSize / 2.0f));
+	addMailBox(tileSize, Vector2(tileSize / 2.0f + tileSize * 15.0f - tilesToViewOffsetX, tileSize * 10.0f - tileSize / 2.0f));
 	addBaseTrackToSpawner(tileSize);
 
 	if (AnimalsManager::instance.isRegionPopulated("farm")) {

@@ -31,6 +31,7 @@ public:
 	void randomizeChildrenViewParams();
 
 private:
+	void preventActorOffContainerBounds(spActor actor);
 	void clearStackContainers();
 	void updateChildren();
 

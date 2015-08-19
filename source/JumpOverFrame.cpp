@@ -65,7 +65,7 @@ void JumpOverFrame::setData() {
 	_world->attachTo(_view);
 	_world->setPosition(0.0f, 0.0f);
 	_world->setName("box2d");
-	
+	// modify by ratio
 	spBox2dFactory factory = new Box2dFactory(_world->_world, _world, P2M_RATIO);
 
 	_world->addPlayer(safeCast<Player2d*>(factory->createEntity(0, Vector2(getRoot()->getWidth() * 0.2f, getRoot()->getHeight() * 0.2f), 2, false)));
@@ -74,10 +74,11 @@ void JumpOverFrame::setData() {
 	_world->addEntity(factory->createEntity(4, Vector2(getRoot()->getWidth() * 0.2f + entity->_sprite->getDerivedWidth(), _view->getHeight() * 0.1f), 0, false, Vector2(getRoot()->getWidth(), getRoot()->getHeight() * 0.03f)));
 	
 	if (_difficulty == "hard") {
-		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.4f, _view->getHeight() * 0.2f), 0, false));
-		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.8f, _view->getHeight() * 0.2f), 0, false));
-		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.9f, _view->getHeight() * 0.3f), 0, false));
-		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 2.0f, _view->getHeight() * 0.4f), 0, false));
+		Vector2 size = Vector2(200.0f, 30.0f);
+		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.4f, _view->getHeight() * 0.2f), 0, false, size));
+		//_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.8f, _view->getHeight() * 0.2f), 0, false, size));
+		//_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.9f, _view->getHeight() * 0.3f), 0, false));
+		//_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 2.0f, _view->getHeight() * 0.4f), 0, false));
 	}
 	else if (_difficulty == "normal") {
 		_world->addEntity(factory->createEntity(5, Vector2(_view->getWidth() * 1.4f, _view->getHeight() * 0.2f), 0, false));
