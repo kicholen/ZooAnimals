@@ -1,6 +1,7 @@
 #include "AchievementManager.h"
 #include "Content.h"
 #include "ZooSettings.h"
+#include "MessageCenterManager.h"
 
 AchievementManager AchievementManager::instance;
 
@@ -32,7 +33,8 @@ void AchievementManager::increaseProgress(AchievementType type) {
 		return;
 	}
 	if (model->increaseProgress()) {
-		dispatchAchievementGainedEvent(model);
+		//dispatchAchievementGainedEvent(); can't dispatch event through static, not added too root
+		MessageCenterManager::instance.onAchievementsGained(model);
 		model->revalidate();
 	}
 }

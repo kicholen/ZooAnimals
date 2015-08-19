@@ -25,8 +25,6 @@ AnimalsManager::~AnimalsManager() {
 }
 
 void AnimalsManager::init(const std::string& version) {
-	ZooSettings::instance.init(version);
-
 	createFarmAnimals();
 	createWinterAnimals();
 	createUnderwaterAnimals();

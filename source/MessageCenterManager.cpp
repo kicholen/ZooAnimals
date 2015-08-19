@@ -15,7 +15,6 @@ MessageCenterManager::~MessageCenterManager() {
 void MessageCenterManager::init() {
 	parseSavedState();
 	ZooSettings::instance.clearMessagesNode();
-	addEventListeners();
 }
 
 void MessageCenterManager::store() {
@@ -67,12 +66,10 @@ void MessageCenterManager::parseSavedState() {
 
 			model->setData(type, lockitTitle, lockitDesc, resourceName, dateMS);
 			_messages.push_back(model);
+
+			message = message.next_sibling();
 		}
 	}
-}
-
-void MessageCenterManager::addEventListeners() {
-	AchievementManager::instance.addEventListener(AchievementManager::AchievementEvent::ACHIEVEMENT_GAINED, CLOSURE(this, &MessageCenterManager::onAchievementsGained));
 }
 
 spMessageModel MessageCenterManager::addMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS) {
@@ -82,11 +79,7 @@ spMessageModel MessageCenterManager::addMessage(int type, int lockitTitle, int l
 	return model;
 }
 
-void MessageCenterManager::onAchievementsGained(Event *event) {
-	AchievementManager::AchievementEvent *achievementEvent = safeCast<AchievementManager::AchievementEvent*>(event);
-
-	spAchievementModel model = achievementEvent->model;
-
+void MessageCenterManager::onAchievementsGained(spAchievementModel model) {
 	addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), (int)getTimeUTCMS());
 	dispatchNewMessageEvent();
 }

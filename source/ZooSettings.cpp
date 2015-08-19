@@ -80,11 +80,10 @@ void ZooSettings::reset() {
 
 void ZooSettings::finishStartAnimalChoice() {
 	_shouldShowChooseAnimalPopup = false;
-	pugi::xml_node checkNode = _doc.append_child("check");
-	checkNode.append_attribute("version").set_value(_version.c_str());
 }
 
 void ZooSettings::save() {
+	appendCheckIfNeeded();
 	FileSaver::save();
 }
 
@@ -264,6 +263,13 @@ pugi::xml_attribute ZooSettings::getPlayerValue(const std::string &name) {
 	OX_ASSERT(attr);
 
 	return attr;
+}
+
+void ZooSettings::appendCheckIfNeeded() {
+	if (!_doc.child("check")) {
+		pugi::xml_node checkNode = _doc.append_child("check");
+		checkNode.append_attribute("version").set_value(_version.c_str());
+	}
 }
 
 /**

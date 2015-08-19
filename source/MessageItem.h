@@ -37,6 +37,7 @@ private:
 	void createTitleTexfield(int lockitId);
 	void createDescriptionTextfield(int lockitId);
 	void createIconSprite(const std::string& resourceName);
+	void createBackground();
 
 	void onMessageDeleted(Event *event);
 	void onRewardsClaimed(Event *event);

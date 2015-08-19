@@ -39,6 +39,7 @@ public:
 	bool shouldShowChooseAnimalPopup() { return _shouldShowChooseAnimalPopup; }
 
 private:
+	void appendCheckIfNeeded();
 	pugi::xml_node setAnimalByRegionNode(pugi::xml_node regionNode, const std::string& name, int happiness, int hunger, int count, int lastFeedMS, int level);
 
 	bool _shouldShowChooseAnimalPopup;

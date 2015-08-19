@@ -47,7 +47,7 @@ void MessageCenterFrame::setData() {
 
 	spColorRectSprite rectangleContainer = new ColorRectSprite();
 	rectangleContainer->setSize(slidingActor->getWidth(), slidingActor->getHeight());
-	rectangleContainer->setColor(Color(0, 0, 0, 0));
+	rectangleContainer->setColor(Color(123, 24, 32, 222));
 
 	float positionY = slidingActor->getHeight() * 0.3f / 2.0f;
 	float itemHeight = 0.0f;
@@ -66,7 +66,7 @@ void MessageCenterFrame::setData() {
 
 	rectangleContainer->setSize(slidingActor->getWidth(), positionY - itemHeight / 2.0f);
 	slidingActor->setContent(rectangleContainer);
-	slidingActor->setPosition((_view->getWidth() - slidingActor->getWidth()) / 2.0f, (_view->getHeight() - slidingActor->getHeight()));
+	slidingActor->setPosition((_view->getWidth() - slidingActor->getWidth()) / 2.0f, (_view->getHeight() - slidingActor->getHeight()) / 2.0f);
 	slidingActor->attachTo(_view);
 }
 

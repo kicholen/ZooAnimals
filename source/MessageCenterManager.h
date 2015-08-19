@@ -35,15 +35,13 @@ public:
 	const std::vector<spMessageModel>& getMessages();
 	void removeMessageByNumber(int number);
 
+	void onAchievementsGained(spAchievementModel model);
 private:
 	void parseSavedState();
-	void addEventListeners();
 
 	void dispatchNewMessageEvent();
 
 	spMessageModel addMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS);
-
-	void onAchievementsGained(Event *event);
 
 private:
 	std::vector<spMessageModel> _messages;

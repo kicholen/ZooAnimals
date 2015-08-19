@@ -17,6 +17,8 @@
 #include "HatManager.h"
 #include "AchievementManager.h"
 #include "RewardsManager.h"
+#include "MessageCenterManager.h"
+#include "ZooSettings.h"
 
 LoadingFrame::LoadingFrame() {
 	init("LoadingFrame.xml", false);
@@ -110,6 +112,7 @@ void LoadingFrame::initManagers(Event *ev) {
 	SpriteSpawner::Initialize(*ad);
 
 	//pass used managers as reference, no static
+	ZooSettings::instance.init(_version);
 	GooglePlayInAppPurchaseManager::instance.init();
 	FacebookManager::instance.init();
 	AnimalsManager::instance.init(_version);
@@ -122,6 +125,7 @@ void LoadingFrame::initManagers(Event *ev) {
 	HatManager::instance.init();
 	AchievementManager::instance.init();
 	RewardsManager::instance.init();
+	MessageCenterManager::instance.init();
 
 	_progressBar->addTween(ProgressBar::TweenProgress(0.5f), 100)->setDoneCallback(CLOSURE(this, &LoadingFrame::initSoundPlayer));
 }
