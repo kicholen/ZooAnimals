@@ -55,6 +55,14 @@ void WalkingSpectator::animateMoveToPosition(const Vector2& position) {
 	addTween(TweenRotationDegrees(10), 200, 5, true);
 }
 
+void WalkingSpectator::makeSpriteAsChild() {
+	spSprite copy = new Sprite();
+	copy->setResAnim(getResAnim());
+	copy->attachTo(this);
+	copy->setAnchor(0.5f, 0.5f);
+	setResAnim(0);
+}
+
 void WalkingSpectator::doUpdate(const UpdateState &us) {
 	if (_state == wsDead) {
 		return;

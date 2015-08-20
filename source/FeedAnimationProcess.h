@@ -16,6 +16,7 @@ public:
 
 private:
 	void createFeederMan(float spectatorsHeight);
+	spSprite createBoat(float boatHeight);
 
 	void moveToNextPart(Event *event);
 private:
@@ -24,6 +25,9 @@ private:
 	
 	int _animalNumber;
 	spWalkingSpectator _feederMan;
+	spSprite _boat;
+	bool _isWater;
+	bool _isBoatAttachedToFeederMan;
 };
 
 #endif

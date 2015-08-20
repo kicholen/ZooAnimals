@@ -6,10 +6,13 @@ FeedAnimationProcess::FeedAnimationProcess(spAnimalFarmField farm, spSlidingActo
 	createFeederMan(getRoot()->getHeight() * 0.07f); // todo remove this magical num
 	_canProcess = true;
 	_animalNumber = 0;
+	_isWater = farm->getModel()->isWaterAnimal();
+	_isBoatAttachedToFeederMan = false;
 }
 
 FeedAnimationProcess::~FeedAnimationProcess() {
 	_feederMan = 0;
+	_boat = 0;
 }
 
 void FeedAnimationProcess::process() {
@@ -28,13 +31,30 @@ void FeedAnimationProcess::process() {
 		_canProcess = false;
 	}
 	else if (_part == 1) {
+		float yPos = _feederMan->getY() - 100;
+		if (_isWater) {
+			_boat = createBoat(_feederMan->getDerivedWidth() * 2.0f);
+			_boat->setPosition(_feederMan->getX(), yPos + _feederMan->getDerivedHeight() - _boat->getDerivedHeight() / 2.0f);
+		}
 		spSprite gateSprite = _farm->getGateSprite();
 		gateSprite->addTween(Actor::TweenX(gateSprite->getX() - gateSprite->getDerivedWidth()), 500);
-		_feederMan->addTween(Actor::TweenY(_feederMan->getY() - 100), 500, 1, false, 500)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
-		gateSprite->addTween(Actor::TweenX(gateSprite->getX()), 500, 1, false, 1000);
+		_feederMan->addTween(Actor::TweenY(yPos), 500, 1, false, 500)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
+		gateSprite->addTween(Actor::TweenX(gateSprite->getX()), 500, 1, false, 2000);
 		_canProcess = false;
 	}
 	else if (_part == 2) {
+		if (_isWater && !_isBoatAttachedToFeederMan) {
+			float height = _feederMan->getDerivedHeight();
+			_feederMan->makeSpriteAsChild();
+			_boat->addRef();
+			_boat->detach();
+			_boat->attachTo(_feederMan);
+			_boat->releaseRef();
+			_boat->setPosition(0.0f, height / 2.0f);
+			_boat->setScale(_boat->getScaleX() / _feederMan->getScaleX());
+			_boat->setPriority(-1);
+			_isBoatAttachedToFeederMan = true;
+		}
 		if (_farm->getAnimation()->getAnimalsCount() > _animalNumber) {
 			spAnimalInFarmElement animalElement = _farm->getAnimation()->getAnimalByNumber(_animalNumber);
 			_animalNumber++;
@@ -70,11 +90,25 @@ bool FeedAnimationProcess::completed() {
 
 void FeedAnimationProcess::createFeederMan(float spectatorsHeight) {
 	_feederMan = new WalkingSpectator();
-
+	_feederMan->setPriority(_feederMan->getPriority() + 1);
 	_feederMan->setResAnim(tilesResources.getResAnim("human_1"));
 	float scale = spectatorsHeight / _feederMan->getHeight();
 	_feederMan->setScale(_feederMan->getScaleX() * scale, scale);
 	_container->getContent()->addChild(_feederMan);
+}
+
+spSprite FeedAnimationProcess::createBoat(float boatWidth) {
+	spSprite boat = new Sprite();
+	boat->setTouchEnabled(false);
+	boat->setAnchor(Vector2(0.5f, 0.5f));
+
+	boat->setResAnim(tilesResources.getResAnim("boat"));
+	float scale = boatWidth / boat->getWidth();
+	boat->setScale(boat->getScaleX() * scale, scale);
+	_container->getContent()->addChild(boat);
+	boat->setPriority(_feederMan->getPriority() - 1);
+
+	return boat;
 }
 
 void FeedAnimationProcess::moveToNextPart(Event *event) {

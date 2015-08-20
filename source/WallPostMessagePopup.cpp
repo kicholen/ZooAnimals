@@ -45,7 +45,6 @@ void WallPostMessagePopup::_preShowing(Event *) {
 
 void WallPostMessagePopup::setData() {
 	_wallPostStatus = WPS_IDLE;
-	_isActionFB = Settings::instance.getValue("action_fb").as_bool();
 	std::string name;
 	if (_isActionFB) {
 		name = "more_permission";

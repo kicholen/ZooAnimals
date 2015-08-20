@@ -46,6 +46,8 @@
 		<image file="greySecondBox9.png" />
 		<image file="brownBox9.png" />
 		<image file="questionMark.png" />
+		<image file="button_true.png" />
+		<image file="button_false.png" />
 	<set path = "images/icons/" />
 		<image file="winter_2.png"/>
 		<image file="underwater_2.png"/>

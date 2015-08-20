@@ -18,6 +18,7 @@ public:
 private:
 	void revalidate();
 
+	void createBackground();
 	void createButton();
 	void createProgressbar();
 	void createCooldownTextfield();

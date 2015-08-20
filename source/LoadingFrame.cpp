@@ -99,11 +99,7 @@ void LoadingFrame::initSettings(Event *ev) {
 
 	// basic settings
 	Settings::instance.init(_version);
-	Settings::instance.getValue("sounds").set_value(100);
-	Settings::instance.getValue("music").set_value(100);
 
-	// todo is it needed
-	Settings::instance.save();
 	_progressBar->addTween(ProgressBar::TweenProgress(0.3f), 100)->setDoneCallback(CLOSURE(this, &LoadingFrame::initManagers));
 }
 

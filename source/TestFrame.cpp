@@ -16,6 +16,7 @@
 #include "AttachHatToAnimalFrame.h"
 #include "AchievementFrame.h"
 #include "MessageCenterFrame.h"
+#include "SettingsFrame.h"
 
 #include "ChooseStartAnimalFrame.h"
 #include "WorldMapFrame.h"
@@ -86,6 +87,10 @@ Action TestFrame::loop(){
 			spMessageCenterFrame messageFrame = new MessageCenterFrame();
 			transitionShowFrame(messageFrame);
 		}
+		else if (action.id == "settings") {
+			spSettingsFrame settingsFrame = new SettingsFrame();
+			transitionShowFrameAsDialog(settingsFrame);
+		}
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover" || action.id == "jump") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
 
@@ -153,6 +158,7 @@ void TestFrame::setData() {
 	dupaArray.push(createButtonWithListener("attach_hat", "attach_hat"));
 	dupaArray.push(createButtonWithListener("achievement", "achievement"));
 	dupaArray.push(createButtonWithListener("message_center", "message_center"));
+	dupaArray.push(createButtonWithListener("settings", "settings"));
 	
 	spAnimatableElementContainer gameContainer = new AnimatableElementContainer(Vector2(_view->getWidth(), _view->getHeight()));
 	gameContainer->addChildren(dupaArray);

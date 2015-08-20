@@ -9,7 +9,7 @@ FeederElement::FeederElement(const Vector2& size, spAnimalModel model) {
 	setSize(size);
 	_model = model;
 	_cooldownMax = FEED_INTERVAL_SECONDS;
-
+	createBackground();
 	revalidate();
 }
 
@@ -45,10 +45,20 @@ void FeederElement::revalidate() {
 	}
 }
 
+void FeederElement::createBackground() {
+	spSprite cardBackground = new Sprite;
+	cardBackground->setAnchor(0.5f, 0.5f);
+	cardBackground->setResAnim(tilesResources.getResAnim("plate"));
+	setSpriteScaleBySize(cardBackground, getSize());
+	cardBackground->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
+	cardBackground->attachTo(this);
+	cardBackground->setPriority(-1);
+}
+
 void FeederElement::createButton() {
 	if (!_button) {
 		_button = new TweenButton();
-		_button->setResAnim(gameResources.getResAnim("circle_border"));
+		_button->setResAnim(tilesResources.getResAnim("fork_knife"));
 		_button->setAnchor(Vector2(0.5f, 0.5f));
 		_button->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
 		_button->setBaseScale(getWidth() / _button->getWidth());
@@ -63,7 +73,7 @@ void FeederElement::createProgressbar() {
 			arg_attachTo = this,
 			arg_anchor = Vector2(0.5f, 0.5f),
 			arg_position = Vector2(getWidth() / 2.0f, getHeight() / 2.0f),
-			arg_resAnim = gameResources.getResAnim("circle_border"));
+			arg_resAnim = tilesResources.getResAnim("fork_knife"));
 		_progressBar->setDirection(_progressBar->dir_radial_cw);
 		_progressBar->setScale(getWidth() / _progressBar->getWidth());
 		_progressBar->setProgress((float)_cooldownLeft / (float)_cooldownMax);

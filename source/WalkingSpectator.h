@@ -32,6 +32,7 @@ public:
 	void revive(const VectorArray<Vector2>& trackPoints);
 	void setFaceAccordingToMovement(float destX);
 	void animateMoveToPosition(const Vector2& position);
+	void makeSpriteAsChild();
 
 	uint getNumber() {
 		return _number;
