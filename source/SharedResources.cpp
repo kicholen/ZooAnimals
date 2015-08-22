@@ -148,8 +148,6 @@ TextStyle createTextStyle(Font* fontType, Color color, bool multiline, TextStyle
 spTextField createTextFieldInBoundries(const std::string& text, const Vector2& boundries, TextStyle style) {
 	spTextField textField = initActor(new TextField,
 		arg_style = style,
-		arg_hAlign = TextStyle::HALIGN_MIDDLE,
-		arg_vAlign = TextStyle::VALIGN_MIDDLE,
 		arg_width = boundries.x,
 		arg_height = boundries.y,
 		arg_input = false,

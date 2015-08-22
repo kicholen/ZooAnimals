@@ -17,7 +17,6 @@
 		<image file="popup_box9_ad.png"/>
 		<image file="memory_card_box9.png"/>
 		<image file="memory_card_box9_a.png"/>
-		<image file="question_mark.png"/>
 		<image file="progress_background_9.png"/>
 		<image file="white_quad.png"/>
 		<image file="quad_40.png"/>
@@ -48,19 +47,13 @@
 		<image file="questionMark.png" />
 		<image file="button_true.png" />
 		<image file="button_false.png" />
-	<set path = "images/icons/" />
-		<image file="winter_2.png"/>
-		<image file="underwater_2.png"/>
-		<image file="steppe_2.png"/>
-		<image file="australia_2.png"/>
-		<image file="farm_2.png"/>
-		<image file="asia_2.png"/>
-		<image file="elephant.png"/>
-		<image file="goat.png"/>
-		<image file="kangaroo.png"/>
-		<image file="octopus.png"/>
-		<image id="peacock" file="peackock_no_taill_2x1.png" cols = "2" />
-		<image file="polarbear.png"/>
+		<image file="settingsIcon.png" />
+		<image file="mail.png" />
+		<image file="color2Box9.png" />
+		<image file="colorBox9.png" />
+		<image file="colo3Box9.png" />
+		<image file="quitButton.png" />
+		<image file="circleBox9.png" />
 	<set path = "images/hats" />
 		<image file="chef_hat.png"/>
 		<image file="detective_hat.png"/>

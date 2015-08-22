@@ -24,7 +24,8 @@ protected:
 	void setData();
 
 	spMessageItem createMessageItem(const Vector2& size, spMessageModel model);
-
+	void createBackground();
+	void createTitle();
 private:
 	void onRewardClaimed(Event *event);
 	void onMessageDeleted(Event *event);

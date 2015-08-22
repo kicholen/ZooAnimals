@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <resources>
-	<set path = "images/tiles/" />
+	<set path = "./images/tiles/" />
 	<atlas id = "primary" format="8888">
 		<image file="bush.png" />
 		<image file="bush_2.png" />
