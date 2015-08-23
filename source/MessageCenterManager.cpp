@@ -1,6 +1,7 @@
 #include "MessageCenterManager.h"
 #include "AchievementManager.h"
 #include "ZooSettings.h"
+#include "s3eTimer.h"
 
 MessageCenterManager MessageCenterManager::instance;
 
@@ -16,12 +17,20 @@ void MessageCenterManager::init() {
 	parseSavedState();
 	ZooSettings::instance.clearMessagesNode();
 	addRef();
+	_shouldAnimate = _messages.size() > 0;
 }
 
 void MessageCenterManager::store() {
 	for (uint i = 0; i < _messages.size(); i++) {
 		ZooSettings::instance.setMessage(_messages[i]->getType(), _messages[i]->getLockitTitle(), _messages[i]->getLockitDescription(), _messages[i]->getResourceName(), _messages[i]->getDateMS(), _messages[i]->getRewards());
 	}
+}
+
+bool MessageCenterManager::shouldAnimate() {
+	bool value = _shouldAnimate;
+	_shouldAnimate = false;
+
+	return value;
 }
 
 const std::vector<spMessageModel>& MessageCenterManager::getMessages() {
@@ -64,7 +73,7 @@ void MessageCenterManager::parseSavedState() {
 			dateMS = attribute.as_int();
 
 			while (!attribute.empty()) {
-				model->addReward(attribute.as_int());
+				model->addReward(attribute.as_string());
 				attribute = attribute.next_attribute();
 			}
 
@@ -80,11 +89,18 @@ spMessageModel MessageCenterManager::addMessage(int type, int lockitTitle, int l
 	spMessageModel model = new MessageModel(type, lockitTitle, lockitDesc, resourceName, dateMS);
 	_messages.push_back(model);
 
+	_shouldAnimate = true;
 	return model;
 }
 
 void MessageCenterManager::onAchievementsGained(spAchievementModel model) {
-	addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), (int)getTimeUTCMS());
+	spMessageModel message = addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), (int)(s3eTimerGetUTC() / 1000));
+	
+	const std::vector<std::string>& rewards = model->getRewards(model->getCurrentPart());
+	for (int i = 0; i < rewards.size(); i++) {
+		message->addReward(rewards[i]);
+	}
+
 	dispatchMessageCountChangedEvent();
 }
 

@@ -27,7 +27,7 @@ void FeedAnimationProcess::process() {
 			: Vector2(-_container->getContent()->getX() + getStage()->getWidth() + _feederMan->getDerivedWidth(), getStage()->getHeight() - (getStage()->getHeight() - _farm->getDerivedHeight()) / 2.0f);
 
 		_feederMan->setPosition(startPosition);
-		_feederMan->addTween(Actor::TweenPosition(Vector2(_farm->getX() - _farm->getDerivedWidth() / 2.0f + _farm->getGateSprite()->getX() + _farm->getGateSprite()->getDerivedWidth() / 2.0f, _farm->getY() + _farm->getDerivedHeight() / 2.0f)), 2000)->addDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
+		_feederMan->addTween(Actor::TweenPosition(Vector2(_farm->getX() - _farm->getDerivedWidth() / 2.0f + _farm->getGateSprite()->getX() + _farm->getGateSprite()->getDerivedWidth() / 2.0f, _farm->getY() + _farm->getDerivedHeight() / 2.0f)), 2000)->setDoneCallback(CLOSURE(this, &FeedAnimationProcess::moveToNextPart));
 		_canProcess = false;
 	}
 	else if (_part == 1) {

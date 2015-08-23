@@ -19,6 +19,7 @@ public:
 	std::string getFarmLevelByModel(spAnimalModel model);
 	int getGateHumanCount();
 	int getFarmHumanCount();
+	int getGateShopHumanCount();
 
 	int getZooSize();
 };

@@ -1,6 +1,9 @@
 #include "MessageCenterFrame.h"
 #include "MessageCenterManager.h"
 #include "SharedResources.h"
+#include "RewardsManager.h"
+#include "ProcessMaster.h"
+#include "AddRewardsProcess.h"
 
 MessageCenterFrame::MessageCenterFrame() {
 	init("LandingPageFrame.xml", false);
@@ -126,8 +129,10 @@ void MessageCenterFrame::onRewardClaimed(Event *event) {
 	spMessageItem item = safeSpCast<MessageItem>(event->currentTarget);
 	item->detach();
 
-	//todo
-	//messageEvent->model->getRewards();
+	// todo set it as action, not process
+	spProcessMaster master = new ProcessMaster();
+	master->addProcess(new AddRewardsProcess(messageEvent->model->getRewards()));
+	master->start(getRoot());
 	MessageCenterManager::instance.removeMessage(messageEvent->model);
 }
 

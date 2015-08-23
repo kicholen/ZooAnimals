@@ -26,7 +26,6 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	_zSortElements._vector.reserve(5);
 
 	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
-	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
 	AnimalsManager::instance.addEventListener(AnimalsManager::AnimalEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onAnimalCountChanged));
 
 	_animationType = afaNone;

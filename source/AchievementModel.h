@@ -16,9 +16,12 @@ public:
 	bool increaseProgress();
 	
 	void addPart(int progress);
+	void addReward(int part, const std::string& rewardName);
 	void setProgress(int progress);
 	void revalidate();
 	bool isCompleted();
+
+	const std::vector<std::string>& getRewards(int part);
 
 	const std::string& getResourceName() const {
 		return _resourceName;
@@ -54,6 +57,7 @@ private:
 	std::string _resourceName;
 	std::string _state;
 	std::vector<int> _parts;
+	std::vector< std::vector<std::string> > _rewards;
 
 	int _maxProgress;
 	int _progress;

@@ -11,11 +11,24 @@ AchievementModel::AchievementModel(const std::string& resourceName, int lockitTi
 }
 
 AchievementModel::~AchievementModel() {
-
+	_rewards.clear();
+	_parts.clear();
 }
 
 void AchievementModel::addPart(int progress) {
 	_parts.push_back(progress);
+}
+
+void AchievementModel::addReward(int part, const std::string& rewardName) {
+	if (_rewards.size() <= part) {
+		std::vector<std::string> part;
+		_rewards.push_back(part);
+	}
+	_rewards[part].push_back(rewardName);
+}
+
+const std::vector<std::string>& AchievementModel::getRewards(int part) {
+	return _rewards[part];
 }
 
 void AchievementModel::setProgress(int progress) {

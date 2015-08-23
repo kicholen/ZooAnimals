@@ -16,7 +16,7 @@ public:
 	~MessageModel();
 
 	void setData(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS);
-	void addReward(int rewardNum);
+	void addReward(const std::string& reward);
 
 	const int getType() const {
 		return _type;
@@ -38,7 +38,7 @@ public:
 		return _resourceName;
 	}
 
-	const std::vector<int>& getRewards() const {
+	const std::vector<std::string>& getRewards() const {
 		return _rewards;
 	}
 
@@ -49,7 +49,7 @@ private:
 	int _lockitTitle;
 	std::string _resourceName;
 
-	std::vector<int> _rewards;
+	std::vector<std::string> _rewards;
 };
 
 #endif

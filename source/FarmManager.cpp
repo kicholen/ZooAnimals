@@ -33,6 +33,10 @@ int FarmManager::getGateHumanCount() {
 	return 25;
 }
 
+int FarmManager::getGateShopHumanCount() {
+	return 5;
+}
+
 int FarmManager::getFarmHumanCount() {
 	return 50;
 }

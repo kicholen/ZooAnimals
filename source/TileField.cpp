@@ -18,19 +18,23 @@ void TileField::setData(const std::string& animalName, const std::string& level)
 	pugi::xml_node animalFarmParameters = Content::instance.getAnimalFarmParametersNode(animalName);
 	std::string baseTile = animalFarmParameters.first_attribute().as_string();
 	pugi::xml_node parameter = animalFarmParameters.child(level.c_str()).child("no_sort").first_child();
-	
+	Vector2 tileSize = Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f);
+	Point position;
+
 	while (parameter) {
-		int i = parameter.first_attribute().as_int();
-		int j = parameter.first_attribute().next_attribute().as_int();
-		addChild(createTileSprite(parameter.name(), Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j), 1));
+		position.x = parameter.first_attribute().as_int();
+		position.y = parameter.first_attribute().next_attribute().as_int();
+		addChild(createTileSprite(parameter.name(), tileSize, position, 1));
 
 		parameter = parameter.next_sibling();
 	}
 
 	if (baseTile != "none") {
 		for (int i = 0; i < _numberOfFields.x; i++) {
+			position.x = i;
 			for (int j = _numberOfFields.y - 1; j >= 0; j--) {
-				addChild(createTileSprite(baseTile, Vector2(TILE_SIZE_X + 0.5f, TILE_SIZE_Y + 0.5f), Point(i, j)));
+				position.y = j;
+				addChild(createTileSprite(baseTile, tileSize, position));
 			}
 		}
 	}

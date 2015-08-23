@@ -4,20 +4,18 @@
 #include "MoneyManager.h"
 #include "RewardsManager.h"
 
-AddRewardsProcess::AddRewardsProcess(const VectorArray<std::string>& rewards)
-{
+AddRewardsProcess::AddRewardsProcess(const std::vector<std::string>& rewards) {
 	_rewards = rewards;
 	_canProcess = true;
 }
 
-
-AddRewardsProcess::~AddRewardsProcess()
-{
+AddRewardsProcess::~AddRewardsProcess() {
+	_rewards.clear();
 }
 
 void AddRewardsProcess::process() {
 	if (_part == 0) {
-		for (int i = 0; i < _rewards.length(); i++) {
+		for (int i = 0; i < _rewards.size(); i++) {
 			parse(RewardsManager::instance.getReward(_rewards[i]));
 		}
 

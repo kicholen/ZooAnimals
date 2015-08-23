@@ -187,20 +187,16 @@ pugi::xml_node ZooSettings::getAchievementsNode() {
 	return _doc.child("achievements");
 }
 
-void ZooSettings::setAchievement(const std::string& achievementName, int progress) {
+void ZooSettings::setAchievement(const std::vector<int> achievements) {
 	pugi::xml_node node = getAchievementsNode();
 
-	if (node.empty()) {
-		node = _doc.append_child("achievements");
+	if (!node.empty()) {
+		_doc.remove_child(node);
 	}
+	node = _doc.append_child("achievements");
 
-	pugi::xml_node achievement = node.child(achievementName.c_str());
-
-	if (achievement.empty()) {
-		node.append_child(achievementName.c_str()).append_attribute("progress").set_value(progress);
-	}
-	else {
-		achievement.first_attribute().set_value(progress);
+	for (uint i = 0; i < achievements.size(); i++) {
+		node.append_attribute("p").set_value(achievements[i]);
 	}
 }
 
@@ -219,7 +215,7 @@ void ZooSettings::clearMessagesNode() {
 	}
 }
 
-void ZooSettings::setMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS, const std::vector<int>& rewards) {
+void ZooSettings::setMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS, const std::vector<std::string>& rewards) {
 	pugi::xml_node node = getMessagesNode();
 
 	if (node.empty()) {
@@ -235,7 +231,7 @@ void ZooSettings::setMessage(int type, int lockitTitle, int lockitDesc, const st
 	messageNode.append_attribute("da").set_value(dateMS);
 
 	for (uint i = 0; i < rewards.size(); i++) {
-		messageNode.append_attribute("re").set_value(rewards[i]);
+		messageNode.append_attribute("re").set_value(rewards[i].c_str());
 	}
 }
 

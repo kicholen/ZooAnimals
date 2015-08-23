@@ -367,6 +367,10 @@ files
 	AddRewardsProcess.cpp
 	AddRewardsProcess.h
 
+	[source/process/fromTo]
+	AnimateFromToProcess.cpp
+	AnimateFromToProcess.h
+
 	[source/action]
 	IAction.cpp
 	IAction.h

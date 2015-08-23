@@ -2,11 +2,12 @@
 
 
 MessageModel::MessageModel(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS) {
+	_rewards.clear();
 	setData(type, lockitTitle, lockitDesc, resourceName, dateMS);
 }
 
 MessageModel::MessageModel() {
-	_rewards.clear();
+	
 }
 
 MessageModel::~MessageModel() {
@@ -21,6 +22,6 @@ void MessageModel::setData(int type, int lockitTitle, int lockitDesc, const std:
 	_dateMS = dateMS;
 }
 
-void MessageModel::addReward(int reward) {
+void MessageModel::addReward(const std::string& reward) {
 	_rewards.push_back(reward);
 }

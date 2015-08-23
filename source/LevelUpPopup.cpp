@@ -42,7 +42,7 @@ Action LevelUpPopup::loop() {
 		Action action = waitAction();
 		if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
 			spProcessMaster master = new ProcessMaster();
-			master->addProcess(new AddRewardsProcess(_rewardsArray));
+			master->addProcess(new AddRewardsProcess(_rewardsArray._vector));
 			master->start(getRoot());
 			break;
 		}

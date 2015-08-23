@@ -30,11 +30,11 @@ public:
 	void setFreeHate(const std::string& hatName, int count);
 
 	pugi::xml_node getAchievementsNode();
-	void setAchievement(const std::string& achievementName, int progress);
+	void setAchievement(const std::vector<int> achievements);
 
 	pugi::xml_node getMessagesNode();
 	void clearMessagesNode();
-	void setMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS, const std::vector<int>& rewards);
+	void setMessage(int type, int lockitTitle, int lockitDesc, const std::string& resourceName, int dateMS, const std::vector<std::string>& rewards);
 
 	bool shouldShowChooseAnimalPopup() { return _shouldShowChooseAnimalPopup; }
 

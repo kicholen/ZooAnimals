@@ -34,6 +34,8 @@ public:
 	const int getMessagesCount() const {
 		return _messages.size();
 	};
+
+	bool shouldAnimate();
 	const std::vector<spMessageModel>& getMessages();
 	void removeMessage(spMessageModel model);
 
@@ -47,6 +49,7 @@ private:
 
 private:
 	std::vector<spMessageModel> _messages;
+	bool _shouldAnimate;
 };
 
 #endif

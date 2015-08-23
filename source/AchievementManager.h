@@ -50,7 +50,6 @@ private:
 
 private:
 	VectorArray<spAchievementModel> _achievementList;
-	std::map <std::string, spAchievementModel> _achievementMap;
 };
 
 #endif

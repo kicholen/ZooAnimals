@@ -7,6 +7,9 @@
 #include "FarmManager.h"
 #include "MessageCenterFrame.h"
 #include "MessageCenterManager.h"
+#include "ProcessMaster.h"
+#include "AnimateFromToProcess.h"
+#include "SpectatorsArea.h"
 
 using namespace FlashUtils;
 
@@ -89,6 +92,15 @@ void ZooGateFrame::setData() {
 	tileFieldObjects->setPriority(-50);
 	tileFieldObjects->attachTo(_view);
 
+	spTileField tileFieldFence = new TileField(Point(27, 15), true);
+	tileFieldFence->setData("zoo_first_fence", "first");
+	tileFieldFence->setScale(scale);
+	tileFieldFence->setAnchor(0.5f, 1.0f);
+	tileFieldFence->setY(_view->getHeight());
+	tileFieldFence->setX(_view->getWidth() / 2);
+	tileFieldFence->setPriority(-40);
+	tileFieldFence->attachTo(_view);
+
 	_spawner = new SpectatorSpawner(FarmManager::instance.getGateHumanCount(), tileSize * 0.8f);
 	_spawner->setTouchChildrenEnabled(false);
 	_spawner->setTouchEnabled(false);
@@ -123,6 +135,13 @@ void ZooGateFrame::setData() {
 	}
 
 	addPossibleSpritesToSpawner();
+
+	spSpectatorsArea area = new SpectatorsArea();
+	area->setPriority(-45);
+	area->setSize(tileSize * 5.0f, tileSize * 4.0f);
+	area->setPosition(tileSize * 18.0f - tilesToViewOffsetX, tileSize * 10.0f);
+	area->init(FarmManager::instance.getGateShopHumanCount());
+	_view->addChild(area);
 
 	/*
 	spFarmControlPanel controlPanel = new FarmControlPanel(_view->getSize(), Vector2(getRoot()->getWidth() * 0.10f, getRoot()->getHeight() * 0.95f));
@@ -307,6 +326,11 @@ void ZooGateFrame::addMailBox(float tileSize, const Vector2& position) {
 	_mailBoxButton->addEventListener(TouchEvent::CLICK, CLOSURE(this, &ZooGateFrame::onButtonClicked));
 	if (MessageCenterManager::instance.getMessagesCount() > 0) {
 		_mailBoxButton->addTween(TweenAnim(tilesResources.getResAnim("mailbox_anim")), 500, -1);
+	}
+	if (MessageCenterManager::instance.shouldAnimate()) {
+		spProcessMaster master = new ProcessMaster();
+		master->addProcess(new AnimateFromToProcess("mail", _view, Vector2(-100.0f, -100.0f), _mailBoxButton->getPosition()));
+		master->start(_view);
 	}
 	MessageCenterManager::instance.addEventListener(MessageCenterManager::MessageEvent::MESSAGE_COUNT_CHANGE, CLOSURE(this, &ZooGateFrame::onMessageCountChanged));
 }

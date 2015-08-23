@@ -11,7 +11,6 @@ AchievementManager::AchievementManager() {
 
 AchievementManager::~AchievementManager() {
 	_achievementList.clear();
-	_achievementMap.clear();
 }
 
 void AchievementManager::init() {
@@ -20,9 +19,12 @@ void AchievementManager::init() {
 }
 
 void AchievementManager::store() {
-	for (map<string, spAchievementModel >::iterator outerIterator = _achievementMap.begin(); outerIterator != _achievementMap.end(); ++outerIterator) {
-		ZooSettings::instance.setAchievement(outerIterator->first, outerIterator->second->getProgress());
+	std::vector < int > achievements;
+	for (int i = 0; i < _achievementList.length(); i++) {
+		achievements.push_back(_achievementList[i]->getProgress());
 	}
+	ZooSettings::instance.setAchievement(achievements);
+	achievements.clear();
 }
 
 void AchievementManager::increaseProgress(AchievementType type) {
@@ -83,15 +85,22 @@ void AchievementManager::parseContent() {
 
 		pugi::xml_node part = achievement.first_child();
 		pugi::xml_attribute attributePart = part.first_attribute();
+		int partNum = 0;
 
 		while (!attributePart.empty()) {
 			model->addPart(attributePart.as_int());
+
+			pugi::xml_node reward = part.first_child();
+
+			while (!reward.empty()) {
+				model->addReward(partNum, reward.name());
+				reward = reward.next_sibling();
+			}
 
 			attributePart = attributePart.next_attribute();
 		}
 
 		_achievementList.push(model);
-		_achievementMap[achievement.name()] = model;
 		model->revalidate();
 
 		achievement = achievement.next_sibling();
@@ -100,15 +109,16 @@ void AchievementManager::parseContent() {
 
 void AchievementManager::parseSavedState() {
 	pugi::xml_node achievements = ZooSettings::instance.getAchievementsNode();
-	
-	if (!achievements.empty()) {
-		pugi::xml_node achievement = achievements.first_child();
-		pugi::xml_attribute attribute = achievement.first_attribute();
-		spAchievementModel model = _achievementMap[achievement.name()];
+	pugi::xml_attribute attribute = achievements.first_attribute();
+	int achievementNum = 0;
 
+	while (!attribute.empty()) {
+		spAchievementModel model = _achievementList[achievementNum];
 		model->setProgress(attribute.as_int());
-
 		model->revalidate();
+		achievementNum += 1;
+
+		attribute = attribute.next_attribute();
 	}
 }
 

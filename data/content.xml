@@ -2214,34 +2214,6 @@
 			<farm base_tile="none" >
 				<first>
 					<no_sort>
-						<fenceFrontSide x="0" y="13" />
-						<fenceFrontCenter x="1" y="13" />
-						<fenceFrontCenter x="2" y="13" />
-						<fenceFrontCenter x="2" y="13" />
-						<fenceFrontCenter x="3" y="13" />
-						<fenceFrontCenter x="4" y="13" />
-						<fenceFrontCenter x="5" y="13" />
-						<fenceFrontCenter x="6" y="13" />
-						<fenceFrontCenter x="7" y="13" />
-						<fenceFrontCenter x="8" y="13" />
-						<fenceFrontCenter x="9" y="13" />
-						<fenceFrontCenter x="10" y="13" />
-						<fenceFrontCenter x="11" y="13" />
-						<safeLeft x="12" y="13" />
-						<safeRight x="13" y="13" />
-						<fenceFrontSide x="15" y="13" />
-						<fenceFrontCenter x="16" y="13" />
-						<fenceFrontCenter x="17" y="13" />
-						<fenceFrontCenter x="18" y="13" />
-						<fenceFrontCenter x="19" y="13" />
-						<fenceFrontCenter x="20" y="13" />
-						<fenceFrontCenter x="21" y="13" />
-						<fenceFrontCenter x="22" y="13" />
-						<fenceFrontCenter x="23" y="13" />
-						<fenceFrontCenter x="24" y="13" />
-						<fenceFrontCenter x="25" y="13" />
-						<fenceFrontCenter x="26" y="13" />
-						<fenceFrontCenter x="27" y="13" />
 						<treeLightGreenBottom x="5" y="12" />
 						<safeGreenTopLeft x="12" y="12" />
 						<safeGreenTopRight x="13" y="12" />
@@ -2319,6 +2291,42 @@
 				</first>
 			</farm>
 		</zoo_first_objects>
+		<zoo_first_fence>
+			<farm base_tile="none" >
+				<first>
+					<no_sort>
+						<fenceFrontSide x="0" y="13" />
+						<fenceFrontCenter x="1" y="13" />
+						<fenceFrontCenter x="2" y="13" />
+						<fenceFrontCenter x="2" y="13" />
+						<fenceFrontCenter x="3" y="13" />
+						<fenceFrontCenter x="4" y="13" />
+						<fenceFrontCenter x="5" y="13" />
+						<fenceFrontCenter x="6" y="13" />
+						<fenceFrontCenter x="7" y="13" />
+						<fenceFrontCenter x="8" y="13" />
+						<fenceFrontCenter x="9" y="13" />
+						<fenceFrontCenter x="10" y="13" />
+						<fenceFrontCenter x="11" y="13" />
+						<safeLeft x="12" y="13" />
+						<safeRight x="13" y="13" />
+						<fenceFrontSide x="15" y="13" />
+						<fenceFrontCenter x="16" y="13" />
+						<fenceFrontCenter x="17" y="13" />
+						<fenceFrontCenter x="18" y="13" />
+						<fenceFrontCenter x="19" y="13" />
+						<fenceFrontCenter x="20" y="13" />
+						<fenceFrontCenter x="21" y="13" />
+						<fenceFrontCenter x="22" y="13" />
+						<fenceFrontCenter x="23" y="13" />
+						<fenceFrontCenter x="24" y="13" />
+						<fenceFrontCenter x="25" y="13" />
+						<fenceFrontCenter x="26" y="13" />
+						<fenceFrontCenter x="27" y="13" />
+					</no_sort>
+				</first>
+			</farm>
+		</zoo_first_fence>
 	</zoo>
 	<games>
 		<match_two>
@@ -2594,36 +2602,36 @@
 				<gold_small/>
 			</part_2>
 		</sixth>
-		<sixth resource="quad" title="100" description="101" state="collectFarm"><!-- progress all species -->
+		<seventh resource="quad" title="100" description="101" state="collectFarm"><!-- progress all species -->
 			<part_1 progress="11">
 				<gold_small/>
 			</part_1>
-		</sixth>
-		<sixth resource="quad" title="100" description="101" state="collectSteppe">
+		</seventh>
+		<eight resource="quad" title="100" description="101" state="collectSteppe">
 			<part_1 progress="7">
 				<gold_small/>
 			</part_1>
-		</sixth>
-		<sixth resource="quad" title="100" description="101" state="collectWinter">
+		</eight>
+		<ninth resource="quad" title="100" description="101" state="collectWinter">
 			<part_1 progress="7">
 				<gold_small/>
 			</part_1>
-		</sixth>
-		<sixth resource="quad" title="100" description="101" state="collectAsia">
+		</ninth>
+		<tenth resource="quad" title="100" description="101" state="collectAsia">
 			<part_1 progress="7">
 				<gold_small/>
 			</part_1>
-		</sixth>
-		<sixth resource="quad" title="100" description="101" state="collectUnder">
+		</tenth>
+		<eleventh resource="quad" title="100" description="101" state="collectUnder">
 			<part_1 progress="5">
 				<gold_small/>
 			</part_1>
-		</sixth>
-		<sixth resource="quad" title="100" description="101" state="collectAustralia">
+		</eleventh>
+		<twelve resource="quad" title="100" description="101" state="collectAustralia">
 			<part_1 progress="8">
 				<gold_small/>
 			</part_1>
-		</sixth>
+		</twelve>
 	</achievements>
 	<rewards>
 		<ori_hat type="hat" name="oriental_hat" count="1" lockit="10" />

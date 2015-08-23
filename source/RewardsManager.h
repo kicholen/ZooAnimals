@@ -19,7 +19,7 @@ public:
 	void init();
 
 	spRewardModel getReward(const std::string& rewardName);
-
+	spRewardModel getReward(int rewardNum);
 private:
 	void parseRewards();
 

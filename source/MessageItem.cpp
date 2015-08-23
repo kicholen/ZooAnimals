@@ -1,6 +1,8 @@
 #include "MessageItem.h"
 #include "SharedResources.h"
 #include "LanguageManager.h"
+#include "time.h"
+#include "clocale"
 
 MessageItem::MessageItem(const Vector2& size, spMessageModel model) {
 	setSize(size);
@@ -35,14 +37,18 @@ void MessageItem::setData(spMessageModel model) {
 }
 
 void MessageItem::createDateTextfield(int dateMS) {
-	//todo make timMs to date converter?
 	TextStyle style;
 	style.font = gameResources.getResFont("nobile_bold")->getFont();
 	style.vAlign = TextStyle::VALIGN_MIDDLE;
 	style.hAlign = TextStyle::HALIGN_RIGHT;
 	style.color = Color(35, 145, 245);
 
-	spTextField text = createTextFieldInBoundries(CMath::intToString(dateMS), Vector2(getWidth() * 0.2f - 10.0f, getHeight() * 0.3f), style);
+	char bufor[64];
+	time_t timeMS = dateMS;
+	tm czasTM = *localtime(&timeMS);
+	strftime(bufor, sizeof(bufor), "%x, %X", &czasTM);
+
+	spTextField text = createTextFieldInBoundries(bufor, Vector2(getWidth() * 0.2f - 10.0f, getHeight() * 0.3f), style);
 	text->setX(getWidth() * 0.8f - 10.0f);
 	addChild(text);
 }
