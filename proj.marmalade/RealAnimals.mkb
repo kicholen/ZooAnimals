@@ -363,10 +363,6 @@ files
 	FeedAnimationProcess.cpp
 	FeedAnimationProcess.h
 
-	[source/process/reward]
-	AddRewardsProcess.cpp
-	AddRewardsProcess.h
-
 	[source/process/fromTo]
 	AnimateFromToProcess.cpp
 	AnimateFromToProcess.h
@@ -378,6 +374,10 @@ files
 	[source/action/endGame]
 	EndGameAction.cpp
 	EndgameAction.h
+
+	[source/action/reward]
+	AddRewardsAction.cpp
+	AddRewardsAction.h
 
 	[source/manager]
 	FacebookManager.cpp

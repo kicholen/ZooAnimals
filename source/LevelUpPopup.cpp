@@ -3,8 +3,7 @@
 #include "LevelUpItem.h"
 #include "SharedResources.h"
 #include "LanguageManager.h"
-#include "ProcessMaster.h"
-#include "AddRewardsProcess.h"
+#include "AddRewardsAction.h"
 #include "RewardsManager.h"
 
 LevelUpPopup::LevelUpPopup()
@@ -41,9 +40,7 @@ Action LevelUpPopup::loop() {
 	while (1) {
 		Action action = waitAction();
 		if (action.id == "back" || action.id == "_btn_back_" || action.id == "close") {
-			spProcessMaster master = new ProcessMaster();
-			master->addProcess(new AddRewardsProcess(_rewardsArray._vector));
-			master->start(getRoot());
+			getRoot()->addChild(new AddRewardsAction(_rewardsArray._vector));
 			break;
 		}
 	}

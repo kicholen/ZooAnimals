@@ -18,7 +18,8 @@ FeederElement::~FeederElement()
 }
 
 void FeederElement::revalidate() {
-	_cooldownLeft = FEED_INTERVAL_SECONDS - ((int)(s3eTimerGetUTC() / 1000) - _model->lastFeedS());
+	int cooldownPassed = (int)(s3eTimerGetUTC() / 1000) - _model->lastFeedS();
+	_cooldownLeft = FEED_INTERVAL_SECONDS - cooldownPassed;
 	
 	createButton();
 
@@ -33,14 +34,14 @@ void FeederElement::revalidate() {
 	else {
 		_button->setTouchChildrenEnabled(false);
 		_button->setTouchEnabled(false);
-		_button->setAlpha(150);
+		_button->setAlpha(0);
 		createProgressbar();
-		_progressBar->addTween(ProgressBar::TweenProgress(0.0f), _cooldownLeft * 1000, 1, false, 1000);
+		_progressBar->setProgress((float)cooldownPassed / (float)FEED_INTERVAL_SECONDS);
+		_progressBar->addTween(ProgressBar::TweenProgress(1.0f), _cooldownLeft * 1000, 1, false, 1000);
 
 		createCooldownTextfield();
 		_cooldown->setVisible(true);
 		spTween tween = addTween(FeederElement::TweenCooldown(0), _cooldownLeft * 1000);
-		tween->setName("score_tween");
 		tween->setDoneCallback(CLOSURE(this, &FeederElement::onTimePassed));
 	}
 }
