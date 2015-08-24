@@ -367,6 +367,10 @@ files
 	AnimateFromToProcess.cpp
 	AnimateFromToProcess.h
 
+	[source/process/clean]
+	CleanAnimalsProcess.cpp
+	CleanAnimalsProcess.h
+
 	[source/action]
 	IAction.cpp
 	IAction.h

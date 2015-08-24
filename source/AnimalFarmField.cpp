@@ -5,6 +5,8 @@
 #include "TileBuilder.h"
 #include "FarmManager.h"
 #include "HatManager.h"
+#include "ProcessMaster.h"
+#include "CleanAnimalsProcess.h"
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setTouchEnabled(false);
@@ -61,6 +63,7 @@ void AnimalFarmField::setData(spAnimalModel model) {
 	}
 
 	createFeeder();
+	createCleaner();
 
 	_state = afWaiting;
 }
@@ -127,6 +130,17 @@ void AnimalFarmField::createFeeder() {
 	_feederElement->setPosition(0.0f, getHeight());
 	_feederElement->setPriority(30000);
 	_feederElement->attachTo(this);
+}
+
+void AnimalFarmField::createCleaner() {
+	_cleanerElement = new Button();
+	_cleanerElement->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &AnimalFarmField::onCleanerClicked));
+	_cleanerElement->setResAnim(gameResources.getResAnim("quad"));
+	_cleanerElement->setAnchor(0.0f, 1.0f);
+	setSpriteScaleBySize(_cleanerElement, Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f));
+	_cleanerElement->setPosition(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getHeight());
+	_cleanerElement->setPriority(30000);
+	_cleanerElement->attachTo(this);
 }
 
 void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
@@ -237,6 +251,12 @@ void AnimalFarmField::onAnimalCountChanged(Event *ev) {
 	}
 }
 
+void AnimalFarmField::onCleanerClicked(Event *event) {
+	spProcessMaster master = new ProcessMaster();
+	master->addProcess(new CleanAnimalsProcess(this, _cleanerElement, event));
+	master->start(this);
+}
+
 Point AnimalFarmField::getNumberOfTiles() {
 	float ratio = (getSize().x / 32.0f) / (getSize().y / 32.0f);
 	return Point(int(ratio * 6.0f), 6);
@@ -244,7 +264,7 @@ Point AnimalFarmField::getNumberOfTiles() {
 
 spTooltipElement AnimalFarmField::createTooltipElement() {
 	if (!_tooltip) {
-		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 100.0f * getWidth(), ANIMAL_PERCENT_SIZE / 100.0f * getHeight()), "circle_border", "", getLockitId());
+		_tooltip = new TooltipElement(Vector2(ANIMAL_PERCENT_SIZE / 50.0f * getWidth(), ANIMAL_PERCENT_SIZE / 70.0f * getHeight()), "circleBox9", "", getLockitId());
 	}
 	else {
 		_tooltip->setText(getLockitId());

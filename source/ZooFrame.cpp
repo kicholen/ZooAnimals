@@ -200,6 +200,7 @@ void ZooFrame::setData() {
 	area->init(FarmManager::instance.getFarmHumanCount());
 	rectangleContainer->addChild(area);
 
+	_rotatingContainer->setLocked(true);
 	rectangleContainer->setSize(positionX - lastFieldWidth / 2, _rotatingContainer->getHeight());
 	_rotatingContainer->setContent(rectangleContainer);
 	_rotatingContainer->setPosition(_view->getSize() / 2 - _rotatingContainer->getSize() / 2);

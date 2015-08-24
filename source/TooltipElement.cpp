@@ -49,14 +49,16 @@ void TooltipElement::setData(const std::string& background, const std::string& s
 	}
 }
 
-// todo set it to box9sprite
 void TooltipElement::createBackground(const std::string& background) {
-	_background = initActor(new Sprite,
+	_background = initActor(new Box9Sprite,
 		arg_anchor = Vector2(0.5f, 0.5f),
 		arg_attachTo = this,
 		arg_priority = -20,
 		arg_animFrame = gameResources.getResAnim(background),
 		arg_position = getSize() / 2.0f);
+	_background->setHorizontalMode(Box9Sprite::STRETCHING);
+	_background->setVerticalMode(Box9Sprite::STRETCHING);
+	_background->setGuides(9, 20, 9, 15);
 	_background->setScaleX(getWidth() / _background->getWidth());
 	_background->setScaleY(getHeight() / _background->getHeight());
 }
@@ -84,10 +86,10 @@ bool TooltipElement::createTextfieldIfNeeded(int lockitId) {
 			arg_height = _background->getDerivedHeight(),
 			arg_input = false,
 			arg_priority = 20,
-			arg_text = LanguageManager::instance.getText(lockitId));
+			arg_text = "Blaba ballabla lbalbaba as das ");// LanguageManager::instance.getText(lockitId));
 	}
 	else {
-		_textField->setText(LanguageManager::instance.getText(lockitId));
+		_textField->setText("Blaba ballabla lbalbaba asds a"); //LanguageManager::instance.getText(lockitId));
 	}
 
 	setTextFieldRectToSize(_textField, _background->getDerivedSize());

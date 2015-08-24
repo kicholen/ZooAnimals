@@ -62,6 +62,7 @@ private:
 	void createFenceAtLeft(spTileField tileField);
 	void createInformationTable(spTileField tileField);
 	void createFeeder();
+	void createCleaner();
 
 	spAnimalInFarmElement createAnimal(const std::string& animalNumber, spAnimalModel model);
 	void removeLastAnimal();
@@ -78,14 +79,15 @@ private:
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
 	void onAnimalCountChanged(Event *ev);
-	void onAnimalFed(Event *ev);
-	
+	void onCleanerClicked(Event *event);
+
 	spSprite _gateSprite;
 
 	VectorArray<spActor> _zSortElements;
 	AnimalFarmState _state;
 	spAnimalFarmPanel _animalPanel;
 	spFeederElement _feederElement;
+	spButton _cleanerElement;
 
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;

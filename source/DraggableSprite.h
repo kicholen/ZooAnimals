@@ -15,7 +15,8 @@ public:
 
 	void setDragBounds(Vector2 position, Vector2 size);
 	void setDragEnabled(bool shouldEnable);
-private:
+	
+public:
 	Draggable drag;
 };
 

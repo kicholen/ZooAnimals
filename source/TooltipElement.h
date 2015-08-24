@@ -26,7 +26,7 @@ private:
 
 	void onTweenEnded(Event *ev);
 private:
-	spSprite _background;
+	spBox9Sprite _background;
 	spTextField _textField;
 	spSprite _sprite;
 };
