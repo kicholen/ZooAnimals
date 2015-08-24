@@ -34,6 +34,7 @@ private:
 	spProgressBar _progressBar;
 	spTweenButton _button;
 	spTextField _cooldown;
+	spSprite _background;
 
 	spAnimalModel _model;
 

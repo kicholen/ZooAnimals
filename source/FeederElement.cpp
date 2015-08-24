@@ -30,8 +30,10 @@ void FeederElement::revalidate() {
 		if (_cooldown) {
 			_cooldown->setVisible(false);
 		}
+		_background->setVisible(false);
 	}
 	else {
+		_background->setVisible(true);
 		_button->setTouchChildrenEnabled(false);
 		_button->setTouchEnabled(false);
 		_button->setAlpha(0);
@@ -47,19 +49,19 @@ void FeederElement::revalidate() {
 }
 
 void FeederElement::createBackground() {
-	spSprite cardBackground = new Sprite;
-	cardBackground->setAnchor(0.5f, 0.5f);
-	cardBackground->setResAnim(tilesResources.getResAnim("plate"));
-	setSpriteScaleBySize(cardBackground, getSize());
-	cardBackground->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
-	cardBackground->attachTo(this);
-	cardBackground->setPriority(-1);
+	_background = new Sprite;
+	_background->setAnchor(0.5f, 0.5f);
+	_background->setResAnim(tilesResources.getResAnim("plate"));
+	setSpriteScaleBySize(_background, getSize());
+	_background->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
+	_background->attachTo(this);
+	_background->setPriority(-1);
 }
 
 void FeederElement::createButton() {
 	if (!_button) {
 		_button = new TweenButton();
-		_button->setResAnim(tilesResources.getResAnim("fork_knife"));
+		_button->setResAnim(tilesResources.getResAnim("bell4x1"));
 		_button->setAnchor(Vector2(0.5f, 0.5f));
 		_button->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
 		_button->setBaseScale(getWidth() / _button->getWidth());
@@ -74,7 +76,7 @@ void FeederElement::createProgressbar() {
 			arg_attachTo = this,
 			arg_anchor = Vector2(0.5f, 0.5f),
 			arg_position = Vector2(getWidth() / 2.0f, getHeight() / 2.0f),
-			arg_resAnim = tilesResources.getResAnim("fork_knife"));
+			arg_resAnim = tilesResources.getResAnim("bell4x1"));
 		_progressBar->setDirection(_progressBar->dir_radial_cw);
 		_progressBar->setScale(getWidth() / _progressBar->getWidth());
 		_progressBar->setProgress((float)_cooldownLeft / (float)_cooldownMax);
@@ -123,7 +125,8 @@ void FeederElement::setCooldown(int cooldown) {
 
 void FeederElement::onFeedClicked(Event *ev) {
 	AnimalsManager::instance.feedAnimalByModel(_model);
-	revalidate();
+	_button->addTween(TweenAnim(tilesResources.getResAnim("bell4x1")), 1000, 8, false)->addDoneCallback(CLOSURE(this, &FeederElement::onTimePassed));
+	_button->setTouchEnabled(false);
 }
 
 void FeederElement::onTimePassed(Event *ev) {

@@ -150,5 +150,6 @@
 		<image file="boat.png"/>
 		<image file="fork_knife.png"/>
 		<image file="plate.png"/>
+		<image file="bell4x1.png" cols="4"/>
 	</atlas>
 </resources>
