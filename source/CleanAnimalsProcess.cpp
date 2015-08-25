@@ -11,7 +11,7 @@ CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source
 	Vector2 pos = convert_stage2local(source, src);
 	_cloud->drag.startDrag(pos);
 	_canProcess = true;
-	_animalsCleaned = 0;
+	_count = 0;
 	_isWater = farm->getModel()->isWaterAnimal();
 	AnimalsManager::instance.cleaning(true);
 }
@@ -25,10 +25,24 @@ CleanAnimalsProcess::~CleanAnimalsProcess() {
 
 void CleanAnimalsProcess::process() {
 	if (_part == 0) {
-		// count animals, make rain droplets
+		_positions.push_back(_cloud->getPosition());
+		_part++;
+	}
+	else if (_part == 1) {
+		_count++;
+		_positions.push_back(_cloud->getPosition());
+		if (isFarmCleaned()) {
+			_part++;
+		}
+		else {
+			_part--;
+		}
+		if (_count == 30) { // for vector overstacking
+			_positions.clear();
+		}
 	}
 	else {
-		_completed = true;
+		spriteTouchUp(0);
 	}
 }
 
@@ -58,6 +72,21 @@ void CleanAnimalsProcess::spriteTouchUp(Event *event) {
 }
 
 void CleanAnimalsProcess::onCloudBack(Event *event) {
+	_cloud->drag.destroy();
 	_cloud->detach();
 	_completed = true;
+}
+
+bool CleanAnimalsProcess::isFarmCleaned() {
+	Vector2 previousPosition = Vector2(_source->getX(), _source->getY());
+	float totalLength = 0.0f;
+	float minLength = (_farm->getDerivedHeight() + _farm->getDerivedWidth()) * 1.2;
+
+	for (uint i = 0; i < _positions.size(); i++) {
+		totalLength += _positions[i].distance(previousPosition);
+		previousPosition.x = _positions[i].x;
+		previousPosition.y = _positions[i].y;
+	}
+
+	return totalLength > minLength;
 }

@@ -20,14 +20,17 @@ private:
 	void spriteTouchUp(Event *event);
 
 	void onCloudBack(Event *event);
+
+	bool isFarmCleaned();
 private:
+	std::vector<Vector2> _positions;
 	spAnimalFarmField _farm;
 	spButton _source;
 
 	spDraggableSprite _cloud;
 
 	bool _isWater;
-	int _animalsCleaned;
+	int _count;
 	float _cloudHeight;
 };
 

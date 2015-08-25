@@ -20,7 +20,7 @@ FeedAnimationProcess::~FeedAnimationProcess() {
 void FeedAnimationProcess::process() {
 	if (_part == 0) {
 		for (int i = 0; i < _farm->getAnimation()->getAnimalsCount(); i++) {
-			_farm->getAnimation()->getAnimalsArray()[i]->setJumpSpeedFactor(0.4f);
+			_farm->getAnimation()->getAnimalByNumber(i)->setJumpSpeedFactor(0.4f);
 		}
 		_farm->playAnimalsAnimation(1);
 		
