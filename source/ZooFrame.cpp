@@ -32,6 +32,7 @@ void ZooFrame::selectTransitions() {
 void ZooFrame::_postHiding(Event *) {
 	//FlurryAnalytics::instance.onLevelLeaveEvent(_whichLevel.c_str());
 	AnimalsManager::instance.removeEventListener(AnimalsManager::AnimalEvent::ANIMAL_FED, CLOSURE(this, &ZooFrame::onAnimalFed));
+	AnimalsManager::instance.removeEventListener(AnimalsManager::AnimalCleanEvent::PROGRESS, CLOSURE(this, &ZooFrame::onCleaningProgress));
 	_view->removeChildren();
 	_resources.unload();
 	_farmArray._vector.resize(0);
@@ -40,6 +41,7 @@ void ZooFrame::_postHiding(Event *) {
 void ZooFrame::_preShowing(Event *) {
 	//FlurryAnalytics::instance.onLevelEnterEvent(_whichLevel.c_str());
 	AnimalsManager::instance.addEventListener(AnimalsManager::AnimalEvent::ANIMAL_FED, CLOSURE(this, &ZooFrame::onAnimalFed));
+	AnimalsManager::instance.addEventListener(AnimalsManager::AnimalCleanEvent::PROGRESS, CLOSURE(this, &ZooFrame::onCleaningProgress));
 	selectTransitions();
 	_resources.load();
 	setData();
@@ -108,6 +110,11 @@ void ZooFrame::onAnimalFed(Event *event) {
 	spProcessMaster master = new ProcessMaster();
 	master->addProcess(new FeedAnimationProcess(getFarmFieldByModel(animalEvent->model), _rotatingContainer));
 	master->start(_view);
+}
+
+void ZooFrame::onCleaningProgress(Event *event) {
+	AnimalsManager::AnimalCleanEvent *ace = safeCast<AnimalsManager::AnimalCleanEvent*>(event);
+	_rotatingContainer->setLocked(ace->inProgress);
 }
 
 void ZooFrame::onFinished(Event *event) {
@@ -200,7 +207,6 @@ void ZooFrame::setData() {
 	area->init(FarmManager::instance.getFarmHumanCount());
 	rectangleContainer->addChild(area);
 
-	_rotatingContainer->setLocked(true);
 	rectangleContainer->setSize(positionX - lastFieldWidth / 2, _rotatingContainer->getHeight());
 	_rotatingContainer->setContent(rectangleContainer);
 	_rotatingContainer->setPosition(_view->getSize() / 2 - _rotatingContainer->getSize() / 2);

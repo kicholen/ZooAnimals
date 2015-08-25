@@ -53,6 +53,11 @@ bool AnimalsManager::canAnimalBeFedByName(const std::string& name) {
 	return canAnimalBeFedByModel(getAnimalModel(name));
 }
 
+void AnimalsManager::cleaning(bool started) {
+	AnimalCleanEvent ev(AnimalCleanEvent::PROGRESS, started);
+	dispatchEvent(&ev);
+}
+
 // time consuming, maps were made on purpose, and here it is removed
 spAnimalModel AnimalsManager::getAnimalModel(const std::string& name) {
 	for (map<string, map<string, spAnimalModel> >::iterator outerIterator = _animalsMap.begin(); outerIterator != _animalsMap.end(); ++outerIterator) {

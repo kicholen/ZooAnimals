@@ -31,6 +31,19 @@ public:
 		spAnimalModel model;
 	};
 
+	class AnimalCleanEvent : public Event
+	{
+	public:
+		enum EV
+		{
+			PROGRESS = makefourcc('A', 'C', 'P', 'R')
+		};
+
+		AnimalCleanEvent(EV ev, bool inProgress_) : Event(ev), inProgress(inProgress_) {}
+
+		bool inProgress;
+	};
+
 	static AnimalsManager instance;
 	
 	AnimalsManager();
@@ -42,6 +55,8 @@ public:
 	void feedAnimalByName(const std::string& name);
 	bool canAnimalBeFedByModel(spAnimalModel model);
 	bool canAnimalBeFedByName(const std::string& name);
+
+	void cleaning(bool started = true);
 
 	spAnimalModel getAnimalModel(const std::string& name);
 	spAnimalModel getAnimalModelByRegion(const std::string& region, const std::string& name);

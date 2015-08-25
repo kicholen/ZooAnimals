@@ -1,4 +1,5 @@
 #include "CleanAnimalsProcess.h"
+#include "AnimalsManager.h"
 
 CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source, Event *event) {
 	_farm = farm;
@@ -12,6 +13,7 @@ CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source
 	_canProcess = true;
 	_animalsCleaned = 0;
 	_isWater = farm->getModel()->isWaterAnimal();
+	AnimalsManager::instance.cleaning(true);
 }
 
 CleanAnimalsProcess::~CleanAnimalsProcess() {
@@ -49,6 +51,7 @@ void CleanAnimalsProcess::createCloudSprite() {
 }
 
 void CleanAnimalsProcess::spriteTouchUp(Event *event) {
+	AnimalsManager::instance.cleaning(false);
 	_cloud->setTouchChildrenEnabled(false);
 	_cloud->setTouchEnabled(false);
 	_cloud->addTween(Actor::TweenPosition(_source->getPosition()), 500, 1)->addDoneCallback(CLOSURE(this, &CleanAnimalsProcess::onCloudBack));

@@ -23,6 +23,8 @@ protected:
 	void onGameChosen(Event *event);
 	void onAnimalFed(Event *event);
 
+	void onCleaningProgress(Event *event);
+
 	void setData();
 
 	spAnimalFarmField getFarmFieldByModel(spAnimalModel model);
