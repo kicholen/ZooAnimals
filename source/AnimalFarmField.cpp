@@ -135,7 +135,7 @@ void AnimalFarmField::createFeeder() {
 void AnimalFarmField::createCleaner() {
 	_cleanerElement = new Button();
 	_cleanerElement->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &AnimalFarmField::onCleanerClicked));
-	_cleanerElement->setResAnim(gameResources.getResAnim("quad"));
+	_cleanerElement->setResAnim(tilesResources.getResAnim("cloud"));
 	_cleanerElement->setAnchor(0.0f, 1.0f);
 	setSpriteScaleBySize(_cleanerElement, Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f));
 	_cleanerElement->setPosition(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getHeight());

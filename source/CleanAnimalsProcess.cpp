@@ -17,6 +17,7 @@ CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source
 }
 
 CleanAnimalsProcess::~CleanAnimalsProcess() {
+	_positions.clear();
 	_cloud = 0;
 	if (_source) {
 		_source->setVisible(true);
@@ -37,11 +38,12 @@ void CleanAnimalsProcess::process() {
 		else {
 			_part--;
 		}
-		if (_count == 30) { // for vector overstacking
-			_positions.clear();
+		if (_count == 10) { // for vector overstacking or block
+			spriteTouchUp(0);
 		}
 	}
 	else {
+		// only here dispatch event CLEANING_COMPLETED!
 		spriteTouchUp(0);
 	}
 }
@@ -59,7 +61,7 @@ void CleanAnimalsProcess::createCloudSprite() {
 	_cloud->setVisible(true);
 	_cloud->setPriority(30000);
 	_cloud->setTouchEnabled(true);
-	_cloud->setResAnim(gameResources.getResAnim("quad"));
+	_cloud->setResAnim(tilesResources.getResAnim("cloud"));
 	setSpriteScaleBySize(_cloud, _source->getDerivedSize());
 	_farm->addChild(_cloud);
 }
