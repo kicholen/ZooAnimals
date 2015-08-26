@@ -4,7 +4,6 @@
 CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source, Event *event) {
 	_farm = farm;
 	_source = source;
-	_source->setVisible(false);
 	createCloudSprite();
 	TouchEvent *touchEvent = safeCast<TouchEvent*>(event);
 	Vector2 src = touchEvent->getPointer()->getPosition().cast<Vector2>();
@@ -19,9 +18,6 @@ CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source
 CleanAnimalsProcess::~CleanAnimalsProcess() {
 	_positions.clear();
 	_cloud = 0;
-	if (_source) {
-		_source->setVisible(true);
-	}
 }
 
 void CleanAnimalsProcess::process() {
@@ -43,7 +39,8 @@ void CleanAnimalsProcess::process() {
 		}
 	}
 	else {
-		// only here dispatch event CLEANING_COMPLETED!
+		AnimalsManager::instance.cleanAnimalByModel(_farm->getModel());
+		// add money here
 		spriteTouchUp(0);
 	}
 }
@@ -54,7 +51,7 @@ bool CleanAnimalsProcess::completed() {
 
 void CleanAnimalsProcess::createCloudSprite() {
 	_cloud = new DraggableSprite();
-	_cloud->setPosition(_source->getPosition());
+	_cloud->setPosition(_source->getParent()->getX(), _source->getParent()->getY() - _source->getDerivedHeight() / 4.0f);
 	_cloud->setAnchor(Vector2(0.0f, 1.0f));
 	_cloud->setDragBounds(Vector2(0.0f, _source->getDerivedHeight()), Vector2(_farm->getDerivedWidth() - _source->getDerivedWidth(), _farm->getDerivedHeight() - _source->getDerivedHeight()));
 	_cloud->addEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &CleanAnimalsProcess::spriteTouchUp));
@@ -70,7 +67,7 @@ void CleanAnimalsProcess::spriteTouchUp(Event *event) {
 	AnimalsManager::instance.cleaning(false);
 	_cloud->setTouchChildrenEnabled(false);
 	_cloud->setTouchEnabled(false);
-	_cloud->addTween(Actor::TweenPosition(_source->getPosition()), 500, 1)->addDoneCallback(CLOSURE(this, &CleanAnimalsProcess::onCloudBack));
+	_cloud->addTween(Actor::TweenPosition(_source->getParent()->getX(), _source->getParent()->getY() - _source->getDerivedHeight() / 4.0f), 500, 1)->addDoneCallback(CLOSURE(this, &CleanAnimalsProcess::onCloudBack));
 }
 
 void CleanAnimalsProcess::onCloudBack(Event *event) {

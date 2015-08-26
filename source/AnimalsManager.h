@@ -23,7 +23,8 @@ public:
 		{
 			COUNT_CHANGED = makefourcc('A', 'M', 'C', 'C'),
 			CAN_FEED = makefourcc('A', 'M', 'C', 'F'),
-			ANIMAL_FED = makefourcc('A', 'M', 'C', 'F')
+			ANIMAL_FED = makefourcc('A', 'M', 'C', 'F'),
+			ANIMAL_CLEANED = makefourcc('A', 'M', 'A', 'C')
 		};
 
 		AnimalEvent(EV ev, spAnimalModel model_) : Event(ev), model(model_) {}
@@ -56,6 +57,7 @@ public:
 	bool canAnimalBeFedByModel(spAnimalModel model);
 	bool canAnimalBeFedByName(const std::string& name);
 
+	void cleanAnimalByModel(spAnimalModel model);
 	void cleaning(bool started = true);
 
 	spAnimalModel getAnimalModel(const std::string& name);
@@ -81,7 +83,7 @@ private:
 	void createAustraliaAnimals();
 	void createTimer();
 
-	void addAnimalModel(const std::string& regionName, const std::string& name, int happiness, int hunger, int count, int lastFeedS, int level = -1);
+	void addAnimalModel(const std::string& regionName, const std::string& name, int happiness, int hunger, int count, int lastFeedS, int lastCleanS, int level = -1);
 	const std::string& getAnimalRegion(spAnimalModel model);
 
 	void updater(Event* event);
@@ -91,7 +93,7 @@ private:
 	void dispatchAnimalCountChangedEvent(spAnimalModel model);
 	void dispatchAnimalCanBeFedEvent(spAnimalModel model);
 	void dispatchAnimalFedEvent(spAnimalModel model);
-	
+
 	int getCurrentTimeInSeconds();
 
 private:

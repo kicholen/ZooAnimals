@@ -97,14 +97,14 @@ pugi::xml_node ZooSettings::getAnimal(const std::string& regionName, const std::
 	return node;
 }
 
-void ZooSettings::setAnimal(const std::string& regionName, const std::string& animalName, int happiness, int hunger, int count, int lastFeedMS, int level) {
+void ZooSettings::setAnimal(const std::string& regionName, const std::string& animalName, int happiness, int hunger, int count, int lastFeedS, int level, int lastCleanS) {
 	pugi::xml_node mainNode = _doc.child("animals");
 	pugi::xml_node regionNode = mainNode.child(regionName.c_str());
 	if (!regionNode) {
 		regionNode = mainNode.append_child(regionName.c_str());
 	}
 	
-	setAnimalByRegionNode(regionNode, animalName, happiness, hunger, count, lastFeedMS, level);
+	setAnimalByRegionNode(regionNode, animalName, happiness, hunger, count, lastFeedS, level, lastCleanS);
 }
 
 pugi::xml_node ZooSettings::getHatsNode() {
@@ -271,7 +271,7 @@ void ZooSettings::appendCheckIfNeeded() {
 /**
 *	Reminder. If u add anything here after release, check for attribute.
 **/
-pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, const std::string& name, int happiness, int hunger, int count, int lastFeedMS, int level) {
+pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, const std::string& name, int happiness, int hunger, int count, int lastFeedS, int level, int lastCleanS) {
 	pugi::xml_node animalNode = regionNode.child(name.c_str());
 	if (!animalNode) {
 		animalNode = regionNode.append_child(name.c_str());
@@ -280,13 +280,15 @@ pugi::xml_node ZooSettings::setAnimalByRegionNode(pugi::xml_node regionNode, con
 		animalNode.append_attribute("c"); // count
 		animalNode.append_attribute("lf"); // last feed time
 		animalNode.append_attribute("l"); // level
+		animalNode.append_attribute("lc"); // last clean time
 	}
 
 	animalNode.attribute("h").set_value(happiness);
 	animalNode.attribute("g").set_value(hunger);
 	animalNode.attribute("c").set_value(count);
-	animalNode.attribute("lf").set_value(lastFeedMS);
+	animalNode.attribute("lf").set_value(lastFeedS);
 	animalNode.attribute("l").set_value(level);
+	animalNode.attribute("lc").set_value(lastCleanS);
 
 	return animalNode;
 }

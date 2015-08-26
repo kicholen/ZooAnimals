@@ -121,62 +121,24 @@ namespace FlashUtils
 		return rad * 180 / MATH_PI;
 	}
 
-	bool CMath::SweptCircleIntersect(SweptCircleIntersect_data &data, const Vector2 &p1, const Vector2 &v1, float r1, const Vector2 &p2, const Vector2 &v2, float r2) {
-		//Set up some radius related information:
-		float tr = r1 + r2;
-		float tr2 = tr * tr;
+	std::string CMath::getFormattedCooldown(int cooldown) {
+		int hours = (int)std::floor((double)cooldown / 3600.0f);
+		int minutes = (int)std::floor((double)(cooldown % 3600) / 60.0f);
+		std::string result = "";
 
-		//Get the disp vec:
-		Vector2 l = Vector2(v1.x - v2.x, v1.y - v2.y);
-		float den = (l.x*l.x + l.y*l.y);
-		if(den == 0)
-		{
-			return false;
-		};
-		float num = ((p2.x-p1.x)*l.x + (p2.y-p1.y)*l.y);
-		float u = num/den;
+		if (hours > 0) {
+			std::string prefix = hours < 10 ? "0" : "";
+			std::string between = minutes < 10 ? ":0" : ":";
+			result = prefix + intToString(hours) + between + intToString(minutes);
+		}
+		else {
+			int seconds = cooldown % 60;
+			std::string between = seconds < 10 ? ":0" : ":";
+			std::string prefix = minutes < 10 ? "0" : "";
+			result = prefix + intToString(minutes) + between + intToString(seconds);
+		}
 
-		//Determine whether the circles ever come within range of each other: (closest point distance)
-		Vector2 r = Vector2(p1.x + u*l.x, p1.y + u*l.y);
-		Vector2 d = Vector2(r.x - p2.x, r.y - p2.y);
-		float dsq = (d.x*d.x + d.y*d.y);
-		if(dsq > tr2)
-		{
-			return false;
-		};
-
-		//Calculate the correct value of u with the pythagorean theorem:
-		float denom = (tr2 - dsq);
-		float ratio = (denom/den);
-		if((u > 1) || (u < 0))
-		{
-			float dist = (u - 1);
-			if((dist*dist) > ratio)
-			{
-				return false;
-			};
-		};
-		float u_subtract = sqrtf(ratio);
-		float nu = (u - u_subtract);
-
-		//Get the new positions:
-		Vector2 f1 = Vector2(p1.x + nu*v1.x, p1.y + nu*v1.y);
-		Vector2 f2 = Vector2(p2.x + nu*v2.x, p2.y + nu*v2.y);
-
-		//Get the contact point:
-		float dist_frac = (r1/(r1+r2));
-		Vector2 cpt = Vector2(f1.x + (f2.x-f1.x)*dist_frac, f1.y + (f2.y-f1.y)*dist_frac);
-
-		//Get the collision normal:
-		Vector2 nrm = Vector2((f2.x-f1.x)/tr, (f2.y-f1.y)/tr);
-
-		data.nu = nu;
-		data.nrm = nrm;
-		data.cpt = cpt;
-		data.f1 = f1;
-		data.f2 = f2;
-
-		return true;
+		return result;
 	}
 
 	std::string CMath::hexToString(int hexIn) {

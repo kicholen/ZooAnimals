@@ -40,6 +40,9 @@ public:
 	int lastFeedS() const { return _lastFeedS; }
 	void setLastFeedS(int value) { _lastFeedS = value; }	
 
+	int lastCleanS() const { return _lastCleanS; }
+	void setLastCleanS(int value) { _lastCleanS = value; }
+
 	const std::string& topGame() { return _topGame; }
 	const std::string& midGame() { return _midGame; }
 	const std::string& lowGame() { return _lowGame; }
@@ -98,6 +101,7 @@ private:
 	int _level;
 
 	int _lastFeedS;
+	int _lastCleanS;
 };
 
 #endif

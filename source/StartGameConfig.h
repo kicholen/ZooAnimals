@@ -15,6 +15,7 @@ extern const std::string START_AUSTRALIA[3];
 extern const int START_ANIMALS_COUNT;
 extern const int FEED_INTERVAL_SECONDS;
 extern const int HUNGER_BARRIER_TIME_SECONDS;
+extern const int CLEAN_INTERVAL_SECONDS;
 extern const int HUNGER_HAPPINES_DECREASE_PERCENT;
 extern const int START_MONEY;
 extern const int START_EXP;

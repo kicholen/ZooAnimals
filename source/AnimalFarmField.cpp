@@ -5,8 +5,6 @@
 #include "TileBuilder.h"
 #include "FarmManager.h"
 #include "HatManager.h"
-#include "ProcessMaster.h"
-#include "CleanAnimalsProcess.h"
 
 AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 	setTouchEnabled(false);
@@ -133,11 +131,8 @@ void AnimalFarmField::createFeeder() {
 }
 
 void AnimalFarmField::createCleaner() {
-	_cleanerElement = new Button();
-	_cleanerElement->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &AnimalFarmField::onCleanerClicked));
-	_cleanerElement->setResAnim(tilesResources.getResAnim("cloud"));
+	_cleanerElement = new CleanerElement(Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f), _model);
 	_cleanerElement->setAnchor(0.0f, 1.0f);
-	setSpriteScaleBySize(_cleanerElement, Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f));
 	_cleanerElement->setPosition(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getHeight());
 	_cleanerElement->setPriority(30000);
 	_cleanerElement->attachTo(this);
@@ -249,12 +244,6 @@ void AnimalFarmField::onAnimalCountChanged(Event *ev) {
 			}
 		}
 	}
-}
-
-void AnimalFarmField::onCleanerClicked(Event *event) {
-	spProcessMaster master = new ProcessMaster();
-	master->addProcess(new CleanAnimalsProcess(this, _cleanerElement, event));
-	master->start(this);
 }
 
 Point AnimalFarmField::getNumberOfTiles() {

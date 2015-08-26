@@ -11,6 +11,7 @@
 #include "AnimalFarmPanel.h"
 #include "TooltipElement.h"
 #include "FeederElement.h"
+#include "CleanerElement.h"
 
 #define BASE_SIZE_IN_PERCENT_X 20
 #define BASE_SIZE_IN_PERCENT_Y 8
@@ -79,7 +80,6 @@ private:
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
 	void onAnimalCountChanged(Event *ev);
-	void onCleanerClicked(Event *event);
 
 	spSprite _gateSprite;
 
@@ -87,7 +87,7 @@ private:
 	AnimalFarmState _state;
 	spAnimalFarmPanel _animalPanel;
 	spFeederElement _feederElement;
-	spButton _cleanerElement;
+	spCleanerElement _cleanerElement;
 
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;

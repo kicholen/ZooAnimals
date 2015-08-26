@@ -182,14 +182,8 @@ namespace FlashUtils
 
 		static float RadToDeg(float rad);
 
-		struct SweptCircleIntersect_data {
-			float nu;
-			Vector2 nrm, cpt, f1, f2;
+		static std::string getFormattedCooldown(int cooldown);
 
-		};
-
-		static bool SweptCircleIntersect(CMath::SweptCircleIntersect_data &data, const Vector2 &p1, const Vector2 &v1, float r1, const Vector2 &p2, const Vector2 &v2, float r2);
-	
 		static std::string hexToString(int hexIn);
 		static int stringToHex(std::string str);
 

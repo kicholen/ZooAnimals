@@ -1,30 +1,31 @@
-#include "FeederElement.h"
-#include "SharedResources.h"
-#include "FlashUtils.h"
+#include "CleanerElement.h"
 #include "StartGameConfig.h"
 #include "s3eTimer.h"
-#include "AnimalsManager.h"
+#include "SharedResources.h"
+#include "FlashUtils.h"
+#include "ProcessMaster.h"
+#include "CleanAnimalsProcess.h"
 
-FeederElement::FeederElement(const Vector2& size, spAnimalModel model) {
+CleanerElement::CleanerElement(const Vector2& size, spAnimalModel model) {
 	setSize(size);
 	_model = model;
-	_cooldownMax = FEED_INTERVAL_SECONDS;
+	_cooldownMax = CLEAN_INTERVAL_SECONDS;
 	createBackground();
 	revalidate();
 }
 
-FeederElement::~FeederElement() {
+CleanerElement::~CleanerElement() {
 
 }
 
-void FeederElement::revalidate() {
-	int cooldownPassed = (int)(s3eTimerGetUTC() / 1000) - _model->lastFeedS();
-	_cooldownLeft = FEED_INTERVAL_SECONDS - cooldownPassed;
-	
+void CleanerElement::revalidate() {
+	int cooldownPassed = (int)(s3eTimerGetUTC() / 1000) - _model->lastCleanS();
+	_cooldownLeft = CLEAN_INTERVAL_SECONDS - cooldownPassed;
+
 	createButton();
 
 	if (_cooldownLeft <= 0) {
-		_button->setAlpha(255);
+		_button->setVisible(255);
 		_button->setTouchEnabled(true);
 		_button->setTouchChildrenEnabled(true);
 		if (_cooldown) {
@@ -36,19 +37,19 @@ void FeederElement::revalidate() {
 		_background->setVisible(true);
 		_button->setTouchChildrenEnabled(false);
 		_button->setTouchEnabled(false);
-		_button->setAlpha(0);
+		_button->setVisible(0);
 		createProgressbar();
-		_progressBar->setProgress((float)cooldownPassed / (float)FEED_INTERVAL_SECONDS);
+		_progressBar->setProgress((float)cooldownPassed / (float)CLEAN_INTERVAL_SECONDS);
 		_progressBar->addTween(ProgressBar::TweenProgress(1.0f), _cooldownLeft * 1000, 1, false, 1000);
 
 		createCooldownTextfield();
 		_cooldown->setVisible(true);
-		spTween tween = addTween(FeederElement::TweenCooldown(0), _cooldownLeft * 1000);
-		tween->setDoneCallback(CLOSURE(this, &FeederElement::onTimePassed));
+		spTween tween = addTween(CleanerElement::TweenCooldown(0), _cooldownLeft * 1000);
+		tween->setDoneCallback(CLOSURE(this, &CleanerElement::onTimePassed));
 	}
 }
 
-void FeederElement::createBackground() {
+void CleanerElement::createBackground() {
 	_background = new Sprite;
 	_background->setAnchor(0.5f, 0.5f);
 	_background->setResAnim(tilesResources.getResAnim("plate"));
@@ -58,25 +59,25 @@ void FeederElement::createBackground() {
 	_background->setPriority(-1);
 }
 
-void FeederElement::createButton() {
+void CleanerElement::createButton() {
 	if (!_button) {
-		_button = new TweenButton();
-		_button->setResAnim(tilesResources.getResAnim("bell4x1"));
+		_button = new Button();
+		_button->setResAnim(tilesResources.getResAnim("cloud"));
 		_button->setAnchor(Vector2(0.5f, 0.5f));
 		_button->setPosition(getWidth() / 2.0f, getHeight() / 2.0f);
-		_button->setBaseScale(getWidth() / _button->getWidth());
-		_button->addEventListener(TouchEvent::CLICK, CLOSURE(this, &FeederElement::onFeedClicked));
+		_button->setScale(getWidth() / _button->getWidth());
+		_button->addEventListener(TouchEvent::TOUCH_DOWN, CLOSURE(this, &CleanerElement::onCleanClicked));
 		addChild(_button);
 	}
 }
 
-void FeederElement::createProgressbar() {
+void CleanerElement::createProgressbar() {
 	if (!_progressBar) {
 		_progressBar = initActor(new ProgressBar,
 			arg_attachTo = this,
 			arg_anchor = Vector2(0.5f, 0.5f),
 			arg_position = Vector2(getWidth() / 2.0f, getHeight() / 2.0f),
-			arg_resAnim = tilesResources.getResAnim("bell4x1"));
+			arg_resAnim = tilesResources.getResAnim("cloud"));
 		_progressBar->setDirection(_progressBar->dir_radial_cw);
 		_progressBar->setScale(getWidth() / _progressBar->getWidth());
 		_progressBar->setProgress((float)_cooldownLeft / (float)_cooldownMax);
@@ -85,7 +86,7 @@ void FeederElement::createProgressbar() {
 	}
 }
 
-void FeederElement::createCooldownTextfield() {
+void CleanerElement::createCooldownTextfield() {
 	if (!_cooldown) {
 		_cooldown = new TextField();
 		_cooldown->setStyle(createTextStyle(gameResources.getResFont("nobile_bold")->getFont(), Color(0, 0, 0, 255), false, TextStyle::HALIGN_CENTER, TextStyle::VALIGN_MIDDLE));
@@ -97,26 +98,28 @@ void FeederElement::createCooldownTextfield() {
 }
 
 
-int FeederElement::getCooldown() const {
+int CleanerElement::getCooldown() const {
 	return _cooldownLeft;
 }
 
-void FeederElement::setCooldown(int cooldown) {
+void CleanerElement::setCooldown(int cooldown) {
 	if (_cooldownLeft == cooldown) {
 		return;
 	}
 
 	_cooldownLeft = cooldown;
-	_cooldownLeft = cooldown;
 	_cooldown->setText(FlashUtils::CMath::getFormattedCooldown(_cooldownLeft));
 }
 
-void FeederElement::onFeedClicked(Event *ev) {
-	AnimalsManager::instance.feedAnimalByModel(_model);
-	_button->addTween(TweenAnim(tilesResources.getResAnim("bell4x1")), 1000, 8, false)->addDoneCallback(CLOSURE(this, &FeederElement::onTimePassed));
+void CleanerElement::onCleanClicked(Event *ev) {
+	spProcessMaster master = new ProcessMaster();
+	master->addProcess(new CleanAnimalsProcess(safeCast<AnimalFarmField*>(this->getParent()), _button, ev));
+	master->setCompleteCallback(CLOSURE(this, &CleanerElement::onTimePassed));
+	master->start(this);
 	_button->setTouchEnabled(false);
+	_button->setVisible(false);
 }
 
-void FeederElement::onTimePassed(Event *ev) {
+void CleanerElement::onTimePassed(Event *ev) {
 	revalidate();
 }

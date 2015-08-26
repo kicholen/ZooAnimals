@@ -21,6 +21,7 @@ public:
 	void start(spActor parent);
 	void clear();
 
+	void setCompleteCallback(EventCallback cb);
 protected:
 	virtual void updateTimer(const UpdateState &us);
 	virtual void complete();
@@ -31,6 +32,7 @@ protected:
 private:
 	spTimer _timer;
 	VectorArray<spProcessSlave> _slaves;
+	EventCallback _cbComplete;
 };
 
 #endif

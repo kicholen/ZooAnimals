@@ -164,6 +164,8 @@ files
 	FarmServiceElement.h
 	FeederElement.cpp
 	FeederElement.h
+	CleanerElement.cpp
+	CleanerElement.h
 	SpectatorsContainer.cpp
 	SpectatorsContainer.h
 	WalkingSpectator.cpp

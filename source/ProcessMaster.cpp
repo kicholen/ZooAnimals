@@ -12,6 +12,10 @@ void ProcessMaster::addProcess(spProcessSlave slave) {
 	_slaves.push(slave);
 }
 
+void ProcessMaster::setCompleteCallback(EventCallback cb) {
+	_cbComplete = cb;
+}
+
 void ProcessMaster::clear() {
 	_slaves.clear();
 }
@@ -48,6 +52,11 @@ void ProcessMaster::updateTimer(const UpdateState &us) {
 }
 
 void ProcessMaster::complete() {
+	if (_cbComplete) {
+		Event ev(Event::COMPLETE, this);
+		_cbComplete(&ev);
+	}
+
 	if (_detachUponCompletion) {
 		detach();
 	}
