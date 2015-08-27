@@ -373,6 +373,10 @@ files
 	CleanAnimalsProcess.cpp
 	CleanAnimalsProcess.h
 
+	[source/process/animateGold]
+	AnimateGoldGained.cpp
+	AnimateGoldGained.h
+
 	[source/action]
 	IAction.cpp
 	IAction.h

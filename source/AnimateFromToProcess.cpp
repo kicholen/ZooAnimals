@@ -11,7 +11,9 @@ AnimateFromToProcess::AnimateFromToProcess(const std::string& resource, spActor 
 }
 
 AnimateFromToProcess::~AnimateFromToProcess() {
-	_sprite->detach();
+	if (_sprite) {
+		_sprite->detach();
+	}
 }
 
 void AnimateFromToProcess::process() {

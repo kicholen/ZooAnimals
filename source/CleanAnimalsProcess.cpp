@@ -1,5 +1,7 @@
 #include "CleanAnimalsProcess.h"
 #include "AnimalsManager.h"
+#include "ProcessMaster.h"
+#include "AnimateGoldGained.h"
 
 CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source, Event *event) {
 	_farm = farm;
@@ -18,6 +20,7 @@ CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source
 CleanAnimalsProcess::~CleanAnimalsProcess() {
 	_positions.clear();
 	_cloud = 0;
+	getStage()->removeEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &CleanAnimalsProcess::spriteTouchUp));
 }
 
 void CleanAnimalsProcess::process() {
@@ -34,13 +37,15 @@ void CleanAnimalsProcess::process() {
 		else {
 			_part--;
 		}
-		if (_count == 10) { // for vector overstacking or block
+		if (_count == 10) {
 			spriteTouchUp(0);
 		}
 	}
 	else {
 		AnimalsManager::instance.cleanAnimalByModel(_farm->getModel());
-		// add money here
+		spProcessMaster master = new ProcessMaster();
+		master->addProcess(new AnimateGoldGained(_farm, 100, _cloud->getPosition(), Vector2(0.0f, 0.0f)));
+		master->start(_farm);
 		spriteTouchUp(0);
 	}
 }
@@ -55,6 +60,7 @@ void CleanAnimalsProcess::createCloudSprite() {
 	_cloud->setAnchor(Vector2(0.0f, 1.0f));
 	_cloud->setDragBounds(Vector2(0.0f, _source->getDerivedHeight()), Vector2(_farm->getDerivedWidth() - _source->getDerivedWidth(), _farm->getDerivedHeight() - _source->getDerivedHeight()));
 	_cloud->addEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &CleanAnimalsProcess::spriteTouchUp));
+	getStage()->addEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &CleanAnimalsProcess::spriteTouchUp));
 	_cloud->setVisible(true);
 	_cloud->setPriority(30000);
 	_cloud->setTouchEnabled(true);
@@ -64,10 +70,13 @@ void CleanAnimalsProcess::createCloudSprite() {
 }
 
 void CleanAnimalsProcess::spriteTouchUp(Event *event) {
-	AnimalsManager::instance.cleaning(false);
-	_cloud->setTouchChildrenEnabled(false);
-	_cloud->setTouchEnabled(false);
-	_cloud->addTween(Actor::TweenPosition(_source->getParent()->getX(), _source->getParent()->getY() - _source->getDerivedHeight() / 4.0f), 500, 1)->addDoneCallback(CLOSURE(this, &CleanAnimalsProcess::onCloudBack));
+	if (_cloud) {
+		AnimalsManager::instance.cleaning(false);
+		_cloud->setTouchChildrenEnabled(false);
+		_cloud->setTouchEnabled(false);
+		_cloud->addTween(Actor::TweenPosition(_source->getParent()->getX(), _source->getParent()->getY() - _source->getDerivedHeight() / 4.0f), 500, 1)->addDoneCallback(CLOSURE(this, &CleanAnimalsProcess::onCloudBack));
+		getStage()->removeEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &CleanAnimalsProcess::spriteTouchUp));
+	}
 }
 
 void CleanAnimalsProcess::onCloudBack(Event *event) {

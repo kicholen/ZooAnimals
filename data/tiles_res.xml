@@ -152,5 +152,6 @@
 		<image file="plate.png"/>
 		<image file="bell4x1.png" cols="4"/>
 		<image file="cloud.png" />
+		<image file="goldCoin.png" />
 	</atlas>
 </resources>
