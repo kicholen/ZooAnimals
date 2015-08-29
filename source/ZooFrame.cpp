@@ -16,6 +16,7 @@
 #include "FindShadowFrame.h"
 #include "PopObjectsFrame.h"
 #include "DiscoverImageFrame.h"
+#include "AttachHatToAnimalFrame.h"
 
 ZooFrame::ZooFrame(const std::string& regionName) {
 	_region = regionName;
@@ -58,6 +59,10 @@ Action ZooFrame::loop() {
 		}
 		else if (action.id == "result") {
 			break;
+		}
+		else if (action.id == "attach_hat") {
+			spAttachHatToAnimalFrame hatAttacher = new AttachHatToAnimalFrame(_hatAnimalName);
+			transitionShowFrameAsDialog(hatAttacher);
 		}
 		else if (action.id == "memory" || action.id == "dots" || action.id == "shadow" || action.id == "match" || action.id == "pop" || action.id == "discover") {
 			spChooseGameDifficultyFrame chooserFrame = new ChooseGameDifficultyFrame();
@@ -134,6 +139,12 @@ void ZooFrame::onGameChosen(Event *event) {
 	generateAction(ev->_name);
 }
 
+void ZooFrame::onHatAttacherClicked(Event *event) {
+	AnimalFarmField::AnimalFarmFieldEvent *ev = safeCast<AnimalFarmField::AnimalFarmFieldEvent*>(event);
+	_hatAnimalName = ev->model->animalName();
+	generateAction("attach_hat");
+}
+
 void ZooFrame::setData() {
 	_farmArray._vector.resize(0);
 	_farmArray._vector.reserve(10);
@@ -174,7 +185,8 @@ void ZooFrame::setData() {
 		field->setAnchor(0.5f, 0.5f);
 		field->setY(field->getDerivedHeight() / 2);
 		field->addEventListener(FarmServiceElement::FarmServiceElementEvent::PLAY_GAMES, CLOSURE(this, &ZooFrame::onGameChosen));
-			
+		field->addEventListener(AnimalFarmField::AnimalFarmFieldEvent::ATTACH_HAT, CLOSURE(this, &ZooFrame::onHatAttacherClicked));
+
 		spTileField tileField = new TileField(Point(field->getNumberOfTiles().x, 3));
 		tileField->setData("pavement", "first");
 		tileField->setScale(fieldSize.x / tileField->getWidth());

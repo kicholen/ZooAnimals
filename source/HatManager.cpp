@@ -52,6 +52,7 @@ void HatManager::addWearableToFreeHats(const std::string& wearableName, int coun
 	else {
 		_freeHats[wearableName] = count;
 	}
+	_freeHatsCount += 1;
 }
 
 

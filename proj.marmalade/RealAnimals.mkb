@@ -486,6 +486,6 @@ deployments
 	embed-icf=1
 	provider='JellyApps'
 	version-major=0
-	version-minor=2
-	version-revision=13
+	version-minor=3
+	version-revision=0
 }

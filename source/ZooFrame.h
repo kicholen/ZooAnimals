@@ -22,6 +22,7 @@ protected:
 	void onFinished(Event *event);
 	void onGameChosen(Event *event);
 	void onAnimalFed(Event *event);
+	void onHatAttacherClicked(Event *event);
 
 	void onCleaningProgress(Event *event);
 
@@ -33,6 +34,8 @@ private:
 	std::string _region;
 
 	spSlidingActor _rotatingContainer;
+
+	std::string _hatAnimalName;
 };
 
 #endif

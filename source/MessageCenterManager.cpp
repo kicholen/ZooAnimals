@@ -71,6 +71,7 @@ void MessageCenterManager::parseSavedState() {
 			resourceName = attribute.as_string();
 			attribute = attribute.next_attribute();
 			dateMS = attribute.as_int();
+			attribute = attribute.next_attribute();
 
 			while (!attribute.empty()) {
 				model->addReward(attribute.as_string());

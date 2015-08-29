@@ -101,7 +101,7 @@ bool CleanAnimalsProcess::isFarmCleaned() {
 	float totalLength = 0.0f;
 	float minLength = (_farm->getDerivedHeight() + _farm->getDerivedWidth()) * 1.2;
 
-	for (int i = 0; i < _positions.size(); i++) {
+	for (uint i = 0; i < _positions.size(); i++) {
 		totalLength += _positions[i].distance(previousPosition);
 		previousPosition.x = _positions[i].x;
 		previousPosition.y = _positions[i].y;

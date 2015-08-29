@@ -62,6 +62,9 @@ void AnimalFarmField::setData(spAnimalModel model) {
 
 	createFeeder();
 	createCleaner();
+	if (HatManager::instance.getFreeHatsCount() > 0 && HatManager::instance.getHatsCountPerAnimal(_model->animalName()) < _model->animalsCount()) {
+		createHatAttacher(); // todo make observer here
+	}
 
 	_state = afWaiting;
 }
@@ -136,6 +139,17 @@ void AnimalFarmField::createCleaner() {
 	_cleanerElement->setPosition(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getHeight());
 	_cleanerElement->setPriority(30000);
 	_cleanerElement->attachTo(this);
+}
+
+void AnimalFarmField::createHatAttacher() {
+	_hatAttacherElement = new Button();
+	_hatAttacherElement->setResAnim(gameResources.getResAnim("quad"));
+	setSpriteScaleBySize(_hatAttacherElement, Vector2(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f, getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f));
+	_hatAttacherElement->addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onHatAttacherClicked));
+	_hatAttacherElement->setAnchor(0.0f, 1.0f);
+	_hatAttacherElement->setPosition(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f * 2.0f, getHeight());
+	_hatAttacherElement->setPriority(30000);
+	_hatAttacherElement->attachTo(this);
 }
 
 void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
@@ -244,6 +258,11 @@ void AnimalFarmField::onAnimalCountChanged(Event *ev) {
 			}
 		}
 	}
+}
+
+void AnimalFarmField::onHatAttacherClicked(Event *event) {
+	AnimalFarmFieldEvent ev(AnimalFarmFieldEvent::ATTACH_HAT, _model);
+	dispatchEvent(&ev);
 }
 
 Point AnimalFarmField::getNumberOfTiles() {

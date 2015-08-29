@@ -6,6 +6,7 @@
 
 AddRewardsAction::AddRewardsAction(const std::vector<std::string>& rewards) {
 	_rewards = rewards;
+	doAction();
 }
 
 

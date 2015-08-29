@@ -33,6 +33,19 @@ typedef enum {afCreating, afWaiting, afAnimating} AnimalFarmState;
 class AnimalFarmField : public Actor
 {
 public:
+	class AnimalFarmFieldEvent : public Event
+	{
+	public:
+		enum EV
+		{
+			ATTACH_HAT = makefourcc('A', 'F', 'F', 'A')
+		};
+
+		AnimalFarmFieldEvent(EV ev, spAnimalModel model_) : Event(ev), model(model_) {}
+
+		spAnimalModel model;
+	};
+
 	AnimalFarmField(Vector2 fieldSize);
 	~AnimalFarmField();
 
@@ -64,6 +77,7 @@ private:
 	void createInformationTable(spTileField tileField);
 	void createFeeder();
 	void createCleaner();
+	void createHatAttacher();
 
 	spAnimalInFarmElement createAnimal(const std::string& animalNumber, spAnimalModel model);
 	void removeLastAnimal();
@@ -79,8 +93,9 @@ private:
 
 	void onTouchOver(Event *event);
 	void onGameChosen(Event *event);
-	void onAnimalCountChanged(Event *ev);
-
+	void onAnimalCountChanged(Event *event);
+	void onHatAttacherClicked(Event *event);
+private:
 	spSprite _gateSprite;
 
 	VectorArray<spActor> _zSortElements;
@@ -88,6 +103,7 @@ private:
 	spAnimalFarmPanel _animalPanel;
 	spFeederElement _feederElement;
 	spCleanerElement _cleanerElement;
+	spButton _hatAttacherElement;
 
 	AnimalsFarmAnimationType _animationType;
 	spAnimalsFarmAnimations _animalsFarmAnimation;

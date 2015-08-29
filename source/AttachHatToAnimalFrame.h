@@ -12,7 +12,7 @@ DECLARE_SMART(AttachHatToAnimalFrame, spAttachHatToAnimalFrame);
 class AttachHatToAnimalFrame : public CustomFrame
 {
 public:
-	AttachHatToAnimalFrame(const std::string& hatResource);
+	AttachHatToAnimalFrame(const std::string& animal);
 	~AttachHatToAnimalFrame();
 
 	void selectTransitions();
