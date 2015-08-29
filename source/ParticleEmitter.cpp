@@ -31,7 +31,7 @@ ParticleEmitter::~ParticleEmitter() {
 
 void ParticleEmitter::doUpdate(const UpdateState &us) {
 	_frameTime += us.dt;
-	int newParticles = int(CMath::Rand(_particlesPerSecond.x, _particlesPerSecond.y) * _frameTime / 1000);
+	int newParticles = int(CMath::Rand(_particlesPerSecond.x, _particlesPerSecond.y) * _frameTime / 1000.0f);
 	if (newParticles != 0) {
 		_frameTime = 0.0f;
 	}

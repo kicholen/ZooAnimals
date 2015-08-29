@@ -94,7 +94,7 @@ void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
 			tileSprite = tileField->createTileSprite("fenceFrontCenter", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 3000);
 		}
 		tileSprite->setAnchor(0.0f, 1.0f);
-		tileSprite->setPosition(tileSprite->getScaleX() > 0 ? tileSprite->getX() * tileField->getScaleX() : tileSprite->getX() * tileField->getScaleX() - tileSprite->getDerivedWidth(), tileSprite->getY() * tileField->getScaleY() + 2.0f);
+		tileSprite->setPosition(tileSprite->getScaleX() > 0.0f ? tileSprite->getX() * tileField->getScaleX() : tileSprite->getX() * tileField->getScaleX() - tileSprite->getDerivedWidth(), tileSprite->getY() * tileField->getScaleY() + 2.0f);
 		addChild(tileSprite);
 	}
 }
@@ -102,10 +102,10 @@ void AnimalFarmField::createFenceAtBottom(spTileField tileField) {
 void AnimalFarmField::createFenceAtLeft(spTileField tileField) {
 	Point tilesNumber = getNumberOfTiles();
 	int i = tilesNumber.x;
-	for (int j = 0; j < tilesNumber.y; j++) {
+	for (int j = 0; j < tilesNumber.y - 1; j++) {
 		spSprite tileSprite = tileField->createTileSprite("fenceTop", Vector2(TILE_SIZE_X * tileField->getScaleX(), TILE_SIZE_Y * tileField->getScaleY()), Point(i, j), 2900);
 		tileSprite->setAnchor(0.0f, 0.0f);
-		tileSprite->setPosition(- tileSprite->getDerivedWidth() / 2, tileSprite->getY() * tileField->getScaleY());
+		tileSprite->setPosition(- tileSprite->getDerivedWidth() / 2.0f, tileSprite->getY() * tileField->getScaleY());
 		tileSprite->setPriority(3000);
 		addChild(tileSprite);
 	}

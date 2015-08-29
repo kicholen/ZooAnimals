@@ -5,6 +5,8 @@
 #include "AnimalFarmField.h"
 #include "DraggableSprite.h"
 
+#define DROPLETS_PER_SECOND 5
+
 class CleanAnimalsProcess : public ProcessSlave
 {
 public:
@@ -18,8 +20,9 @@ private:
 	void createCloudSprite();
 
 	void spriteTouchUp(Event *event);
-
+	void spawnDroplets();
 	void onCloudBack(Event *event);
+	void updateDroplet(const UpdateState &us);
 
 	bool isFarmCleaned();
 private:
@@ -28,6 +31,11 @@ private:
 	spButton _source;
 
 	spDraggableSprite _cloud;
+
+	VectorArray<spSprite> _droplets;
+	UpdateCallback _updateCallback;
+	int _lastDropletIndex;
+	float _timeSinceLastDroplet;
 
 	bool _isWater;
 	int _count;

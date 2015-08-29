@@ -79,8 +79,10 @@ void AttachHatToAnimalFrame::createTitleTextfield() {
 }
 
 void AttachHatToAnimalFrame::createHats() {
-	map<std::string, int> hats = HatManager::instance.getFreeHats();
-
+	const std::map<std::string, int > &hats = HatManager::instance.getFreeHats();
+	if (hats.size() == 0) {
+		return;
+	}
 	spSlidingActor slidingActor = new SlidingActor();
 	slidingActor->setSize(_view->getWidth() / 2.0f, _view->getHeight() / 2.0f);
 
@@ -92,7 +94,8 @@ void AttachHatToAnimalFrame::createHats() {
 	 
 	int count = 0;
 	bool shouldCreate = true;
-	for (map<string, int >::iterator innerIterator = hats.begin(); innerIterator != hats.end(); ++innerIterator) {
+
+	for (map<string, int >::const_iterator innerIterator = hats.begin(); innerIterator != hats.end(); ++innerIterator) {
 		if (count == 0 && shouldCreate) {
 			_container = new StackContainer(Vector2(content->getWidth(), content->getHeight() / 3.0f), 1);
 			content->addChild(_container);
