@@ -87,7 +87,7 @@ void LevelUpPopup::createRewards() {
 	spLevelUpItem item = new LevelUpItem(Vector2(_view->getWidth() / 2.0f, _view->getHeight() * 0.3f), 10, false);
 	item->setPosition(_view->getSize() / 2.0f);
 
-	for (int i = 0; i < _rewardsArray._vector.size(); i++) {
+	for (uint i = 0; i < _rewardsArray._vector.size(); i++) {
 		item->addReward(RewardsManager::instance.getReward(_rewardsArray._vector[i]));
 	}
 	_view->addChild(item);

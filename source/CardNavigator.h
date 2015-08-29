@@ -8,7 +8,7 @@ using namespace oxygine;
 
 DECLARE_SMART(CardNavigator, spCardNavigator);
 enum CardNavigatorAlign { cnVertical = 0, cnHorizontal = 1 };
-typedef enum CardNavigatorState { cnBlock, cnWait };
+enum CardNavigatorState { cnBlock, cnWait };
 /*
 *	CardNavigator will automatically be size of added items, changing size of this element will do nothing.
 *	Remember to call updateCards.

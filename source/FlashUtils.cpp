@@ -185,7 +185,7 @@ namespace FlashUtils
 
 		unsigned char *output = u.bytes;
 
-		for(int i = 0; i < bytesInDouble; ++i) {
+		for(uint i = 0; i < bytesInDouble; ++i) {
 			sscanf(input, "%02hhX", output);
 
 			input += 2;

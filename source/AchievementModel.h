@@ -16,7 +16,7 @@ public:
 	bool increaseProgress();
 	
 	void addPart(int progress);
-	void addReward(int part, const std::string& rewardName);
+	void addReward(uint part, const std::string& rewardName);
 	void setProgress(int progress);
 	void revalidate();
 	bool isCompleted();

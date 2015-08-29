@@ -97,7 +97,7 @@ spSprite FindShadowFieldHard::createTouchableSprite(const std::string name) {
 }
 
 void FindShadowFieldHard::createSpriteToBeFoundIfDoesntExist(const std::string name) {
-	if (_spriteToBeFound == NULL) {
+	if (!_spriteToBeFound) {
 		_spriteToBeFound = initActor(new Sprite,
 			arg_anchor = Vector2(0.5, 0.5f),
 			arg_attachTo = this);

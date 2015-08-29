@@ -14,7 +14,7 @@ AddRewardsAction::~AddRewardsAction() {
 }
 
 void AddRewardsAction::doAction() {
-	for (int i = 0; i < _rewards.size(); i++) {
+	for (uint i = 0; i < _rewards.size(); i++) {
 		parse(RewardsManager::instance.getReward(_rewards[i]));
 	}
 

@@ -97,7 +97,7 @@ void MessageCenterManager::onAchievementsGained(spAchievementModel model) {
 	spMessageModel message = addMessage(mmReward, model->getLockitTitle(), model->getLockitDescription(), model->getResourceName(), (int)(s3eTimerGetUTC() / 1000));
 	
 	const std::vector<std::string>& rewards = model->getRewards(model->getCurrentPart());
-	for (int i = 0; i < rewards.size(); i++) {
+	for (uint i = 0; i < rewards.size(); i++) {
 		message->addReward(rewards[i]);
 	}
 

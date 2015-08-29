@@ -1,7 +1,7 @@
 #include "CleanAnimalsProcess.h"
 #include "AnimalsManager.h"
 #include "ProcessMaster.h"
-#include "AnimateGoldGained.h"
+#include "AnimateGoldAction.h"
 
 CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source, Event *event) {
 	_farm = farm;
@@ -18,6 +18,7 @@ CleanAnimalsProcess::CleanAnimalsProcess(spAnimalFarmField farm, spButton source
 }
 
 CleanAnimalsProcess::~CleanAnimalsProcess() {
+	AnimalsManager::instance.cleaning(false);
 	_positions.clear();
 	_cloud = 0;
 	getStage()->removeEventListener(TouchEvent::TOUCH_UP, CLOSURE(this, &CleanAnimalsProcess::spriteTouchUp));
@@ -42,10 +43,9 @@ void CleanAnimalsProcess::process() {
 		}
 	}
 	else {
+		_canProcess = false;
 		AnimalsManager::instance.cleanAnimalByModel(_farm->getModel());
-		spProcessMaster master = new ProcessMaster();
-		master->addProcess(new AnimateGoldGained(_farm, 100, _cloud->getPosition(), Vector2(0.0f, 0.0f)));
-		master->start(_farm);
+		_farm->addChild(new AnimateGoldAction(_farm, 100, _cloud->getPosition(), Vector2(getStage()->getDerivedWidth(), 0.0f)));
 		spriteTouchUp(0);
 	}
 }
@@ -70,8 +70,8 @@ void CleanAnimalsProcess::createCloudSprite() {
 }
 
 void CleanAnimalsProcess::spriteTouchUp(Event *event) {
+	_canProcess = false;
 	if (_cloud) {
-		AnimalsManager::instance.cleaning(false);
 		_cloud->setTouchChildrenEnabled(false);
 		_cloud->setTouchEnabled(false);
 		_cloud->addTween(Actor::TweenPosition(_source->getParent()->getX(), _source->getParent()->getY() - _source->getDerivedHeight() / 4.0f), 500, 1)->addDoneCallback(CLOSURE(this, &CleanAnimalsProcess::onCloudBack));

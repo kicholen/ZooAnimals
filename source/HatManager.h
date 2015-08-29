@@ -36,7 +36,7 @@ public:
 	const std::map<std::string, int >& getFreeHats();
 
 
-	const int HatManager::getFreeHatsCount() const {
+	const int getFreeHatsCount() const {
 		return _freeHatsCount;
 	}
 private:

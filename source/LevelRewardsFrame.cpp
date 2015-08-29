@@ -61,14 +61,14 @@ void LevelRewardsFrame::setData() {
 	const VectorArray< VectorArray<std::string> >& rewardsArray = ExpManager::instance.getAllRewards();
 	const Vector2& size = Vector2(_rotatingContainer->getWidth() * 0.9f, _rotatingContainer->getHeight() * 0.3f);
 	
-	for (int i = 0; i < rewardsArray._vector.size(); i++) {
+	for (uint i = 0; i < rewardsArray._vector.size(); i++) {
 		spLevelUpItem item = new LevelUpItem(size, i + 1);
 		item->setPosition(_rotatingContainer->getWidth() / 2.0f, positionY);
 		positionY += item->getDerivedHeight() + OFFSET;
 		itemHeight = item->getDerivedHeight();
 		rectangleContainer->addChild(item);
 		
-		for (int j = 0; j < rewardsArray._vector[i]._vector.size(); j++) {
+		for (uint j = 0; j < rewardsArray._vector[i]._vector.size(); j++) {
 			item->addReward(RewardsManager::instance.getReward(rewardsArray._vector[i]._vector[j]));
 		}
 	}

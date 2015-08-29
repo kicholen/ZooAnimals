@@ -5,7 +5,7 @@
 #include "RewardModel.h"
 #include "StackContainer.h"
 
-#define OFFSET 20
+#define OFFSET_LEVEL 20
 
 using namespace oxygine;
 

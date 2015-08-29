@@ -36,7 +36,7 @@ void LevelUpItem::createMainTextfield(int requiredLevel) {
 	style.color = Color(35, 145, 245);
 
 	spTextField textField = createTextFieldInBoundries(LanguageManager::instance.getText(100) + "*todo*" + CMath::intToString(requiredLevel), Vector2(getWidth(), getHeight() * 0.2f), style);
-	textField->setY(OFFSET / 2.0f);
+	textField->setY(OFFSET_LEVEL / 2.0f);
 	addChild(textField);
 }
 
@@ -54,17 +54,17 @@ void LevelUpItem::createBackground() {
 }
 
 void LevelUpItem::createStackContainer() {
-	_stackContainer = new StackContainer(Vector2(getWidth(), getHeight() * 0.8f - OFFSET * 1.5f), 1);
+	_stackContainer = new StackContainer(Vector2(getWidth(), getHeight() * 0.8f - OFFSET_LEVEL * 1.5f), 1);
 	_stackContainer->attachTo(this);
-	_stackContainer->setY(getHeight() * 0.2f + OFFSET);
+	_stackContainer->setY(getHeight() * 0.2f + OFFSET_LEVEL);
 }
 
 spSprite LevelUpItem::createRewardSprite(spRewardModel model) {
 	spSprite sprite = new Sprite();
-	if (model->getType() == RewardType::rmHat) {
+	if (model->getType() == rmHat) {
 		sprite->setResAnim(gameResources.getResAnim(model->getName()));
 	}
-	else if (model->getType() == RewardType::rmAnimal){
+	else if (model->getType() == rmAnimal){
 		sprite->setResAnim(animalsResources.getResAnim(model->getName()));
 	}
 	else {

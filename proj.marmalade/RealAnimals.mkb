@@ -373,21 +373,21 @@ files
 	CleanAnimalsProcess.cpp
 	CleanAnimalsProcess.h
 
-	[source/process/animateGold]
-	AnimateGoldGained.cpp
-	AnimateGoldGained.h
-
 	[source/action]
 	IAction.cpp
 	IAction.h
 
 	[source/action/endGame]
 	EndGameAction.cpp
-	EndgameAction.h
+	EndGameAction.h
 
 	[source/action/reward]
 	AddRewardsAction.cpp
 	AddRewardsAction.h
+
+	[source/action/rewardAnim]
+	AnimateGoldAction.cpp
+	AnimateGoldAction.h
 
 	[source/manager]
 	FacebookManager.cpp
