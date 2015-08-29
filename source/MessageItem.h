@@ -30,6 +30,7 @@ public:
 
 	void addReward(const std::string& rewardName);
 
+	int position;
 private:
 	void setData(spMessageModel model);
 

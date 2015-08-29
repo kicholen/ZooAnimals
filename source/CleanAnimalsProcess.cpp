@@ -130,6 +130,9 @@ void CleanAnimalsProcess::spawnDroplets() {
 }
 
 void CleanAnimalsProcess::updateDroplet(const UpdateState &us) {
+	if (!_canProcess) {
+		return;
+	}
 	for (int i = 0; i < _droplets.length(); i++) {
 		_droplets[i]->setY(_droplets[i]->getY() + us.dt * 0.1f);
 	}

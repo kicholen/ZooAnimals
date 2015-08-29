@@ -21,14 +21,20 @@ protected:
 	void _postHiding(Event *);
 	void _preShowing(Event *);
 
+private:
 	void setData();
+	void revalidate(int removedPosition, float height);
 
 	spMessageItem createMessageItem(const Vector2& size, spMessageModel model);
 	void createBackground();
 	void createTitle();
-private:
+
 	void onRewardClaimed(Event *event);
 	void onMessageDeleted(Event *event);
+	void onRevalidateFinished(Event * event);
+private:
+	spColorRectSprite _rectangleContainer;
+	spSlidingActor _slidingActor;
 
 };
 

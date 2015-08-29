@@ -47,32 +47,33 @@ Action MessageCenterFrame::loop() {
 void MessageCenterFrame::setData() {
 	createBackground();
 	createTitle();
-	spSlidingActor slidingActor = new SlidingActor();
-	slidingActor->setSize(_view->getWidth() * 0.8f, _view->getHeight() * 0.6f);
+	_slidingActor = new SlidingActor();
+	_slidingActor->setSize(_view->getWidth() * 0.8f, _view->getHeight() * 0.6f);
 
-	spColorRectSprite rectangleContainer = new ColorRectSprite();
-	rectangleContainer->setSize(slidingActor->getWidth(), slidingActor->getHeight());
-	rectangleContainer->setColor(Color(123, 24, 32, 0));
+	_rectangleContainer = new ColorRectSprite();
+	_rectangleContainer->setSize(_slidingActor->getWidth(), _slidingActor->getHeight());
+	_rectangleContainer->setColor(Color(123, 24, 32, 0));
 
 	float positionY = _view->getHeight() * 0.3f / 2.0f;
 	float itemHeight = 0.0f;
 
 	const std::vector<spMessageModel>& messages = MessageCenterManager::instance.getMessages();
 
-	const Vector2& size = Vector2(slidingActor->getWidth(), _view->getHeight() * 0.2f);
+	const Vector2& size = Vector2(_slidingActor->getWidth(), _view->getHeight() * 0.2f);
 
 	for (uint i = 0; i < messages.size(); i++) {
 		spMessageItem item = createMessageItem(size, messages[i]);
-		item->setPosition(slidingActor->getWidth() / 2.0f, positionY);
+		item->position = i;
+		item->setPosition(_slidingActor->getWidth() / 2.0f, positionY);
 		positionY += item->getDerivedHeight() + OFFSET_MESSAGES;
 		itemHeight = item->getDerivedHeight();
-		rectangleContainer->addChild(item);
+		_rectangleContainer->addChild(item);
 	}
 
-	rectangleContainer->setSize(slidingActor->getWidth(), positionY - itemHeight / 2.0f);
-	slidingActor->setContent(rectangleContainer);
-	slidingActor->setPosition((_view->getWidth() - slidingActor->getWidth()) / 2.0f, (_view->getHeight() * 1.2f - slidingActor->getHeight()) / 2.0f);
-	slidingActor->attachTo(_view);
+	_rectangleContainer->setSize(_slidingActor->getWidth(), positionY - itemHeight / 2.0f);
+	_slidingActor->setContent(_rectangleContainer);
+	_slidingActor->setPosition((_view->getWidth() - _slidingActor->getWidth()) / 2.0f, (_view->getHeight() * 1.2f - _slidingActor->getHeight()) / 2.0f);
+	_slidingActor->attachTo(_view);
 }
 
 spMessageItem MessageCenterFrame::createMessageItem(const Vector2& size, spMessageModel model) {
@@ -126,9 +127,10 @@ void MessageCenterFrame::createTitle() {
 void MessageCenterFrame::onRewardClaimed(Event *event) {
 	MessageItem::MessageItemEvent *messageEvent = safeCast<MessageItem::MessageItemEvent*>(event);
 	spMessageItem item = safeSpCast<MessageItem>(event->currentTarget);
+	int position = item->position;
+	int height = item->getDerivedHeight();
 	item->detach();
-
-	// todo set it as action, not process
+	revalidate(position, height);
 	getRoot()->addChild(new AddRewardsAction(messageEvent->model->getRewards()));
 	MessageCenterManager::instance.removeMessage(messageEvent->model);
 }
@@ -136,5 +138,44 @@ void MessageCenterFrame::onRewardClaimed(Event *event) {
 void MessageCenterFrame::onMessageDeleted(Event *event) {
 	MessageItem::MessageItemEvent *messageEvent = safeCast<MessageItem::MessageItemEvent*>(event);
 	spMessageItem item = safeSpCast<MessageItem>(event->currentTarget);
+	int position = item->position;
+	int height = item->getDerivedHeight();
 	item->detach();
+	revalidate(position, height);
+}
+
+void MessageCenterFrame::revalidate(int removedPosition, float height) {
+	spActor child = _rectangleContainer->getFirstChild();
+	bool wasAnimated = false;
+	bool wasCallbackAdded = false;
+
+	while (child) {
+		spMessageItem item = safeSpCast<MessageItem>(child);
+		
+		if (item->position > removedPosition) {
+			item->position -= 1;
+			if (!wasCallbackAdded) {
+				item->addTween(Actor::TweenY(item->getY() - height - OFFSET_MESSAGES), 400)->addDoneCallback(CLOSURE(this, &MessageCenterFrame::onRevalidateFinished));
+			}
+			else {
+				item->addTween(Actor::TweenY(item->getY() - height - OFFSET_MESSAGES), 400);
+			}
+			wasAnimated = true;
+		}
+
+		child = child->getNextSibling();
+	}
+	if (wasAnimated) {
+		_view->setTouchChildrenEnabled(false);
+		_view->setTouchEnabled(false);
+	}
+	_rectangleContainer->setHeight(_rectangleContainer->getHeight() - height - OFFSET_MESSAGES);
+	_rectangleContainer->addRef();
+	_slidingActor->setContent(_rectangleContainer);
+	_rectangleContainer->releaseRef();
+}
+
+void MessageCenterFrame::onRevalidateFinished(Event *event) {
+	_view->setTouchChildrenEnabled(true);
+	_view->setTouchEnabled(true);
 }
