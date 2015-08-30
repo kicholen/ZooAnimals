@@ -134,7 +134,8 @@ spTweenButton AttachHatToAnimalFrame::createHatButton(const std::string& name) {
 
 void AttachHatToAnimalFrame::onHatClicked(Event *event) {
 	const std::string &name = event->target->getName();
-
 	HatManager::instance.addWearableToAnimal(_animal, name);
+	_view->setTouchChildrenEnabled(false);
+	_view->setTouchEnabled(false);
 	generateAction("close");
 }

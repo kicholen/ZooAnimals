@@ -7,6 +7,7 @@ HatManager HatManager::instance;
 HatManager::HatManager()
 {
 	_freeHatsCount = 0;
+	addRef();
 }
 
 HatManager::~HatManager()
@@ -41,8 +42,9 @@ const std::map<std::string, int >& HatManager::getFreeHats() {
 }
 
 void HatManager::addWearableToAnimal(const std::string& animalName, const std::string& wearableName) {
-	removeHatFromFreeList(wearableName);
 	_hatsMap[animalName][wearableName] += 1;
+	dispatchHatAttached(animalName, wearableName);
+	removeHatFromFreeList(wearableName);
 }
 
 void HatManager::addWearableToFreeHats(const std::string& wearableName, int count) {
@@ -53,16 +55,18 @@ void HatManager::addWearableToFreeHats(const std::string& wearableName, int coun
 		_freeHats[wearableName] = count;
 	}
 	_freeHatsCount += 1;
+	dispatchCountChanged();
 }
 
 
 std::string HatManager::getWearable(const std::string& animalName, int hatIndex) {
-	int value = 0;
+	int value = -1;
 	for (int i = 0; i < _hatList.length(); i++) {
+		int prevValue = value;
 		if (_hatsMap[animalName].count(_hatList[i]) > 0) {
 			value += _hatsMap[animalName][_hatList[i]];
 		}
-		if (hatIndex <= value) {
+		if (hatIndex <= value && hatIndex > prevValue) {
 			return _hatList[i];
 		}
 	}
@@ -103,11 +107,22 @@ void HatManager::removeHatFromFreeList(const std::string& hatName) {
 	if (_freeHats.count(hatName) > 0) {
 		_freeHats[hatName] -= 1;
 		_freeHatsCount -= 1;
+		dispatchCountChanged();
 
 		if (_freeHats[hatName] == 0) {
 			_freeHats.erase(hatName);
 		}
 	}
+}
+
+void HatManager::dispatchCountChanged() {
+	HatEvent ev(HatEvent::COUNT_CHANGED, _freeHatsCount);
+	dispatchEvent(&ev);
+}
+
+void HatManager::dispatchHatAttached(const std::string& animalName, const std::string& wearableName) {
+	HatEvent ev(HatEvent::ATTACHED, animalName, wearableName);
+	dispatchEvent(&ev);
 }
 
 void HatManager::parseSavedState() {

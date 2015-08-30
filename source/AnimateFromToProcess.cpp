@@ -34,6 +34,8 @@ spSprite AnimateFromToProcess::createSprite(const std::string& resource) {
 	spSprite sprite = new Sprite();
 	sprite->setResAnim(gameResources.getResAnim(resource));
 	sprite->setAnchor(0.5f, 0.5f);
+	sprite->setTouchEnabled(false);
+	sprite->setTouchChildrenEnabled(false);
 	setSpriteScaleBySize(sprite, Vector2(getRoot()->getWidth() * 0.05f, getRoot()->getHeight() * 0.05f));
 
 	return sprite;

@@ -27,6 +27,8 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 
 	addEventListener(TouchEvent::CLICK, CLOSURE(this, &AnimalFarmField::onTouchOver));
 	AnimalsManager::instance.addEventListener(AnimalsManager::AnimalEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onAnimalCountChanged));
+	HatManager::instance.addEventListener(HatManager::HatEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onHatCountChanged));
+	HatManager::instance.addEventListener(HatManager::HatEvent::ATTACHED, CLOSURE(this, &AnimalFarmField::onHatAttached));
 
 	_animationType = afaNone;
 	_animalsFarmAnimation = new AnimalsFarmAnimations(Vector2(getWidth() * 0.95f, getHeight() * 0.9f));
@@ -36,6 +38,8 @@ AnimalFarmField::AnimalFarmField(Vector2 fieldSize) {
 
 AnimalFarmField::~AnimalFarmField() {
 	AnimalsManager::instance.removeEventListener(AnimalsManager::AnimalEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onAnimalCountChanged));
+	HatManager::instance.removeEventListener(HatManager::HatEvent::COUNT_CHANGED, CLOSURE(this, &AnimalFarmField::onHatCountChanged));
+	HatManager::instance.removeEventListener(HatManager::HatEvent::ATTACHED, CLOSURE(this, &AnimalFarmField::onHatAttached));
 	_zSortElements._vector.resize(0);
 	_animalsFarmAnimation->releaseRef();
 }
@@ -62,9 +66,7 @@ void AnimalFarmField::setData(spAnimalModel model) {
 
 	createFeeder();
 	createCleaner();
-	if (HatManager::instance.getFreeHatsCount() > 0 && HatManager::instance.getHatsCountPerAnimal(_model->animalName()) < _model->animalsCount()) {
-		createHatAttacher(); // todo make observer here
-	}
+	createHatAttacher();
 
 	_state = afWaiting;
 }
@@ -150,6 +152,7 @@ void AnimalFarmField::createHatAttacher() {
 	_hatAttacherElement->setPosition(getWidth() * (float)BASE_SIZE_IN_PERCENT_Y / 100.0f * 2.0f, getHeight());
 	_hatAttacherElement->setPriority(30000);
 	_hatAttacherElement->attachTo(this);
+	onHatCountChanged(0);
 }
 
 void AnimalFarmField::playNextAnimalsAnimation(Event *event) {
@@ -263,6 +266,27 @@ void AnimalFarmField::onAnimalCountChanged(Event *ev) {
 void AnimalFarmField::onHatAttacherClicked(Event *event) {
 	AnimalFarmFieldEvent ev(AnimalFarmFieldEvent::ATTACH_HAT, _model);
 	dispatchEvent(&ev);
+}
+
+void AnimalFarmField::onHatCountChanged(Event *event) {
+	if (HatManager::instance.getFreeHatsCount() > 0 && HatManager::instance.getHatsCountPerAnimal(_model->animalName()) < _model->animalsCount()) {
+		_hatAttacherElement->setVisible(true);
+	}
+	else {
+		_hatAttacherElement->setVisible(false);
+	}
+}
+
+void AnimalFarmField::onHatAttached(Event *event) {
+	HatManager::HatEvent *hatEvent = safeCast<HatManager::HatEvent*>(event);
+	
+	if (hatEvent->animalName == _model->animalName()) {
+		spAnimalInFarmElement animalElement = getChildT<AnimalInFarmElement>(CMath::intToString(_wearableIndex), oxygine::ep_ignore_error);
+		if (animalElement) {
+			_wearableIndex++;
+			animalElement->attachWearable(hatEvent->hatName, hatEvent->animalName);
+		}
+	}
 }
 
 Point AnimalFarmField::getNumberOfTiles() {

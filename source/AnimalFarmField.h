@@ -95,6 +95,8 @@ private:
 	void onGameChosen(Event *event);
 	void onAnimalCountChanged(Event *event);
 	void onHatAttacherClicked(Event *event);
+	void onHatCountChanged(Event *event);
+	void onHatAttached(Event *event);
 private:
 	spSprite _gateSprite;
 

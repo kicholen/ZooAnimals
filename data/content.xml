@@ -3403,9 +3403,23 @@
 	</achievements>
 	<rewards>
 		<ori_hat type="hat" name="oriental_hat" count="1" lockit="10" />
-		<peng type="animal" name="penguin" count="1" lockit="10"/>
+		<top_hat type="hat" name="top_hat" count="1" lockit="10" />
+		<sai_hat type="hat" name="sailor_hat" count="1" lockit="10" />
+		<pir_hat type="hat" name="pirate_hat" count="1" lockit="10" />
+		<par_hat type="hat" name="party_hat" count="1" lockit="10" />
+		<pai_hat type="hat" name="painter_hat" count="1" lockit="10" />
+		<oku_hat type="hat" name="okulary" count="1" lockit="10" />
+		<med_hat type="hat" name="medieval_hat" count="1" lockit="10" />
+		<gir_hat type="hat" name="girl_hat" count="1" lockit="10" />
+		<gar_har type="hat" name="garden_hat" count="1" lockit="10" />
+		<fed_hat type="hat" name="fedora_hat" count="1" lockit="10" />
+		<far_hat type="hat" name="farmer_hat" count="1" lockit="10" />
+		<eas_hat type="hat" name="easter_ears" count="1" lockit="10" />
+		<det_hat type="hat" name="detective_hat" count="1" lockit="10" />
 		<san_hat type="hat" name="santa_hat" count="1" lockit="10"/>
 		<chef_hat type="hat" name="chef_hat" count="1" lockit="10"/>
+		
+		<peng type="animal" name="penguin" count="1" lockit="10"/>
 		<gold_small type="gold" name="gold" count="500" lockit="10"/>
 	</rewards>
 	<sounds value="60" />

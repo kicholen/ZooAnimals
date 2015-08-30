@@ -20,6 +20,23 @@ public:
 		int offsetY;
 	};
 
+	class HatEvent : public Event
+	{
+	public:
+		enum EV
+		{
+			COUNT_CHANGED = makefourcc('H', 'M', 'C', 'C'),
+			ATTACHED = makefourcc('H', 'M', 'E', 'A')
+		};
+
+		HatEvent(EV ev, int count_) : Event(ev), count(count_) {}
+		HatEvent(EV ev, const std::string& animalName_, const std::string& hatName_) : Event(ev), animalName(animalName_), hatName(hatName_) {}
+
+		int count;
+		std::string animalName;
+		std::string hatName;
+	};
+
 	HatManager();
 	~HatManager();
 
@@ -44,6 +61,8 @@ private:
 	void parseSavedState();
 
 	void removeHatFromFreeList(const std::string& hatName);
+	void dispatchCountChanged();
+	void dispatchHatAttached(const std::string& animalName, const std::string& wearableName);
 private:
 	VectorArray<std::string> _hatList;
 	std::map<std::string, hatsMap > _hatsMap;
