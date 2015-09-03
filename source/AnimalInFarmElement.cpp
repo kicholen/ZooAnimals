@@ -67,13 +67,13 @@ void AnimalInFarmElement::createShadowSprite() {
 
 void AnimalInFarmElement::attachWearable(const std::string& spriteName, const std::string& animalName) {
 	spSprite hat = new Sprite();
-	hat->setAnchor(0.5f, 1.0f);
+	hat->setAnchor(1.0f, 1.0f);
 	HatManager::hatParams *param = HatManager::instance.getHatParametersForAnimal(spriteName, animalName);
 
 	hat->setResAnim(gameResources.getResAnim(spriteName));
 	hat->setScale((_animalSprite->getWidth() / 2.0f) / hat->getDerivedWidth() + _animalSprite->getScaleX() * (float)param->scale / 100.0f);
-	hat->setX(_animalSprite->getHeight() * (float)param->offsetX / 100.0f);
-	hat->setY(_animalSprite->getHeight() * (float)param->offsetY / 100.0f);
+	hat->setX(_animalSprite->getWidth() * ((float)param->offsetX / 100.0f));
+	hat->setY(_animalSprite->getHeight() * ((float)param->offsetY / 100.0f));
 	hat->attachTo(_animalSprite);
 
 	delete param;

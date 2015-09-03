@@ -96,9 +96,9 @@ HatManager::hatParams* HatManager::getHatParametersForAnimal(const std::string& 
 	hatParams *params = new hatParams;
 	params->scale = attribute.as_int();
 	attribute = attribute.next_attribute();
-	params->offsetY = attribute.as_int();
-	attribute = attribute.next_attribute();
 	params->offsetX = attribute.as_int();
+	attribute = attribute.next_attribute();
+	params->offsetY = attribute.as_int();
 
 	return params;
 }
