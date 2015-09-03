@@ -20,6 +20,7 @@ public:
 	int getGateHumanCount();
 	int getFarmHumanCount();
 	int getGateShopHumanCount();
+	std::string getZooGateLevel(int regionsUnblocked);
 
 	int getZooSize();
 };

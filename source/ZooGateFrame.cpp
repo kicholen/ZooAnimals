@@ -71,7 +71,6 @@ void ZooGateFrame::setData() {
 
 	spTileField tileField = new TileField(Point(27, 15), true);
 	float scale = _view->getHeight() / tileField->getHeight();
-	tileField->setData("zoo_first_ground", "first");
 	tileField->setScale(scale);
 	tileField->setName("ground_tiles");
 	tileField->setAnchor(0.5f, 1.0f);
@@ -109,30 +108,38 @@ void ZooGateFrame::setData() {
 	addMailBox(tileSize, Vector2(tileSize / 2.0f + tileSize * 15.0f - tilesToViewOffsetX, tileSize * 10.0f - tileSize / 2.0f));
 	addBaseTrackToSpawner(tileSize);
 
+	int regionsCount = 0;
 	if (AnimalsManager::instance.isRegionPopulated("farm")) {
 		addFarmTrackToSpawner(tileSize, tilesToViewOffsetX);
 		addSignPost(tileSize, "farm", Vector2(tileSize / 2.0f, tileSize * 10.0f - tileSize / 2.0f));
+		regionsCount++;
 	}
 	if (AnimalsManager::instance.isRegionPopulated("winter")) {
 		addWinterTrackToSpawner(tileSize, tilesToViewOffsetX);
 		addSignPost(tileSize, "winter", Vector2(tileSize * 8.0f + tileSize / 2.0f - tilesToViewOffsetX, tileSize / 2.0f));
+		regionsCount++;
 	}
 	if (AnimalsManager::instance.isRegionPopulated("underwater")) {
 		addUnderwaterTrackToSpawner(tileSize, tilesToViewOffsetX);
 		addSignPost(tileSize, "underwater", Vector2(_view->getWidth() - tileSize / 2.0f, tileSize / 2.0f));
+		regionsCount++;
 	}
 	if (AnimalsManager::instance.isRegionPopulated("steppe")) {
 		addSteppeTrackToSpawner(tileSize, tilesToViewOffsetX);
 		addSignPost(tileSize, "steppe", Vector2(tileSize / 2.0f, tileSize / 2.0f + 3.0f * tileSize));
+		regionsCount++;
 	}
 	if (AnimalsManager::instance.isRegionPopulated("asia")) {
 		addAsiaTrackToSpawner(tileSize, tilesToViewOffsetX);
 		addSignPost(tileSize, "asia", Vector2(tileSize * 15.0f + tileSize / 2.0f - tilesToViewOffsetX, tileSize / 2.0f));
+		regionsCount++;
 	}
 	if (AnimalsManager::instance.isRegionPopulated("australia")) {
 		addAustraliaTrackToSpawner(tileSize, tilesToViewOffsetX);
 		addSignPost(tileSize, "australia", Vector2(_view->getWidth() - tileSize / 2.0f, tileSize / 2.0f + 3.0f * tileSize));
+		regionsCount++;
 	}
+	tileField->setData("zoo_first_ground", FarmManager::instance.getZooGateLevel(regionsCount));
 
 	addPossibleSpritesToSpawner();
 

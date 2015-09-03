@@ -24,6 +24,9 @@
 		<image file="fenceFrontSide.png"/>
 		<image file="informationTableBox9.png"/>
 		<image file="roadLeftRight.png"/>
+		<image file="roadCrossBottomTopLeft.png"/>
+		<image file="roadTurnRightTop.png"/>
+		<image file="roadTurnBottomRight.png"/>
 		<image file="roadCrossLeftRigtTop.png"/>
 		<image file="roadLeftRight.png"/>
 		<image file="roadBottomTop.png"/>
